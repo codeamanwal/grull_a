@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.rounded-tl-3xl {
+	border-top-left-radius: 3rem;
+}
+
+.rounded-tr-3xl {
+	border-top-right-radius: 3rem;
+}
+
+@font-face {
+	font-family: "space-grotesk";
+	src: url("../src/components/Assets/Fonts/OTF/SpaceGrotesk-Regular.otf")
+		format("opentype");
+	/* You can add more font formats if needed */
+}
+
+@font-face {
+	font-family: "General-Sans";
+	src: url("../src/components/Assets/Fonts/General-sans-font/OTF/SpaceGrotesk-Regular.otf")
+		format("opentype");
+	/* You can add more font formats if needed */
+}
+
+body {
+	background-color: #1a0142;
+	padding-top: 6rem;
+}
+
+@media (max-width: 640px) {
+	body {
+		/* Styles for screen sizes less than sm */
+		padding-top: 4rem; 
+	}
+}
