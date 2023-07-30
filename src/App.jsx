@@ -85,10 +85,10 @@ function App() {
 				<Route path="/signUpOption" element={<SignUpOptionPage />} />
 
 				{/* SignUpModal */}
-				<Route
+				{/* <Route
 					path="/SignUpRequestOtp"
 					element={<LoginSignUpModalPage otp={true} welcome={false} />}
-				/>
+				/> */}
 
 				<Route
 					path="/signUpEnterOtp"

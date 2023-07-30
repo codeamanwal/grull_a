@@ -63,7 +63,7 @@ const SignUp = ({ isOtp, isWelcome }) => {
 				{/* phone no. */}
 				<input
 					type="text"
-					placeholder="Phone No."
+					placeholder="Email"
 					className="py-2 px-4 border text-xs w-72 h-10 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 m-2"
 				/>
 
@@ -73,7 +73,7 @@ const SignUp = ({ isOtp, isWelcome }) => {
 						<div className="flex justify-center">
 							<input
 								type="text"
-								placeholder="Enter OTP"
+								placeholder="Enter Password"
 								className="py-2 px-4  text-xs w-72 h-10 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 m-2"
 							/>
 						</div>
