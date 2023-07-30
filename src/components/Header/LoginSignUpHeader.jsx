@@ -25,7 +25,7 @@ const LoginSignUpHeader = () => {
 						<ul className="flex sm:space-x-2  space-x-1 justify-center items-center gap-x-3">
 							<li>
 								<a
-									href="/"
+									href="/logInRequestOtp?isFreelancer=true:false"
 									className="text-white hover:text-gray-400 font-semibold sm:text-xl text-sm leading-4 sm:leading-6"
 								>
 									LOGIN
