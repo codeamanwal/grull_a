@@ -16,7 +16,6 @@ const SignUp = () => {
         setErrorMessage('Please fill in all the required fields.');
         return false;
       }
-      console.log(process.env);
       const response = await fetch(`${process.env.BACKEND_ENDPOINT}/api/v0/auth/register`, {
         method: 'POST',
         headers: {
