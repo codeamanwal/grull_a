@@ -29,5 +29,6 @@ module.exports = {
   ],
   'rules': {
     'no-console': 'off',
+    'jsdoc/require-jsdoc': false,
   },
 };
