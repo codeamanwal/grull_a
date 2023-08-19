@@ -1,5 +1,5 @@
 import React from "react";
-import PropType from "prop-types";
+import PropTypes from "prop-types";
 import JobDetailsCard from "./JobDetailsCard";
 import { ClosedChatBox, OpenedChatBox } from "../../components";
 import { downarrow } from "../../components/Assets";
@@ -47,9 +47,9 @@ var BrowseJobInDetails = ({ isFreelancer, isOpen, setIsOpen }) => {
 };
 
 BrowseJobInDetails.propTypes = {
-    isFreelancer: PropType.bool,
-    isOpen: PropType.bool,
-    setIsOpen: PropType.func
+    isFreelancer: PropTypes.bool,
+    isOpen: PropTypes.bool,
+    setIsOpen: PropTypes.func
 };
 
 export default BrowseJobInDetails;

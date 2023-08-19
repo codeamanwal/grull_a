@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { uparrow, search } from "../Assets";
 import ClosedChatBox from "./ClosedChatBox";
 import MessagePreviewCard from "./MessagePreviewCard";
@@ -64,6 +65,10 @@ const OpenedChatBox = ({ setIsOpen }) => {
             </div>
         </div>
     );
+};
+
+OpenedChatBox.propTypes = {
+    setIsOpen: PropTypes.func,
 };
 
 export default OpenedChatBox;

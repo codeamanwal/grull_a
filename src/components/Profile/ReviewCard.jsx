@@ -1,3 +1,6 @@
+import React from "react";
+import PropTypes from "prop-types";
+
 const ReviewCard = ({ rating }) => {
     const stars = Array.from({ length: rating }, (_, index) => (
         <svg key={index} className="w-4 h-4 inline-block align-text-top">
@@ -20,6 +23,10 @@ const ReviewCard = ({ rating }) => {
             </div>
         </div>
     );
+};
+
+ReviewCard.propTypes = {
+    rating: PropTypes.number
 };
 
 export default ReviewCard;

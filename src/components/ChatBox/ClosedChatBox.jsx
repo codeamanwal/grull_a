@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { hrProfile } from "../Assets";
 
 const ClosedChatBox = ({ arrow, onClick }) => {
@@ -27,6 +28,11 @@ const ClosedChatBox = ({ arrow, onClick }) => {
             />
         </div>
     );
+};
+
+ClosedChatBox.propTypes = {
+    arrow: PropTypes.string,
+    onClick: PropTypes.func,
 };
 
 export default ClosedChatBox;

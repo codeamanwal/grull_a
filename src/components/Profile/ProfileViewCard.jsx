@@ -1,13 +1,10 @@
-import { useState } from "react";
-import { youtube, twitter, facebook2 } from "../Assets";
+import React from "react";
+import PropTypes from "prop-types";
 
 const ProfileViewCard = ({
     userProfileImg,
-
     userName,
 }) => {
-    const [isEditing, setIsEditing] = useState(false);
-
     return (
         <div className="flex sm:px-6 sm:py-3 px-2  text-white">
             <div className="flex flex-col items-center space-y-2 xl:space-y-6 bg-[#482773] rounded-lg lg:mt-0 xl:p-10 m-4 py-3">
@@ -37,6 +34,11 @@ const ProfileViewCard = ({
             </div>
         </div>
     );
+};
+
+ProfileViewCard.propTypes = {
+    userProfileImg: PropTypes.string,
+    userName: PropTypes.string,
 };
 
 export default ProfileViewCard;

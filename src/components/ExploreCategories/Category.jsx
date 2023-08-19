@@ -1,3 +1,6 @@
+import React from "react";
+import PropTypes from "prop-types";
+
 const Category = ({ logo, title }) => {
     return (
         <div className="flex flex-col items-center bg-purple-200 bg-opacity-30 border border-purple-300 border-opacity-70 rounded-lg sm:space-y-3 ">
@@ -12,6 +15,11 @@ const Category = ({ logo, title }) => {
             </p>
         </div>
     );
+};
+
+Category.propTypes = {
+    logo: PropTypes.string,
+    title: PropTypes.string,
 };
 
 export default Category;

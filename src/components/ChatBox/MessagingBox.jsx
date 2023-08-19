@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { hrProfile, messageBoxAttachment } from "../Assets";
 
 const MessagingBox = ({ onClose }) => {
@@ -93,6 +94,10 @@ const MessagingBox = ({ onClose }) => {
             </div>
         </div>
     );
+};
+
+MessagingBox.propTypes = {
+    onClose: PropTypes.func,
 };
 
 export default MessagingBox;

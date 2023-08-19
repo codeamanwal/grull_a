@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import { youtube, twitter, facebook2 } from "../Assets";
 
 const EditProfileCard = ({
@@ -8,7 +9,7 @@ const EditProfileCard = ({
     userName,
     profession,
 }) => {
-    const [isEditing, setIsEditing] = useState(false);
+    const isEditing = false;
 
     return (
         <div className="flex px-2 py-2 text-white">
@@ -144,6 +145,14 @@ const EditProfileCard = ({
             </div>
         </div>
     );
+};
+
+EditProfileCard.propTypes = {
+    userProfileImg: PropTypes.string,
+    toHire: PropTypes.bool,
+    isEmployerProfile: PropTypes.bool,
+    userName: PropTypes.string,
+    profession: PropTypes.string,
 };
 
 export default EditProfileCard;

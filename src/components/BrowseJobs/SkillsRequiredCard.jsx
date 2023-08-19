@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const SkillsRequiredCard = ({ isFreelancer, isActive }) => {
@@ -82,6 +83,11 @@ const SkillsRequiredCard = ({ isFreelancer, isActive }) => {
             )}
         </div>
     );
+};
+
+SkillsRequiredCard.propTypes = {
+    isFreelancer: PropTypes.bool,
+    isActive: PropTypes.bool,
 };
 
 export default SkillsRequiredCard;

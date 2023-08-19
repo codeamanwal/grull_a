@@ -1,3 +1,6 @@
+import React from "react";
+import PropTypes from "prop-types";
+
 const Info = ({ title, sub1, sub2 }) => {
     return (
         <div className="">
@@ -14,6 +17,12 @@ const Info = ({ title, sub1, sub2 }) => {
             </div>
         </div>
     );
+};
+
+Info.propTypes = {
+    title: PropTypes.string,
+    sub1: PropTypes.string,
+    sub2: PropTypes.string,
 };
 
 export default Info;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
 const BrowseByCard = ({ topic, items }) => {
     const [checkedItems, setCheckedItems] = useState([]);
@@ -112,6 +113,11 @@ const BrowseByCard = ({ topic, items }) => {
             </div>
         </div>
     );
+};
+
+BrowseByCard.propTypes = {
+    topic: PropTypes.string,
+    items: PropTypes.array,
 };
 
 export default BrowseByCard;

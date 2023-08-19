@@ -1,3 +1,4 @@
+import React from "react";
 import { userProfile, youtube, twitter, facebook2 } from "../Assets";
 
 const ProfileCard = () => {

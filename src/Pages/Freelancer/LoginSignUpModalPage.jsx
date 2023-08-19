@@ -1,5 +1,5 @@
 import React from "react";
-import PropType from "prop-types";
+import PropTypes from "prop-types";
 import { Footer, LoggedInHeader, SignUp } from "../../components";
 
 var LoginSignUpModalPage = ({ otp, welcome }) => {
@@ -16,8 +16,8 @@ var LoginSignUpModalPage = ({ otp, welcome }) => {
     );
 };
 LoginSignUpModalPage.propTypes = {
-    otp: PropType.string,
-    welcome: PropType.bool,
+    otp: PropTypes.string,
+    welcome: PropTypes.bool,
 };
 
 export default LoginSignUpModalPage;

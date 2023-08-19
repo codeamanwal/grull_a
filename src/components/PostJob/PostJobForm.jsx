@@ -1,3 +1,4 @@
+import React from "react";
 const PostJobForm = () => {
     return (
         <div className="flex flex-col flex-wrap  text-white sm:space-y-7 sm:w-3/4 w-full mx-auto font-GeneralSans p-3">

@@ -1,3 +1,4 @@
+import React from "react";
 import { hrProfile } from "../Assets";
 
 const MessagePreviewCard = () => {

@@ -1,3 +1,6 @@
+import React from "react";
+import PropTypes from "prop-types";
+
 const Box = ({ logo, name, color, textColor, logoWidth, logoHeight }) => {
     const logoStyle = {
         width: logoWidth,
@@ -19,6 +22,15 @@ const Box = ({ logo, name, color, textColor, logoWidth, logoHeight }) => {
             <h2 className="font-bold">{name}</h2>
         </div>
     );
+};
+
+Box.propTypes = {
+    "logo": PropTypes.string,
+    "name": PropTypes.string,
+    "color": PropTypes.string,
+    "textColor": PropTypes.string,
+    "logoWidth": PropTypes.string,
+    "logoHeight": PropTypes.string,
 };
 
 export default Box;
