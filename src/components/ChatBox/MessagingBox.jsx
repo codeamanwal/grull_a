@@ -48,7 +48,7 @@ const MessagingBox = ({onClose}) => {
           className="w-6 h-6 text-gray-600 hover:text-gray-800"
           onClick={handleBoxClose}
         >
-					X
+          X
         </button>
       </div>
       <div className="flex-grow overflow-y-auto">
@@ -89,7 +89,7 @@ const MessagingBox = ({onClose}) => {
           className="text-white bg-blue-500 hover:bg-blue-600 rounded-lg px-4 py-2"
           onClick={handleSendMessage}
         >
-					Send
+          Send
         </button>
       </div>
     </div>

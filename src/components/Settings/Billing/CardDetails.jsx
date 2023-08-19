@@ -7,31 +7,31 @@ const CardDetails = () => {
     <div className="flex flex-wrap bg-[#1A0142] text-white w-3/4 mx-auto pt-6">
       <div className="sm:flex hidden flex-col space-y-6 font-semibold justify-start">
         <button className="md:px-8 sm:p-4 p-2 sm:w-48 rounded shadow bg-purple-900">
-					My Account
+                    My Account
         </button>
         <Link
           to="/cardDetails"
           className="text-center bg-gradient-to-l from-purple-400 to-transparent bg-opacity-70 border border-solid border-purple-500 rounded-lg sm:p-4  p-2 sm:w-48"
         >
-					Payment
+                    Payment
         </Link>
         <button className="md:px-8 sm:p-4 p-2 sm:w-48 rounded shadow bg-purple-900">
-					Tax Information
+                    Tax Information
         </button>
       </div>
 
       <div className="sm:hidden flex space-x-2 py-10 font-semibold text-sm text-white">
         <button className="md:px-8 sm:p-4 p-2 sm:w-48 rounded shadow bg-purple-900 bg-opacity-70 ">
-					My Account
+                    My Account
         </button>
         <Link
           to="/cardDetails"
           className="text-center bg-gradient-to-l from-purple-400 to-transparent border border-solid border-purple-500 rounded-lg sm:p-4  p-2 sm:w-48"
         >
-					Payment
+                    Payment
         </Link>
         <button className="md:px-8 sm:p-4 p-2 sm:w-48 rounded shadow bg-purple-900 bg-opacity-70">
-					Tax Information
+                    Tax Information
         </button>
       </div>
 
@@ -52,10 +52,10 @@ const CardDetails = () => {
           </div>
 
           <p className="flex justify-center items-center font-semibold text-lg border border-gray-300">
-						85241*******98741
+                        85241*******98741
           </p>
           <p className="flex justify-center items-center font-semibold text-lg border border-gray-300">
-						Chanderkant Sarma
+                        Chanderkant Sarma
           </p>
 
           <div className="flex items-center justify-center">
@@ -77,11 +77,11 @@ const CardDetails = () => {
           </div>
 
           <p className="flex justify-center items-center font-semibold text-lg border border-gray-300">
-						85241*******98741
+                        85241*******98741
           </p>
 
           <p className="flex justify-center items-center font-semibold text-lg border border-gray-300">
-						Chanderkant Sarma
+                        Chanderkant Sarma
           </p>
 
           <div className="flex items-center justify-center">
@@ -97,7 +97,7 @@ const CardDetails = () => {
         <div className="flex justify-end">
           <Link to="/editCardDetais">
             <button className="sm:text-xl font-medium md:px-8 py-6 sm:px-16 rounded shadow bg-gradient-to-l from-purple-400 to-transparent font-spaceGrotesk">
-							ADD NEW BILLING METHOD
+                            ADD NEW BILLING METHOD
             </button>
           </Link>
         </div>

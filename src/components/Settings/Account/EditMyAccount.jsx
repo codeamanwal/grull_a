@@ -6,27 +6,27 @@ const EditMyAccount = () => {
     <div className="flex justify-center  items-center space-y-10 space-x- text-white bg-[#1A0142] w-3/4 mx-auto p-2">
       <div className="flex flex-col space-y-6 pt-20 font-semibold justify-start text-sm">
         <button className="md:px-8 sm:p-4 p-2 sm:w-48 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
-					My Account
+          My Account
         </button>
         <Link
           to="/cardDetails"
           className="text-center bg-purple-900 bg-opacity-70 border border-solid border-purple-500 rounded-lg sm:p-4  p-2 sm:w-48"
         >
-					Payment
+          Payment
         </Link>
         <button className="bg-purple-900 bg-opacity-30 rounded-lg border border-purple-600 sm:p-4 sm:w-48 p-2">
-					Tax Information
+          Tax Information
         </button>
       </div>
 
       <div className="flex flex-col justify-center space-x-16 space-y-8 w-full sm:space-x-20">
         <p className="sm:text-3xl text-xl text-center font-spaceGrotesk font-semibold">
-					ACCOUNT DETAILS
+          ACCOUNT DETAILS
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-4 gap-2 sm:space-y-3 text-base font-GeneralSans font-medium">
           <div className="sm:col-span-1 flex flex-col justify-center ">
             <label htmlFor="fullName" className="block mb-2">
-							Full Name
+              Full Name
             </label>
             <input
               type="text"
@@ -36,7 +36,7 @@ const EditMyAccount = () => {
           </div>
           <div className="sm:col-span-1 flex flex-col justify-center">
             <label htmlFor="email" className="block mb-2">
-							Email
+              Email
             </label>
             <input
               type="email"
@@ -46,7 +46,7 @@ const EditMyAccount = () => {
           </div>
           <div className="sm:col-span-1 flex flex-col justify-center">
             <label htmlFor="phone" className="block mb-2">
-							Phone No.
+              Phone No.
             </label>
             <input
               type="text"
@@ -57,7 +57,7 @@ const EditMyAccount = () => {
 
           <div className="sm:col-span-2 flex flex-col justify-center">
             <label htmlFor="address" className="block mb-2">
-							Address
+              Address
             </label>
             <input
               type="text"
@@ -67,7 +67,7 @@ const EditMyAccount = () => {
           </div>
           <div className="sm:col-span-1 flex flex-col justify-center">
             <label htmlFor="timezone" className="block mb-2">
-							Timezone
+              Timezone
             </label>
             <input
               type="text"
@@ -77,7 +77,7 @@ const EditMyAccount = () => {
           </div>
           <div className="sm:col-span-1 flex flex-col justify-center">
             <label htmlFor="city" className="block mb-2">
-							City
+              City
             </label>
             <input
               type="text"
@@ -87,7 +87,7 @@ const EditMyAccount = () => {
           </div>
           <div className="sm:col-span-1 flex flex-col justify-center">
             <label htmlFor="country" className="block mb-2">
-							Country
+              Country
             </label>
             <input
               type="text"
@@ -97,7 +97,7 @@ const EditMyAccount = () => {
           </div>
           <div className="sm:col-span-1 flex flex-col justify-center">
             <label htmlFor="pincode" className="block mb-2">
-							Pincode
+              Pincode
             </label>
             <input
               type="text"
@@ -113,7 +113,7 @@ const EditMyAccount = () => {
             href="/billsAndPayments"
             className="block md:px-8 p-2 w-48 rounded shadow bg-gradient-to-l from-purple-400 to-transparent text-white text-center"
           >
-						SAVE
+            SAVE
           </a>
         </div>
       </div>

@@ -26,25 +26,25 @@ const EditCardDetails = () => {
     <div className="flex flex-wrap sm:space-x-5 bg-[#1A0142] text-white w-4/5 mx-auto justify-between sm:mt-20">
       <div className="sm:flex hidden flex-col space-y-6  font-semibold justify-start">
         <button className="bg-purple-900 bg-opacity-70 border border-solid border-purple-500 rounded-lg p-4 w-48">
-					My Account
+                    My Account
         </button>
         <button className="md:px-8 p-4 w-48 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
-					Payment
+                    Payment
         </button>
         <button className="bg-purple-900 bg-opacity-30 rounded-lg border border-purple-600 p-4 w-48">
-					Tax Information
+                    Tax Information
         </button>
       </div>
 
       <div className="sm:hidden flex  py-10 space-x-5 font-semibold text-sm text-white">
         <button className="flex-grow bg-purple-900 bg-opacity-70 border border-solid border-purple-500 rounded-lg p-2">
-					My Account
+                    My Account
         </button>
         <button className="flex-grow bg-purple-900 bg-opacity-70 border border-solid bg-gradient-to-l from-purple-400 to-transparentrounded-lg p-2">
-					Payment
+                    Payment
         </button>
         <button className="flex-grow bg-purple-900 bg-opacity-70 border border-solid border-purple-500 rounded-lg p-2">
-					Tax Information
+                    Tax Information
         </button>
       </div>
 
@@ -58,7 +58,7 @@ const EditCardDetails = () => {
               checked={isCardChecked}
               onChange={handleCardCheckboxChange}
             />
-						Debit/Credit Card
+                        Debit/Credit Card
           </label>
 
           <label className="sm:col-span-4 col-span-2 text-base font-semibold ">
@@ -68,7 +68,7 @@ const EditCardDetails = () => {
               checked={isPaypalChecked}
               onChange={handlePaypalCheckboxChange}
             />
-						Paypal/UPI
+                        Paypal/UPI
           </label>
 
           <div className="col-span-full">
@@ -77,7 +77,7 @@ const EditCardDetails = () => {
               <div className="grid sm:grid-cols-8 grid-cols-3 gap-2">
                 <div className="sm:col-span-2  col-span-full flex flex-col justify-center">
                   <label htmlFor="cardNumber" className="mb-1">
-										Card Number
+                                        Card Number
                   </label>
                   <input
                     type="text"
@@ -117,7 +117,7 @@ const EditCardDetails = () => {
               <div className="grid sm:grid-cols-8 grid-cols-3 sm:gap-10 gap-2 ">
                 <div className="sm:col-span-2 col-span-full flex flex-col  space-y-2  justify-start">
                   <label htmlFor="enterupiid" className="mb-1">
-										Enter UPI id
+                                        Enter UPI id
                   </label>
                   <input
                     type="text"
@@ -160,7 +160,7 @@ const EditCardDetails = () => {
                 <div className="col-span-2">
                   <div className="flex flex-col">
                     <label htmlFor="accountHolderName" className="mb-1">
-											Account Holder Name
+                                            Account Holder Name
                     </label>
                     <input
                       type="text"
@@ -173,7 +173,7 @@ const EditCardDetails = () => {
                 <div className="col-span-2">
                   <div className="flex flex-col">
                     <label htmlFor="cvv" className="mb-1">
-											CVV
+                                            CVV
                     </label>
                     <input
                       type="text"
@@ -186,7 +186,7 @@ const EditCardDetails = () => {
                 <div className="col-span-2">
                   <div className="flex flex-col">
                     <label htmlFor="expiryDate" className="mb-1">
-											Expiry Date
+                                            Expiry Date
                     </label>
                     <input
                       type="text"
@@ -198,7 +198,7 @@ const EditCardDetails = () => {
 
                 <div className="col-span-2">
                   <label htmlFor="unlabeledInput" className="mb-1">
-										Unlabeled
+                                        Unlabeled
                   </label>
                   <div className="flex flex-col">
                     <input
@@ -219,7 +219,7 @@ const EditCardDetails = () => {
             // href="/billsAndPayments"
             className="block md:px-8 p-4 w-48 rounded shadow bg-gradient-to-l from-purple-400 to-transparent text-white text-center"
           >
-						SAVE
+                        SAVE
           </button>
         </div>
       </div>

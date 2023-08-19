@@ -29,6 +29,12 @@ module.exports = {
   ],
   'rules': {
     'no-console': 'off',
-    'jsdoc/require-jsdoc': false,
+    'require-jsdoc': 0,
+    'max-len': ['error', {
+      code: 200,
+      tabWidth: 2,
+      ignoreUrls: true,
+      ignorePattern: 'goog\.(module|require)',
+    }],
   },
 };

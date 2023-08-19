@@ -28,11 +28,11 @@ const BrowseJobs = () => {
           <div className="flex flex-col sm:pt-10 p-2">
             <div className="flex flex-wrap  sm:flex-row flex-col items-center sm:justify-between">
               <p className="flex sm:text-4xl text-2xl text-white font-bold pl-6">
-								POSTED JOBS
+                POSTED JOBS
               </p>
               <div className="flex flex-col items-center">
                 <p className="text-white sm:text-2xl font-semibold">
-									Posted in the last &#x2191; 30 &#x2193; days
+                  Posted in the last &#x2191; 30 &#x2193; days
                 </p>
               </div>
             </div>

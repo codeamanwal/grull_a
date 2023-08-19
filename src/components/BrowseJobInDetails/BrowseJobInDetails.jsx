@@ -13,10 +13,10 @@ const BrowseJobInDetails = ({isFreelancer, isOpen, setIsOpen}) => {
       {isFreelancer ? (
                 <div className="flex sm:flex-col flex-wrap sm:justify-start sm:space-y-10">
                   <button className="text-white sm:text-xl font-semibold sm:px-12 sm:py-2 px-4  py-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
-						MANAGE PROFILE
+            MANAGE PROFILE
                   </button>
                   <button className="text-white sm:text-xl font-semibold  sm::px-8 sm:py-2 px-4 py-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
-						BROWSE MORE JOBS
+            BROWSE MORE JOBS
                   </button>
                 </div>
             ) : (
@@ -26,10 +26,10 @@ const BrowseJobInDetails = ({isFreelancer, isOpen, setIsOpen}) => {
                       to="/freelancerApplicationView"
                       className="text-white sm:text-xl font-semibold md:px-8 py-4 px-2 sm:px-12 rounded shadow bg-gradient-to-l from-purple-400 to-transparent"
                     >
-							VIEW FREELANCER APPLICATIONS
+              VIEW FREELANCER APPLICATIONS
                     </Link>
                     <button className="text-white sm:text-xl font-semibold md:px-8 py-4 sm:px-12  px-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
-							MANAGE POSTED JOB
+              MANAGE POSTED JOB
                     </button>
                   </div>
 

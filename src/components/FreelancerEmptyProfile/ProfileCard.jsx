@@ -48,7 +48,7 @@ const ProfileCard = () => {
           {/* no. of projects */}
           <div className="flex  justify-center items-center w-64 gap-x-1">
             <p className="font-semibold text-xl text-white">
-							No. of Projects Completed:
+              No. of Projects Completed:
             </p>
             <input
               placeholder=""

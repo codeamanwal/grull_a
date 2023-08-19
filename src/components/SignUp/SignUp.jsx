@@ -122,7 +122,8 @@ const SignUp = () => {
           {isSignUpSuccessful ? (
                         <Link to={isFreelancer ? '/logInRequestOtp?isFreelancer=true' : '/logInRequestOtp?isFreelancer=false'}>
                           <button
-                            className="flex justify-center p-2 bg-gradient-to-r from-purple-500 via-indigo-600 to-purple-800 rounded-lg w-60 m-2 text-white font-medium text-2xl leading-10 font-GeneralSans"
+                            className=
+                              "flex justify-center p-2 bg-gradient-to-r from-purple-500 via-indigo-600 to-purple-800 rounded-lg w-60 m-2 text-white font-medium text-2xl leading-10 font-GeneralSans"
                           >
               Login
                           </button>
@@ -130,7 +131,8 @@ const SignUp = () => {
                     ) : (
                         <button
                           type="button" // Prevent default form submission behavior
-                          className="flex justify-center p-2 bg-gradient-to-r from-purple-500 via-indigo-600 to-purple-800 rounded-lg w-60 m-2 text-white font-medium text-2xl leading-10 font-GeneralSans"
+                          className=
+                            "flex justify-center p-2 bg-gradient-to-r from-purple-500 via-indigo-600 to-purple-800 rounded-lg w-60 m-2 text-white font-medium text-2xl leading-10 font-GeneralSans"
                           onClick={handleSignUp}
                         >
             Join Grull

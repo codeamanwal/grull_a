@@ -21,25 +21,25 @@ const EditProfile = ({isFreelancer, toHire}) => {
         {isFreelancer ? (
                     <div className="flex flex-col space-y-4   font-spaceGrotesk font-semibold text-xl">
                       <button className="sm:px-8 sm:py-4  text-center p-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
-							FIND JOBS
+              FIND JOBS
                       </button>
                       <a
                         href="/freelancerFileSharing?isFreelancer=true"
                         className=" text-center p-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent"
                       >
-							MANAGE JOBS
+              MANAGE JOBS
                       </a>
                       <p className="text-purple-600 text-base font-spaceGrotesk font-medium ">
-							SWITCH TO AN EMPLOYER
+              SWITCH TO AN EMPLOYER
                       </p>
                     </div>
                 ) : (
                     <div className="flex flex-col space-y-4 md:pt-8 font-spaceGrotesk font-semibold text-xl">
                       <button className="md:px-8 py-4 px-1 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
-							HIRE
+              HIRE
                       </button>
                       <p className="text-purple-600 text-base font-spaceGrotesk font-medium pt-4">
-							SEND AN OFFER
+              SEND AN OFFER
                       </p>
                     </div>
                 )}
@@ -47,7 +47,7 @@ const EditProfile = ({isFreelancer, toHire}) => {
         <div className="p-6">
           <div className="flex flex-col space-y-2 space-x-2 rounded-lg border border-white w-full md:w-[300px]">
             <p className="text-center rounded-t-lg w-full h-10 bg-purple-600 text-24 font-spaceGrotesk font-semibold pt-2">
-							REVIEWS
+              REVIEWS
             </p>
             <div className="flex flex-col  items-center">
               <ReviewCard rating={2} />

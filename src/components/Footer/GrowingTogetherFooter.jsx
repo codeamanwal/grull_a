@@ -5,7 +5,7 @@ const GrowingTogetherFooter = () => {
   return (
     <div className="w-full bg-white p-4 rounded-t-3xl">
       <p className="flex items-center justify-center w-full text-center font-medium sm:text-4xl text-2xl sm:leading-96 text-purple-600">
-				GROWING TOGETHER WITH
+        GROWING TOGETHER WITH
       </p>
 
       <div className="border-b-2 border-gray-300 w-full my-3"></div>

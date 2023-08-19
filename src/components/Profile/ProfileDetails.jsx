@@ -7,19 +7,19 @@ const ProfileDetails = () => {
     <div className="flex flex-col sm:space-y-20  space-y-5 sm:w-[600px] text-white leading-normal ml-3">
       <div className="flex flex-col  space-y-4">
         <p className="sm:text-2xl text-lg font-spaceGrotesk font-bold pl-2">
-					Description
+          Description
         </p>
         <p className=" sm:text-xl font-GeneralSans font-normal p-3">
-					I have had an inclination towards art and design since childhood and
-					have grown to have a high level of liking and skill set to nurture
-					this talent. A sense of aesthetics always came naturally to me
+          I have had an inclination towards art and design since childhood and
+          have grown to have a high level of liking and skill set to nurture
+          this talent. A sense of aesthetics always came naturally to me
         </p>
       </div>
 
       <div className="flex justify-between px-6">
         <div className=" space-y-4">
           <p className="sm:text-2xl text-lg font-spaceGrotesk font-bold">
-						Skills
+            Skills
           </p>
           <ul className="sm:text-xl font-GeneralSans font-normal list-disc list-inside">
             <li>Graphic Design</li>
@@ -30,7 +30,7 @@ const ProfileDetails = () => {
         </div>
         <div className=" space-y-4">
           <p className="sm:text-2xl text-lg font-spaceGrotesk font-bold">
-						Languages
+            Languages
           </p>
           <div className="sm:text-xl font-GeneralSans font-normal">
             <p>English</p>
@@ -42,7 +42,7 @@ const ProfileDetails = () => {
 
       <div className="">
         <p className="sm:text-2xl text-lg font-spaceGrotesk font-bold">
-					Ongoing Work/ Portfolio
+          Ongoing Work/ Portfolio
         </p>
         <div className="flex space-x-3 py-6">
           <Link to="/freelancerProjectGallery">

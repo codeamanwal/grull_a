@@ -28,7 +28,7 @@ const LoginSignUpHeader = () => {
                   href="/logInRequestOtp?isFreelancer=true:false"
                   className="text-white hover:text-gray-400 font-semibold sm:text-xl text-sm leading-4 sm:leading-6"
                 >
-									LOGIN
+                  LOGIN
                 </a>
               </li>
               <li>
@@ -36,7 +36,7 @@ const LoginSignUpHeader = () => {
                   href="/signUpOption"
                   className="text-white hover:text-gray-400 font-semibold sm:text-xl text-sm leading-4 sm:leading-6"
                 >
-									SIGN UP
+                  SIGN UP
                 </a>
               </li>
 

@@ -19,7 +19,7 @@ const FreelanceApplication = () => {
   return (
     <div className="text-white leading-normal px-2 py-6 w-full">
       <h1 className="text-center sm:text-4xl text-2xl font-spaceGrotesk font-medium mb-8">
-				PROPOSAL
+        PROPOSAL
       </h1>
       <div className="flex flex-wrap justify-between w-full sm:w-3/4 mx-auto">
         <div className="grid sm:grid-cols-6 gap-4 space-y-8 w-full sm:w-1/2">
@@ -28,7 +28,7 @@ const FreelanceApplication = () => {
               htmlFor="description"
               className="font-semibold block mb-2 text-xl font-spaceGrotesk pb-4"
             >
-							Why are you fit for this job?
+              Why are you fit for this job?
             </label>
 
             {window.innerWidth <= 640 ? (
@@ -53,14 +53,14 @@ const FreelanceApplication = () => {
               htmlFor="files"
               className="font-semibold block mb-2 text-xl font-spaceGrotesk pb-4"
             >
-							Any files to support your proposal
+              Any files to support your proposal
             </label>
             <div className="flex items-center">
               <label
                 htmlFor="file-upload"
                 className="flex  p-2 h-10 border border-solid border-purple-500 rounded-md cursor-pointer w-full"
               >
-								Upload
+                Upload
               </label>
               <input
                 type="file"
@@ -76,7 +76,7 @@ const FreelanceApplication = () => {
               htmlFor="rate"
               className="font-semibold block mb-2 text-xl font-spaceGrotesk pb-4"
             >
-							What is your proposed rate?
+              What is your proposed rate?
             </label>
             <div className="grid grid-cols-8 gap-4">
               <div className="col-span-2">
@@ -116,7 +116,7 @@ const FreelanceApplication = () => {
 
           <div>
             <button className="text-white sm:text-2xl  px-4 py-3  text-base font-medium sm:py-4 sm:px-32 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
-							APPLY
+              APPLY
             </button>
           </div>
         </div>

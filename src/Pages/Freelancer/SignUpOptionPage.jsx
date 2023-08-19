@@ -13,7 +13,8 @@ const SignUpOptionPage = () => {
     <div className="flex flex-col min-h-screen">
       <LoginSignUpHeader />
       <div
-        className="flex flex-wrap justify-center items-center sm:space-x-0 space-y-5 sm:space-y-0 sm:py-40 mb-5 p-6"
+        className=
+          "flex flex-wrap justify-center items-center sm:space-x-0 space-y-5 sm:space-y-0 sm:py-40 mb-5 p-6"
         style={{
           backgroundImage: `url(${purpleBackImg})`,
           backgroundSize: 'cover',
@@ -35,8 +36,7 @@ const SignUpOptionPage = () => {
             src={user}
             alt="whitepaper"
           />
-          <button className="bg-purple-300 px-6 py-3 rounded-2xl">
-						CLICK TO READ
+          <button className="bg-purple-300 px-6 py-3 rounded-2xl">CLICK TO READ
           </button>
         </div>
       </div>

@@ -3,7 +3,7 @@ const PostJobForm = () => {
   return (
     <div className="flex flex-col flex-wrap  text-white sm:space-y-7 sm:w-3/4 w-full mx-auto font-GeneralSans p-3">
       <p className="text-center sm:text-4xl  text-2xl font-bold font-spaceGrotesk py-4">
-				JOB DESCRIPTION
+        JOB DESCRIPTION
       </p>
       <div className="grid sm:grid-cols-8  sm:gap-6 gap-3">
         {/* Title */}
@@ -12,7 +12,7 @@ const PostJobForm = () => {
             htmlFor="title"
             className="font-semibold sm:text-xl font-spaceGrotesk"
           >
-						Title
+            Title
           </label>
           <input
             id="title"
@@ -28,7 +28,7 @@ const PostJobForm = () => {
             htmlFor="skills"
             className="font-semibold  sm:text-xl font-spaceGrotesk"
           >
-						Add Skills Required
+            Add Skills Required
           </label>
           <input
             id="skills"
@@ -44,7 +44,7 @@ const PostJobForm = () => {
             htmlFor="catagory"
             className="font-semibold  sm:text-xl font-spaceGrotesk"
           >
-						Job Category
+            Job Category
           </label>
           <input
             id="catagory"
@@ -60,7 +60,7 @@ const PostJobForm = () => {
             htmlFor="files"
             className="font-semibold sm:text-xl font-spaceGrotesk "
           >
-						Refrence Files
+            Refrence Files
           </label>
           <input
             id="files"
@@ -76,7 +76,7 @@ const PostJobForm = () => {
             htmlFor="location"
             className="font-semibold sm:text-xl font-spaceGrotesk"
           >
-						Location
+            Location
           </label>
           <input
             id="location"
@@ -92,7 +92,7 @@ const PostJobForm = () => {
             htmlFor="duration"
             className="font-semibold sm:text-xl font-spaceGrotesk"
           >
-						Duration
+            Duration
           </label>
           <input
             id="diration"
@@ -108,7 +108,7 @@ const PostJobForm = () => {
             htmlFor="compnayname"
             className="font-semibold  sm:text-xl font-spaceGrotesk"
           >
-						Company Name (optional)
+            Company Name (optional)
           </label>
           <input
             id="compnayname"
@@ -124,7 +124,7 @@ const PostJobForm = () => {
             htmlFor="compnayname"
             className="font-semibold sm:text-xl font-spaceGrotesk"
           >
-						Budget
+            Budget
           </label>
           <div className="grid sm:grid-cols-5 grid-cols-3 gap-4">
             <div className=" sm:col-span-2 flex flex-col space-y-2  justify-center">
@@ -165,7 +165,7 @@ const PostJobForm = () => {
             htmlFor="description"
             className="font-semibold block sm:text-xl font-spaceGrotesk"
           >
-						About Company (optional)
+            About Company (optional)
           </label>
           <textarea
             id="description"
@@ -180,7 +180,7 @@ const PostJobForm = () => {
             htmlFor="jobDescription"
             className="font-semibold block sm:text-xl font-spaceGrotesk"
           >
-						Job Description
+            Job Description
           </label>
           <textarea
             id="jobDescription"
@@ -192,7 +192,7 @@ const PostJobForm = () => {
 
         <div className="sm:col-start-8 sm:col-span-2 sm:self-end flex justify-center">
           <button className="text-white sm:text-2xl text-base font-semibold p-3 mt-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent sm:py-2 sm:w-full">
-						POST JOB
+            POST JOB
           </button>
         </div>
       </div>

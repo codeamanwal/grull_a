@@ -47,7 +47,7 @@ const FreelancerEmptyProfile = () => {
               htmlFor="description"
               className="font-semibold block mb-2 text-xl font-spaceGrotesk pb-4"
             >
-							Description
+              Description
             </label>
             <textarea
               id="description"
@@ -62,7 +62,7 @@ const FreelancerEmptyProfile = () => {
               htmlFor="skills"
               className="font-semibold block mb-2 text-xl font-spaceGrotesk"
             >
-							Skills
+              Skills
             </label>
             {skills.map((skill, index) => (
               <input
@@ -92,7 +92,7 @@ const FreelancerEmptyProfile = () => {
               htmlFor="languages"
               className="font-semibold block mb-2 text-xl font-spaceGrotesk"
             >
-							Languages
+              Languages
             </label>
             {languages.map((language, index) => (
               <input
@@ -122,7 +122,7 @@ const FreelancerEmptyProfile = () => {
               htmlFor="portfolio"
               className="font-semibold block mb-2 text-xl font-spaceGrotesk pb-4"
             >
-							Ongoing Work/ Portfolio
+              Ongoing Work/ Portfolio
             </label>
             <div className="flex items-center">
               {images.map((image, index) => (
@@ -162,11 +162,11 @@ const FreelancerEmptyProfile = () => {
           href="/freelancerEditProfile"
           className="text-white text-xl font-medium py-2 px-16 rounded shadow bg-gradient-to-l from-purple-400 to-transparent"
         >
-					DONE
+          DONE
         </a>
 
         <p className="text-[#B27EE3] text-lg font-medium font-spaceGrotesk pt-8">
-					SWITCH TO AN EMPLOYER
+          SWITCH TO AN EMPLOYER
         </p>
       </div>
     </div>

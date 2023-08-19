@@ -29,7 +29,7 @@ const EditProfileCard = ({
         <div className="border-b-2 border-gray-300 w-64 m-2"></div>
 
         <div className="text-sm sm:text-base font-GeneralSans font-normal">
-					Bengaluru, India
+          Bengaluru, India
         </div>
 
         {/* border */}
@@ -40,7 +40,7 @@ const EditProfileCard = ({
                       {/* ave rate usd */}
                       <div className="flex gap-x-20 justify-center items-center">
                         <p className="font-semibold text-lg font-GeneralSans">
-								Avg. Budget:
+                Avg. Budget:
                         </p>
                         <div className="text-base font-GeneralSans">300USD</div>
                       </div>
@@ -48,7 +48,7 @@ const EditProfileCard = ({
                       {/* no. of projects */}
                       <div className="flex justify-center items-center w-64 gap-x-1">
                         <p className="font-semibold text-lg font-GeneralSans">
-								No. of Jobs Posted:
+                No. of Jobs Posted:
                         </p>
                         {isEditing ? (
                                 <input
@@ -58,7 +58,7 @@ const EditProfileCard = ({
                                 />
                             ) : (
                                 <div className="rounded-md text-center w-20 h-8 px-2 text-white text-base bg-[#B27EE3] bg-opacity-30 font-GeneralSans">
-									50
+                  50
                                 </div>
                             )}
                       </div>
@@ -68,17 +68,17 @@ const EditProfileCard = ({
                       {/* ave rate usd */}
                       <div className="flex gap-x-20 justify-center items-center">
                         <p className="font-semibold sm:text-lg font-GeneralSans">
-								Avg. Rate:
+                Avg. Rate:
                         </p>
                         <div className="sm:text-base font-GeneralSans">
-								30USD/Per Hour
+                30USD/Per Hour
                         </div>
                       </div>
 
                       {/* no. of projects */}
                       <div className="flex justify-center items-center w-64 gap-x-1">
                         <p className="font-semibold sm:text-lg font-GeneralSans">
-								No. of Projects Completed:
+                No. of Projects Completed:
                         </p>
                         {isEditing ? (
                                 <input
@@ -88,7 +88,7 @@ const EditProfileCard = ({
                                 />
                             ) : (
                                 <div className="rounded-md text-center w-20 h-8 px-2 text-white text-base bg-[#B27EE3] bg-opacity-30 font-GeneralSans">
-									5
+                  5
                                 </div>
                             )}
                       </div>
@@ -105,7 +105,7 @@ const EditProfileCard = ({
                           href="/freelancerProfileViewByEmployer"
                           className="text-white text-center text-xl font-medium rounded shadow bg-gradient-to-l from-purple-400 to-transparent py-2 w-full"
                         >
-								HIRE
+                HIRE
                         </a>
                       </div>
                     </>

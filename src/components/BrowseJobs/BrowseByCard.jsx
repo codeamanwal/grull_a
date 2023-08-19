@@ -37,7 +37,7 @@ const BrowseByCard = ({topic, items}) => {
   return (
     <div className="sm:my-6 ">
       <p className="text-white font-semibold sm:text-3xl sm:pb-6">
-				BROWSE BY {topic}
+        BROWSE BY {topic}
       </p>
       <div className="flex flex-col sm:b-10">
         {isMobile ? (
