@@ -33,7 +33,7 @@ const EmployerProfilePage = () => {
             <div className="flex flex-col flex-wrap items-center text-white">
               <div className="flex flex-col space-y-3 space-x-3 rounded-lg border border-white">
                 <p className="flex items-center justify-center rounded-t-lg bg-purple-600 text-lg font-spaceGrotesk font-semibold">
-									REVIEWS
+                                    REVIEWS
                 </p>
                 <ReviewCard rating={2} />
                 <ReviewCard rating={3} />
@@ -48,21 +48,21 @@ const EmployerProfilePage = () => {
               <div className="flex flex-col space-y-4">
                 <div className="flex flex-col space-y-2">
                   <p className="sm:text-2xl text-xl font-spaceGrotesk font-bold">
-										Description
+                                        Description
                   </p>
                   <p className="sm:text-xl text-sm font-GeneralSans font-normal">
-										I am an HR manager graduated from KMD College, actively
-										hiring for design jobs.
+                                        I am an HR manager graduated from KMD College, actively
+                                        hiring for design jobs.
                   </p>
                 </div>
 
                 <div className="flex flex-col space-y-2">
                   <p className="sm:text-2xl text-xl font-spaceGrotesk font-bold">
-										ABD PVT. LTD.
+                                        ABD PVT. LTD.
                   </p>
                   <p className="sm:text-xl text-sm font-GeneralSans font-normal">
-										This company deals with furniture, with many freelance
-										requirements from design to development, based in India.
+                                        This company deals with furniture, with many freelance
+                                        requirements from design to development, based in India.
                   </p>
                 </div>
               </div>
@@ -70,10 +70,10 @@ const EmployerProfilePage = () => {
               {/* right */}
               <div className="flex flex-col justify-center items-center flex-wrap space-y-4 font-spaceGrotesk font-semibold sm:text-xl p-2">
                 <button className="md:px-8 sm:py-4 py-2 px-2 text-center rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
-									EDIT JOBS
+                                    EDIT JOBS
                 </button>
                 <p className="text-purple-600 text-center sm:text-lg font-spaceGrotesk font-medium">
-									SWITCH TO A FREELANCER
+                                    SWITCH TO A FREELANCER
                 </p>
               </div>
             </div>
@@ -111,7 +111,7 @@ const EmployerProfilePage = () => {
             <div className="flex flex-col flex-wrap items-center text-white">
               <div className="flex flex-col space-y-3 space-x-3 rounded-lg border border-white">
                 <p className="flex items-center justify-center rounded-t-lg bg-purple-600 text-lg font-spaceGrotesk font-semibold">
-									REVIEWS
+                                    REVIEWS
                 </p>
                 <ReviewCard rating={2} />
                 <ReviewCard rating={3} />

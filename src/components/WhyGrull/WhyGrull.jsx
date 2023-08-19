@@ -14,11 +14,11 @@ const WhyGrull = () => {
         className="flex justify-center sm:w-1/3 w-3/5 py-4 rounded-lg sm:my-8 my-3"
         style={{
           background:
-						'linear-gradient(269.98deg, #4301A3 45.02%, rgba(255, 255, 255, 0) 132.92%)',
+                        'linear-gradient(269.98deg, #4301A3 45.02%, rgba(255, 255, 255, 0) 132.92%)',
         }}
       >
         <p className="font-semibold sm:text-3xl sm:leading-6 text-white font-spaceGrotesk">
-					WHY GRULL
+                    WHY GRULL
         </p>
       </div>
 

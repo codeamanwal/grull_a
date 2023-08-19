@@ -18,7 +18,7 @@ const BrowseFreelancersPage = () => {
       <div className="flex sm:flex-row space-y-6 flex-col space-x-6 ">
         <div className="flex flex-col sm:space-y-4 space-y-6 font-bold sm:text-2xl text-white justify-start mt-4">
           <p className="sm:pl-20 text-center text-2xl font-bold">
-						BROWSE FREELANCERS
+                        BROWSE FREELANCERS
           </p>
 
           <div className="p-2">
