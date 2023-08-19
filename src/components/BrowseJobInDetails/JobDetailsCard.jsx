@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const JobDetailsCard = ({ isFreelancer }) => {
     return (
@@ -17,44 +18,44 @@ const JobDetailsCard = ({ isFreelancer }) => {
                         <div className="flex flex-wrap sm:flex-col space-y-2">
                             <p className="font-bold sm:pt-4">JOB DESCRIPTION</p>
                             <p className=" sm:w-72  w-full text-sm font-normal sm:pt-2">
-								Looking for a skilled designer to help me make 10-15 product
-								renders in 3 dimensional, high quality of furniture Looking for
-								a skilled designer to help me make 10-15 product renders in 3
-								dimensional, high quality of furniture and more..
+                                Looking for a skilled designer to help me make 10-15 product
+                                renders in 3 dimensional, high quality of furniture Looking for
+                                a skilled designer to help me make 10-15 product renders in 3
+                                dimensional, high quality of furniture and more..
                             </p>
                         </div>
                         <div className="flex flex-wrap flex-col">
                             <div className="flex flex-wrap flex-col space-y-2">
                                 <p className="font-bold sm:pt-4">COMPANY NAME</p>
                                 <p className="sm:pt-2">
-									We are a kids furniture retail company based in Bangalore,
-									India with many stores.
+                                    We are a kids furniture retail company based in Bangalore,
+                                    India with many stores.
                                 </p>
                             </div>
                             <p className="sm:pt-12 font-bold text-sm">
-								DOWNLOAD REFRENCE FILES
+                                DOWNLOAD REFRENCE FILES
                             </p>
                         </div>
                     </div>
                     <div className="flex flex-wrap flex-col">
                         <p className="text-white text-base font-GeneralSans font-bold leading-normal">
-							SKILLS REQUIRED
+                            SKILLS REQUIRED
                         </p>
                         <div className="grid grid-cols-2 sm:grid-cols-3 sm:gap-4 gap-2 sm:pt-4 text-white p-2 text-base">
                             <button className="sm:p-2 s p-1 rounded-md bg-[#B27FE2] ">
-								Auto CAD
+                                Auto CAD
                             </button>
                             <button className="sm:p-2  p-1 rounded-md bg-[#B27FE2]">
-								MAYA
+                                MAYA
                             </button>
                             <button className="sm:p-2  p-1 rounded-md bg-[#B27FE2]">
-								Adobe Dimension
+                                Adobe Dimension
                             </button>
                             <button className="sm:p-2  p-1 rounded-md bg-[#B27FE2]">
-								Adobe Creative Cloud
+                                Adobe Creative Cloud
                             </button>
                             <button className="sm:p-2  p-1 rounded-md bg-[#B27FE2]">
-								Photoshop
+                                Photoshop
                             </button>
                         </div>
                     </div>
@@ -64,13 +65,13 @@ const JobDetailsCard = ({ isFreelancer }) => {
                     <div className="space-y-6 sm:w-40 w-full">
                         {isFreelancer ? (
                             <p className="text-purple-600 text-base text-center font-GeneralSans font-medium">
-								NON-NEGOTIABLE
+                                NON-NEGOTIABLE
                             </p>
                         ) : (
                             <button className="flex items-center bg-white border border-gray-300 rounded-lg p-2 ml-4">
                                 <div className="h-6 w-6 bg-green-500 rounded-full"></div>
                                 <span className="sm:ml-2 text-[#4301a3] px-2 opacity-1 font-semibold">
-									ACTIVE
+                                    ACTIVE
                                 </span>
                             </button>
                         )}
@@ -82,7 +83,7 @@ const JobDetailsCard = ({ isFreelancer }) => {
                             </div>
                             {!isFreelancer && (
                                 <p className="text-purple-600 text-base  text-center font-GeneralSans font-medium">
-									NON-NEGOTIABLE
+                                    NON-NEGOTIABLE
                                 </p>
                             )}
                         </div>
@@ -92,13 +93,17 @@ const JobDetailsCard = ({ isFreelancer }) => {
                             href="/applyProposal"
                             className="text-white w-1/2 m-4  sm:w-full text-center sm:text-xl font-medium md:px-8 py-2 px-4 rounded shadow bg-gradient-to-l from-purple-400 to-transparent"
                         >
-							APPLY
+                            APPLY
                         </a>
                     )}
                 </div>
             </div>
         </div>
     );
+};
+
+JobDetailsCard.propTypes = {
+    isFreelancer: PropTypes.bool,
 };
 
 export default JobDetailsCard;
