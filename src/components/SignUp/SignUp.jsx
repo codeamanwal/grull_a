@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import config from 'react-global-configuration';
 import {Link} from 'react-router-dom';
 import {apple, facebook, google} from '../Assets';
 import Box from './Box';
@@ -17,7 +16,7 @@ const SignUp = () => {
         setErrorMessage('Please fill in all the required fields.');
         return false;
       }
-      const response = await fetch(`${config.BACKEND_ENDPOINT}/api/v0/auth/register`, {
+      const response = await fetch(`${process.env.BACKEND_ENDPOINT}/api/v0/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
