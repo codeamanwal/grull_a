@@ -26,7 +26,15 @@ import {
   ProjectGalleryPage,
 } from './Pages';
 
+import config from 'react-global-configuration';
+import {env} from 'process';
+
+function createSettings() {
+  config.set('BACKEND_ENDPOINT', env.BACKEND_ENDPOINT);
+}
+
 function App() {
+  createSettings();
   return (
     <div className=" overflow-hidden">
       <Routes>
