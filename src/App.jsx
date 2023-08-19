@@ -27,10 +27,9 @@ import {
 } from './Pages';
 
 import config from 'react-global-configuration';
-import {env} from 'process';
 
 function createSettings() {
-  config.set('BACKEND_ENDPOINT', env.BACKEND_ENDPOINT);
+  config.set('BACKEND_ENDPOINT', process.env.BACKEND_ENDPOINT);
 }
 
 function App() {
