@@ -12,7 +12,7 @@ const SignUpBox = () => {
 					<p className="flex flex-col text-white md:text-2xl font-medium font-GeneralSans">
 						I am looking for jobs
 					</p>
-					<Link to="/signUpEnterOtp?isFreelancer=true">
+					<Link to="/signUp?isFreelancer=true">
 						<button className="text-white md:text-xl font-spaceGrotesk font-medium px-6 py-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
 							SIGN UP AS A FREELANCER
 						</button>
@@ -24,7 +24,7 @@ const SignUpBox = () => {
 						I want to post jobs
 					</p>
 
-					<Link to="/signUpEnterOtp?isFreelancer=false">
+					<Link to="/signUp?isFreelancer=false">
 						<button className="text-white md:text-xl font-spaceGrotesk font-medium px-6 py-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
 							SIGN UP AS AN EMPLOYER
 						</button>

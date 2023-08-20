@@ -1,5 +1,6 @@
 import LoggedInHeader from "./Header/LoggedInHeader";
 import SignUp from "./SignUp/SignUp";
+import LogIn from "./LogIn/LogIn";
 import Box from "./SignUp/Box";
 import Footer from "./Footer/Footer";
 import WhyGrull from "./WhyGrull/WhyGrull";
@@ -35,6 +36,7 @@ import ProfileViewCard from "./Profile/ProfileViewCard";
 export {
 	LoggedInHeader,
 	SignUp,
+	LogIn,
 	Box,
 	Footer,
 	WhyGrull,

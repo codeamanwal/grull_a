@@ -86,21 +86,17 @@ function App() {
 
 				{/* SignUpModal */}
 				{/* <Route
-					path="/SignUpRequestOtp"
-					element={<LoginSignUpModalPage otp={true} welcome={false} />}
+					path="/SignUp"
+					element={<LoginSignUpModalPage welcome={false} />}
 				/> */}
 
 				<Route
-					path="/signUpEnterOtp"
-					element={<LoginSignUpModalPage otp={false} welcome={false} />}
+					path="/signUp"
+					element={<LoginSignUpModalPage welcome={false} />}
 				/>
 				<Route
-					path="/logInRequestOtp"
-					element={<LoginSignUpModalPage otp={true} welcome={true} />}
-				/>
-				<Route
-					path="/logInEnterOtp"
-					element={<LoginSignUpModalPage otp={false} welcome={true} />}
+					path="/logIn"
+					element={<LoginSignUpModalPage welcome={true} />}
 				/>
 
 				<Route path="/browseJobs" element={<BrowseJobsPage />} />

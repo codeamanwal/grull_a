@@ -1,12 +1,12 @@
-import { Footer, LoggedInHeader, SignUp } from "../../components";
+import { Footer, LoggedInHeader, SignUp, LogIn } from "../../components";
 
-const LoginSignUpModalPage = ({ otp, welcome }) => {
+const LoginSignUpModalPage = ({welcome }) => {
 	return (
 		<div className="flex flex-col min-h-screen bg-[#1A0142]">
 			<LoggedInHeader includeNavBar={false} />
 			<div className="flex-grow overflow-y-auto">
 				<div className="flex justify-center items-center py-28">
-					<SignUp isOtp={otp} isWelcome={welcome} />
+				{welcome ? <LogIn /> : <SignUp isWelcome={welcome} />}
 				</div>
 			</div>
 			<Footer />

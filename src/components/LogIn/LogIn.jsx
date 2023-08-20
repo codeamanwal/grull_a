@@ -1,25 +1,25 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { apple, facebook, google } from "../Assets";
-import Box from "./Box";
+import Box from "../SignUp/Box";
 
-const SignUp = () => {
+const LogIn = () => {
   const [email, setEmail] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [isFreelancer, setIsFreelancer] = useState(false);
   const [checkbox, setCheckboxChecked] = useState(false);
-  const [isSignUpSuccessful, setIsSignUpSuccessful] = useState(false);
+  const [isLogInSuccessful, setIsLogInSuccessful] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [password, setPassword] = useState(""); // New state for password
 
-  const handleSignUp = async () => {
+  const handleLogIn = async () => {
     try {
       if (!email || !password || !checkbox) {
         setErrorMessage("Please fill in all the required fields.");
         return false;
       }
 
-      const response = await fetch("https://35.154.4.80/api/v0/auth/register", {
+      const response = await fetch("https://35.154.4.80/api/v0/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -35,7 +35,7 @@ const SignUp = () => {
       }
 
       setErrorMessage("");
-      setIsSignUpSuccessful(true);
+      setIsLogInSuccessful(true);
 
       const responseData = await response.json();
       console.log("User signed up successfully!");
@@ -44,7 +44,7 @@ const SignUp = () => {
       return true;
     } catch (error) {
       console.error("Error occurred:", error);
-      setIsSignUpSuccessful(false);
+      setIsLogInSuccessful(false);
       return false;
     }
   };
@@ -60,10 +60,10 @@ const SignUp = () => {
 
   return (
     <div className="w-96 bg-white rounded-2xl border border-black py-6 mx-auto">
-		<form onSubmit={handleSignUp}>
+		<form onSubmit={handleLogIn}>
       <div className="flex flex-col items-center">
         <p className="font-medium text-5xl font-spaceGrotesk text-purple-600">
-          Sign Up
+          Log In
         </p>
 
         <div className="flex flex-col gap-y-4 mt-4">
@@ -126,11 +126,11 @@ const SignUp = () => {
         </div>
 
 		<p className="text-red-500 font-medium text-center">{errorMessage}</p>
-		{isSignUpSuccessful ? (
+		{isLogInSuccessful ? (
         <p className="text-green-500 font-medium text-center mt-3">Sign up successful! You can now log in.</p>
       ) : null}
 
-{isSignUpSuccessful ? (
+{isLogInSuccessful ? (
           <Link to={isFreelancer ? "/logIn?isFreelancer=true" : "/logIn?isFreelancer=false"}>
             <button
               className="flex justify-center p-2 bg-gradient-to-r from-purple-500 via-indigo-600 to-purple-800 rounded-lg w-60 m-2 text-white font-medium text-2xl leading-10 font-GeneralSans"
@@ -139,20 +139,28 @@ const SignUp = () => {
             </button>
           </Link>
         ) : (
+            
           <button
             type="button" // Prevent default form submission behavior
             className="flex justify-center p-2 bg-gradient-to-r from-purple-500 via-indigo-600 to-purple-800 rounded-lg w-60 m-2 text-white font-medium text-2xl leading-10 font-GeneralSans"
-            onClick={handleSignUp}
+            onClick={handleLogIn}
           >
-            Join Grull
+            LogIn
           </button>
         )}
 
         <p className="text-lg">
-          Already have an account?
-          <Link to={isFreelancer ? "/logIn?isFreelancer=true" : "/logIn?isFreelancer=false"}>
-            <span className="text-purple-700"> Log In</span>
-          </Link>
+          Don't have an account?
+
+          <a
+									href="/signUpOption"
+									className="text-purple-700"
+								>
+									 <span> Sign Up</span>
+								</a>
+          {/* <Link to="/SignUpOptionPage">
+            <span className="text-purple-700"> Sign Up</span>
+          </Link> */}
         </p>
       </div>
 	  </form>
@@ -160,4 +168,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default LogIn;
