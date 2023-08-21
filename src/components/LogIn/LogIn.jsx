@@ -10,31 +10,31 @@ const LogIn = () => {
   const isFreelancer = false;
   const [checkbox, setCheckboxChecked] = useState(false);
   const [isLogInSuccessful, setIsLogInSuccessful] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessages, setErrorMessages] = useState([]);
   const [password, setPassword] = useState(''); // New state for password
 
   const handleLogIn = async () => {
     try {
       if (!email) {
-        setErrorMessage('Email field cannot be empty!');
+        setErrorMessages([...errorMessages, 'Email field cannot be empty!']);
         setIsLogInSuccessful(false);
         return false;
       }
 
       if (!isEmailValid(email)) {
-        setErrorMessage('Please enter a valid email address.');
+        setErrorMessages([...errorMessages, 'Please enter a valid email address.']);
         setIsLogInSuccessful(false);
         return false;
       }
 
       if (!password) {
-        setErrorMessage('Password field cannot be empty!');
+        setErrorMessages([...errorMessages, 'Password field cannot be empty!']);
         setIsLogInSuccessful(false);
         return false;
       }
 
       if (!checkbox) {
-        setErrorMessage('You must agree to the Grull User Policy Agreement.');
+        setErrorMessages([...errorMessages, 'You must agree to the Grull User Policy Agreement.']);
         setIsLogInSuccessful(false);
         return false;
       }
@@ -56,7 +56,7 @@ const LogIn = () => {
       );
 
       if (!response.ok && response.status == 400) {
-        setErrorMessage('Email Adress/Password is incorrect.');
+        setErrorMessages([...errorMessages, 'Email Adress/Password is incorrect.']);
         setIsLogInSuccessful(false);
         return false;
       }
@@ -65,7 +65,7 @@ const LogIn = () => {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      setErrorMessage('');
+      setErrorMessages([]);
       setIsLogInSuccessful(true);
 
       const responseData = await response.json();
@@ -148,12 +148,11 @@ const LogIn = () => {
             I agree to the Grull User Policy Agreement
             </span>
           </div>
-
-          <p className="text-red-500 font-medium text-center">{errorMessage}</p>
-          {isLogInSuccessful ? (
-        <p className="text-green-500 font-medium text-center mt-3">Sign up successful! You can now log in.</p>
-      ) : null}
-
+          <div>
+            {errorMessages.map((errorMessage, index) => (
+              <p key={index} className="text-red-500 font-medium text-center">{errorMessage}</p>
+            ))}
+          </div>
           {isLogInSuccessful ? (
           <Link to={isFreelancer ? '/logIn?isFreelancer=true' : '/logIn?isFreelancer=false'}>
             <button
