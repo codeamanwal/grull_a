@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import config from 'react-global-configuration';
 import {Link} from 'react-router-dom';
 import {apple, facebook, google} from '../Assets';
 import Box from './Box';
@@ -17,16 +18,20 @@ const SignUp = () => {
         return false;
       }
 
-      const response = await fetch(`${config.BACKEND_URL}/api/v0/auth/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
+      const urlEndpoint = `${config.get('BACKEND_URL')}/api/v0/auth/register`;
+      const response = await fetch(
+          urlEndpoint,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              email,
+              password,
+            }),
+          },
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
