@@ -3,6 +3,7 @@ import config from 'react-global-configuration';
 import {Link} from 'react-router-dom';
 import {apple, facebook, google} from '../Assets';
 import Box from '../SignUp/Box';
+import {isEmailValid} from '../../utils/validators';
 
 const LogIn = () => {
   const [email, setEmail] = useState('');
@@ -16,6 +17,12 @@ const LogIn = () => {
     try {
       if (!email) {
         setErrorMessage('Email field cannot be empty!');
+        setIsLogInSuccessful(false);
+        return false;
+      }
+
+      if (!isEmailValid(email)) {
+        setErrorMessage('Please enter a valid email address.');
         setIsLogInSuccessful(false);
         return false;
       }
