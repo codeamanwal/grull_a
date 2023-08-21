@@ -14,27 +14,25 @@ const LogIn = () => {
   const [password, setPassword] = useState(''); // New state for password
 
   const handleLogIn = async () => {
+    setErrorMessages([]);
     try {
       if (!email) {
         setErrorMessages([...errorMessages, 'Email field cannot be empty!']);
-        setIsLogInSuccessful(false);
-        return false;
       }
 
       if (!isEmailValid(email)) {
         setErrorMessages([...errorMessages, 'Please enter a valid email address.']);
-        setIsLogInSuccessful(false);
-        return false;
       }
 
       if (!password) {
         setErrorMessages([...errorMessages, 'Password field cannot be empty!']);
-        setIsLogInSuccessful(false);
-        return false;
       }
 
       if (!checkbox) {
         setErrorMessages([...errorMessages, 'You must agree to the Grull User Policy Agreement.']);
+      }
+
+      if (errorMessages) {
         setIsLogInSuccessful(false);
         return false;
       }
