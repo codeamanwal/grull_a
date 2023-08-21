@@ -55,6 +55,12 @@ const LogIn = () => {
           },
       );
 
+      if (!response.ok && response.status == 400) {
+        setErrorMessage('Email Adress/Password is incorrect.');
+        setIsLogInSuccessful(false);
+        return false;
+      }
+
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
