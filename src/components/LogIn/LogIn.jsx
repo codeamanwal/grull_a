@@ -14,7 +14,7 @@ const LogIn = () => {
   const [password, setPassword] = useState(''); // New state for password
 
   const handleLogIn = async () => {
-    setErrorMessages([]);
+    setErrorMessage('');
     try {
       if (!email) {
         setErrorMessage('Email field cannot be empty!');
