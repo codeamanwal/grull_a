@@ -10,29 +10,32 @@ const LogIn = () => {
   const isFreelancer = false;
   const [checkbox, setCheckboxChecked] = useState(false);
   const [isLogInSuccessful, setIsLogInSuccessful] = useState(false);
-  const [errorMessages, setErrorMessages] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
   const [password, setPassword] = useState(''); // New state for password
 
   const handleLogIn = async () => {
     setErrorMessages([]);
     try {
       if (!email) {
-        setErrorMessages([...errorMessages, 'Email field cannot be empty!']);
+        setErrorMessage('Email field cannot be empty!');
+        setIsLogInSuccessful(false);
+        return false;
       }
 
       if (email && !isEmailValid(email)) {
-        setErrorMessages([...errorMessages, 'Please enter a valid email address.']);
+        setErrorMessage('Please enter a valid email address.');
+        setIsLogInSuccessful(false);
+        return false;
       }
 
       if (!password) {
-        setErrorMessages([...errorMessages, 'Password field cannot be empty!']);
+        setErrorMessage('Password field cannot be empty!');
+        setIsLogInSuccessful(false);
+        return false;
       }
 
       if (!checkbox) {
-        setErrorMessages([...errorMessages, 'You must agree to the Grull User Policy Agreement.']);
-      }
-
-      if (errorMessages) {
+        setErrorMessage('You must agree to the Grull User Policy Agreement.');
         setIsLogInSuccessful(false);
         return false;
       }
@@ -54,7 +57,7 @@ const LogIn = () => {
       );
 
       if (!response.ok && response.status == 400) {
-        setErrorMessages([...errorMessages, 'Email Adress/Password is incorrect.']);
+        setErrorMessage('Email Adress/Password is incorrect.');
         setIsLogInSuccessful(false);
         return false;
       }
@@ -63,7 +66,7 @@ const LogIn = () => {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      setErrorMessages([]);
+      setErrorMessage('');
       setIsLogInSuccessful(true);
 
       const responseData = await response.json();
@@ -146,10 +149,8 @@ const LogIn = () => {
             I agree to the Grull User Policy Agreement
             </span>
           </div>
-          <div>
-            {errorMessages.map((errorMessage, index) => (
-              <p key={index} className="text-red-500 font-medium text-center">{errorMessage}</p>
-            ))}
+          <div name="errors">
+            <p className="text-red-500 font-medium text-center">{errorMessage}</p>
           </div>
           {isLogInSuccessful ? (
           <Link to={isFreelancer ? '/logIn?isFreelancer=true' : '/logIn?isFreelancer=false'}>
