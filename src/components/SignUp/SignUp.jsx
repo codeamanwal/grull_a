@@ -17,7 +17,7 @@ const SignUp = () => {
         return false;
       }
 
-      const response = await fetch('https://35.154.4.80/api/v0/auth/register', {
+      const response = await fetch(`${config.BACKEND_URL}/api/v0/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

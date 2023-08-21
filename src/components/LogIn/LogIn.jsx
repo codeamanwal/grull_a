@@ -13,20 +13,16 @@ const LogIn = () => {
 
   const handleLogIn = async () => {
     try {
-      if (!email || !password || !checkbox) {
-        setErrorMessage('Please fill in all the required fields.');
-        return false;
-      }
+      const urlencodedData = new URLSearchParams();
+      urlencodedData.append('username', email);
+      urlencodedData.append('password', password);
 
-      const response = await fetch('https://35.154.4.80/api/v0/auth/login', {
+      const response = await fetch(`${config.BACKEND_URL}/api/v0/auth/login`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
+        body: urlencodedData,
       });
 
       if (!response.ok) {
@@ -37,9 +33,12 @@ const LogIn = () => {
       setIsLogInSuccessful(true);
 
       const responseData = await response.json();
-      console.log('User signed up successfully!');
-      console.log('User details:', responseData);
-
+      localStorage.setItem(
+          'authData', {
+            'access_token': responseData['access_token'],
+            'token_type': responseData['token_type'],
+          },
+      );
       return true;
     } catch (error) {
       console.error('Error occurred:', error);
@@ -88,6 +87,7 @@ const LogIn = () => {
           <div className="border-b-2 border-gray-300 w-80 m-2 font-GeneralSans"></div>
 
           <input
+            required={true}
             type="email"
             placeholder="Email"
             className="py-2 px-4 border text-xs w-72 h-10 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 m-2"
@@ -96,6 +96,7 @@ const LogIn = () => {
           />
 
           <input
+            required={true}
             type="password" // New input type for password
             placeholder="Password"
             className="py-2 px-4 border text-xs w-72 h-10 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 m-2"
@@ -105,6 +106,7 @@ const LogIn = () => {
 
           <div className="flex items-center space-x-2">
             <input
+              required={true}
               type="checkbox"
               className="form-checkbox h-6 w-6 text-indigo-600"
               checked={checkbox}
@@ -147,9 +149,6 @@ const LogIn = () => {
             >
               <span> Sign Up</span>
             </a>
-            {/* <Link to="/SignUpOptionPage">
-            <span className="text-purple-700"> Sign Up</span>
-          </Link> */}
           </p>
         </div>
       </form>

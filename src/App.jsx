@@ -1,5 +1,6 @@
 import React from 'react';
 import {Route, Routes} from 'react-router-dom';
+import createSettings from './utils/settings';
 import './index.css';
 
 import {
@@ -18,6 +19,7 @@ import {
 } from './Pages';
 
 function App() {
+  createSettings();
   return (
     <div className=" overflow-hidden">
       <Routes>
