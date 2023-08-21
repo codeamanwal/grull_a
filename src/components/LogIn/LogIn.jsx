@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import config from 'react-global-configuration';
 import {Link} from 'react-router-dom';
 import {apple, facebook, google} from '../Assets';
 import Box from '../SignUp/Box';
@@ -13,17 +14,21 @@ const LogIn = () => {
 
   const handleLogIn = async () => {
     try {
+      const urlEndpoint = `${config.get('BACKEND_URL')}/api/v0/auth/login`;
       const urlencodedData = new URLSearchParams();
       urlencodedData.append('username', email);
       urlencodedData.append('password', password);
 
-      const response = await fetch(`${config.BACKEND_URL}/api/v0/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: urlencodedData,
-      });
+      const response = await fetch(
+          urlEndpoint,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: urlencodedData,
+          },
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
