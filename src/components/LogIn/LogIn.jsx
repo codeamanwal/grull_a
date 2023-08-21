@@ -14,6 +14,24 @@ const LogIn = () => {
 
   const handleLogIn = async () => {
     try {
+      if (!email) {
+        setErrorMessage('Email field cannot be empty!');
+        setIsLogInSuccessful(false);
+        return false;
+      }
+
+      if (!password) {
+        setErrorMessage('Password field cannot be empty!');
+        setIsLogInSuccessful(false);
+        return false;
+      }
+
+      if (!checkbox) {
+        setErrorMessage('You must agree to the Grull User Policy Agreement.');
+        setIsLogInSuccessful(false);
+        return false;
+      }
+
       const urlEndpoint = `${config.get('BACKEND_URL')}/api/v0/auth/login`;
       const urlencodedData = new URLSearchParams();
       urlencodedData.append('username', email);
