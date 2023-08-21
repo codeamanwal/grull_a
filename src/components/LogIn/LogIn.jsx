@@ -57,7 +57,7 @@ const LogIn = () => {
       );
 
       if (!response.ok && response.status == 400) {
-        setErrorMessage('Email Adress/Password is incorrect.');
+        setErrorMessage('Login credentials are incorrect.');
         setIsLogInSuccessful(false);
         return false;
       }
