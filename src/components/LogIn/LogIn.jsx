@@ -20,7 +20,7 @@ const LogIn = () => {
         setErrorMessages([...errorMessages, 'Email field cannot be empty!']);
       }
 
-      if (!isEmailValid(email)) {
+      if (email && !isEmailValid(email)) {
         setErrorMessages([...errorMessages, 'Please enter a valid email address.']);
       }
 
