@@ -20,25 +20,25 @@ const LoginSignUpHeader = () => {
           />
         </Link>
 
-				<div className="flex space-x-4">
-					<nav className={`ml-2 ${menuOpen ? "block" : "hidden"} sm:block`}>
-						<ul className="flex sm:space-x-2  space-x-1 justify-center items-center gap-x-3">
-							<li>
-								<a
-									href="/LogIn"
-									className="text-white hover:text-gray-400 font-semibold sm:text-xl text-sm leading-4 sm:leading-6"
-								>
-									LOGIN
-								</a>
-							</li>
-							<li>
-								<a
-									href="/signUpOption"
-									className="text-white hover:text-gray-400 font-semibold sm:text-xl text-sm leading-4 sm:leading-6"
-								>
-									SIGN UP
-								</a>
-							</li>
+        <div className="flex space-x-4">
+          <nav className={`ml-2 ${menuOpen ? 'block' : 'hidden'} sm:block`}>
+            <ul className="flex sm:space-x-2  space-x-1 justify-center items-center gap-x-3">
+              <li>
+                <a
+                  href="/LogIn"
+                  className="text-white hover:text-gray-400 font-semibold sm:text-xl text-sm leading-4 sm:leading-6"
+                >
+                  LOGIN
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/signUpOption"
+                  className="text-white hover:text-gray-400 font-semibold sm:text-xl text-sm leading-4 sm:leading-6"
+                >
+                  SIGN UP
+                </a>
+              </li>
 
               <li>
                 <img

@@ -8,22 +8,13 @@ import {
   LoginSignUpModalPage,
   BrowseJobsPage,
   BrowseJobInDetailsPage,
-  EditProfilePage,
   FreelancerEmptyProfilePage,
-  ApplyProposalPage,
-  EditMyAccountPage,
-  BillsAndPaymentsPage,
-  CardDetailsPage,
-  EditCardDetailsPage,
-  AccountDetailsPage,
-  FreelancerFileSharingPage,
   PostJobPage,
   BrowseFreelancersPage,
   FreelancerProfileViewByEmployerPage,
   EmployerProfilePage,
   EmployerBrowsingPostedJobsPage,
   FreelancerApplicationViewPage,
-  ProjectGalleryPage,
 } from './Pages';
 
 function App() {
@@ -75,21 +66,14 @@ function App() {
           path="/freelancerEmptyProfile"
           element={<FreelancerEmptyProfilePage />}
         />
-
-				{/* SignUpModal */}
-				{/* <Route
-					path="/SignUp"
-					element={<LoginSignUpModalPage welcome={false} />}
-				/> */}
-
-				<Route
-					path="/signUp"
-					element={<LoginSignUpModalPage welcome={false} />}
-				/>
-				<Route
-					path="/logIn"
-					element={<LoginSignUpModalPage welcome={true} />}
-				/>
+        <Route
+          path="/signUp"
+          element={<LoginSignUpModalPage welcome={false} />}
+        />
+        <Route
+          path="/logIn"
+          element={<LoginSignUpModalPage welcome={true} />}
+        />
 
         {/* employer pages */}
         <Route path="/postJob" element={<PostJobPage />} />

@@ -17,8 +17,8 @@ const SignUp = () => {
         return false;
       }
 
-      const response = await fetch("https://35.154.4.80/api/v0/auth/register", {
-        method: "POST",
+      const response = await fetch('https://35.154.4.80/api/v0/auth/register', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -119,14 +119,14 @@ const SignUp = () => {
                         <p className="text-green-500 font-medium text-center mt-3">Sign up successful! You can now log in.</p>
                     ) : null}
 
-{isSignUpSuccessful ? (
-          <Link to={isFreelancer ? "/logIn?isFreelancer=true" : "/logIn?isFreelancer=false"}>
+          {isSignUpSuccessful ? (
+          <Link to={isFreelancer ? '/logIn?isFreelancer=true' : '/logIn?isFreelancer=false'}>
             <button
               className="flex justify-center p-2 bg-gradient-to-r from-purple-500 via-indigo-600 to-purple-800 rounded-lg w-60 m-2 text-white font-medium text-2xl leading-10 font-GeneralSans"
             >
               Login
-                          </button>
-                        </Link>
+            </button>
+          </Link>
                     ) : (
                         <button
                           type="button" // Prevent default form submission behavior
@@ -140,12 +140,12 @@ const SignUp = () => {
 
           <p className="text-lg">
           Already have an account?
-          <Link to={isFreelancer ? "/logIn?isFreelancer=true" : "/logIn?isFreelancer=false"}>
-            <span className="text-purple-700"> Log In</span>
-          </Link>
-        </p>
-      </div>
-	  </form>
+            <Link to={isFreelancer ? '/logIn?isFreelancer=true' : '/logIn?isFreelancer=false'}>
+              <span className="text-purple-700"> Log In</span>
+            </Link>
+          </p>
+        </div>
+      </form>
     </div>
   );
 };
