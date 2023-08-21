@@ -38,12 +38,8 @@ const LogIn = () => {
       setIsLogInSuccessful(true);
 
       const responseData = await response.json();
-      localStorage.setItem(
-          'authData', {
-            'access_token': responseData['access_token'],
-            'token_type': responseData['token_type'],
-          },
-      );
+      localStorage.setItem('access_token', responseData['access_token']);
+      localStorage.setItem('token_type', responseData['token_type']);
       return true;
     } catch (error) {
       console.error('Error occurred:', error);
