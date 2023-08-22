@@ -40,8 +40,7 @@ const LogIn = () => {
         ));
       }
 
-      if (errorMessages) {
-        console.log(errorMessages);
+      if (errorMessages.length > 0) {
         setIsLogInSuccessful(false);
         return false;
       }
