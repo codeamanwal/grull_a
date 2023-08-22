@@ -10,10 +10,11 @@ const LogIn = () => {
   const isFreelancer = false;
   const [checkbox, setCheckboxChecked] = useState(false);
   const [isLogInSuccessful, setIsLogInSuccessful] = useState(false);
-  const [errorMessages, setErrorMessages] = useState([]);
+  const [errorMessages, setErrorMessages] = useState(null);
   const [password, setPassword] = useState(''); // New state for password
 
   const handleLogIn = async () => {
+    setErrorMessages((prevErrorMessages) => ([]));
     try {
       if (!email) {
         setErrorMessages((prevErrorMessages) => (
