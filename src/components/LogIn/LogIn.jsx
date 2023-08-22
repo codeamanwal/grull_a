@@ -20,30 +20,27 @@ const LogIn = () => {
         setErrorMessages((prevErrorMessages) => (
           [...prevErrorMessages, 'Email field cannot be empty!']
         ));
-        setIsLogInSuccessful(false);
-        return false;
       }
 
       if (email && !isEmailValid(email)) {
         setErrorMessages((prevErrorMessages) => (
           [...prevErrorMessages, 'Please enter a valid email address.']
         ));
-        setIsLogInSuccessful(false);
-        return false;
       }
 
       if (!password) {
         setErrorMessages((prevErrorMessages) => (
           [...prevErrorMessages, 'Password field cannot be empty!']
         ));
-        setIsLogInSuccessful(false);
-        return false;
       }
 
       if (!checkbox) {
         setErrorMessages((prevErrorMessages) => (
           [...prevErrorMessages, 'You must agree to the Grull User Policy Agreement.']
         ));
+      }
+
+      if (errorMessages) {
         setIsLogInSuccessful(false);
         return false;
       }
