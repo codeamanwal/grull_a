@@ -42,7 +42,6 @@ const LogIn = () => {
 
       if (errorMessages) {
         console.log(errorMessages);
-        setErrorMessages([]);
         setIsLogInSuccessful(false);
         return false;
       }
