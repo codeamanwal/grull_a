@@ -14,6 +14,7 @@ const LogIn = () => {
   const [password, setPassword] = useState(''); // New state for password
 
   const handleLogIn = async () => {
+    setErrorMessages((prevErrorMessages) => ([]));
     try {
       if (!email) {
         setErrorMessages((prevErrorMessages) => (
@@ -41,7 +42,6 @@ const LogIn = () => {
 
       if (errorMessages.length > 0) {
         setIsLogInSuccessful(false);
-        setErrorMessages([]);
         return false;
       }
 
