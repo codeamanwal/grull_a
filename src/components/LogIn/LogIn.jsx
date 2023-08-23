@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
 import config from 'react-global-configuration';
 import {apple, facebook, google} from '../Assets';
 import Box from '../SignUp/Box';
@@ -65,39 +66,6 @@ const LoginForm = () => {
       {({isSubmitting}) => (
         <Form>
           <div className="flex flex-col items-center">
-            <p className="font-medium text-5xl font-spaceGrotesk text-purple-600">
-          Log In
-            </p>
-
-            <div className="flex flex-col gap-y-4 mt-4">
-              <Box
-                logo={facebook}
-                name="Continue with Facebook"
-                color="#4285F4"
-                textColor="blue-600"
-                logoWidth="2rem"
-                logoHeight="2rem"
-              />
-
-              <Box
-                logo={google}
-                name="Continue with Google"
-                color="white"
-                textColor="#63646B"
-                logoWidth="2rem"
-                logoHeight="2rem"
-              />
-
-              <Box
-                logo={apple}
-                name="Continue with Apple"
-                color="white"
-                textColor="#63646B"
-                logoWidth="2rem"
-                logoHeight="2rem"
-              />
-            </div>
-            <div className="border-b-2 border-gray-300 w-80 m-2 font-GeneralSans"></div>
             <ErrorMessage name="email" component="div" className={errorClassNames}/>
             <Field placeholder="Email Address" type="email" name="email" className={fieldClassNames}/>
             <ErrorMessage name="password" component="div" className={errorClassNames}/>
@@ -120,15 +88,6 @@ const LoginForm = () => {
             >
              Log In
             </button>
-            <p className="text-lg">
-          Don&apos;t have an account?
-              <a
-                href="/signUpOption"
-                className="text-purple-700"
-              >
-                <span> Sign Up</span>
-              </a>
-            </p>
           </div>
         </Form>
       )}
@@ -139,7 +98,52 @@ const LoginForm = () => {
 const LogIn = () => {
   return (
     <div className="w-96 bg-white rounded-2xl border border-black py-6 mx-auto">
+      <div className="flex flex-col items-center">
+        <p className="font-medium text-5xl font-spaceGrotesk text-purple-600">
+          Log In
+        </p>
+
+        <div className="flex flex-col gap-y-4 mt-4">
+          <Box
+            logo={facebook}
+            name="Continue with Facebook"
+            color="#4285F4"
+            textColor="blue-600"
+            logoWidth="2rem"
+            logoHeight="2rem"
+          />
+
+          <Box
+            logo={google}
+            name="Continue with Google"
+            color="white"
+            textColor="#63646B"
+            logoWidth="2rem"
+            logoHeight="2rem"
+          />
+
+          <Box
+            logo={apple}
+            name="Continue with Apple"
+            color="white"
+            textColor="#63646B"
+            logoWidth="2rem"
+            logoHeight="2rem"
+          />
+        </div>
+        <div className="border-b-2 border-gray-300 w-80 m-2 font-GeneralSans"/>
+      </div>
       <LoginForm />
+      <div className="flex flex-col items-center">
+        <p className="text-lg">
+          Don&apos;t have an account?
+          <Link
+            href="/signup"
+          >
+            <span className="text-purple-700"> Sign Up</span>
+          </Link>
+        </p>
+      </div>
     </div>
   );
 };

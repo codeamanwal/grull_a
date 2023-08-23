@@ -69,11 +69,11 @@ function App() {
           element={<FreelancerEmptyProfilePage />}
         />
         <Route
-          path="/signUp"
+          path="/signup"
           element={<LoginSignUpModalPage welcome={false} />}
         />
         <Route
-          path="/logIn"
+          path="/login"
           element={<LoginSignUpModalPage welcome={true} />}
         />
 
