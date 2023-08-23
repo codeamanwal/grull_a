@@ -56,8 +56,7 @@ const LoginForm = () => {
           console.error(`Error(${result.status}): ${text}.`);
           return false;
         }
-
-        const responseData = await response.json();
+        const responseData = await result.json();
         localStorage.setItem('access_token', responseData['access_token']);
         localStorage.setItem('token_type', responseData['token_type']);
         return true;
