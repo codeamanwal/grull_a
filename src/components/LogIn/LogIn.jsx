@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
+import config from 'react-global-configuration';
 import {apple, facebook, google} from '../Assets';
 import Box from '../SignUp/Box';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
@@ -6,6 +7,8 @@ import {Formik, Form, Field, ErrorMessage} from 'formik';
 const LoginForm = () => {
   const fieldClassNames = 'py-2 px-4 border text-xs w-72 h-10 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 m-2';
   const errorClassNames = 'text-red-500 text-sm text-center';
+  const [isIncorrectCredential, setIsIncorrectCredential] = useState(false);
+  const urlEndpoint = `${config.get('BACKEND_URL')}/api/v0/auth/login`;
   return <div>
     <Formik
       initialValues={{email: '', password: '', checkbox: false}}
@@ -26,11 +29,38 @@ const LoginForm = () => {
         }
         return errors;
       }}
-      onSubmit={(values, {setSubmitting}) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
+      onSubmit={async (values, {setSubmitting}) => {
+        const email = values.email;
+        const password = values.password;
+        const urlencodedData = new URLSearchParams();
+        urlencodedData.append('username', email);
+        urlencodedData.append('password', password);
+        const result = await fetch(
+            urlEndpoint,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+              },
+              body: urlencodedData,
+            },
+        );
+        setSubmitting(false);
+        if (!result.ok && result.status == 400) {
+          setIsIncorrectCredential(true);
+          return false;
+        }
+
+        if (!result.ok) {
+          const text = await result.text();
+          console.error(`Error(${result.status}): ${text}.`);
+          return false;
+        }
+
+        const responseData = await response.json();
+        localStorage.setItem('access_token', responseData['access_token']);
+        localStorage.setItem('token_type', responseData['token_type']);
+        return true;
       }}
     >
       {({isSubmitting}) => (
@@ -80,6 +110,10 @@ const LoginForm = () => {
               </span>
             </div>
             <ErrorMessage name="checkbox" component="span" className={errorClassNames}/>
+            {
+              isIncorrectCredential?
+              (<span className={errorClassNames}>Incorrect credentials.</span>): null
+            }
             <button
               type="submit"
               className="flex justify-center p-2 bg-gradient-to-r from-purple-500 via-indigo-600 to-purple-800 rounded-lg w-60 m-2 text-white font-medium text-2xl leading-10 font-GeneralSans"
