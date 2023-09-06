@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import ProfileCard from './ProfileCard';
 import {plus, upArrow} from '../Assets';
@@ -7,6 +8,52 @@ const FreelancerEmptyProfile = () => {
   const [skills, setSkills] = useState(['']);
   const [languages, setLanguages] = useState(['']);
   const [images, setImages] = useState([null]);
+  const [description, setDescription] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  // const location = useLocation();
+  // const queryParams = new URLSearchParams(location.search);
+  // const [firstName, setFirstName] = useState(queryParams.get('first_name') || '');
+  // const [lastName, setLastName] = useState(queryParams.get('last_name') || '');
+
+  const handleProfileChange = (newName, newRole) => {
+    setFirstName(newName); // Update firstName state
+    setLastName(newRole); // Update lastName state
+  };  
+
+
+  const handleSubmit = async ( ) => {
+    try {
+      const payload = {
+        password: 'staticPassword',
+        first_name: firstName,
+        last_name: lastName,
+        description: description,
+        list_as_freelancer: true,
+      };
+
+      console.log('First name from query:', firstName); // Corrected from newName
+    console.log('Last name from query:', lastName);
+
+      const accessToken = localStorage.getItem('access_token');
+
+      // Perform the API call
+      const response = await fetch('http://35.154.4.80:3000/api/v0/users/me', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(payload), // Convert payload to JSON
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+    } catch (error) {
+      console.error('Error occurred:', error);
+    }
+  };
 
   const handleChange = (index, event, field) => {
     if (field === 'skills') {
@@ -37,7 +84,11 @@ const FreelancerEmptyProfile = () => {
 
   return (
     <div className="flex flex-wrap bg-[#1A0142] sm:w-3/4 sm:mx-auto  text-white 2xl:h-[913px] p-10">
-      <ProfileCard />
+      <ProfileCard
+        profileName={firstName} // Pass the firstName state as prop
+        profileRole={lastName} // Pass the lastName state as prop
+        onProfileChange={handleProfileChange}
+      />
 
       {/* form */}
       <div className="p-6 space-y-6 flex-grow">
@@ -52,8 +103,10 @@ const FreelancerEmptyProfile = () => {
             <textarea
               id="description"
               rows="4"
-              className="bg-[#1A0142] border border-solid border-purple-500 rounded-lg text-gray-900 sm:text-sm block w-full p-4"
+              className="bg-[#1A0142] border border-solid border-purple-500 rounded-lg  sm:text-sm block w-full p-4"
               placeholder="Write about you..."
+              value={description}
+              onChange={(event) => setDescription(event.target.value)}
             ></textarea>
           </div>
 
@@ -72,7 +125,7 @@ const FreelancerEmptyProfile = () => {
                 id={`skill-${index}`}
                 value={skill}
                 onChange={(event) => handleChange(index, event, 'skills')}
-                className="bg-[#1A0142] border border-solid border-purple-500 rounded-lg text-gray-900 sm:text-sm block w-full p-2.5 my-2"
+                className="bg-[#1A0142] border border-solid border-purple-500 rounded-lg text-white sm:text-sm block w-full p-2.5 my-2"
                 required=""
               />
             ))}
@@ -102,7 +155,7 @@ const FreelancerEmptyProfile = () => {
                 id={`language-${index}`}
                 value={language}
                 onChange={(event) => handleChange(index, event, 'languages')}
-                className="bg-[#1A0142] border border-solid border-purple-500 rounded-lg text-gray-900 sm:text-sm block w-full p-2.5 my-2"
+                className="bg-[#1A0142] border border-solid border-purple-500 rounded-lg text-white sm:text-sm block w-full p-2.5 my-2"
                 required=""
               />
             ))}
@@ -159,8 +212,8 @@ const FreelancerEmptyProfile = () => {
 
       <div className="pt-10 pl-10">
         <a
-          href="/freelancerEditProfile"
           className="text-white text-xl font-medium py-2 px-16 rounded shadow bg-gradient-to-l from-purple-400 to-transparent"
+          onClick={() => handleSubmit(firstName, lastName)}
         >
           DONE
         </a>

@@ -17,7 +17,7 @@ const LoginSignUpModalPage = ({welcome}) => {
 };
 
 LoginSignUpModalPage.propTypes = {
-  welcome: PropTypes.bool,
+  welcome: PropTypes.bool.isRequired, // Add appropriate prop type validation
 };
 
 export default LoginSignUpModalPage;

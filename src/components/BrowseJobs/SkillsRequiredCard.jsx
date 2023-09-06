@@ -1,15 +1,68 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+/* eslint-disable */
+import React, {useState} from "react";
+import PropTypes from "prop-types";
+import { Link, useParams, useNavigate } from 'react-router-dom';
 
-const SkillsRequiredCard = ({isFreelancer, isActive}) => {
+const SkillsRequiredCard = ({ isFreelancer, jobData }) => {
+  const [applied, setApplied] = useState(false); // State to keep track of whether applied or not
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const[description, setDescription] = useState("");
+  const[title, setTitle] = useState("");
+
+  const handleApply = async () => {
+    // Perform API request here
+    console.log("skills", jobData)
+    try {
+      const accessToken = localStorage.getItem('access_token');
+      const id = localStorage.getItem('job_id');
+    
+      console.log("id:", id);
+      const response = await fetch(`http://35.154.4.80:3000/api/v0/jobs/${id}`, {
+        method: 'GET', 
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch data');
+      }
+  
+      const data = await response.json();
+
+      // const browseJobs = "/browseJobsInDetails";
+
+      // // Pass jobData as state to the next route using navigate
+      // navigate(browseJobs, {
+      //   state: {
+      //     description: data.description, // Pass jobData as state
+      //     title: data.title
+      //   },
+      // });
+      const browseJobsInDetails = '/browseJobsInDetails';
+
+      // Pass jobData as state to the next route using navigate
+      navigate(browseJobsInDetails, {
+        state: {
+          jobData: jobData, // Pass jobData as state
+        },
+      });
+
+      setApplied(true); // Set the applied state to true
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  // console.log("data", jobData)
+  if (jobData && jobData.title) {
   return (
     <div className="flex flex-wrap justify-between rounded-xl border border-solid border-purple-500 bg-[#492772] bg-opacity-70 sm:py-8 sm:px-4 py-4 px-2 2xl:w-[1200px] my-2">
       <div>
         <div className="flex flex-col items-start">
-          <p className="text-white sm:text-3xl text-xl ont-medium sm:px-4 py-2">
-            Need someone to design a product 3D renders
-          </p>
+          <p className="text-white sm:text-3xl text-xl ont-medium sm:px-4 py-2" id="title">{jobData.title}</p>
         </div>
         <div>
           <div className="flex sm:flex-row flex-col sm:justify-between justify-start sm:items-center">
@@ -49,45 +102,65 @@ const SkillsRequiredCard = ({isFreelancer, isActive}) => {
       </div>
 
       {isFreelancer ? (
-                <div className="sm:p-8 mt-6 space-y-4">
-                  <Link to="/browseJobsInDetails">
-                    <p className="sm:text-lg text-sm text-[#B37EE2]">NON-NEGOTIABLE</p>
-                  </Link>
+        <div className="sm:p-8 mt-6 space-y-4">
+          {/* <Link to={{
+  pathname: "/browseJobsInDetails",
+}}> */}
+            <p className="sm:text-lg text-sm text-[#B37EE2]">NON-NEGOTIABLE</p>
+          {/* </Link> */}
 
-                  <button className="text-white sm:text-xl  text-sm font-medium md:px-8 py-2 px-4 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
-            APPLY
-                  </button>
-                </div>
-            ) : (
-                <div className="sm:p-8 p-3 space-y-4">
-                  <Link to="/browseJobsInDetails">
-                    <p className="text-lg text-[#B37EE2]">12 FREELANCERS APPLIED</p>
-                  </Link>
+          <button
+            onClick={handleApply} // Call handleApply when the button is clicked
+            className="text-white sm:text-xl  text-sm font-medium md:px-8 py-2 px-4 rounded shadow bg-gradient-to-l from-purple-400 to-transparent"
+            disabled={applied} // Disable the button if already applied
+          >
+            {applied ? "APPLIED" : "APPLY"}
+          </button>
+        </div>
+      ) : (
+        <div className="sm:p-8 p-3 space-y-4">
+          <Link to={{
+              pathname: "/browseJobsInDetails",
+              state: {
+                jobData: jobData, // Pass jobData as state
+              },
+            }}>
+            <p className="text-lg text-[#B37EE2]">12 FREELANCERS APPLIED</p>
+          </Link>
 
-                  {isActive ? (
-                        <button className="flex items-center bg-white border border-gray-300 rounded-lg p-2">
-                          <div className="h-6 w-6 bg-green-500 rounded-full"></div>
+          {isActive ? (
+            <button className="flex items-center bg-white border border-gray-300 rounded-lg p-2">
+              <div className="h-6 w-6 bg-green-500 rounded-full"></div>
                           <span className="ml-2 text-[#4301a3] opacity-1 font-semibold">
                 ACTIVE
                           </span>
-                        </button>
-                    ) : (
-                        <button className="flex items-center bg-white border border-gray-300 rounded-lg p-2">
-                          <div className="h-6 w-6 bg-red-500 rounded-full"></div>
+            </button>
+          ) : (
+            <button className="flex items-center bg-white border border-gray-300 rounded-lg p-2">
+              <div className="h-6 w-6 bg-red-500 rounded-full"></div>
                           <span className="ml-2 text-[#4301a3] opacity-1 font-semibold">
                 COMPLETED
                           </span>
-                        </button>
-                    )}
-                </div>
-            )}
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
+          }else {
+    // Handle the case where jobData is undefined or does not have a title property
+    return (
+      <div>
+        <p>Error: Job data not available</p>
+      </div>
+    );
 };
 
 SkillsRequiredCard.propTypes = {
   isFreelancer: PropTypes.bool,
   isActive: PropTypes.bool,
 };
+
+}
 
 export default SkillsRequiredCard;

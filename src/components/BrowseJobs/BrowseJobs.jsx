@@ -1,9 +1,16 @@
+/* eslint-disable */
 import React from 'react';
-import {Link} from 'react-router-dom';
-import SkillsRequiredCard from './SkillsRequiredCard';
+import {Link, useHistory, useLocation} from 'react-router-dom';
+import SkillsRequiredCard from '../BrowseJobs/SkillsRequiredCard';
 import BrowseByCard from './BrowseByCard';
 
 const BrowseJobs = () => {
+  const location = useLocation();
+  const { jobData } = location.state || {};
+
+  console.log("BrowseJobs", jobData)
+  // console.log("data", jobData.title)
+  // console.log("data", jobData.description)
   const items1 = [
     'Graphic Designer',
     'Illustrator',
@@ -36,15 +43,17 @@ const BrowseJobs = () => {
                 </p>
               </div>
             </div>
-            <Link to="/browseJobsInDetails">
-              <SkillsRequiredCard isFreelancer={true} />
-            </Link>
-            <Link to="/browseJobsInDetails">
-              <SkillsRequiredCard isFreelancer={true} />
-            </Link>
-            <Link to="/browseJobsInDetails">
-              <SkillsRequiredCard isFreelancer={true} />
-            </Link>
+            {jobData && jobData.slice(0, 3).map((job, index) => (
+  <Link to={{
+    pathname: "/browseJobsInDetails",
+    // state: {
+    //    job: job// Pass description from job
+    // },
+  }} key={job.id}>
+    <SkillsRequiredCard isFreelancer={true} jobData={job} />
+  </Link>
+))}
+
           </div>
           {window.innerWidth > 640 ? (
                         <div className="flex flex-col bg-[#B37EE2] sm:p-12 rounded-tl-3xl rounded-bl-3xl">

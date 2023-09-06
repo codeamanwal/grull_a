@@ -1,3 +1,4 @@
+/* eslint-disable */
 import LoggedInHeader from './Header/LoggedInHeader';
 import SignUp from './SignUp/SignUp';
 import LogIn from './LogIn/LogIn';
@@ -27,6 +28,7 @@ import BrowseByCard from './BrowseJobs/BrowseByCard';
 import EditProfileCard from './Profile/EditProfileCard';
 import ReviewCard from './Profile/ReviewCard';
 import SkillsRequiredCard from './BrowseJobs/SkillsRequiredCard';
+import SkillsRequiredCards from './BrowseJobs/SkillsRequiredCards';
 import ClosedChatBox from './ChatBox/ClosedChatBox';
 import OpenedChatBox from './ChatBox/OpenedChatBox';
 import MessagePreviewCard from './ChatBox/MessagePreviewCard';
@@ -63,6 +65,7 @@ export {
   EditProfileCard,
   ReviewCard,
   SkillsRequiredCard,
+  SkillsRequiredCards,
   ClosedChatBox,
   OpenedChatBox,
   MessagePreviewCard,

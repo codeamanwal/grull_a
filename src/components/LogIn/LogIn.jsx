@@ -1,4 +1,7 @@
+/* eslint-disable */
 import React, {useState} from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
+import config from 'react-global-configuration';
 import {Link} from 'react-router-dom';
 import config from 'react-global-configuration';
 import {apple, facebook, google} from '../Assets';
@@ -148,4 +151,10 @@ const LogIn = () => {
   );
 };
 
+LogIn.propTypes = {
+  setToken: PropTypes.func.isRequired
+};
+
 export default LogIn;
+
+

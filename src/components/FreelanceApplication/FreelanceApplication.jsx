@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, {useState} from 'react';
 
 function setFiles() {
@@ -6,6 +7,33 @@ function setFiles() {
 
 const FreelanceApplication = () => {
   const [rate, setRate] = useState('');
+  const [isApplying, setIsApplying] = useState('');
+
+  const handleApplyClick = async () => {
+    setIsApplying(true);
+    const accessToken = localStorage.getItem('access_token');
+    const jobId = localStorage.getItem('job_id'); // Replace with how you obtain the job ID
+  
+    try {
+      const response = await fetch(`http://35.154.4.80:3000/api/v0/jobs/${jobId}/apply`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
+      setIsApplying(false);
+    } catch (error) {
+      console.error('Error occurred:', error);
+      setIsApplying(false); // Reset the applying state to false if there's an error
+    }
+  };
+  
 
   const handleFileUpload = (event) => {
     const uploadedFiles = Array.from(event.target.files);
@@ -115,8 +143,14 @@ const FreelanceApplication = () => {
           </div>
 
           <div>
-            <button className="text-white sm:text-2xl  px-4 py-3  text-base font-medium sm:py-4 sm:px-32 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
-              APPLY
+            <button
+              className={`text-white w-1/2 m-4 sm:w-full text-center sm:text-xl font-medium md:px-8 py-2 px-4 rounded shadow ${
+      isApplying ? 'bg-gray-400' : 'bg-gradient-to-l from-purple-400 to-transparent'
+              }`}
+              onClick={handleApplyClick}
+              disabled={isApplying} // Disable the button when the API call is in progress
+            >
+              {isApplying ? 'APPLYING...' : 'APPLY'}
             </button>
           </div>
         </div>

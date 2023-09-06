@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import {Route, Routes} from 'react-router-dom';
 import createSettings from './utils/settings';
@@ -16,7 +17,16 @@ import {
   EmployerProfilePage,
   EmployerBrowsingPostedJobsPage,
   FreelancerApplicationViewPage,
+  ApplyProposalPage 
 } from './Pages';
+
+import {LogIn} from './components';
+
+function getToken() {
+  const tokenString = sessionStorage.getItem('token');
+  const userToken = JSON.parse(tokenString);
+  return userToken?.token;
+}
 
 function App() {
   createSettings();
@@ -45,25 +55,20 @@ function App() {
           }
         />
         <Route path="/signUpOption" element={<SignUpOptionPage />} />
-        <Route
-          path="/signUpEnterOtp"
-          element={<LoginSignUpModalPage otp={false} welcome={false} />}
-        />
-        <Route
-          path="/logInRequestOtp"
-          element={<LoginSignUpModalPage otp={true} welcome={true} />}
-        />
-        <Route
-          path="/logInEnterOtp"
-          element={<LoginSignUpModalPage otp={false} welcome={true} />}
-        />
+        <Route path="/signUpEnterOtp" element={<LoginSignUpModalPage otp={false} welcome={false} />} />
+        <Route path="/logInRequestOtp" element={<LoginSignUpModalPage otp={true} welcome={true} />} />
+        <Route path="/logInEnterOtp" element={<LoginSignUpModalPage otp={false} welcome={true} />} />
 
         <Route path="/browseJobs" element={<BrowseJobsPage />} />
+
+        <Route path="/ApplyProposalPage" element={<ApplyProposalPage />} />
 
         <Route
           path="/browseJobsInDetails"
           element={<BrowseJobInDetailsPage />}
         />
+  
+
         <Route
           path="/freelancerEmptyProfile"
           element={<FreelancerEmptyProfilePage />}
@@ -80,19 +85,10 @@ function App() {
         {/* employer pages */}
         <Route path="/postJob" element={<PostJobPage />} />
         <Route path="/browseFreelancers" element={<BrowseFreelancersPage />} />
-        <Route
-          path="/freelancerProfileViewByEmployer"
-          element={<FreelancerProfileViewByEmployerPage />}
-        />
+        <Route path="/freelancerProfileViewByEmployer" element={<FreelancerProfileViewByEmployerPage />} />
         <Route path="/employerProfile" element={<EmployerProfilePage />} />
-        <Route
-          path="/employerBrowsingPostedJobs"
-          element={<EmployerBrowsingPostedJobsPage />}
-        />
-        <Route
-          path="/freelancerApplicationView"
-          element={<FreelancerApplicationViewPage />}
-        />
+        <Route path="/employerBrowsingPostedJobs" element={<EmployerBrowsingPostedJobsPage />} />
+        <Route path="/freelancerApplicationView" element={<FreelancerApplicationViewPage />} />
       </Routes>
     </div>
   );

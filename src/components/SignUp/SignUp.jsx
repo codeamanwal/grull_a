@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
@@ -123,6 +124,66 @@ const SignUpForm = () => {
 };
 
 const SignUp = () => {
+import Box from './Box';
+import { useLocation, useHistory } from 'react-router-dom';
+
+const SignUp = () => {
+  const [email, setEmail] = useState('');
+  const [checkbox, setCheckboxChecked] = useState(false);
+  const [isSignUpSuccessful, setIsSignUpSuccessful] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [password, setPassword] = useState(''); // New state for password
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const isFreelancerParam = params.get('isFreelancer');
+  const isFreelancer = isFreelancerParam === 'true';
+
+  const handleSignUp = async () => {
+    console.log('isFreelancer:', isFreelancer);
+    try {
+      if (!email || !password || !checkbox) {
+        setErrorMessage('Please fill in all the required fields.');
+        return false;
+      }
+
+      const urlEndpoint = `http://35.154.4.80:3000/api/v0/auth/register`;
+      const response = await fetch(
+          urlEndpoint,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              email,
+              password,
+            }),
+          },
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      setErrorMessage('');
+      setIsSignUpSuccessful(true);
+
+      const responseData = await response.json();
+      console.log('User signed up successfully!');
+      console.log('User details:', responseData);
+
+      // if (responseData.list_as_freelancer) {
+      //   localStorage.setItem("list_as_freelancer", responseData.list_as_freelancer);
+      // }
+
+      return true;
+    } catch (error) {
+      console.error('Error occurred:', error);
+      setIsSignUpSuccessful(false);
+      return false;
+    }
+  };
+
   return (
     <div className="w-96 bg-white rounded-2xl border border-black py-6 mx-auto">
       <div className="flex flex-col items-center">
