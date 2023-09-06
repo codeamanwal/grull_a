@@ -31,16 +31,15 @@ function getToken() {
 function App() {
   createSettings();
   return (
+    
     <div className=" overflow-hidden">
       <Routes>
         <Route path="/" element={<LandingPage isLoggedIn={false} />} />
         <Route
-          path="/freelancerLoggedInPage"
+          path="/LoggedInPage"
           element={
             <LandingPage
               isLoggedIn={true}
-              category="JOBS"
-              isFreelancer={true}
             />
           }
         />

@@ -5,7 +5,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import {grullLogo, bell, user} from '../Assets';
 import BrowseJobs from '../BrowseJobs/BrowseJobs';
 
-const LoggedInHeader = ({includeNavBar, category, isFreelancer}) => {
+const LoggedInHeader = ({includeNavBar, isFreelancer, category}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const [jobData, setJobData] = useState(""); // State variable to hold title
@@ -95,14 +95,14 @@ const LoggedInHeader = ({includeNavBar, category, isFreelancer}) => {
         {includeNavBar && (
           <nav className=" flex justify-end sm:pl-6 w-3/4 sm:w-full">
             <ul className="flex space-x-4 sm:space-x-8 justify-end items-center gap-4 sm:gap-8">
-              {category === 'JOBS' ? (
+              {isFreelancer ? (
                                 <li className="">
                                   <Link
                                     to={isFreelancer ? '/browseJobs' : '/browseFreelancers'}
                                     className="text-white hover:text-gray-400 font-semibold text-base sm:text-xl inline-block"
                                     onClick={handleBrowseClick}
                                   >
-                                        BROWSE {category}
+                                        BROWSE JOBS
                                   </Link>
                                 </li>
                             ) : (
@@ -112,11 +112,11 @@ const LoggedInHeader = ({includeNavBar, category, isFreelancer}) => {
                                     className="text-white hover:text-gray-400 font-semibold text-sm sm:text-xl inline-block"
                                     onClick={handleBrowseClick}
                                   >
-                                        BROWSE {category}
+                                        BROWSE FREELANCER
                                   </Link>
                                 </li>
                             )}
-              {category !== 'JOBS' && !isFreelancer && (
+              { !isFreelancer && (
                 <li className="sm:w-auto  w-1/12 mr-3">
                   <Link
                     to="/postJob"

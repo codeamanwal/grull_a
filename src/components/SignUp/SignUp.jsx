@@ -2,7 +2,7 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import config from 'react-global-configuration';
 
 import {apple, facebook, google} from '../Assets';
@@ -11,17 +11,6 @@ import getQueryParams from '../utils';
 
 const RegistrationState = ({isEmailAlreadyInUse, isSignUpSuccessful, errorClassNames}) => {
   if (isEmailAlreadyInUse) return <span className={errorClassNames}>This email is already in use.</span>;
-  if (isSignUpSuccessful) {
-    return (
-      <span className="text-black text-sm m-2">
-        Signup was successful! Click here to
-        <span className="text-purple-700 text-sm m-2">
-          <Link href="/login">Login</Link>
-        </span>
-      </span>
-    );
-  }
-  return null;
 };
 
 RegistrationState.propTypes = {
@@ -35,9 +24,14 @@ const SignUpForm = () => {
   const errorClassNames = 'text-red-500 text-sm text-center';
   const [isEmailAlreadyInUse, setIsEmailAlreadyInUse] = useState(false);
   const [isSignUpSuccessful, setIsSignUpSuccessful] = useState(false);
-  const urlEndpoint = `${config.get('BACKEND_URL')}/api/v0/auth/register`;
+  const urlEndpoint = `http://35.154.4.80:3000/api/v0/auth/register`;
   const queryParams = getQueryParams();
-  const isFreelancer = queryParams.get('isFreelancer', false);
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const isFreelancerParam = params.get('isFreelancer');
+  const isFreelancer = isFreelancerParam === 'true';
+
+  console.log('isFreelancer final:', isFreelancer);
   return <div>
     <Formik
       initialValues={{email: '', password: '', checkbox: false}}
@@ -108,13 +102,24 @@ const SignUpForm = () => {
               </span>
             </div>
             <ErrorMessage name="checkbox" component="span" className={errorClassNames}/>
+            {isSignUpSuccessful && (
+              <div className="text-green-500 text-lg text-center my-2">
+                Sign up successful! You can now login.
+              </div>
+            )}
             <button
-              type="submit"
-              className="flex justify-center p-2 bg-gradient-to-r from-purple-500 via-indigo-600 to-purple-800 rounded-lg w-60 m-2 text-white font-medium text-2xl leading-10 font-GeneralSans"
-              disabled={isSubmitting}
-            >
-              Sign Up
-            </button>
+  type="submit"
+  className="flex justify-center p-2 bg-gradient-to-r from-purple-500 via-indigo-600 to-purple-800 rounded-lg w-60 m-2 text-white font-medium text-2xl leading-10 font-GeneralSans"
+  disabled={isSubmitting}
+>
+  {isSignUpSuccessful ? (
+    <Link to={`/login?isFreelancer=${isFreelancer}`} className="text-white no-underline">
+      Login
+    </Link>
+  ) : (
+    "Sign Up"
+  )}
+</button>
             <RegistrationState isEmailAlreadyInUse={isEmailAlreadyInUse} isSignUpSuccessful={isSignUpSuccessful} errorClassNames={errorClassNames}/>
           </div>
         </Form>
@@ -123,9 +128,8 @@ const SignUpForm = () => {
   </div>;
 };
 
-const SignUp = () => {
-import Box from './Box';
-import { useLocation, useHistory } from 'react-router-dom';
+
+
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -139,7 +143,7 @@ const SignUp = () => {
   const isFreelancer = isFreelancerParam === 'true';
 
   const handleSignUp = async () => {
-    console.log('isFreelancer:', isFreelancer);
+    
     try {
       if (!email || !password || !checkbox) {
         setErrorMessage('Please fill in all the required fields.');
@@ -166,6 +170,7 @@ const SignUp = () => {
       }
 
       setErrorMessage('');
+      
       setIsSignUpSuccessful(true);
 
       const responseData = await response.json();

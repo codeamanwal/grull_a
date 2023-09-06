@@ -1,5 +1,7 @@
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link, useLocation} from 'react-router-dom';
 import {
   LoginSignUpHeader,
   LoggedInHeader,
@@ -9,14 +11,20 @@ import {
   ExploreCategories,
 } from '../../components';
 
-const LandingPage = ({isLoggedIn, category, isFreelancer}) => {
+const LandingPage = ({isLoggedIn}) => {
+  const location = useLocation();
+  const state = location.state || {};
+  const { isFreelancer, category } = state;
+
+  console.log('isFreelancer:', isFreelancer);
+  console.log('category:', category);
   return (
     <div>
       {isLoggedIn ? (
                 <LoggedInHeader
                   includeNavBar={true}
-                  category={category}
                   isFreelancer={isFreelancer}
+                  category={category}
                 />
             ) : (
                 <LoginSignUpHeader />
