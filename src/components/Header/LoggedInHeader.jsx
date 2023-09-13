@@ -35,13 +35,13 @@ const LoggedInHeader = ({includeNavBar, isFreelancer, category}) => {
   
       if (category === 'JOBS') {
         apiUrl = isFreelancer
-          ? 'http://35.154.4.80:3000/api/v0/jobs?page=1&per_page=8'
-          : 'http://35.154.4.80:3000/api/v0/freelancers?page=1&per_page=8';
+          ? `${config.get('BACKEND_URL')}/api/v0/jobs?page=1&per_page=8`
+          : `${config.get('BACKEND_URL')}/api/v0/freelancers?page=1&per_page=8`;
         console.log('API Call for Browse Jobs:', apiUrl);
       } else  {
         apiUrl = isFreelancer
-          ? 'http://35.154.4.80:3000/api/v0/jobs?page=1&per_page=8'
-          : 'http://35.154.4.80:3000/api/v0/freelancers?page=1&per_page=8';
+          ? `${config.get('BACKEND_URL')}/api/v0/jobs?page=1&per_page=8`
+          : `${config.get('BACKEND_URL')}/api/v0/freelancers?page=1&per_page=8`;
         console.log('API Call for Browse Freelancers:', apiUrl);
       }
   

@@ -26,7 +26,7 @@ const LoginForm = () => {
   
 
   console.log('isFreelancer finally:', isFreelancer);
-  const urlEndpoint = `http://35.154.4.80:3000/api/v0/auth/login`;
+  const urlEndpoint = `${config.get('BACKEND_URL')}/api/v0/auth/login`;
   return <div>
 
     

@@ -18,7 +18,7 @@ const SkillsRequiredCard = ({ isFreelancer, jobData }) => {
       const id = localStorage.getItem('job_id');
     
       console.log("id:", id);
-      const response = await fetch(`http://35.154.4.80:3000/api/v0/jobs/${id}`, {
+      const response = await fetch(`${config.get('BACKEND_URL')}/api/v0/jobs/${id}`, {
         method: 'GET', 
         headers: {
           'Content-Type': 'application/json',

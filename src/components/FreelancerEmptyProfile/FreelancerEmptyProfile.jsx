@@ -38,7 +38,7 @@ const FreelancerEmptyProfile = () => {
       const accessToken = localStorage.getItem('access_token');
 
       // Perform the API call
-      const response = await fetch('http://35.154.4.80:3000/api/v0/users/me', {
+      const response = await fetch(`${config.get('BACKEND_URL')}/api/v0/users/me`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

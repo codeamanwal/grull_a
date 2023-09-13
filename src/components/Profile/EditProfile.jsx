@@ -16,7 +16,7 @@ const EditProfile = ({isFreelancer, toHire}) => {
     
 
       // Construct the URL for the API endpoint
-      const apiUrl = `http://35.154.4.80:3000/api/v0/applications/${id}/accept`;
+      const apiUrl = `${config.get('BACKEND_URL')}/api/v0/applications/${id}/accept`;
 
       // Make a POST request to accept the application
       fetch(apiUrl, {

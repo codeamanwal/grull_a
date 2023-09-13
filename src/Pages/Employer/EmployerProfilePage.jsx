@@ -21,7 +21,7 @@ const EmployerProfilePage = () => {
       description: "developer",
     };
 
-    const apiUrl = `http://35.154.4.80:3000/api/v0/jobs/${jobId}`;
+    const apiUrl = `${config.get('BACKEND_URL')}/api/v0/jobs/${jobId}`;
 
     fetch(apiUrl, {
       method: 'PATCH', 

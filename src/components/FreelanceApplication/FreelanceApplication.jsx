@@ -15,7 +15,7 @@ const FreelanceApplication = () => {
     const jobId = localStorage.getItem('job_id'); // Replace with how you obtain the job ID
   
     try {
-      const response = await fetch(`http://35.154.4.80:3000/api/v0/jobs/${jobId}/apply`, {
+      const response = await fetch(`${config.get('BACKEND_URL')}/api/v0/jobs/${jobId}/apply`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

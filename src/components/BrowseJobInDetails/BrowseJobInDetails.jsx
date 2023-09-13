@@ -17,7 +17,7 @@ const BrowseJobInDetails = ({isFreelancer, isOpen, setIsOpen, jobData}) => {
     const jobId = localStorage.getItem('job_id');
     const accessToken = localStorage.getItem('access_token');
 
-    const apiUrl = 'http://35.154.4.80:3000/api/v0/users/me/jobs?page=1&per_page=8'; 
+    const apiUrl = `${config.get('BACKEND_URL')}/api/v0/users/me/jobs?page=1&per_page=8`; 
 
     fetch(apiUrl, {
       method: 'GET', 

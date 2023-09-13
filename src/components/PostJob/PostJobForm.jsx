@@ -18,7 +18,7 @@ const PostJobForm = () => {
     };
 
 
-      const response = await fetch("http://35.154.4.80:3000/api/v0/jobs", {
+      const response = await fetch(`${config.get('BACKEND_URL')}/api/v0/jobs`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

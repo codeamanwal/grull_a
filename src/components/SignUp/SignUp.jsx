@@ -24,7 +24,7 @@ const SignUpForm = () => {
   const errorClassNames = 'text-red-500 text-sm text-center';
   const [isEmailAlreadyInUse, setIsEmailAlreadyInUse] = useState(false);
   const [isSignUpSuccessful, setIsSignUpSuccessful] = useState(false);
-  const urlEndpoint = `http://35.154.4.80:3000/api/v0/auth/register`;
+  const urlEndpoint = `${config.get('BACKEND_URL')}/api/v0/auth/register`;
   const queryParams = getQueryParams();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
@@ -150,7 +150,7 @@ const SignUp = () => {
         return false;
       }
 
-      const urlEndpoint = `http://35.154.4.80:3000/api/v0/auth/register`;
+      const urlEndpoint = `${config.get('BACKEND_URL')}/api/v0/auth/register`;
       const response = await fetch(
           urlEndpoint,
           {
