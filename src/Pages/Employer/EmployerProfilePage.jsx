@@ -9,6 +9,7 @@ import {
 } from '../../components';
 import {hrProfile} from '../../components/Assets';
 import {Link} from 'react-router-dom';
+import config from 'react-global-configuration';
 
 const EmployerProfilePage = () => {
   const handleEditJobsClick = () => {

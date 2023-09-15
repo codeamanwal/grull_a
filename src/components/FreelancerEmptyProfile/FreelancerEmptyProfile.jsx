@@ -3,6 +3,9 @@ import React from 'react';
 import ProfileCard from './ProfileCard';
 import {plus, upArrow} from '../Assets';
 import {useState} from 'react';
+import config from 'react-global-configuration';
+import { useNavigate } from 'react-router-dom';
+
 
 const FreelancerEmptyProfile = () => {
   const [skills, setSkills] = useState(['']);
@@ -11,6 +14,8 @@ const FreelancerEmptyProfile = () => {
   const [description, setDescription] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const navigate = useNavigate();
+
   // const location = useLocation();
   // const queryParams = new URLSearchParams(location.search);
   // const [firstName, setFirstName] = useState(queryParams.get('first_name') || '');
@@ -45,6 +50,15 @@ const FreelancerEmptyProfile = () => {
           'Authorization': `Bearer ${accessToken}`,
         },
         body: JSON.stringify(payload), // Convert payload to JSON
+      });
+     
+      navigate('/editProfile', {
+        state: {
+          firstName,
+          lastName,
+          description,
+          list_as_freelancer,
+        },
       });
 
       if (!response.ok) {

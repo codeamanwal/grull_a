@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {Link, useNavigate} from 'react-router-dom';
 import {grullLogo, bell, user} from '../Assets';
 import BrowseJobs from '../BrowseJobs/BrowseJobs';
+import config from 'react-global-configuration';
 
 const LoggedInHeader = ({includeNavBar, isFreelancer, category}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -31,7 +32,7 @@ const LoggedInHeader = ({includeNavBar, isFreelancer, category}) => {
   const handleBrowseClick = async () => {
     try {
       const accessToken = localStorage.getItem('access_token');
-      let apiUrl = '';
+      let apiUrl = '';      
   
       if (category === 'JOBS') {
         apiUrl = isFreelancer

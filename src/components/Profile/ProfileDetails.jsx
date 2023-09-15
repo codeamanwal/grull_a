@@ -1,8 +1,9 @@
+/* eslint-disable */
 import React from 'react';
 import {projectImg} from '../Assets';
 import {Link} from 'react-router-dom';
 
-const ProfileDetails = () => {
+const ProfileDetails = ({description}) => {
   return (
     <div className="flex flex-col sm:space-y-20  space-y-5 sm:w-[600px] text-white leading-normal ml-3">
       <div className="flex flex-col  space-y-4">
@@ -10,9 +11,7 @@ const ProfileDetails = () => {
           Description
         </p>
         <p className=" sm:text-xl font-GeneralSans font-normal p-3">
-          I have had an inclination towards art and design since childhood and
-          have grown to have a high level of liking and skill set to nurture
-          this talent. A sense of aesthetics always came naturally to me
+          {description}
         </p>
       </div>
 
