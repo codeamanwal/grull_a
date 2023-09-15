@@ -1,7 +1,6 @@
 /* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link, useLocation} from 'react-router-dom';
 import {
   LoginSignUpHeader,
   LoggedInHeader,
@@ -11,13 +10,14 @@ import {
   ExploreCategories,
 } from '../../components';
 
-const LandingPage = ({isLoggedIn}) => {
-  const location = useLocation();
-  const state = location.state || {};
-  const { isFreelancer, category } = state;
+import getQueryParams from "../../components/utils";
 
-  console.log('isFreelancer:', isFreelancer);
-  console.log('category:', category);
+
+const LandingPage = () => {
+  const isLoggedIn = Boolean(localStorage["access_token"]) || false;
+  const queryParams = getQueryParams();
+  const isFreelancer = Boolean(queryParams.get("isFreelancer"));
+  const category = queryParams.get("category") || isFreelancer ? 'FREELANCER' : 'JOBS';
   return (
     <div>
       {isLoggedIn ? (

@@ -80,7 +80,8 @@ const LoginForm = () => {
         const responseData = await result.json();
         localStorage.setItem('access_token', responseData['access_token']);
         localStorage.setItem('token_type', responseData['token_type']);
-        navigate('/LoggedInPage', { state: { isFreelancer, category: isFreelancer ? 'FREELANCER' : 'JOBS' } });
+        const category = isFreelancer ? 'FREELANCER' : 'JOBS';
+        navigate(`/dashboard?isFreelancer=${isFreelancer}&category=${category}`);
         return true;
       }}
     >

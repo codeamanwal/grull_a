@@ -36,15 +36,13 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage isLoggedIn={false} />} />
         <Route
-          path="/LoggedInPage"
+          path="/dashboard"
           element={
-            <LandingPage
-              isLoggedIn={true}
-            />
+            <LandingPage/>
           }
         />
         <Route
-          path="/employerLoggedInPage"
+          path="/dashboard"
           element={
             <LandingPage
               isLoggedIn={true}
