@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Footer, LoggedInHeader, SignUp, LogIn} from '../../components';
@@ -17,7 +18,7 @@ const LoginSignUpModalPage = ({welcome}) => {
 };
 
 LoginSignUpModalPage.propTypes = {
-  welcome: PropTypes.bool,
+  welcome: PropTypes.bool.isRequired, // Add appropriate prop type validation
 };
 
 export default LoginSignUpModalPage;

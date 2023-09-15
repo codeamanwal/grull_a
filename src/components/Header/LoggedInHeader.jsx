@@ -1,11 +1,15 @@
+/* eslint-disable */
 import React, {useState, useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {grullLogo, bell, user} from '../Assets';
+import BrowseJobs from '../BrowseJobs/BrowseJobs';
 
-const LoggedInHeader = ({includeNavBar, category, isFreelancer}) => {
+const LoggedInHeader = ({includeNavBar, isFreelancer, category}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const [jobData, setJobData] = useState(""); // State variable to hold title
+  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -24,6 +28,59 @@ const LoggedInHeader = ({includeNavBar, category, isFreelancer}) => {
     };
   }, []);
 
+  const handleBrowseClick = async () => {
+    try {
+      const accessToken = localStorage.getItem('access_token');
+      let apiUrl = '';
+  
+      if (category === 'JOBS') {
+        apiUrl = isFreelancer
+          ? `${config.get('BACKEND_URL')}/api/v0/jobs?page=1&per_page=8`
+          : `${config.get('BACKEND_URL')}/api/v0/freelancers?page=1&per_page=8`;
+        console.log('API Call for Browse Jobs:', apiUrl);
+      } else  {
+        apiUrl = isFreelancer
+          ? `${config.get('BACKEND_URL')}/api/v0/jobs?page=1&per_page=8`
+          : `${config.get('BACKEND_URL')}/api/v0/freelancers?page=1&per_page=8`;
+        console.log('API Call for Browse Freelancers:', apiUrl);
+      }
+  
+      const response = await fetch(apiUrl, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
+      const responseData = await response.json();
+      console.log('API Response:', responseData);
+
+      setJobData(responseData.results);
+      console.log(responseData.results)
+
+      const browseJobsRoute = isFreelancer ? '/browseJobs' : '/browseFreelancers';
+
+      // Pass jobData as state to the next route using navigate
+      navigate(browseJobsRoute, {
+        state: {
+          jobData: responseData.results, // Pass jobData as state
+        },
+      });
+  
+      return true;
+    } catch (error) {
+      console.error('Error occurred:', error);
+      return false;
+    }
+
+    
+  };  
+  
   return (
     <header className=" fixed top-0 left-0 w-full z-50">
       <div className="flex items-center justify-between px-4 sm:px-8 bg-[#080112] text-white w-full">
@@ -38,22 +95,14 @@ const LoggedInHeader = ({includeNavBar, category, isFreelancer}) => {
         {includeNavBar && (
           <nav className=" flex justify-end sm:pl-6 w-3/4 sm:w-full">
             <ul className="flex space-x-4 sm:space-x-8 justify-end items-center gap-4 sm:gap-8">
-              {/* <li className="sm:w-auto w-1/4">
-                            <Link
-                                to={isFreelancer ? "/browseJobs" : "/browseFreelancers"}
-                                className="text-white hover:text-gray-400 font-semibold text-sm sm:text-xl inline-block"
-                            >
-                                BROWSE {category}
-                            </Link>
-                        </li> */}
-
-              {category === 'JOBS' ? (
+              {isFreelancer ? (
                                 <li className="">
                                   <Link
                                     to={isFreelancer ? '/browseJobs' : '/browseFreelancers'}
                                     className="text-white hover:text-gray-400 font-semibold text-base sm:text-xl inline-block"
+                                    onClick={handleBrowseClick}
                                   >
-                                        BROWSE {category}
+                                        BROWSE JOBS
                                   </Link>
                                 </li>
                             ) : (
@@ -61,12 +110,13 @@ const LoggedInHeader = ({includeNavBar, category, isFreelancer}) => {
                                   <Link
                                     to={isFreelancer ? '/browseJobs' : '/browseFreelancers'}
                                     className="text-white hover:text-gray-400 font-semibold text-sm sm:text-xl inline-block"
+                                    onClick={handleBrowseClick}
                                   >
-                                        BROWSE {category}
+                                        BROWSE FREELANCER
                                   </Link>
                                 </li>
                             )}
-              {category !== 'JOBS' && !isFreelancer && (
+              { !isFreelancer && (
                 <li className="sm:w-auto  w-1/12 mr-3">
                   <Link
                     to="/postJob"

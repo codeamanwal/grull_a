@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable */
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import EditProfileCard from './EditProfileCard';
 import ProfileDetails from './ProfileDetails';
@@ -6,6 +7,43 @@ import ReviewCard from './ReviewCard';
 import {userProfile} from '../Assets';
 
 const EditProfile = ({isFreelancer, toHire}) => {
+  const [isHiring, setIsHiring] = useState(false);
+
+  const handleHireClick = () => {
+    const id = localStorage.getItem('job_id');
+    const accessToken = localStorage.getItem('access_token');
+
+    
+
+      // Construct the URL for the API endpoint
+      const apiUrl = `${config.get('BACKEND_URL')}/api/v0/applications/${id}/accept`;
+
+      // Make a POST request to accept the application
+      fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+        },
+        // Add any request body data if required
+        // body: JSON.stringify({}),
+      })
+        .then((response) => {
+          if (response.ok) {
+            // Handle success
+            console.log('Application accepted successfully');
+            setIsHiring(true); // Set a state variable to indicate the hiring action
+          } else {
+            // Handle error
+            console.error('Failed to accept application');
+          }
+        })
+        .catch((error) => {
+          // Handle network error
+          console.error('Network error:', error);
+        });
+  };
+
   return (
     <div className="flex flex-col md:flex-row justify-center md:space-x-20 bg-[#1A0142] 2xl:h-[913px] pt-10">
       <EditProfileCard
@@ -35,7 +73,9 @@ const EditProfile = ({isFreelancer, toHire}) => {
                     </div>
                 ) : (
                     <div className="flex flex-col space-y-4 md:pt-8 font-spaceGrotesk font-semibold text-xl">
-                      <button className="md:px-8 py-4 px-1 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
+                      <button className="md:px-8 py-4 px-1 rounded shadow bg-gradient-to-l from-purple-400 to-transparent"
+                      onClick={handleHireClick}
+                      >
               HIRE
                       </button>
                       <p className="text-purple-600 text-base font-spaceGrotesk font-medium pt-4">

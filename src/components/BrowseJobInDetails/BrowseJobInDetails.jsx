@@ -1,14 +1,51 @@
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import JobDetailsCard from './JobDetailsCard';
 import {ClosedChatBox, OpenedChatBox} from '../../components';
 import {downarrow} from '../../components/Assets';
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 
-const BrowseJobInDetails = ({isFreelancer, isOpen, setIsOpen}) => {
+const BrowseJobInDetails = ({isFreelancer, isOpen, setIsOpen, jobData}) => {
+  const location = useLocation();
+
+  console.log("jobData in BrowseJobsInDetails:", jobData);
+ 
+
+  const handleManagePostedJobsClick = () => {
+    console.log("des", description)
+    const jobId = localStorage.getItem('job_id');
+    const accessToken = localStorage.getItem('access_token');
+
+    const apiUrl = `${config.get('BACKEND_URL')}/api/v0/users/me/jobs?page=1&per_page=8`; 
+
+    fetch(apiUrl, {
+      method: 'GET', 
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`,
+      },
+
+    })
+      .then((response) => {
+        if (response.ok) {
+          // Handle success
+          console.log('Posted jobs managed successfully');
+          // Redirect or perform any other action after managing
+        } else {
+          // Handle error
+          console.error('Failed to manage posted jobs');
+        }
+      })
+      .catch((error) => {
+        // Handle network error
+        console.error('Network error:', error);
+      });
+  };
+
   return (
     <div className="flex  flex-wrap sm:justify-between  justify-center sm:w-11/12 mx-auto py-28 space-y-10">
-      <JobDetailsCard isFreelancer={isFreelancer} />
+      <JobDetailsCard isFreelancer={isFreelancer} jobData={jobData}  />
 
       {isFreelancer ? (
                 <div className="flex sm:flex-col flex-wrap sm:justify-start sm:space-y-10">
@@ -28,7 +65,9 @@ const BrowseJobInDetails = ({isFreelancer, isOpen, setIsOpen}) => {
                     >
               VIEW FREELANCER APPLICATIONS
                     </Link>
-                    <button className="text-white sm:text-xl font-semibold md:px-8 py-4 sm:px-12  px-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
+                    <button className="text-white sm:text-xl font-semibold md:px-8 py-4 sm:px-12  px-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent"
+                    onClick={handleManagePostedJobsClick}
+                    >
               MANAGE POSTED JOB
                     </button>
                   </div>

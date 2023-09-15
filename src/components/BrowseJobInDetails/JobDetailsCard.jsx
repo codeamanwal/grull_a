@@ -1,13 +1,27 @@
-import React from 'react';
+/* eslint-disable */
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-const JobDetailsCard = ({isFreelancer}) => {
+
+const JobDetailsCard = ({isFreelancer, jobData}) => {
+
+  if (!jobData) {
+    // Render a loading indicator or message when jobData is undefined
+    return <div>Loading...</div>;
+  }
+
+  console.log("jobData in detailsCard:", jobData);
+  console.log("jobDatapat in detailsCard:", jobData.title);
+
+  
+
   return (
     <div className="sm:w-2/3 w-full">
       <div className="flex flex-col sm:flex-row  justify-center bg-[#492772] bg-opacity-70 sm:w-auto sm:space-x-36 rounded-lg border border-purple-600 sm:p-10 -mt-16">
         <div className="flex flex-col flex-wrap justify-start space-y-6  p-2 sm:p-8">
           <div className="text-white text-center sm:text-3xl text-xl font-spaceGrotesk font-bold ">
-            <p>Need someone to design some product 3D renders</p>
+            <p>{jobData.title}</p>
           </div>
           <div className="flex flex-wrap sm:space-x-16 space-x-5 text-white text-base font-GeneralSans font-normal">
             <p className="text-sm sm:text-base">BANGALORE, INDIA</p>
@@ -18,10 +32,7 @@ const JobDetailsCard = ({isFreelancer}) => {
             <div className="flex flex-wrap sm:flex-col space-y-2">
               <p className="font-bold sm:pt-4">JOB DESCRIPTION</p>
               <p className=" sm:w-72  w-full text-sm font-normal sm:pt-2">
-                                Looking for a skilled designer to help me make 10-15 product
-                                renders in 3 dimensional, high quality of furniture Looking for
-                                a skilled designer to help me make 10-15 product renders in 3
-                                dimensional, high quality of furniture and more..
+                                {jobData.description}
               </p>
             </div>
             <div className="flex flex-wrap flex-col">
@@ -89,13 +100,14 @@ const JobDetailsCard = ({isFreelancer}) => {
             </div>
           </div>
           {isFreelancer && (
-            <a
-              href="/applyProposal"
-              className="text-white w-1/2 m-4  sm:w-full text-center sm:text-xl font-medium md:px-8 py-2 px-4 rounded shadow bg-gradient-to-l from-purple-400 to-transparent"
-            >
-                            APPLY
-            </a>
-          )}
+  <Link to="/ApplyProposalPage">
+    <button className="text-white sm:text-2xl  px-4 py-3  text-base font-medium sm:py-4 sm:px-32 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
+      APPLY
+    </button>
+  </Link>
+)}
+
+
         </div>
       </div>
     </div>

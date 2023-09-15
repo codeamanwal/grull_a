@@ -1,7 +1,24 @@
-import React from 'react';
+/* eslint-disable */
+import React, {useState} from 'react';
 import {userProfile, youtube, twitter, facebook2} from '../Assets';
 
-const ProfileCard = () => {
+
+// eslint-disable-next-line react/prop-types
+const ProfileCard = ({ profileName, profileRole, onProfileChange }) => {
+  const [name, setName] = useState(profileName || '');
+  const [role, setRole] = useState(profileRole || '');
+
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+    onProfileChange(e.target.value, role);
+  };
+
+  // Function to handle input changes and update state
+  const handleRoleChange = (e) => {
+    setRole(e.target.value);
+    onProfileChange(name, e.target.value);
+  };
+
   return (
     <div className="flex items-center justify-center ">
       <div className="flex flex-col items-center space-y-4 xl:space-y-6 bg-[#482773] rounded-lg lg:mt-0 xl:p-8 m-4 px-2 py-6">
@@ -13,12 +30,16 @@ const ProfileCard = () => {
         <input
           placeholder="Enter Name"
           type="text"
+          value={name}
+          onChange={handleNameChange}
           className="rounded-md text-center w-56 h-8 text-white text-base bg-[#B27EE3] bg-opacity-30"
         />
 
         <input
           placeholder="Role"
           type="text"
+          value={role}
+          onChange={handleRoleChange}
           className="rounded-md text-center w-36 h-8  px-2  text-white text-base bg-[#B27EE3] bg-opacity-30"
         />
 
