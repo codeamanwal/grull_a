@@ -3,9 +3,9 @@ import React from 'react';
 import {
   BrowseFreelancers,
   LoggedInHeader,
-  EditProfileCard,
   Footer,
 } from '../../components';
+import BrowseFreelancerProfile from '../../components/Profile/BrowseFreelancerProfile';
 import {userProfile} from '../../components/Assets';
 
 const BrowseFreelancersPage = () => {
@@ -27,7 +27,7 @@ const BrowseFreelancersPage = () => {
           </div>
 
           <div className="grid sm:grid-cols-4 sm:gap-20">
-            <EditProfileCard
+            <BrowseFreelancerProfile
               toHire={true}
               isEmployerProfile={false}
               userProfileImg={userProfile}
@@ -35,7 +35,7 @@ const BrowseFreelancersPage = () => {
               profession="Product Designer"
             />
 
-            <EditProfileCard
+            <BrowseFreelancerProfile
               toHire={true}
               isEmployerProfile={false}
               userProfileImg={userProfile}
@@ -43,7 +43,7 @@ const BrowseFreelancersPage = () => {
               profession="Product Designer"
             />
 
-            <EditProfileCard
+            <BrowseFreelancerProfile
               toHire={true}
               isEmployerProfile={false}
               userProfileImg={userProfile}

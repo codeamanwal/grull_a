@@ -3,7 +3,7 @@ import React from 'react';
 import {Route, Routes} from 'react-router-dom';
 import createSettings from './utils/settings';
 import './index.css';
-
+import FreelancerInDetail from './Pages/Employer/FreelancerInDetail';
 import {
   LandingPage,
   SignUpOptionPage,
@@ -18,7 +18,7 @@ import {
   EmployerBrowsingPostedJobsPage,
   FreelancerApplicationViewPage,
   ApplyProposalPage,
-  EditProfilePage
+  EditProfilePage,
 } from './Pages';
 
 import {LogIn} from './components';
@@ -61,8 +61,8 @@ function App() {
 
         <Route path="/browseJobs" element={<BrowseJobsPage />} />
         <Route path="/editProfile" element={<EditProfilePage />} />
-
         <Route path="/ApplyProposalPage" element={<ApplyProposalPage />} />
+        <Route path="/freelancerInDetail" element={<FreelancerInDetail />} />
 
         <Route
           path="/browseJobsInDetails"

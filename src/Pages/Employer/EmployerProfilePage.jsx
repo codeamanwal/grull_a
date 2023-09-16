@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   LoggedInHeader,
   EditProfileCard,
@@ -8,10 +8,19 @@ import {
   Footer,
 } from '../../components';
 import {hrProfile} from '../../components/Assets';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import config from 'react-global-configuration';
 
 const EmployerProfilePage = () => {
+  const [title, setTitle] = useState(''); // Declare title state
+  const [description, setDescription] = useState('');
+  const [jobs, setJobs] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getJobs(); // Call the function when the component is mounted
+  }, []); // Empty dependency array means it runs once when mounted
+
   const handleEditJobsClick = () => {
     
     const jobId = localStorage.getItem('job_id');
@@ -47,6 +56,62 @@ const EmployerProfilePage = () => {
         console.error('Network error:', error);
       });
   };
+
+  const getJobs = async () => {
+    try {
+      const jobId = localStorage.getItem('job_id');
+      const accessToken = localStorage.getItem('access_token');
+      const apiUrl = `${config.get('BACKEND_URL')}/api/v0/users/me/jobs?page=1&per_page=8`;
+      
+      const response = await fetch(apiUrl, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+        },
+      });
+  
+      if (response.ok) {
+        // Handle success
+        const responseData = await response.json();
+        const jobs = responseData.results;
+        setJobs(jobs);
+        console.log(responseData.results, 'Jobs retrieved successfully');
+        
+
+        // jobs.forEach((job) => {
+        //   const jobTitle = job.title;
+        //   const jobDescription = job.description;
+        //   console.log('Job Title:', jobTitle);
+        //   console.log('Description:', jobDescription);
+        //   setTitle(jobTitle);
+        //   setDescription(jobDescription);
+        // });
+        // You can parse the response data here if needed
+      } else {
+        // Handle error
+        console.error('Failed to get jobs');
+        const errorData = await response.json();
+        console.error('Error details:', errorData);
+      }
+    } catch (error) {
+      // Handle network error
+      console.error('Network error:', error);
+    }
+  };  
+
+  const handleSkillCardClick = (jobs) => {
+    navigate('/employerBrowsingPostedJobs', {
+      state: {
+        jobs, // Pass the clicked job data to the next page
+      },
+    });
+  };
+
+  console.log('Job Title outsede:', title);
+  console.log('Description outsie:', description);
+
+ 
 
   return (
     <div className="bg-[#1A0142]  min-h-screen flex flex-col">
@@ -129,21 +194,35 @@ const EmployerProfilePage = () => {
                   profession="HR Manager"
                 />
               </div>
-              <Link to="/employerBrowsingPostedJobs" className="text-gray-700">
-                <SkillsRequiredCards isFreelancer={false} isActive={false} />
-              </Link>
+              <div className="flex flex-col flex-wrap">
+  {/* {jobs.slice(0, 4).map((job) => (
+    <Link
+      to="/employerBrowsingPostedJobs"
+      className="text-gray-700"
+      key={job.id}
+    >
+      <SkillsRequiredCards
+        isFreelancer={false}
+        isActive={false}
+        title={job.title}
+        description={job.description}
+      />
+    </Link>
+  ))} */}
+{jobs.slice(0, 4).map((job) => (
+          <div key={job.id} onClick={() => handleSkillCardClick(job)}>
+            <SkillsRequiredCards
+              isFreelancer={false}
+              isActive={false}
+              title={job.title}
+              description={job.description}
+            />
+          </div>
+        ))}
 
-              <Link to="/employerBrowsingPostedJobs" className="text-gray-700">
-                <SkillsRequiredCards isFreelancer={false} isActive={true} />
-              </Link>
 
-              <Link to="/employerBrowsingPostedJobs" className="text-gray-700">
-                <SkillsRequiredCards isFreelancer={false} isActive={false} />
-              </Link>
+</div>
 
-              <Link to="/employerBrowsingPostedJobs" className="text-gray-700">
-                <SkillsRequiredCards isFreelancer={false} isActive={true} />
-              </Link>
             </div>
           </div>
 

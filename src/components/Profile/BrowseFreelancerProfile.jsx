@@ -1,91 +1,30 @@
 /* eslint-disable */
-import React,{useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import {youtube, twitter, facebook2, editIcon} from '../Assets';
+import {youtube, twitter, facebook2} from '../Assets';
 
-const EditProfileCard = ({
+const BrowseFreelancerProfile = ({
   userProfileImg,
   toHire,
   isEmployerProfile,
   userName,
   profession,
 }) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedName, setEditedName] = useState(userName);
-  const [editedProfession, setEditedProfession] = useState(profession);
-
-  const handleEditClick = () => {
-    setIsEditing(!isEditing); // Toggle the isEditing state
-  };
-
-  const handleSaveClick = () => {
-    // Handle saving changes, e.g., send editedName and editedProfession to the server
-    setIsEditing(false); // Turn off editing mode
-  };
+  const isEditing = false;
 
   return (
     <div className="flex px-2 py-2 text-white">
       <div className="flex flex-col items-center space-y-6 xl:space-y-6 bg-[#482773] rounded-lg lg:mt-0 xl:p-10 m-4 mx-auto py-8 px-2">
-      {isEmployerProfile ? (
-  <>
-    <button
-          className="" style={{ marginLeft: '14rem'}}
-          onClick={handleEditClick}
-        >
-          <img src={editIcon} alt="Edit" />
-        </button>
         <img
           className="mx-auto rounded-full sm:h-64 sm:w-64 w-32 h-32"
           src={userProfileImg}
           alt="author avatar"
         />
-  </>
-) : (
-  <>
-    <button
-          className="" style={{ marginLeft: '11rem' }}
-          onClick={handleEditClick}
-        >
-          <img src={editIcon} alt="Edit" />
-        </button>
-        <img
-          className="mx-auto rounded-full sm:h-64 sm:w-64 w-32 h-32"
-          src={userProfileImg}
-          alt="author avatar"
-        />
-  </>
-)}
+        <div className="text-center font-bold text-2xl font-spaceGrotesk">
+          {userName}
+        </div>
 
-      
-          <div className="text-center font-bold text-2xl font-spaceGrotesk">
-  {isEditing ? (
-    <input
-      placeholder="Enter Name"
-      type="text"
-      value={editedName}
-      onChange={(e) => setEditedName(e.target.value)}
-      className="rounded-md text-center w-56 h-8 text-white text-base bg-[#B27EE3] bg-opacity-30"
-    />
-  ) : (
-    editedName // Display the editedName state when editing is off
-  )}
-</div>
-
-
-       
-        <div className="text-xl font-GeneralSans font-normal">
-  {isEditing ? (
-    <input
-      placeholder="Enter Profession"
-      type="text"
-      value={editedProfession}
-      onChange={(e) => setEditedProfession(e.target.value)}
-      className="rounded-md text-center w-56 h-8 text-white text-base bg-[#B27EE3] bg-opacity-30"
-    />
-  ) : (
-    editedProfession
-  )}
-</div>
+        <div className="text-xl font-GeneralSans font-normal">{profession}</div>
 
         {/* border */}
         <div className="border-b-2 border-gray-300 w-64 m-2"></div>
@@ -209,7 +148,7 @@ const EditProfileCard = ({
   );
 };
 
-EditProfileCard.propTypes = {
+BrowseFreelancerProfile.propTypes = {
   userProfileImg: PropTypes.string,
   toHire: PropTypes.bool,
   isEmployerProfile: PropTypes.bool,
@@ -217,4 +156,4 @@ EditProfileCard.propTypes = {
   profession: PropTypes.string,
 };
 
-export default EditProfileCard;
+export default BrowseFreelancerProfile;

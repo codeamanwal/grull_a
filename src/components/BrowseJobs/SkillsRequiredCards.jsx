@@ -3,13 +3,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
-const SkillsRequiredCards = ({isFreelancer, isActive}) => {
+const SkillsRequiredCards = ({isFreelancer, isActive, title, description}) => {
   return (
     <div className="flex flex-wrap justify-between rounded-xl border border-solid border-purple-500 bg-[#492772] bg-opacity-70 sm:py-8 sm:px-4 py-4 px-2 2xl:w-[1200px] my-2">
       <div>
         <div className="flex flex-col items-start">
           <p className="text-white sm:text-3xl text-xl ont-medium sm:px-4 py-2">
-            Need someone to design a product 3D renders
+            {title}
           </p>
         </div>
         <div>
