@@ -1,16 +1,63 @@
 /* eslint-disable */
-import React from 'react';
+import React,{useEffect, useState} from 'react';
 import {Link, useHistory, useLocation} from 'react-router-dom';
 import SkillsRequiredCard from '../BrowseJobs/SkillsRequiredCard';
 import BrowseByCard from './BrowseByCard';
+import config from 'react-global-configuration';
 
 const BrowseJobs = () => {
-  const location = useLocation();
-  const { jobData } = location.state || {};
+  const [jobData, setJobData] = useState(""); // State variable to hold title
+
+  useEffect(() => {
+    handleBrowse();
+  }, []);
+
+  const handleBrowse = async () => {
+    try {
+      const accessToken = localStorage.getItem('access_token');
+      let apiUrl = '';      
+  
+        apiUrl =`${config.get('BACKEND_URL')}/api/v0/jobs?page=1&per_page=8`
+        console.log('API Call for Browse Jobs:', apiUrl);
+
+      const response = await fetch(apiUrl, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
+      const responseData = await response.json();
+      console.log('API Response:', responseData);
+
+      setJobData(responseData.results);
+      console.log(responseData.results)
+
+      const browseJobsRoute = isFreelancer ? '/browseJobs' : '/browseFreelancers';
+
+      // Pass jobData as state to the next route using navigate
+      navigate(browseJobsRoute, {
+        state: {
+          jobData: responseData.results, // Pass jobData as state
+        },
+      });
+  
+      return true;
+    } catch (error) {
+      console.error('Error occurred:', error);
+      return false;
+    }
+
+    
+  };  
 
   console.log("BrowseJobs", jobData)
-  // console.log("data", jobData.title)
-  // console.log("data", jobData.description)
+
   const items1 = [
     'Graphic Designer',
     'Illustrator',

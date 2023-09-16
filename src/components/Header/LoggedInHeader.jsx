@@ -9,7 +9,6 @@ import config from 'react-global-configuration';
 const LoggedInHeader = ({includeNavBar, isFreelancer, category}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const [jobData, setJobData] = useState(""); // State variable to hold title
   const navigate = useNavigate();
 
   const toggleDropdown = () => {
@@ -28,59 +27,6 @@ const LoggedInHeader = ({includeNavBar, isFreelancer, category}) => {
       window.removeEventListener('click', handleClickOutside);
     };
   }, []);
-
-  const handleBrowseClick = async () => {
-    try {
-      const accessToken = localStorage.getItem('access_token');
-      let apiUrl = '';      
-  
-      if (category === 'JOBS') {
-        apiUrl = isFreelancer
-          ? `${config.get('BACKEND_URL')}/api/v0/jobs?page=1&per_page=8`
-          : `${config.get('BACKEND_URL')}/api/v0/freelancers?page=1&per_page=8`;
-        console.log('API Call for Browse Jobs:', apiUrl);
-      } else  {
-        apiUrl = isFreelancer
-          ? `${config.get('BACKEND_URL')}/api/v0/jobs?page=1&per_page=8`
-          : `${config.get('BACKEND_URL')}/api/v0/freelancers?page=1&per_page=8`;
-        console.log('API Call for Browse Freelancers:', apiUrl);
-      }
-  
-      const response = await fetch(apiUrl, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${accessToken}`,
-        },
-      });
-  
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-  
-      const responseData = await response.json();
-      console.log('API Response:', responseData);
-
-      setJobData(responseData.results);
-      console.log(responseData.results)
-
-      const browseJobsRoute = isFreelancer ? '/browseJobs' : '/browseFreelancers';
-
-      // Pass jobData as state to the next route using navigate
-      navigate(browseJobsRoute, {
-        state: {
-          jobData: responseData.results, // Pass jobData as state
-        },
-      });
-  
-      return true;
-    } catch (error) {
-      console.error('Error occurred:', error);
-      return false;
-    }
-
-    
-  };  
   
   return (
     <header className=" fixed top-0 left-0 w-full z-50">
@@ -101,7 +47,6 @@ const LoggedInHeader = ({includeNavBar, isFreelancer, category}) => {
                                   <Link
                                     to={isFreelancer ? '/browseJobs' : '/browseFreelancers'}
                                     className="text-white hover:text-gray-400 font-semibold text-base sm:text-xl inline-block"
-                                    onClick={handleBrowseClick}
                                   >
                                         BROWSE JOBS
                                   </Link>
@@ -111,7 +56,6 @@ const LoggedInHeader = ({includeNavBar, isFreelancer, category}) => {
                                   <Link
                                     to={isFreelancer ? '/browseJobs' : '/browseFreelancers'}
                                     className="text-white hover:text-gray-400 font-semibold text-sm sm:text-xl inline-block"
-                                    onClick={handleBrowseClick}
                                   >
                                         BROWSE FREELANCER
                                   </Link>
