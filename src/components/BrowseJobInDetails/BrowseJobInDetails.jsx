@@ -43,6 +43,33 @@ const BrowseJobInDetails = ({ isFreelancer, isOpen, setIsOpen, jobData, jobs }) 
       });
   };
 
+  const handleViewFreelancerApplicationsClick = () => {
+    const jobId = localStorage.getItem("job_id");
+    const accessToken = localStorage.getItem("access_token");
+  
+    const apiUrl = `${config.get("BACKEND_URL")}/api/v0/jobs/${jobId}/applications?page=1&per_page=8`;
+  
+    fetch(apiUrl, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then(response => {
+        if (response.ok) {
+          console.log("Viewed freelancer applications successfully");
+        } else {
+          console.error("Failed to view freelancer applications");
+        }
+      })
+      .catch(error => {
+        console.error("Network error:", error);
+      });
+  };
+  
+  
+
   return (
     <div className="flex  flex-wrap sm:justify-between  justify-center sm:w-11/12 mx-auto py-28 space-y-10">
       {isFreelancer ? <JobDetailsCard isFreelancer={true} jobData={jobData} /> : <JobDetailsCardForEmployer isFreelancer={false} jobs={jobs} />}
@@ -55,7 +82,7 @@ const BrowseJobInDetails = ({ isFreelancer, isOpen, setIsOpen, jobData, jobs }) 
       ) : (
         <div className="flex flex-col  justify-between items-center space-y-4 ">
           <div className="flex flex-col items-center   space-y-5 sm:justify-start sm:space-y-10 sm:mb-[73px]">
-            <Link to="/freelancerApplicationView" className="text-white sm:text-xl font-semibold md:px-8 py-4 px-2 sm:px-12 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
+            <Link to="/freelancerApplicationView" className="text-white sm:text-xl font-semibold md:px-8 py-4 px-2 sm:px-12 rounded shadow bg-gradient-to-l from-purple-400 to-transparent" onClick={handleViewFreelancerApplicationsClick}>
               VIEW FREELANCER APPLICATIONS
             </Link>
             <button className="text-white sm:text-xl font-semibold md:px-8 py-4 sm:px-12  px-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent" onClick={handleManagePostedJobsClick}>
