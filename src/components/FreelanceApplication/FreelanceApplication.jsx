@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React, {useState} from 'react';
+import config from 'react-global-configuration';
 
 function setFiles() {
 

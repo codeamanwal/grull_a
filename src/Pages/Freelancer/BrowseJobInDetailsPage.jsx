@@ -5,7 +5,7 @@ import {Link, useLocation} from 'react-router-dom';
 
 const BrowseJobInDetailsPage = () => {
   const location = useLocation();
-  const { jobData } = location.state || {}; // Access jobData from location state
+  const { jobData } = location.state || {}; 
 
   console.log("jobData in BrowseJobsInDetailsPage:", jobData);
   return (

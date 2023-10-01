@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React from "react";
 import { useState } from "react";
+import config from 'react-global-configuration';
 
 const PostJobForm = () => {
   const [title, setTitle] = useState("");

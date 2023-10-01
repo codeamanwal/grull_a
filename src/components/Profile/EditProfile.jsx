@@ -5,15 +5,14 @@ import EditProfileCard from './EditProfileCard';
 import ProfileDetails from './ProfileDetails';
 import ReviewCard from './ReviewCard';
 import {userProfile} from '../Assets';
+import config from 'react-global-configuration';
 
-const EditProfile = ({isFreelancer, toHire}) => {
+const EditProfile = ({firstName, lastName, description, isFreelancer}) => {
   const [isHiring, setIsHiring] = useState(false);
-
+  console.log(description, "descriptionally")
   const handleHireClick = () => {
     const id = localStorage.getItem('job_id');
     const accessToken = localStorage.getItem('access_token');
-
-    
 
       // Construct the URL for the API endpoint
       const apiUrl = `${config.get('BACKEND_URL')}/api/v0/applications/${id}/accept`;
@@ -47,13 +46,15 @@ const EditProfile = ({isFreelancer, toHire}) => {
   return (
     <div className="flex flex-col md:flex-row justify-center md:space-x-20 bg-[#1A0142] 2xl:h-[913px] pt-10">
       <EditProfileCard
-        toHire={toHire}
+        // toHire={toHire}
         isEmployerProfile={false}
         userProfileImg={userProfile}
-        userName="Chandrakanth Sharma"
+        userName={firstName}
         profession="Product Designer"
       />
-      <ProfileDetails />
+      <ProfileDetails 
+      description={description}
+      />
 
       <div className="flex flex-col items-center  sm:space-y-10 text-white space-x-4 pt-8">
         {isFreelancer ? (
@@ -110,9 +111,5 @@ const EditProfile = ({isFreelancer, toHire}) => {
   );
 };
 
-EditProfile.propTypes = {
-  isFreelancer: PropTypes.bool,
-  toHire: PropTypes.bool,
-};
 
 export default EditProfile;

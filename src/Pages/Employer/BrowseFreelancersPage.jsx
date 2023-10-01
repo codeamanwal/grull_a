@@ -1,14 +1,55 @@
 /* eslint-disable */
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   BrowseFreelancers,
   LoggedInHeader,
-  EditProfileCard,
   Footer,
 } from '../../components';
+import BrowseFreelancerProfile from '../../components/Profile/BrowseFreelancerProfile';
 import {userProfile} from '../../components/Assets';
+import config from 'react-global-configuration';
 
 const BrowseFreelancersPage = () => {
+
+  const [freelanceData, setFreelanceData] = useState(""); // State variable to hold title
+
+  useEffect(() => {
+    handleBrowseFreelancers();
+  }, []);
+
+  const handleBrowseFreelancers = async () => {
+  
+    try {
+      const accessToken = localStorage.getItem('access_token');
+      let apiUrl = '';      
+  
+      apiUrl = `${config.get('BACKEND_URL')}/api/v0/freelancers?page=1&per_page=8`;
+  
+      const response = await fetch(apiUrl, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
+      const responseData = await response.json();
+      console.log('API Response:', responseData);
+  
+      setFreelanceData(responseData.results);
+      console.log(responseData.results)
+      return true;
+    } catch (error) {
+      console.error('Error occurred:', error);
+      return false;
+    }
+  };  
+
+  
   return (
     <div className="flex flex-col min-h-screen bg-[#1A0142]">
       <LoggedInHeader
@@ -27,7 +68,7 @@ const BrowseFreelancersPage = () => {
           </div>
 
           <div className="grid sm:grid-cols-4 sm:gap-20">
-            <EditProfileCard
+            <BrowseFreelancerProfile
               toHire={true}
               isEmployerProfile={false}
               userProfileImg={userProfile}
@@ -35,7 +76,7 @@ const BrowseFreelancersPage = () => {
               profession="Product Designer"
             />
 
-            <EditProfileCard
+            <BrowseFreelancerProfile
               toHire={true}
               isEmployerProfile={false}
               userProfileImg={userProfile}
@@ -43,7 +84,7 @@ const BrowseFreelancersPage = () => {
               profession="Product Designer"
             />
 
-            <EditProfileCard
+            <BrowseFreelancerProfile
               toHire={true}
               isEmployerProfile={false}
               userProfileImg={userProfile}

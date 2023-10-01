@@ -2,6 +2,7 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types";
 import { Link, useParams, useNavigate } from 'react-router-dom';
+import config from 'react-global-configuration';
 
 const SkillsRequiredCard = ({ isFreelancer, jobData }) => {
   const [applied, setApplied] = useState(false); // State to keep track of whether applied or not
