@@ -125,7 +125,7 @@ const LogIn = () => {
           Log In
         </p>
 
-        <div className="flex flex-col gap-y-4 mt-4">
+        {/* <div className="flex flex-col gap-y-4 mt-4">
           <Box
             logo={facebook}
             name="Continue with Facebook"
@@ -152,7 +152,7 @@ const LogIn = () => {
             logoWidth="2rem"
             logoHeight="2rem"
           />
-        </div>
+        </div> */}
         <div className="border-b-2 border-gray-300 w-80 m-2 font-GeneralSans"/>
       </div>
       <LoginForm />
