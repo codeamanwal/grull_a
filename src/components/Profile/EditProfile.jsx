@@ -163,40 +163,6 @@ const EditProfile = ({firstName, lastName, description, isFreelancer}) => {
         setIsPopupVisible(true); // Show the popup for network errors
       });
   };
-  
-
-  const cancelApplication = () => {
-    const id = localStorage.getItem('job_id');
-    const accessToken = localStorage.getItem('access_token');
-
-      // Construct the URL for the API endpoint
-      const apiUrl = `${config.get('BACKEND_URL')}/api/v0/applications/${id}/cancel`;
-
-      // Make a POST request to accept the application
-      fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${accessToken}`,
-        },
-        // Add any request body data if required
-        // body: JSON.stringify({}),
-      })
-        .then((response) => {
-          if (response.ok) {
-            // Handle success
-            console.log('Application rejected successfully');
-            setIsHiring(true); // Set a state variable to indicate the hiring action
-          } else {
-            // Handle error
-            console.error('Failed to reject application');
-          }
-        })
-        .catch((error) => {
-          // Handle network error
-          console.error('Network error:', error);
-        });
-  };
 
   return (
     <div className="flex flex-col md:flex-row justify-center md:space-x-20 bg-[#1A0142] 2xl:h-[913px] pt-10">
