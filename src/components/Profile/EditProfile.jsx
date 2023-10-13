@@ -164,6 +164,72 @@ const EditProfile = ({firstName, lastName, description, isFreelancer}) => {
       });
   };
 
+  const rejectApplication = () => {
+    const id = localStorage.getItem('job_id');
+    const accessToken = localStorage.getItem('access_token');
+
+      // Construct the URL for the API endpoint
+      const apiUrl = `${config.get('BACKEND_URL')}/api/v0/applications/${id}/reject`;
+
+      // Make a POST request to accept the application
+      fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+        },
+        // Add any request body data if required
+        // body: JSON.stringify({}),
+      })
+        .then((response) => {
+          if (response.ok) {
+            // Handle success
+            console.log('Application rejected successfully');
+            setIsHiring(true); // Set a state variable to indicate the hiring action
+          } else {
+            // Handle error
+            console.error('Failed to reject application');
+          }
+        })
+        .catch((error) => {
+          // Handle network error
+          console.error('Network error:', error);
+        });
+  };
+
+  const cancelApplication = () => {
+    const id = localStorage.getItem('job_id');
+    const accessToken = localStorage.getItem('access_token');
+
+      // Construct the URL for the API endpoint
+      const apiUrl = `${config.get('BACKEND_URL')}/api/v0/applications/${id}/cancel`;
+
+      // Make a POST request to accept the application
+      fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+        },
+        // Add any request body data if required
+        // body: JSON.stringify({}),
+      })
+        .then((response) => {
+          if (response.ok) {
+            // Handle success
+            console.log('Application rejected successfully');
+            setIsHiring(true); // Set a state variable to indicate the hiring action
+          } else {
+            // Handle error
+            console.error('Failed to reject application');
+          }
+        })
+        .catch((error) => {
+          // Handle network error
+          console.error('Network error:', error);
+        });
+  };
+
   return (
     <div className="flex flex-col md:flex-row justify-center md:space-x-20 bg-[#1A0142] 2xl:h-[913px] pt-10">
       <EditProfileCard
@@ -210,22 +276,21 @@ const EditProfile = ({firstName, lastName, description, isFreelancer}) => {
                       >
               Reject Application
                       </button>
-                      {/* Conditionally render the popup */}
 
-{/* Conditionally render the popup */}
-{isPopupVisible && (
-  <div id="Popup" className="popup" style={{ zIndex: 7 }}>
-    <div className="popup-content bg-purple-500" style={{ color: 'white', padding: '20px', textAlign: 'center', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '300px', transition: 'opacity 0.3s, transform 0.3s', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', border: '1px solid black' }}>
-      {successMessage === 'Failed to reject application' ? (
-        <p className="mt-2 fw-bolder" style={{ color: 'white' }}>{successMessage}</p>
-      ) : (
-        <p className="mt-2 fw-bolder">{successMessage}</p>
-      )}
-      <button className="close-popup" style={{ position: 'absolute', top: '10px', right: '10px', cursor: 'pointer', background: 'none', border: 'none', color: 'black', fontSize: '20px' }} onClick={() => setIsPopupVisible(false)}> &times;</button>
-    </div>
-    <div className="popup-backdrop" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1, backdropFilter: 'blur(5px)' }}></div>
-  </div>
-)}
+              {/* Conditionally render the popup */}
+              {isPopupVisible && (
+                <div id="Popup" className="popup" style={{ zIndex: 7 }}>
+                  <div className="popup-content bg-purple-500" style={{ color: 'white', padding: '20px', textAlign: 'center', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '300px', transition: 'opacity 0.3s, transform 0.3s', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', border: '1px solid black' }}>
+                    {successMessage === 'Failed to reject application' ? (
+                      <p className="mt-2 fw-bolder" style={{ color: 'white' }}>{successMessage}</p>
+                    ) : (
+                      <p className="mt-2 fw-bolder">{successMessage}</p>
+                    )}
+                    <button className="close-popup" style={{ position: 'absolute', top: '10px', right: '10px', cursor: 'pointer', background: 'none', border: 'none', color: 'black', fontSize: '20px' }} onClick={() => setIsPopupVisible(false)}> &times;</button>
+                  </div>
+                  <div className="popup-backdrop" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1, backdropFilter: 'blur(5px)' }}></div>
+                </div>
+              )}
 
                       <button className="text-purple-600 text-base font-spaceGrotesk font-medium "
                       onClick={cancelApplication}>
