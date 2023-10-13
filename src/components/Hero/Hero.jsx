@@ -48,14 +48,11 @@ const Hero = () => {
           <header className="flex flex-col justify-center m-auto items-center md:container px-4 lg:flex mt-10 h-full lg:mt-0">
             <div className="w-full space-y-12">
               <h1 className="text-3xl lg:text-7xl font-semibold text-white leading-8 font-spaceGrotesk">
-                India&apos;s first decentralized freelancing platform.
+                World&apos;s First Trusted Network Freelancing Platform
               </h1>
 
               <p className="md:text-2xl text-lg font-GeneralSans md:mb-10 text-white md:w-4/5 w-full md:leading-8 leading-5">
-                A revolutionary product which changes everything with the
-                current freelancing industry. GRULL uses the power of Defi, DAO,
-                and WEB 3.0 technology to solve problems with the centralized
-                freelancing marketplace.
+              Grull is an AI-enhanced freelancing platform that serves as the trusted network for Freelancing, revolutionizing the way Designers and Businesses collaborate in the digital era.
               </p>
               <button className="text-white font-spaceGrotesk text-xl font-medium md:px-8 py-2 px-4 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
                 EXPLORE THE SPACE
