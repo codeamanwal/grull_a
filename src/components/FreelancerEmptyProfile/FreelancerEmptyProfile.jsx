@@ -50,7 +50,9 @@ const FreelancerEmptyProfile = () => {
         body: JSON.stringify(payload), // Convert payload to JSON
       });
 
+      console.log("firstname for edit profile", firstName),
       navigate("/editProfile", {
+        
         state: {
           firstName,
           lastName,

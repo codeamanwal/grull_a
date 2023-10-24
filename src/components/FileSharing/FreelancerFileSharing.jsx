@@ -1,5 +1,6 @@
 import React from 'react';
 import {star} from '../Assets';
+import {Link} from 'react-router-dom';
 
 const FreelancerFileSharing = () => {
   const stars = Array(5).fill(
@@ -9,9 +10,9 @@ const FreelancerFileSharing = () => {
   return (
     <div className="flex text-white flex-wrap  sm:w-full  justify-center sm:space-x-44 overflow-x-hidden">
       <div className="flex-col flex-wrap space-y-6 pt-20 font-semibold justify-start pl-16 text-white hidden sm:flex">
-        <button className="bg-purple-900 bg-opacity-70 border border-solid border-purple-500 rounded-lg p-4 w-48">
+        <Link to="/browseJobsInDetails" className="bg-purple-900 text-center bg-opacity-70 border border-solid border-purple-500 rounded-lg p-4 w-48">
           Job Details
-        </button>
+        </Link>
         <button className="md:px-8 p-4 w-48 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
           Bid Details
         </button>

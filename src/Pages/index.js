@@ -5,9 +5,11 @@ import BrowseJobsPage from './Freelancer/BrowseJobsPage';
 import BrowseJobInDetailsPage from './Freelancer/BrowseJobInDetailsPage';
 import EditProfilePage from './Freelancer/EditProfilePage';
 import FreelancerEmptyProfilePage from './Freelancer/FreelancerEmptyProfilePage';
+import EmployerEmptyProfilePage from './Employer/EmployerEmptyProfilePage';
 import ApplyProposalPage from './Freelancer/ApplyProposalPage';
 import EditMyAccountPage from './Freelancer/EditMyAccountPage';
 import BillsAndPaymentsPage from './Freelancer/BillsAndPaymentsPage';
+import EmployerAccountDetails from './Employer/EmployerAccountDetails';
 import CardDetailsPage from './Freelancer/CardDetailsPage';
 import EditCardDetailsPage from './Freelancer/EditCardDetailsPage';
 import AccountDetailsPage from './Freelancer/AccountDetailsPage';
@@ -42,4 +44,6 @@ export {
   EmployerBrowsingPostedJobsPage,
   FreelancerApplicationViewPage,
   ProjectGalleryPage,
+  EmployerAccountDetails,
+  EmployerEmptyProfilePage,
 };

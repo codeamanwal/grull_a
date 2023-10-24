@@ -11,6 +11,7 @@ import {
   BrowseJobsPage,
   BrowseJobInDetailsPage,
   FreelancerEmptyProfilePage,
+  EmployerEmptyProfilePage,
   PostJobPage,
   BrowseFreelancersPage,
   FreelancerProfileViewByEmployerPage,
@@ -19,6 +20,13 @@ import {
   FreelancerApplicationViewPage,
   ApplyProposalPage,
   EditProfilePage,
+  FreelancerFileSharingPage,
+  AccountDetailsPage,
+  EditMyAccountPage,
+  CardDetailsPage,
+  EditCardDetailsPage,
+  BillsAndPaymentsPage,
+  EmployerAccountDetails
 } from './Pages';
 
 import {LogIn} from './components';
@@ -63,6 +71,13 @@ function App() {
         <Route path="/editProfile" element={<EditProfilePage />} />
         <Route path="/ApplyProposalPage" element={<ApplyProposalPage />} />
         <Route path="/freelancerInDetail" element={<FreelancerInDetail />} />
+        <Route path="/FreelancerFileSharingPage" element={<FreelancerFileSharingPage />} />
+        <Route path="/AccountDetailsPage" element={<AccountDetailsPage />} />
+        <Route path="/employerAccountDetails" element={<EmployerAccountDetails />} />
+        <Route path="/EditMyAccountPage" element={<EditMyAccountPage />} />
+        <Route path="/CardDetailsPage" element={<CardDetailsPage />} />
+        <Route path="/EditCardDetailsPage" element={<EditCardDetailsPage />} />
+        <Route path="/BillsAndPaymentsPage" element={<BillsAndPaymentsPage />} />
 
         <Route
           path="/browseJobsInDetails"
@@ -73,6 +88,10 @@ function App() {
         <Route
           path="/freelancerEmptyProfile"
           element={<FreelancerEmptyProfilePage />}
+        />
+        <Route
+          path="/employerEmptyProfile"
+          element={<EmployerEmptyProfilePage />}
         />
         <Route
           path="/signup"

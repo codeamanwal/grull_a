@@ -10,7 +10,7 @@ const MyAccount = () => {
           My Account
         </button>
         <Link
-          to="/cardDetails"
+          to="/BillsAndPaymentsPage"
           className="text-center bg-purple-900 bg-opacity-70 border border-solid border-purple-500 rounded-lg sm:p-4  p-2 sm:w-48"
         >
           Payment
@@ -23,7 +23,7 @@ const MyAccount = () => {
       <div className="flex flex-col space-y-10 sm:pl-10">
         <div className="flex space-x-7 sm:text-3xl text-xl font-spaceGrotesk font-medium">
           <p>ACCOUNT DETAILS</p>
-          <Link to="/editMyAccount">
+          <Link to="/EditMyAccountPage">
             <img
               className="sm:w-6 sm:h-6 sm:object-fit w-4 h-4"
               src={edit}

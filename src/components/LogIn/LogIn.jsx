@@ -21,7 +21,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   console.log("isFreelancer finally:", isFreelancer);
-  const urlEndpoint = `${config.get("BACKEND_URL")}/api/v0/auth/login`;
+  const urlEndpoint = "https://api.dev.grull.tech/api/v0/auth/login";
   return (
     <div>
       <Formik

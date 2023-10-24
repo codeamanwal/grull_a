@@ -7,6 +7,7 @@ import {
   phonepay,
   paytm,
 } from '../../Assets';
+import {Link} from 'react-router-dom';
 
 const EditCardDetails = () => {
   const [isCardChecked, setIsCardChecked] = useState(true);
@@ -215,12 +216,12 @@ const EditCardDetails = () => {
 
         <div className="flex justify-end items-center space-x-5 sm:text-xl text-base font-spaceGrotesk font-medium sm:leading-96 sm:pt-10 pt-5">
           <button>CANCEL</button>
-          <button
-            // href="/billsAndPayments"
+          <Link
+            to="/CardDetailsPage"
             className="block md:px-8 p-4 w-48 rounded shadow bg-gradient-to-l from-purple-400 to-transparent text-white text-center"
           >
                         SAVE
-          </button>
+          </Link>
         </div>
       </div>
     </div>
