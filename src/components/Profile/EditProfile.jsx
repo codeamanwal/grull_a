@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import EditProfileCard from './EditProfileCard';
 import ProfileDetails from './ProfileDetails';
@@ -7,11 +7,13 @@ import ReviewCard from './ReviewCard';
 import {userProfile} from '../Assets';
 import config from 'react-global-configuration';
 
-const EditProfile = ({firstName, lastName, description, isFreelancer}) => {
+const EditProfile = () => {
   const [isHiring, setIsHiring] = useState(false);
   const [successMessage, setSuccessMessage] = useState(''); // Track success message
   const [isPopupVisible, setIsPopupVisible] = useState(false); // Track popup visibility
-  console.log(description, "descriptionally")
+  const [data, setData] = useState("");
+
+  
   const handleHireClick = () => {
     const id = localStorage.getItem('job_id');
     const accessToken = localStorage.getItem('access_token');
@@ -164,21 +166,63 @@ const EditProfile = ({firstName, lastName, description, isFreelancer}) => {
       });
   };
 
+  const fetchData = async () => {
+    try {
+      const accessToken = localStorage.getItem("access_token");
+  
+      // Perform the GET request to fetch data
+      const response = await fetch(`${config.get("BACKEND_URL")}/api/v0/users/me`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
+      // Parse the response as JSON
+      const data = await response.json();
+  
+      // Now, you can use the 'data' object to access the fetched information
+      console.log("Fetched data:", data);
+  
+      return data; // Return the fetched data
+    } catch (error) {
+      console.error("Error occurred:", error);
+      throw error; // Rethrow the error so it can be caught in the calling function
+    }
+  };
+  
+  useEffect(() => {
+    fetchData()
+      .then((fetchedData) => {
+        setData(fetchedData);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+  
+  
+
   return (
     <div className="flex flex-col md:flex-row justify-center md:space-x-20 bg-[#1A0142] 2xl:h-[913px] pt-10">
       <EditProfileCard
         // toHire={toHire}
         isEmployerProfile={false}
         userProfileImg={userProfile}
-        userName={firstName}
+        userName={data.first_name}
         profession="Product Designer"
       />
       <ProfileDetails 
-      description={description}
+       description={data.description}
       />
 
       <div className="flex flex-col items-center  sm:space-y-10 text-white space-x-4 pt-8">
-        {isFreelancer ? (
+        {data.list_as_freelancer
+ ? (
                     <div className="flex flex-col space-y-4   font-spaceGrotesk font-semibold text-xl">
                       <button className="sm:px-8 sm:py-4  text-center p-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
               FIND JOBS

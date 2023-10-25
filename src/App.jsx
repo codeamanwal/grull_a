@@ -29,6 +29,8 @@ import {
   EmployerAccountDetails
 } from './Pages';
 
+import EditProfile from './components/Profile/EditProfile';
+
 import {LogIn} from './components';
 
 function getToken() {
@@ -69,6 +71,7 @@ function App() {
 
         <Route path="/browseJobs" element={<BrowseJobsPage />} />
         <Route path="/editProfile" element={<EditProfilePage />} />
+        <Route path="/EditProfile" element={<EditProfile />} />
         <Route path="/ApplyProposalPage" element={<ApplyProposalPage />} />
         <Route path="/freelancerInDetail" element={<FreelancerInDetail />} />
         <Route path="/FreelancerFileSharingPage" element={<FreelancerFileSharingPage />} />

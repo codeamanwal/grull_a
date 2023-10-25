@@ -4,15 +4,17 @@ import PropTypes from 'prop-types';
 import {youtube, twitter, facebook2, editIcon} from '../Assets';
 
 const EditProfileCard = ({
-  userProfileImg,
-  toHire,
   isEmployerProfile,
-  userName,
-  profession,
+      userProfileImg,
+        userName,
+        profession
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedName, setEditedName] = useState(userName);
   const [editedProfession, setEditedProfession] = useState(profession);
+  const toHire = false;
+
+  console.log(userName, "editedName in card");
 
   const handleEditClick = () => {
     setIsEditing(!isEditing); // Toggle the isEditing state
@@ -67,7 +69,7 @@ const EditProfileCard = ({
       className="rounded-md text-center w-56 h-8 text-white text-base bg-[#B27EE3] bg-opacity-30"
     />
   ) : (
-    editedName // Display the editedName state when editing is off
+    userName // Display the editedName state when editing is off
   )}
 </div>
 

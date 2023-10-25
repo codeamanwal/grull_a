@@ -4,11 +4,7 @@ import {EditProfile, Footer, LoggedInHeader} from '../../components';
 import {Link, useLocation} from 'react-router-dom';
 
 const EditProfilePage = () => {
-  const location = useLocation();
-  const { firstName, lastName, description, isFreelancer } = location.state || {};
-  console.log(description, "description")
-  console.log(firstName, "firstName")
-  console.log(lastName, "lastName")
+  
   return (
     <div className="flex flex-col min-h-screen">
       <LoggedInHeader
@@ -17,7 +13,7 @@ const EditProfilePage = () => {
         isFreelancer={true}
       />
       <div className="flex-grow">
-        <EditProfile firstName={firstName} lastName={lastName} description={description} isFreelancer={true}/>
+        <EditProfile />
       </div>
       <Footer />
     </div>
