@@ -11,7 +11,7 @@ import config from 'react-global-configuration';
 
 const BrowseFreelancersPage = () => {
 
-  const [freelanceData, setFreelanceData] = useState(""); // State variable to hold title
+  const [freelanceData, setFreelanceData] = useState([]);
 
   useEffect(() => {
     handleBrowseFreelancers();
@@ -38,7 +38,7 @@ const BrowseFreelancersPage = () => {
       }
   
       const responseData = await response.json();
-      console.log('API Response:', responseData);
+      console.log('API Response for the freelancers:', responseData);
   
       setFreelanceData(responseData.results);
       console.log(responseData.results)
@@ -68,29 +68,19 @@ const BrowseFreelancersPage = () => {
           </div>
 
           <div className="grid sm:grid-cols-4 sm:gap-20">
-            <BrowseFreelancerProfile
-              toHire={true}
-              isEmployerProfile={false}
-              userProfileImg={userProfile}
-              userName="Chandrakanth Sharma"
-              profession="Product Designer"
-            />
+          {freelanceData.slice(0, 3).map((freelancer) => (
+  <BrowseFreelancerProfile
+    key={freelancer.id} // Make sure to set a unique key for each profile
+    toHire={true}
+    isEmployerProfile={false}
+    userProfileImg={userProfile}
+    userName={freelancer.first_name}
+    profession="Product Designer" // You can replace this with the actual profession from the response
+  />
+))}
 
-            <BrowseFreelancerProfile
-              toHire={true}
-              isEmployerProfile={false}
-              userProfileImg={userProfile}
-              userName="Chandrakanth Sharma"
-              profession="Product Designer"
-            />
 
-            <BrowseFreelancerProfile
-              toHire={true}
-              isEmployerProfile={false}
-              userProfileImg={userProfile}
-              userName="Chandrakanth Sharma"
-              profession="Product Designer"
-            />
+            
           </div>
         </div>
 

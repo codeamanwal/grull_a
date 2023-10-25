@@ -6,16 +6,19 @@ import config from 'react-global-configuration';
 const PostJobForm = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  
   const handleBrowseClick = async () => {
     try {
       const accessToken = localStorage.getItem("access_token");
-
+    const skillsRequired = document.getElementById("skills").value;
     const titleValue = document.getElementById("title").value;
     const descriptionValue = document.getElementById("jobDescription").value;
 
     const requestData = {
       title: titleValue,
       description: descriptionValue,
+  rate_per_hour: 0,
+  required_skills: [skillsRequired],
     };
 
 

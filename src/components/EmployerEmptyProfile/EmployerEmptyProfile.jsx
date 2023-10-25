@@ -5,6 +5,8 @@ import { plus, upArrow } from "../Assets";
 import { useState } from "react";
 import config from "react-global-configuration";
 import { useNavigate, Link } from "react-router-dom";
+import EditProfileCard from "../Profile/EditProfileCard";
+import {hrProfile} from '../../components/Assets';
 
 const EmployerEmptyProfile = () => {
   const [skills, setSkills] = useState([""]);
@@ -14,6 +16,10 @@ const EmployerEmptyProfile = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const navigate = useNavigate();
+  const [isEditing, setIsEditing] = useState(false);
+  // const [editedName, setEditedName] = useState(userName);
+  // const [editedProfession, setEditedProfession] = useState(profession);
+  const toHire = false;
 
 
   const handleProfileChange = (newName, newRole) => {
@@ -94,11 +100,88 @@ const EmployerEmptyProfile = () => {
 
   return (
     <div className="flex flex-wrap bg-[#1A0142] sm:w-3/4 sm:mx-auto  text-white 2xl:h-[913px] p-10">
-      <ProfileCard
-        profileName={firstName} // Pass the firstName state as prop
-        profileRole={lastName} // Pass the lastName state as prop
-        onProfileChange={handleProfileChange}
-      />
+      <div className="flex px-2 py-2 text-white">
+      <div className="flex flex-col items-center space-y-6 xl:space-y-6 bg-[#482773] rounded-lg lg:mt-0 xl:p-10 m-4 mx-auto py-8 px-2">
+  
+  <>
+        <img
+          className="mx-auto rounded-full sm:h-64 sm:w-64 w-32 h-32"
+          src={hrProfile}
+          alt="author avatar"
+        />
+  </>
+
+
+      
+          <div className="text-center font-bold text-2xl font-spaceGrotesk">
+    <input
+      placeholder="Enter Name"
+      type="text"
+      // value={editedName}
+      className="rounded-md text-center w-56 h-8 text-white text-base bg-[#B27EE3] bg-opacity-30"
+    />
+</div>
+
+
+       
+        <div className="text-xl font-GeneralSans font-normal">
+    <input
+      placeholder="Enter Profession"
+      type="text"
+      // value={editedProfession}
+      className="rounded-md text-center w-56 h-8 text-white text-base bg-[#B27EE3] bg-opacity-30"
+    />
+</div>
+
+        {/* border */}
+        <div className="border-b-2 border-gray-300 w-64 m-2"></div>
+
+        <div className="text-sm sm:text-base font-GeneralSans font-normal">
+        <input
+      placeholder="Enter Location"
+      type="text"
+      className="rounded-md text-center w-56 h-8 text-white text-base bg-[#B27EE3] bg-opacity-30"
+    />
+        </div>
+
+        {/* border */}
+        <div className="border-b-2 border-gray-300 w-64 m-2"></div>
+
+                    <div className="flex flex-col justify-start items-center space-y-2">
+                      {/* ave rate usd */}
+                      <div className="flex gap-x-20 justify-center items-center">
+                        <p className="font-semibold text-lg font-GeneralSans">
+                Avg. Budget:
+                        </p>
+                        <div className="text-base font-GeneralSans"><input
+      placeholder="Enter Budget"
+      className="rounded-md text-center w-32 h-8 text-white text-base bg-[#B27EE3] bg-opacity-30"
+    /></div>
+                      </div>
+
+                      {/* no. of projects */}
+                      <div className="flex justify-center items-center gap-x-3">
+                        <p className="font-semibold text-lg font-GeneralSans mr-3">
+                No. of Jobs Posted:
+                        </p>
+                                <div className="text-base font-GeneralSans">
+                                <input
+      placeholder="Posted Jobs"
+      className="rounded-md text-center w-32 h-8 text-white text-base bg-[#B27EE3] bg-opacity-30"
+    />
+                                </div>
+                      </div>
+                    </div>
+
+                    <>
+                      {/* border */}
+                      <div className="border-b-2 border-gray-300 w-64 m-2"></div>
+                      <div className="flex flex-col space-y-2">
+                        <p>Learn more</p>
+                      </div>
+                    </>
+      </div>
+    </div>
 
       {/* form */}
       <div className="p-6 space-y-6 flex-grow">

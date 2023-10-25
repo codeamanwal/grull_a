@@ -7,7 +7,7 @@ import ReviewCard from './ReviewCard';
 import {userProfile} from '../Assets';
 import config from 'react-global-configuration';
 
-const EditProfile = () => {
+const EditProfile = ({isFreelancer}, {toHire}) => {
   const [isHiring, setIsHiring] = useState(false);
   const [successMessage, setSuccessMessage] = useState(''); // Track success message
   const [isPopupVisible, setIsPopupVisible] = useState(false); // Track popup visibility

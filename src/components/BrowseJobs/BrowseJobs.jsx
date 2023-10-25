@@ -93,9 +93,6 @@ const BrowseJobs = () => {
             {jobData && jobData.slice(0, 3).map((job, index) => (
   <Link to={{
     pathname: "/browseJobsInDetails",
-    // state: {
-    //    job: job// Pass description from job
-    // },
   }} key={job.id}>
     <SkillsRequiredCard isFreelancer={true} jobData={job} />
   </Link>
