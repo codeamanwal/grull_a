@@ -6,7 +6,7 @@ import {Link, useLocation} from 'react-router-dom';
 import config from 'react-global-configuration';
 
 import {apple, facebook, google} from '../Assets';
-import Box from '../SignUp/Box';
+import Box from './Box';
 import getQueryParams from '../utils';
 
 const RegistrationState = ({isEmailAlreadyInUse, isSignUpSuccessful, errorClassNames}) => {

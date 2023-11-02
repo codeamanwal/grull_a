@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React,{useEffect, useState} from 'react';
 import {Link, useHistory, useLocation} from 'react-router-dom';
-import SkillsRequiredCard from '../BrowseJobs/SkillsRequiredCard';
+import SkillsRequiredCard from './SkillsRequiredCard';
 import BrowseByCard from './BrowseByCard';
 import config from 'react-global-configuration';
 

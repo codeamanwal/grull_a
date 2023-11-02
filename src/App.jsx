@@ -22,6 +22,7 @@ import {
 } from './Pages';
 
 import {LogIn} from './components';
+import AuthLayout from './components/AuthLayout';
 
 function getToken() {
   const tokenString = sessionStorage.getItem('token');
@@ -36,44 +37,54 @@ function App() {
     <div className=" overflow-hidden">
       <Routes>
         <Route path="/" element={<LandingPage isLoggedIn={false} />} />
-        <Route
-          path="/LoggedInPage"
-          element={
-            <LandingPage
-              isLoggedIn={true}
-            />
-          }
-        />
-        <Route
-          path="/employerLoggedInPage"
-          element={
-            <LandingPage
-              isLoggedIn={true}
-              category="FREELANCERS"
-              isFreelancer={false}
-            />
-          }
-        />
+        <Route element={<AuthLayout/>}>
+          {/* Auth Protected Routes go here.*/}
+          <Route
+            path="/LoggedInPage"
+            element={
+              <LandingPage
+                isLoggedIn={true}
+              />
+            }
+          />
+          <Route
+            path="/employerLoggedInPage"
+            element={
+              <LandingPage
+                isLoggedIn={true}
+                category="FREELANCERS"
+                isFreelancer={false}
+              />
+            }
+          />
+
+          <Route path="/editProfile" element={<EditProfilePage />} />
+          <Route path="/ApplyProposalPage" element={<ApplyProposalPage />} />
+          <Route path="/freelancerInDetail" element={<FreelancerInDetail />} />
+          <Route
+            path="/browseJobsInDetails"
+            element={<BrowseJobInDetailsPage />}
+          />
+          <Route
+            path="/freelancerEmptyProfile"
+            element={<FreelancerEmptyProfilePage />}
+          />
+
+          {/* employer pages */}
+          <Route path="/postJob" element={<PostJobPage />} />
+          <Route path="/browseFreelancers" element={<BrowseFreelancersPage />} />
+          <Route path="/freelancerProfileViewByEmployer" element={<FreelancerProfileViewByEmployerPage />} />
+          <Route path="/employerProfile" element={<EmployerProfilePage />} />
+          <Route path="/employerBrowsingPostedJobs" element={<EmployerBrowsingPostedJobsPage />} />
+          <Route path="/freelancerApplicationView" element={<FreelancerApplicationViewPage />} />
+        </Route>
+        
         <Route path="/signUpOption" element={<SignUpOptionPage />} />
         <Route path="/signUpEnterOtp" element={<LoginSignUpModalPage otp={false} welcome={false} />} />
         <Route path="/logInRequestOtp" element={<LoginSignUpModalPage otp={true} welcome={true} />} />
         <Route path="/logInEnterOtp" element={<LoginSignUpModalPage otp={false} welcome={true} />} />
 
         <Route path="/browseJobs" element={<BrowseJobsPage />} />
-        <Route path="/editProfile" element={<EditProfilePage />} />
-        <Route path="/ApplyProposalPage" element={<ApplyProposalPage />} />
-        <Route path="/freelancerInDetail" element={<FreelancerInDetail />} />
-
-        <Route
-          path="/browseJobsInDetails"
-          element={<BrowseJobInDetailsPage />}
-        />
-  
-
-        <Route
-          path="/freelancerEmptyProfile"
-          element={<FreelancerEmptyProfilePage />}
-        />
         <Route
           path="/signup"
           element={<LoginSignUpModalPage welcome={false} />}
@@ -82,14 +93,6 @@ function App() {
           path="/login"
           element={<LoginSignUpModalPage welcome={true} />}
         />
-
-        {/* employer pages */}
-        <Route path="/postJob" element={<PostJobPage />} />
-        <Route path="/browseFreelancers" element={<BrowseFreelancersPage />} />
-        <Route path="/freelancerProfileViewByEmployer" element={<FreelancerProfileViewByEmployerPage />} />
-        <Route path="/employerProfile" element={<EmployerProfilePage />} />
-        <Route path="/employerBrowsingPostedJobs" element={<EmployerBrowsingPostedJobsPage />} />
-        <Route path="/freelancerApplicationView" element={<FreelancerApplicationViewPage />} />
       </Routes>
     </div>
   );
