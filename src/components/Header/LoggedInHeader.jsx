@@ -8,6 +8,10 @@ import AuthService from '../../Services/AuthService';
 const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const navigate = useNavigate();
+  const [isFirstNameNotEmpty, setIsFirstNameNotEmpty] = useState(false);
+
+  console.log(isFreelancer, "isFreelancer");
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -25,6 +29,51 @@ const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
       window.removeEventListener('click', handleClickOutside);
     };
   }, []);
+
+  const fetchData = async () => {
+    try {
+      const accessToken = localStorage.getItem("access_token");
+
+      // Perform the GET request to fetch data
+      const response = await fetch(`${config.get("BACKEND_URL")}/api/v0/users/me`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      // Parse the response as JSON
+      const data = await response.json();
+
+      // Now, you can use the 'data' object to access the fetched information
+      console.log("Fetched data:", data);
+      if(data.first_name === ""){
+        setIsFirstNameNotEmpty(true);
+      }
+      return data; // Return the fetched data
+    } catch (error) {
+      console.error("Error occurred:", error);
+      throw error; // Rethrow the error so it can be caught in the calling function
+    }
+  };
+
+  useEffect(() => {
+    fetchData()
+      .then((fetchedData) => {
+        setData(fetchedData);
+        if(fetchedData.first_name === ""){
+          setIsFirstNameNotEmpty(true);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
 
   isFreelancer = AuthService.isFreelancer();
 
