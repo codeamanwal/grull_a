@@ -1,16 +1,12 @@
 /* eslint-disable */
 import React, {useState, useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {grullLogo, bell, user} from '../Assets';
-import BrowseJobs from '../BrowseJobs/BrowseJobs';
-import config from 'react-global-configuration';
-import AuthService from '../../Services/AuthService';
 
-const LoggedInHeader = ({includeNavBar, isFreelancer, category}) => {
+const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -28,7 +24,7 @@ const LoggedInHeader = ({includeNavBar, isFreelancer, category}) => {
       window.removeEventListener('click', handleClickOutside);
     };
   }, []);
-  
+
   return (
     <header className=" fixed top-0 left-0 w-full z-50">
       <div className="flex items-center justify-between px-4 sm:px-8 bg-[#080112] text-white w-full">
