@@ -5,6 +5,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import {grullLogo, bell, user} from '../Assets';
 import BrowseJobs from '../BrowseJobs/BrowseJobs';
 import config from 'react-global-configuration';
+import AuthService from '../../Services/AuthService';
 
 const LoggedInHeader = ({includeNavBar, isFreelancer, category}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -163,7 +164,7 @@ const LoggedInHeader = ({includeNavBar, isFreelancer, category}) => {
                                           <hr className="flex justify-center items-center w-3/4 ml-4 my-2 border-1 border-black" />
                                           <li>
                                             <Link
-                                              to="/"
+                                              to="/logout"
                                               className="block px-4 py-2 text-sm leading-5 text-gray-800 hover:bg-gray-100 font-bold"
                                             >
                                                     LOGOUT
@@ -196,7 +197,7 @@ const LoggedInHeader = ({includeNavBar, isFreelancer, category}) => {
                                           <hr className="flex justify-center items-center w-3/4 ml-4 my-2 border-1 border-black" />
                                           <li>
                                             <Link
-                                              to="/"
+                                              to="/logout"
                                               className="block px-4 py-2 text-sm leading-5 text-gray-800 hover:bg-gray-100 font-bold"
                                             >
                                                     LOGOUT

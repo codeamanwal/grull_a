@@ -36,9 +36,26 @@ function App() {
     
     <div className=" overflow-hidden">
       <Routes>
-        <Route path="/" element={<LandingPage isLoggedIn={false} />} />
-        <Route element={<AuthLayout/>}>
+        <Route element={<AuthLayout onlyAuthorized={false}/>}>
+          {/* Only unauthorized Routes go here.*/}
+          <Route path="/" element={<LandingPage isLoggedIn={false} />} />
+          <Route path="/signUpOption" element={<SignUpOptionPage />} />
+          <Route path="/signUpEnterOtp" element={<LoginSignUpModalPage otp={false} welcome={false} />} />
+          <Route path="/logInRequestOtp" element={<LoginSignUpModalPage otp={true} welcome={true} />} />
+          <Route path="/logInEnterOtp" element={<LoginSignUpModalPage otp={false} welcome={true} />} />
+          <Route
+            path="/signup"
+            element={<LoginSignUpModalPage welcome={false} />}
+          />
+          <Route
+            path="/login"
+            element={<LoginSignUpModalPage welcome={true} />}
+          />
+        </Route>
+        <Route element={<AuthLayout onlyAuthorized={true}/>}>
           {/* Auth Protected Routes go here.*/}
+          <Route path="/" element={<LandingPage isLoggedIn={true} />} />
+          <Route path="/logout" element={<LandingPage logout={true} />} />
           <Route
             path="/LoggedInPage"
             element={
@@ -78,21 +95,9 @@ function App() {
           <Route path="/employerBrowsingPostedJobs" element={<EmployerBrowsingPostedJobsPage />} />
           <Route path="/freelancerApplicationView" element={<FreelancerApplicationViewPage />} />
         </Route>
-        
-        <Route path="/signUpOption" element={<SignUpOptionPage />} />
-        <Route path="/signUpEnterOtp" element={<LoginSignUpModalPage otp={false} welcome={false} />} />
-        <Route path="/logInRequestOtp" element={<LoginSignUpModalPage otp={true} welcome={true} />} />
-        <Route path="/logInEnterOtp" element={<LoginSignUpModalPage otp={false} welcome={true} />} />
 
         <Route path="/browseJobs" element={<BrowseJobsPage />} />
-        <Route
-          path="/signup"
-          element={<LoginSignUpModalPage welcome={false} />}
-        />
-        <Route
-          path="/login"
-          element={<LoginSignUpModalPage welcome={true} />}
-        />
+
       </Routes>
     </div>
   );

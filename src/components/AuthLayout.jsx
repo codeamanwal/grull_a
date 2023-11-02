@@ -8,13 +8,21 @@ import React from 'react';
 import AuthService from '../Services/AuthService';
 import {Navigate, Outlet} from 'react-router-dom';
 
-const AuthLayout = () => {
+const AuthLayout = ({onlyAuthorized}) => {
   // Add your own authentication on the below line.
-  if (!AuthService.isLoggedIn()) {
-    return <Navigate to={'/login'} replace />;
+  if (onlyAuthorized) {
+    if (!AuthService.isLoggedIn()) {
+      return <Navigate to={'/login'} replace />;
+    }
+    return <Outlet />;
   }
-  return <Outlet />;
+
+  if (AuthService.isLoggedIn()) {
+    return <Navigate to={'/LoggedInPage'} replace />;
+  }
   
+  return <Outlet />;
+
 };
 
 export default AuthLayout;

@@ -1,14 +1,10 @@
 /* eslint-disable */
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import { useLocation, useHistory } from "react-router-dom";
 import config from "react-global-configuration";
-import { Link } from "react-router-dom";
-import { apple, facebook, google } from "../Assets";
-import Box from "../SignUp/Box";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import LoggedInHeader from "../Header/LoggedInHeader";
 import { useNavigate } from "react-router-dom";
+import AuthService from "../../Services/AuthService";
 
 const LoginForm = () => {
   const fieldClassNames = "py-2 px-4 border text-xs w-72 h-10 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 m-2";
@@ -67,8 +63,9 @@ const LoginForm = () => {
             return false;
           }
           const responseData = await result.json();
-          localStorage.setItem("access_token", responseData["access_token"]);
-          localStorage.setItem("token_type", responseData["token_type"]);
+          const accessToken = responseData["access_token"]
+          const tokenType = responseData["token_type"]
+          AuthService.setToken(accessToken, tokenType);
           navigate("/LoggedInPage", { state: { isFreelancer, category: isFreelancer ? "FREELANCER" : "JOBS" } });
           return true;
         }}>
