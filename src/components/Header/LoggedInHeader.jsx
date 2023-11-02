@@ -1,18 +1,13 @@
 /* eslint-disable */
 import React, {useState, useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {grullLogo, bell, user} from '../Assets';
-import BrowseJobs from '../BrowseJobs/BrowseJobs';
-import config from 'react-global-configuration';
+import AuthService from '../../Services/AuthService';
 
-const LoggedInHeader = ({includeNavBar, isFreelancer, category}) => {
+const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const navigate = useNavigate();
-  const [isFirstNameNotEmpty, setIsFirstNameNotEmpty] = useState(false);
-
-  console.log(isFreelancer, "isFreelancer");
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -31,50 +26,8 @@ const LoggedInHeader = ({includeNavBar, isFreelancer, category}) => {
     };
   }, []);
 
-  const fetchData = async () => {
-    try {
-      const accessToken = localStorage.getItem("access_token");
-  
-      // Perform the GET request to fetch data
-      const response = await fetch(`${config.get("BACKEND_URL")}/api/v0/users/me`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-  
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-  
-      // Parse the response as JSON
-      const data = await response.json();
-  
-      // Now, you can use the 'data' object to access the fetched information
-      console.log("Fetched data:", data);
-      if(data.first_name === ""){
-        setIsFirstNameNotEmpty(true);
-      }
-      return data; // Return the fetched data
-    } catch (error) {
-      console.error("Error occurred:", error);
-      throw error; // Rethrow the error so it can be caught in the calling function
-    }
-  };
-  
-  useEffect(() => {
-    fetchData()
-      .then((fetchedData) => {
-        setData(fetchedData);
-        if(fetchedData.first_name === ""){
-          setIsFirstNameNotEmpty(true);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
-  
+  isFreelancer = AuthService.isFreelancer();
+
   return (
     <header className=" fixed top-0 left-0 w-full z-50">
       <div className="flex items-center justify-between px-4 sm:px-8 bg-[#080112] text-white w-full">
@@ -210,7 +163,7 @@ const LoggedInHeader = ({includeNavBar, isFreelancer, category}) => {
                                           <hr className="flex justify-center items-center w-3/4 ml-4 my-2 border-1 border-black" />
                                           <li>
                                             <Link
-                                              to="/"
+                                              to="/logout"
                                               className="block px-4 py-2 text-sm leading-5 text-gray-800 hover:bg-gray-100 font-bold"
                                             >
                                                     LOGOUT
@@ -251,7 +204,7 @@ const LoggedInHeader = ({includeNavBar, isFreelancer, category}) => {
                                           <hr className="flex justify-center items-center w-3/4 ml-4 my-2 border-1 border-black" />
                                           <li>
                                             <Link
-                                              to="/"
+                                              to="/logout"
                                               className="block px-4 py-2 text-sm leading-5 text-gray-800 hover:bg-gray-100 font-bold"
                                             >
                                                     LOGOUT

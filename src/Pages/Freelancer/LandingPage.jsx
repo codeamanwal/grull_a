@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link, useLocation} from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 import {
   LoginSignUpHeader,
   LoggedInHeader,
@@ -10,32 +10,33 @@ import {
   WhyGrull,
   ExploreCategories,
 } from '../../components';
+import AuthService from '../../Services/AuthService';
 
-const LandingPage = ({isLoggedIn}) => {
+const LandingPage = ({isLoggedIn, logout = false}) => {
   const location = useLocation();
   const state = location.state || {};
-  const { isFreelancer, category } = state;
 
-  console.log('isFreelancer:', isFreelancer);
-  console.log('category:', category);
+  let { isFreelancer, category } = state;
+
+  if (logout) {
+    isLoggedIn = false;
+    AuthService.logout();
+  }
+
   return (
     <div>
-      {isLoggedIn ? (
-                <LoggedInHeader
-                  includeNavBar={true}
-                  isFreelancer={isFreelancer}
-                  category={category}
-                />
-            ) : (
-                <LoginSignUpHeader />
-            )}
-
+      {isLoggedIn ? 
+      <LoggedInHeader
+        includeNavBar={true}
+        isFreelancer={isFreelancer}
+        category={category}
+      />: <LoginSignUpHeader/>}
       <Hero />
       <ExploreCategories />
       <WhyGrull />
       <Footer />
     </div>
-  );
+  )
 };
 
 LandingPage.propTypes = {
