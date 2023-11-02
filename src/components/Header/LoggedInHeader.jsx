@@ -3,6 +3,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {grullLogo, bell, user} from '../Assets';
+import AuthService from '../../Services/AuthService';
 
 const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -24,6 +25,8 @@ const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
       window.removeEventListener('click', handleClickOutside);
     };
   }, []);
+
+  isFreelancer = AuthService.isFreelancer();
 
   return (
     <header className=" fixed top-0 left-0 w-full z-50">

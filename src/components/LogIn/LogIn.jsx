@@ -66,8 +66,26 @@ const LoginForm = () => {
           const accessToken = responseData["access_token"]
           const tokenType = responseData["token_type"]
           AuthService.setToken(accessToken, tokenType);
-          navigate("/LoggedInPage", { state: { isFreelancer, category: isFreelancer ? "FREELANCER" : "JOBS" } });
-          return true;
+          const meApiUrl = `${config.get("BACKEND_URL")}/api/v0/users/me`;
+          return fetch(
+            meApiUrl, 
+            {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`,
+              },
+            },
+          )
+          .then(response => response.json())
+          .then(json => {
+            AuthService.setUserMode(json.list_as_freelancer? AuthService.FREELANCER_MODE: AuthService.EMPLOYER_MODE);
+            const isFreelancer = AuthService.isFreelancer();
+            navigate("/LoggedInPage", { state: { isFreelancer, category: isFreelancer ? "FREELANCER" : "JOBS" } });
+            return true;
+          })
+          .catch(error => console.error(error));
+          
         }}>
         {({ isSubmitting }) => (
           <Form>
