@@ -2,8 +2,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import JobDetailsCard from "./JobDetailsCard";
-import { ClosedChatBox, OpenedChatBox } from "..";
-import { downarrow } from "../Assets";
+import { ClosedChatBox, OpenedChatBox } from "../../components";
+import { downarrow } from "../../components/Assets";
 import { Link, useLocation } from "react-router-dom";
 import config from "react-global-configuration";
 import JobDetailsCardForEmployer from "./JobDetailsCardForEmployer";
