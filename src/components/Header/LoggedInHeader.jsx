@@ -63,7 +63,6 @@ const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
   useEffect(() => {
     fetchData()
         .then((fetchedData) => {
-          setData(fetchedData);
           if (fetchedData.first_name === '') {
             setIsFirstNameNotEmpty(true);
           }

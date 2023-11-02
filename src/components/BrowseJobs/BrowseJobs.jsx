@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import SkillsRequiredCard from '../BrowseJobs/SkillsRequiredCard';
 import BrowseByCard from './BrowseByCard';
 import config from 'react-global-configuration';
@@ -7,6 +7,7 @@ import AuthService from '../../Services/AuthService';
 
 const BrowseJobs = () => {
   const [jobData, setJobData] = useState(''); // State variable to hold title
+  const navigate = useNavigate();
 
   useEffect(() => {
     handleBrowse();
