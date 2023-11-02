@@ -10,7 +10,7 @@ const CardDetails = () => {
                     My Account
         </button>
         <Link
-          to="/cardDetails"
+          to="/BillsAndPaymentsPage"
           className="text-center bg-gradient-to-l from-purple-400 to-transparent bg-opacity-70 border border-solid border-purple-500 rounded-lg sm:p-4  p-2 sm:w-48"
         >
                     Payment
@@ -25,7 +25,7 @@ const CardDetails = () => {
                     My Account
         </button>
         <Link
-          to="/cardDetails"
+          to="/BillsAndPaymentsPage"
           className="text-center bg-gradient-to-l from-purple-400 to-transparent border border-solid border-purple-500 rounded-lg sm:p-4  p-2 sm:w-48"
         >
                     Payment
@@ -95,7 +95,7 @@ const CardDetails = () => {
         </div>
 
         <div className="flex justify-end">
-          <Link to="/editCardDetais">
+          <Link to="/EditCardDetailsPage">
             <button className="sm:text-xl font-medium md:px-8 py-6 sm:px-16 rounded shadow bg-gradient-to-l from-purple-400 to-transparent font-spaceGrotesk">
                             ADD NEW BILLING METHOD
             </button>

@@ -21,7 +21,6 @@ import {
   EditProfilePage,
 } from './Pages';
 
-import {LogIn} from './components';
 import AuthLayout from './components/AuthLayout';
 
 function getToken() {
@@ -97,7 +96,6 @@ function App() {
         </Route>
 
         <Route path="/browseJobs" element={<BrowseJobsPage />} />
-
       </Routes>
     </div>
   );

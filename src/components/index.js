@@ -8,6 +8,7 @@ import WhyGrull from './WhyGrull/WhyGrull';
 import ExploreCategories from './ExploreCategories/ExploreCategories';
 import Hero from './Hero/Hero';
 import FreelancerEmptyProfile from './FreelancerEmptyProfile/FreelancerEmptyProfile';
+import EmployerEmptyProfile from './EmployerEmptyProfile/EmployerEmptyProfile';
 import EditProfile from './Profile/EditProfile';
 import GrowingTogetherFooter from './Footer/GrowingTogetherFooter';
 import SignUpOption from '../Pages/Freelancer/SignUpOptionPage';
@@ -71,4 +72,5 @@ export {
   MessagePreviewCard,
   MessagingBox,
   ProfileViewCard,
+  EmployerEmptyProfile,
 };

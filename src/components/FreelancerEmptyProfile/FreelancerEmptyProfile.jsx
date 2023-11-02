@@ -50,7 +50,9 @@ const FreelancerEmptyProfile = () => {
         body: JSON.stringify(payload), // Convert payload to JSON
       });
 
-      navigate("/editProfile", {
+      console.log("firstname for edit profile", firstName),
+navigate("/editProfile", {
+        
         state: {
           firstName,
           lastName,
@@ -184,7 +186,9 @@ const FreelancerEmptyProfile = () => {
       </div>
 
       <div className="pt-10 pl-10">
-        <Link to="/editProfile" className="text-white text-xl font-medium py-2 px-16 rounded shadow bg-gradient-to-l from-purple-400 to-transparent" onClick={() => handleSubmit(firstName, lastName)}>
+        <Link to={{
+    pathname: "/editProfile",
+  }} onClick={handleSubmit} className="text-white text-xl font-medium py-2 px-16 rounded shadow bg-gradient-to-l from-purple-400 to-transparent" onClick={() => handleSubmit(firstName, lastName)}>
           DONE
         </Link>
         {/* <a href='/EditProfilePage'

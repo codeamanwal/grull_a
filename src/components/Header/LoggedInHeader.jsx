@@ -101,7 +101,7 @@ const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
                                           </li>
                                           <li>
                                             <Link
-                                              to="/freelancerEmptyProfile"
+                                             to={isFirstNameNotEmpty ? '/freelancerEmptyProfile' : '/editProfile'} 
                                               className="block px-4 py-1 text-sm leading-5 text-gray-800 hover:bg-gray-100"
                                             >
                                                     Manage Profile
@@ -109,7 +109,7 @@ const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
                                           </li>
                                           <li>
                                             <Link
-                                              to="/accountDetails"
+                                              to="/AccountDetailsPage"
                                               className="block px-4 py-1 text-sm leading-5 text-gray-800 hover:bg-gray-100"
                                             >
                                                     Account Details
@@ -117,49 +117,49 @@ const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
                                           </li>
                                           <li>
                                             <Link
-                                              to="/freelancerFileSharing?isFreelancer=true"
+                                              to="/freelancerFileSharingPage?isFreelancer=true"
                                               className="block px-4 py-1 text-sm leading-5 text-gray-800 hover:bg-gray-100"
                                             >
                                                     Settings
                                             </Link>
                                           </li>
-                                          <li className="mt-2">
+                                          {/* <li className="mt-2">
                                             <p className="block px-4 py-2 text-sm leading-5 text-gray-800 hover:bg-gray-100 font-bold">
                                                     Finances
                                             </p>
-                                          </li>
-                                          <li>
+                                          </li> */}
+                                          {/* <li>
                                             <Link
                                               to="/"
                                               className="block px-4 py-1 text-sm leading-5 text-gray-800 hover:bg-gray-100"
                                             >
                                                     Balance
                                             </Link>
-                                          </li>
-                                          <li>
+                                          </li> */}
+                                          {/* <li>
                                             <Link
                                               to="/"
                                               className="block px-4 py-1 text-sm leading-5 text-gray-800 hover:bg-gray-100"
                                             >
                                                     Withdraw Funds
                                             </Link>
-                                          </li>
-                                          <li>
+                                          </li> */}
+                                          {/* <li>
                                             <Link
                                               to="/"
                                               className="block px-4 py-1 text-sm leading-5 text-gray-800 hover:bg-gray-100"
                                             >
                                                     Add Funds
                                             </Link>
-                                          </li>
-                                          <li>
+                                          </li> */}
+                                          {/* <li>
                                             <Link
                                               to="/"
                                               className="block px-4 py-1 text-sm leading-5 text-gray-800 hover:bg-gray-100"
                                             >
                                                     Transaction History
                                             </Link>
-                                          </li>
+                                          </li> */}
                                           <hr className="flex justify-center items-center w-3/4 ml-4 my-2 border-1 border-black" />
                                           <li>
                                             <Link
@@ -179,7 +179,7 @@ const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
                                           </li>
                                           <li>
                                             <Link
-                                              to="/employerProfile"
+                                              to="/employerEmptyProfile"
                                               className="block px-4 py-1 text-sm leading-5 text-gray-800 hover:bg-gray-100"
                                             >
                                                     Manage Profile
@@ -187,7 +187,15 @@ const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
                                           </li>
                                           <li>
                                             <Link
-                                              to="/freelancerFileSharing?isFreelancer=false"
+                                              to="/employerAccountDetails"
+                                              className="block px-4 py-1 text-sm leading-5 text-gray-800 hover:bg-gray-100"
+                                            >
+                                                    Account Details
+                                            </Link>
+                                          </li>
+                                          <li>
+                                            <Link
+                                              to="/freelancerFileSharingPage?isFreelancer=false"
                                               className="block px-4 py-1 text-sm leading-5 text-gray-800 hover:bg-gray-100"
                                             >
                                                     Settings

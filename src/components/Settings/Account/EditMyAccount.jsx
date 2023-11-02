@@ -9,7 +9,7 @@ const EditMyAccount = () => {
           My Account
         </button>
         <Link
-          to="/cardDetails"
+          to="/BillsAndPaymentsPage"
           className="text-center bg-purple-900 bg-opacity-70 border border-solid border-purple-500 rounded-lg sm:p-4  p-2 sm:w-48"
         >
           Payment

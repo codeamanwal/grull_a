@@ -10,7 +10,7 @@ const SettingsBillsAndPayments = () => {
         </button>
 
         <Link
-          to="/cardDetails"
+          to="/BillsAndPaymentsPage"
           className="bg-purple-900 text-center bg-opacity-30 rounded-lg border border-purple-600 sm:p-4 sm:w-48 p-2 bg-gradient-to-l from-purple-400 to-transparent"
         >
                     Payment
@@ -28,7 +28,7 @@ const SettingsBillsAndPayments = () => {
           <p className="sm:text-xl text-center font-GeneralSans font-normal">
                         You have not set up any billing method yet
           </p>
-          <Link to="/editCardDetais">
+          <Link to="/EditCardDetailsPage">
             <button className="sm:text-xl   px-4 py-2 text-base font-medium rounded shadow bg-gradient-to-l from-purple-400 to-transparent font-spaceGrotesk">
                             ADD BILLING METHOD
             </button>

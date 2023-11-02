@@ -6,16 +6,19 @@ import config from 'react-global-configuration';
 const PostJobForm = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  
   const handleBrowseClick = async () => {
     try {
       const accessToken = localStorage.getItem("access_token");
-
+    const skillsRequired = document.getElementById("skills").value;
     const titleValue = document.getElementById("title").value;
     const descriptionValue = document.getElementById("jobDescription").value;
 
     const requestData = {
       title: titleValue,
       description: descriptionValue,
+  rate_per_hour: 0,
+  required_skills: [skillsRequired],
     };
 
 
@@ -70,6 +73,7 @@ const PostJobForm = () => {
           <input
             id="skills"
             // rows="6"
+            type="text"
             className="bg-[#1A0142] border border-solid border-[#B1B1B1]  rounded-lg text-white sm:text-sm sm:p-4 p-2 sm:w-full"
             placeholder="Enter"></input>
         </div>
@@ -79,11 +83,21 @@ const PostJobForm = () => {
           <label htmlFor="catagory" className="font-semibold  sm:text-xl font-spaceGrotesk">
             Job Category
           </label>
-          <input
+          {/* <input
             id="catagory"
             // rows="6"
             className="bg-[#1A0142] border border-solid border-[#B1B1B1] rounded-lg text-white sm:text-sm sm:p-4 p-2 sm:w-full"
-            placeholder="Select"></input>
+            placeholder="Select"></input> */}
+            <select
+            id="currency"
+            className="bg-[#1A0142] border border-solid border-[#B1B1B1] rounded-lg text-white sm:text-sm sm:p-4 p-2 sm:w-full"
+          >
+            <option value="Graphic">Graphic Designer</option>
+            <option value="Developer">Software Developer</option>
+            <option value="Writer">Copywriter</option>
+            <option value="Content">Content Creator</option>
+            <option value="Other">Other</option>
+          </select>
         </div>
 
         {/* Refrence Files */}
@@ -93,6 +107,7 @@ const PostJobForm = () => {
           </label>
           <input
             id="files"
+            type="file"
             // rows="6"
             className="bg-[#1A0142] border border-solid border-[#B1B1B1] rounded-lg text-white sm:text-sm sm:p-4 p-2 sm:w-full"
             placeholder="Upload"></input>
@@ -103,11 +118,21 @@ const PostJobForm = () => {
           <label htmlFor="location" className="font-semibold sm:text-xl font-spaceGrotesk">
             Location
           </label>
-          <input
+          {/* <input
             id="location"
             // rows="6"
             className="bg-[#1A0142] border border-solid border-[#B1B1B1] rounded-lg text-white sm:text-sm sm:p-4  p-2 sm:w-full"
-            placeholder="Select"></input>
+            placeholder="Select"></input> */}
+            <select
+            id="currency"
+            className="bg-[#1A0142] border border-solid border-[#B1B1B1] rounded-lg text-white sm:text-sm sm:p-4 p-2 sm:w-full"
+          >
+            <option value="India">India</option>
+            <option value="America">United States</option>
+            <option value="Canada">Canada</option>
+            <option value="Germany">Germany</option>
+            <option value="Other">Other</option>
+          </select>
         </div>
 
         {/* Duration */}
@@ -117,6 +142,7 @@ const PostJobForm = () => {
           </label>
           <input
             id="diration"
+            type="text"
             // rows="6"
             className="bg-[#1A0142] border border-solid border-[#B1B1B1] rounded-lg text-white sm:text-sm sm:p-4  p-2 sm:w-full"
             placeholder="Select"></input>
@@ -141,11 +167,13 @@ const PostJobForm = () => {
           </label>
           <div className="grid sm:grid-cols-5 grid-cols-3 gap-4">
             <div className=" sm:col-span-2 flex flex-col space-y-2  justify-center">
-              <input
-                id="currency"
-                // rows="6"
-                className="bg-[#1A0142] border border-solid border-[#B1B1B1] rounded-lg text-white sm:text-sm sm:p-4  p-2 sm:w-full"
-                placeholder="USD"></input>
+            <select
+            id="currency"
+            className="bg-[#1A0142] border border-solid border-[#B1B1B1] rounded-lg text-white sm:text-sm sm:p-4 p-2 sm:w-full"
+          >
+            <option value="USD">USD</option>
+            <option value="INR">INR</option>
+          </select>
             </div>
 
             <div className=" sm:col-span-2 flex flex-col space-y-2  justify-center">

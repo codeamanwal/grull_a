@@ -60,6 +60,7 @@ const SkillsRequiredCard = ({ isFreelancer, jobData }) => {
   // console.log("data", jobData)
   if (jobData && jobData.title) {
   return (
+    <Link  onClick={handleApply}>
     <div className="flex flex-wrap justify-between rounded-xl border border-solid border-purple-500 bg-[#492772] bg-opacity-70 sm:py-8 sm:px-4 py-4 px-2 2xl:w-[1200px] my-2">
       <div>
         <div className="flex flex-col items-start">
@@ -78,12 +79,12 @@ const SkillsRequiredCard = ({ isFreelancer, jobData }) => {
                 <p className="bg-[#B37EE2] px-4 py-2 rounded-xl text-white font-medium sm:text-base text-sm m-1">
                   MAYA
                 </p>
-                <Link
-                  to="/browseJobsInDetails"
+                <p
+                  
                   className="text-[#B37EE2] font-normal sm:text-lg text-sm"
                 >
                   more
-                </Link>
+                </p>
               </div>
             </div>
 
@@ -147,6 +148,7 @@ const SkillsRequiredCard = ({ isFreelancer, jobData }) => {
         </div>
       )}
     </div>
+    </Link>
   );
           }else {
     // Handle the case where jobData is undefined or does not have a title property

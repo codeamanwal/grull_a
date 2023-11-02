@@ -8,7 +8,10 @@
         "@testing-library/user-event": "^13.5.0",
         "buffer": "^6.0.3",
         "classnames": "^2.3.2",
+        "config": "^3.3.9",
         "formik": "^2.4.3",
+        "os-browserify": "^0.3.0",
+        "path-browserify": "^1.0.1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-global-configuration": "^1.4.1",
@@ -19,6 +22,7 @@
     },
     "scripts": {
         "start": "react-scripts start",
+        "start-server": "node backend-proxy-server.js",
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"

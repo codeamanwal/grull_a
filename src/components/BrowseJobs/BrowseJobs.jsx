@@ -16,7 +16,7 @@ const BrowseJobs = () => {
     try {
       const accessToken = localStorage.getItem('access_token');
       let apiUrl = '';      
-  
+        
         apiUrl =`${config.get('BACKEND_URL')}/api/v0/jobs?page=1&per_page=8`
         console.log('API Call for Browse Jobs:', apiUrl);
 
@@ -33,7 +33,7 @@ const BrowseJobs = () => {
       }
   
       const responseData = await response.json();
-      console.log('API Response:', responseData);
+      console.log('API Response of browse jobs:', responseData);
 
       setJobData(responseData.results);
       console.log(responseData.results)
@@ -93,9 +93,6 @@ const BrowseJobs = () => {
             {jobData && jobData.slice(0, 3).map((job, index) => (
   <Link to={{
     pathname: "/browseJobsInDetails",
-    // state: {
-    //    job: job// Pass description from job
-    // },
   }} key={job.id}>
     <SkillsRequiredCard isFreelancer={true} jobData={job} />
   </Link>

@@ -85,7 +85,7 @@ const BrowseJobInDetails = ({ isFreelancer, isOpen, setIsOpen, jobData, jobs }) 
             <Link to="/freelancerApplicationView" className="text-white sm:text-xl font-semibold md:px-8 py-4 px-2 sm:px-12 rounded shadow bg-gradient-to-l from-purple-400 to-transparent" onClick={handleViewFreelancerApplicationsClick}>
               VIEW FREELANCER APPLICATIONS
             </Link>
-            <button className="text-white sm:text-xl font-semibold md:px-8 py-4 sm:px-12  px-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent" onClick={handleManagePostedJobsClick}>
+            <button className="text-white sm:text-xl font-semibold md:px-8 py-4 sm:px-12  px-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent" >
               MANAGE POSTED JOB
             </button>
           </div>
