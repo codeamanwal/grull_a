@@ -1,12 +1,12 @@
-/* eslint-disable */
-import React,{useEffect, useState} from 'react';
-import {Link, useHistory, useLocation} from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
 import SkillsRequiredCard from '../BrowseJobs/SkillsRequiredCard';
 import BrowseByCard from './BrowseByCard';
 import config from 'react-global-configuration';
+import AuthService from '../../Services/AuthService';
 
 const BrowseJobs = () => {
-  const [jobData, setJobData] = useState(""); // State variable to hold title
+  const [jobData, setJobData] = useState(''); // State variable to hold title
 
   useEffect(() => {
     handleBrowse();
@@ -15,10 +15,10 @@ const BrowseJobs = () => {
   const handleBrowse = async () => {
     try {
       const accessToken = localStorage.getItem('access_token');
-      let apiUrl = '';      
-        
-        apiUrl =`${config.get('BACKEND_URL')}/api/v0/jobs?page=1&per_page=8`
-        console.log('API Call for Browse Jobs:', apiUrl);
+      const isFreelancer = AuthService.isFreelancer();
+      let apiUrl = '';
+      apiUrl =`${config.get('BACKEND_URL')}/api/v0/jobs?page=1&per_page=8`;
+      console.log('API Call for Browse Jobs:', apiUrl);
 
       const response = await fetch(apiUrl, {
         method: 'GET',
@@ -27,16 +27,16 @@ const BrowseJobs = () => {
           'Authorization': `Bearer ${accessToken}`,
         },
       });
-  
+
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-  
+
       const responseData = await response.json();
       console.log('API Response of browse jobs:', responseData);
 
       setJobData(responseData.results);
-      console.log(responseData.results)
+      console.log(responseData.results);
 
       const browseJobsRoute = isFreelancer ? '/browseJobs' : '/browseFreelancers';
 
@@ -46,17 +46,15 @@ const BrowseJobs = () => {
           jobData: responseData.results, // Pass jobData as state
         },
       });
-  
+
       return true;
     } catch (error) {
       console.error('Error occurred:', error);
       return false;
     }
+  };
 
-    
-  };  
-
-  console.log("BrowseJobs", jobData)
+  console.log('BrowseJobs', jobData);
 
   const items1 = [
     'Graphic Designer',
@@ -91,12 +89,12 @@ const BrowseJobs = () => {
               </div>
             </div>
             {jobData && jobData.slice(0, 3).map((job, index) => (
-  <Link to={{
-    pathname: "/browseJobsInDetails",
-  }} key={job.id}>
-    <SkillsRequiredCard isFreelancer={true} jobData={job} />
-  </Link>
-))}
+              <Link to={{
+                pathname: '/browseJobsInDetails',
+              }} key={job.id}>
+                <SkillsRequiredCard isFreelancer={true} jobData={job} />
+              </Link>
+            ))}
 
           </div>
           {window.innerWidth > 640 ? (
