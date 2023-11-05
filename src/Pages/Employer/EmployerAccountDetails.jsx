@@ -1,6 +1,5 @@
 import React from 'react';
 import {Footer, LoggedInHeader, MyAccount} from '../../components';
-
 const EmployerAccountDetails = () => {
   return (
     <div className="flex flex-col min-h-screen">
@@ -12,5 +11,4 @@ const EmployerAccountDetails = () => {
     </div>
   );
 };
-
 export default EmployerAccountDetails;
