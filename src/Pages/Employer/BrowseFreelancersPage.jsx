@@ -8,9 +8,10 @@ import {
 import BrowseFreelancerProfile from '../../components/Profile/BrowseFreelancerProfile';
 import {userProfile} from '../../components/Assets';
 import config from 'react-global-configuration';
+import AuthService from '../../Services/AuthService';
 
 const BrowseFreelancersPage = () => {
-
+  var accessToken = AuthService.getToken();
   const [freelanceData, setFreelanceData] = useState([]);
 
   useEffect(() => {
@@ -20,7 +21,6 @@ const BrowseFreelancersPage = () => {
   const handleBrowseFreelancers = async () => {
   
     try {
-      const accessToken = localStorage.getItem('access_token');
       let apiUrl = '';      
   
       apiUrl = `${config.get('BACKEND_URL')}/api/v0/freelancers?page=1&per_page=8`;

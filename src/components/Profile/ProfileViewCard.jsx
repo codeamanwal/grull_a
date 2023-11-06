@@ -1,14 +1,15 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import config from 'react-global-configuration';
+import AuthService from '../../Services/AuthService';
 
 const ProfileViewCard = ({userProfileImg, userName}) => {
   const [successMessage, setSuccessMessage] = useState(''); // Track success message
   const [isPopupVisible, setIsPopupVisible] = useState(false); // Track popup visibility
-
+  const accessToken = AuthService.getToken();
   const confirmSalaryNegotiation = () => {
     const id = localStorage.getItem('job_id');
-    const accessToken = localStorage.getItem('access_token');
+
 
     // Construct the URL for the API endpoint
     const apiUrl = `${config.get('BACKEND_URL')}/api/v0/applications/${id}/confirm-negotiation`;

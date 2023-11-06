@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React, {useState} from 'react';
 import config from 'react-global-configuration';
+import AuthService from '../../Services/AuthService';
 
 function setFiles() {
 
@@ -9,10 +10,9 @@ function setFiles() {
 const FreelanceApplication = () => {
   const [rate, setRate] = useState('');
   const [isApplying, setIsApplying] = useState('');
-
+  var accessToken = AuthService.getToken();
   const handleApplyClick = async () => {
     setIsApplying(true);
-    const accessToken = localStorage.getItem('access_token');
     const jobId = localStorage.getItem('job_id'); // Replace with how you obtain the job ID
   
     try {

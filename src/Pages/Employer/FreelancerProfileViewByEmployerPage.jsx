@@ -5,15 +5,14 @@ import {userProfile} from '../../components/Assets';
 import EditProfileCard from '../../components/Profile/EditProfileCard';
 import ProfileDetails from '../../components/Profile/ProfileDetails';
 import config from 'react-global-configuration';
+import AuthService from '../../Services/AuthService';
 
 const FreelancerProfileViewByEmployerPage = () => {
   const [successMessage, setSuccessMessage] = useState(''); // Track success message
   const [isPopupVisible, setIsPopupVisible] = useState(false); // Track popup visibility
-
+  const accessToken = AuthService.getToken();
   const handleHireClick = () => {
     const id = localStorage.getItem('job_id');
-    const accessToken = localStorage.getItem('access_token');
-
     // Construct the URL for the API endpoint
     const apiUrl = `${config.get('BACKEND_URL')}/api/v0/freelancers/${id}/hire`;
 
@@ -50,8 +49,6 @@ const FreelancerProfileViewByEmployerPage = () => {
 
   const acceptApplication = () => {
     const id = localStorage.getItem('job_id');
-    const accessToken = localStorage.getItem('access_token');
-
     // Construct the URL for the API endpoint
     const apiUrl = `${config.get('BACKEND_URL')}/api/v0/applications/${id}/accept`;
 
@@ -88,7 +85,7 @@ const FreelancerProfileViewByEmployerPage = () => {
 
   const rejectApplication = () => {
     const id = localStorage.getItem('job_id');
-    const accessToken = localStorage.getItem('access_token');
+
 
     // Construct the URL for the API endpoint
     const apiUrl = `${config.get('BACKEND_URL')}/api/v0/applications/${id}/reject`;
@@ -126,7 +123,7 @@ const FreelancerProfileViewByEmployerPage = () => {
 
   const cancelApplication = () => {
     const id = localStorage.getItem('job_id');
-    const accessToken = localStorage.getItem('access_token');
+
 
     // Construct the URL for the API endpoint
     const apiUrl = `${config.get('BACKEND_URL')}/api/v0/applications/${id}/cancel`;

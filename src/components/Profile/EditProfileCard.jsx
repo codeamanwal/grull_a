@@ -6,16 +6,16 @@ import {youtube, twitter, facebook2, editIcon} from '../Assets';
 const EditProfileCard = ({
   isEmployerProfile,
       userProfileImg,
+        userData,
         userName,
-        profession
+        userProfession,
+        
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedName, setEditedName] = useState(userName);
-  const [editedProfession, setEditedProfession] = useState(profession);
+  const [editedProfession, setEditedProfession] = useState(userProfession);
   const toHire = false;
-
-  console.log(userName, "editedName in card");
-
+  console.log(userData)
   const handleEditClick = () => {
     setIsEditing(!isEditing); // Toggle the isEditing state
   };
@@ -69,7 +69,7 @@ const EditProfileCard = ({
       className="rounded-md text-center w-56 h-8 text-white text-base bg-[#B27EE3] bg-opacity-30"
     />
   ) : (
-    userName // Display the editedName state when editing is off
+    editedName // Display the editedName state when editing is off
   )}
 </div>
 
@@ -215,8 +215,10 @@ EditProfileCard.propTypes = {
   userProfileImg: PropTypes.string,
   toHire: PropTypes.bool,
   isEmployerProfile: PropTypes.bool,
-  userName: PropTypes.string,
-  profession: PropTypes.string,
+  userData: PropTypes.array,
+  userName:PropTypes.string,
+  userProfession:PropTypes.string,
+
 };
 
 export default EditProfileCard;

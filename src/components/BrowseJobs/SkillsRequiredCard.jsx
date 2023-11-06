@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import PropTypes from "prop-types";
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import config from 'react-global-configuration';
+import AuthService from "../../Services/AuthService";
 
 const SkillsRequiredCard = ({ isFreelancer, jobData }) => {
   
@@ -11,12 +12,12 @@ const SkillsRequiredCard = ({ isFreelancer, jobData }) => {
   const navigate = useNavigate();
   const[description, setDescription] = useState("");
   const[title, setTitle] = useState("");
-
+  var accessToken = AuthService.getToken();
   const handleApply = async () => {
     // Perform API request here
     console.log("skills", jobData)
     try {
-      const accessToken = localStorage.getItem('access_token');
+      
       const id = localStorage.getItem('job_id');
     
       console.log("id:", id);

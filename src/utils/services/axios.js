@@ -1,8 +1,9 @@
 import axios from 'axios';
+import AuthService from '../../Services/AuthService';
 export const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_BACKEND_URL,
 });
-const accessToken = localStorage.getItem('access_token');
+const accessToken = AuthService.getToken();
 export const axiosGet = async (url, params = {}, contentType = 'application/json') => {
   let response = {};
   try {
@@ -23,3 +24,4 @@ export const axiosGet = async (url, params = {}, contentType = 'application/json
   }
   return response;
 };
+
