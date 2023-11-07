@@ -30,7 +30,7 @@ const FreelancerEmptyProfile = () => {
     try {
       const payload = {
         first_name: firstName,
-        last_name: role,
+        role: role,
         description: description,
         list_as_freelancer: true,
         skills,

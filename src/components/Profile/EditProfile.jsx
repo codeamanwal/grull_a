@@ -214,7 +214,7 @@ const EditProfile = ({isFreelancer}, {toHire}) => {
         userProfileImg={userProfile}
         userData={data}
         userName={data.first_name}
-        userProfession={data.last_name}
+        userProfession={data.role}
       />
       <ProfileDetails 
        userData={data}
