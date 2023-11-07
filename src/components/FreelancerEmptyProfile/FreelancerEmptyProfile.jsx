@@ -29,7 +29,6 @@ const FreelancerEmptyProfile = () => {
   const handleSubmit = async () => {
     try {
       const payload = {
-        password: "staticPassword",
         first_name: firstName,
         last_name: role,
         description: description,
