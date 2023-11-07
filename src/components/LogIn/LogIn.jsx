@@ -5,7 +5,6 @@ import config from "react-global-configuration";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../Services/AuthService";
-
 const LoginForm = () => {
   const fieldClassNames = "py-2 px-4 border text-xs w-72 h-10 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 m-2";
   const errorClassNames = "text-red-500 text-sm text-center";

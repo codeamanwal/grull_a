@@ -3,19 +3,21 @@ import React, {useState} from "react";
 import PropTypes from "prop-types";
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import config from 'react-global-configuration';
+import AuthService from "../../Services/AuthService";
 
 const SkillsRequiredCard = ({ isFreelancer, jobData }) => {
+  
   const [applied, setApplied] = useState(false); // State to keep track of whether applied or not
   const { id } = useParams();
   const navigate = useNavigate();
   const[description, setDescription] = useState("");
   const[title, setTitle] = useState("");
-
+  var accessToken = AuthService.getToken();
   const handleApply = async () => {
     // Perform API request here
     console.log("skills", jobData)
     try {
-      const accessToken = localStorage.getItem('access_token');
+      
       const id = localStorage.getItem('job_id');
     
       console.log("id:", id);
@@ -58,10 +60,10 @@ const SkillsRequiredCard = ({ isFreelancer, jobData }) => {
   };
 
   // console.log("data", jobData)
-  if (jobData && jobData.title) {
+  if (jobData) {
   return (
     <Link  onClick={handleApply}>
-    <div className="flex flex-wrap justify-between rounded-xl border border-solid border-purple-500 bg-[#492772] bg-opacity-70 sm:py-8 sm:px-4 py-4 px-2 2xl:w-[1200px] my-2">
+    <div className="flex flex-wrap justify-between rounded-[55px] border border-solid border-purple-500 bg-[#492772] bg-opacity-70 sm:py-8 sm:px-4 py-2 px-2 2xl:w-[1200px] my-5 ">
       <div>
         <div className="flex flex-col items-start">
           <p className="text-white sm:text-3xl text-xl ont-medium sm:px-4 py-2" id="title">{jobData.title}</p>

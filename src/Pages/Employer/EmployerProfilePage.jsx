@@ -10,13 +10,14 @@ import {
 import {hrProfile} from '../../components/Assets';
 import {Link, useNavigate} from 'react-router-dom';
 import config from 'react-global-configuration';
+import AuthService from '../../Services/AuthService';
 
 const EmployerProfilePage = () => {
   const [title, setTitle] = useState(''); // Declare title state
   const [description, setDescription] = useState('');
   const [jobs, setJobs] = useState([]);
   const navigate = useNavigate();
-
+  var accessToken = AuthService.getToken();
   useEffect(() => {
     getJobs(); // Call the function when the component is mounted
   }, []); // Empty dependency array means it runs once when mounted
@@ -24,8 +25,6 @@ const EmployerProfilePage = () => {
   const handleEditJobsClick = () => {
     
     const jobId = localStorage.getItem('job_id');
-    const accessToken = localStorage.getItem('access_token');
-
     const requestData = {
       title: "title",
       description: "developer",
@@ -60,7 +59,6 @@ const EmployerProfilePage = () => {
   const getJobs = async () => {
     try {
       const jobId = localStorage.getItem('job_id');
-      const accessToken = localStorage.getItem('access_token');
       const apiUrl = `${config.get('BACKEND_URL')}/api/v0/users/me/jobs?page=1&per_page=8`;
       
       const response = await fetch(apiUrl, {

@@ -19,6 +19,7 @@ import {
   FreelancerApplicationViewPage,
   ApplyProposalPage,
   EditProfilePage,
+  AccountDetailsPage,
 } from './Pages';
 
 import AuthLayout from './components/AuthLayout';
@@ -93,6 +94,7 @@ function App() {
           <Route path="/employerProfile" element={<EmployerProfilePage />} />
           <Route path="/employerBrowsingPostedJobs" element={<EmployerBrowsingPostedJobsPage />} />
           <Route path="/freelancerApplicationView" element={<FreelancerApplicationViewPage />} />
+          <Route path='/AccountDetailsPage' element={<AccountDetailsPage/>}/>
         </Route>
 
         <Route path="/browseJobs" element={<BrowseJobsPage />} />

@@ -30,6 +30,7 @@ module.exports = {
   'rules': {
     'no-console': 'off',
     'require-jsdoc': 0,
+    'linebreak-style': ['error', process.platform === 'win32' ? 'windows' : 'unix'],//fixed linter issue
     'max-len': ['error', {
       code: 200,
       tabWidth: 2,

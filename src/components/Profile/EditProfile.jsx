@@ -6,17 +6,17 @@ import ProfileDetails from './ProfileDetails';
 import ReviewCard from './ReviewCard';
 import {userProfile} from '../Assets';
 import config from 'react-global-configuration';
+import AuthService from '../../Services/AuthService';
 
 const EditProfile = ({isFreelancer}, {toHire}) => {
   const [isHiring, setIsHiring] = useState(false);
   const [successMessage, setSuccessMessage] = useState(''); // Track success message
   const [isPopupVisible, setIsPopupVisible] = useState(false); // Track popup visibility
   const [data, setData] = useState("");
-
+  var accessToken = AuthService.getToken();
   
   const handleHireClick = () => {
     const id = localStorage.getItem('job_id');
-    const accessToken = localStorage.getItem('access_token');
 
       // Construct the URL for the API endpoint
       const apiUrl = `${config.get('BACKEND_URL')}/api/v0/freelancers/${id}/hire`;
@@ -54,7 +54,6 @@ const EditProfile = ({isFreelancer}, {toHire}) => {
 
   const acceptApplication = () => {
     const id = localStorage.getItem('job_id');
-    const accessToken = localStorage.getItem('access_token');
 
       // Construct the URL for the API endpoint
       const apiUrl = `${config.get('BACKEND_URL')}/api/v0/applications/${id}/accept`;
@@ -92,7 +91,7 @@ const EditProfile = ({isFreelancer}, {toHire}) => {
 
   const rejectApplication = () => {
     const id = localStorage.getItem('job_id');
-    const accessToken = localStorage.getItem('access_token');
+  
 
       // Construct the URL for the API endpoint
       const apiUrl = `${config.get('BACKEND_URL')}/api/v0/applications/${id}/reject`;
@@ -130,7 +129,7 @@ const EditProfile = ({isFreelancer}, {toHire}) => {
 
   const cancelApplication = () => {
     const id = localStorage.getItem('job_id');
-    const accessToken = localStorage.getItem('access_token');
+   
 
       // Construct the URL for the API endpoint
       const apiUrl = `${config.get('BACKEND_URL')}/api/v0/applications/${id}/cancel`;
@@ -168,7 +167,7 @@ const EditProfile = ({isFreelancer}, {toHire}) => {
 
   const fetchData = async () => {
     try {
-      const accessToken = localStorage.getItem("access_token");
+     
   
       // Perform the GET request to fetch data
       const response = await fetch(`${config.get("BACKEND_URL")}/api/v0/users/me`, {
@@ -213,11 +212,12 @@ const EditProfile = ({isFreelancer}, {toHire}) => {
         // toHire={toHire}
         isEmployerProfile={false}
         userProfileImg={userProfile}
+        userData={data}
         userName={data.first_name}
-        profession="Product Designer"
+        userProfession={data.role}
       />
       <ProfileDetails 
-       description={data.description}
+       userData={data}
       />
 
       <div className="flex flex-col items-center  sm:space-y-10 text-white space-x-4 pt-8">

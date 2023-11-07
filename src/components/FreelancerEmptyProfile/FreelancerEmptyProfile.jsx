@@ -5,6 +5,7 @@ import { plus, upArrow } from "../Assets";
 import { useState } from "react";
 import config from "react-global-configuration";
 import { useNavigate, Link } from "react-router-dom";
+import AuthService from "../../Services/AuthService";
 
 const FreelancerEmptyProfile = () => {
   const [skills, setSkills] = useState([""]);
@@ -12,7 +13,7 @@ const FreelancerEmptyProfile = () => {
   const [images, setImages] = useState([null]);
   const [description, setDescription] = useState("");
   const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [role,setRole] = useState('');
   const navigate = useNavigate();
 
   // const location = useLocation();
@@ -22,23 +23,22 @@ const FreelancerEmptyProfile = () => {
 
   const handleProfileChange = (newName, newRole) => {
     setFirstName(newName); // Update firstName state
-    setLastName(newRole); // Update lastName state
+    setRole(newRole); // Update lastName state
   };
 
   const handleSubmit = async () => {
     try {
       const payload = {
-        password: "staticPassword",
         first_name: firstName,
-        last_name: lastName,
+        role: role,
         description: description,
         list_as_freelancer: true,
+        skills,
+        languages,
+       // images//to add
       };
 
-      console.log("First name from query:", firstName); // Corrected from newName
-      console.log("Last name from query:", lastName);
-
-      const accessToken = localStorage.getItem("access_token");
+      const accessToken = AuthService.getToken();
 
       // Perform the API call
       const response = await fetch(`${config.get("BACKEND_URL")}/api/v0/users/me`, {
@@ -49,17 +49,19 @@ const FreelancerEmptyProfile = () => {
         },
         body: JSON.stringify(payload), // Convert payload to JSON
       });
-
+      if(response.ok){
       navigate("/editProfile", {
         state: {
           firstName,
-          lastName,
+          role,
           description,
           list_as_freelancer,
+          skills,
+          languages
         },
       });
-
-      if (!response.ok) {
+    }
+      else if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
     } catch (error) {
@@ -98,7 +100,7 @@ const FreelancerEmptyProfile = () => {
     <div className="flex flex-wrap bg-[#1A0142] sm:w-3/4 sm:mx-auto  text-white 2xl:h-[913px] p-10">
       <ProfileCard
         profileName={firstName} // Pass the firstName state as prop
-        profileRole={lastName} // Pass the lastName state as prop
+        profileRole={role} // Pass the lastName state as prop
         onProfileChange={handleProfileChange}
       />
 

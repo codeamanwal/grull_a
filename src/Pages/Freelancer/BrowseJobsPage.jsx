@@ -10,7 +10,7 @@ const BrowseJobsPage = () => {
         isFreelancer={true}
       />
       <div className="flex-grow">
-        <BrowseJobs />
+        <BrowseJobs isFreelancer={true}/>
       </div>
       <Footer />
     </div>

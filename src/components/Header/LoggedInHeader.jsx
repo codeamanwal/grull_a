@@ -9,7 +9,7 @@ const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const [isFirstNameNotEmpty, setIsFirstNameNotEmpty] = useState(false);
-
+  const accessToken = AuthService.getToken();
   console.log(isFreelancer, 'isFreelancer');
 
   const toggleDropdown = () => {
@@ -31,8 +31,6 @@ const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
 
   const fetchData = async () => {
     try {
-      const accessToken = localStorage.getItem('access_token');
-
       // Perform the GET request to fetch data
       const response = await fetch(`${config.get('BACKEND_URL')}/api/v0/users/me`, {
         method: 'GET',

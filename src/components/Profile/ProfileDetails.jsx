@@ -3,7 +3,8 @@ import React from 'react';
 import {projectImg} from '../Assets';
 import {Link} from 'react-router-dom';
 
-const ProfileDetails = ({description}) => {
+const ProfileDetails = ({userData}) => {
+  console.log(userData)// to correct
   return (
     <div className="flex flex-col sm:space-y-20  space-y-5 sm:w-[600px] text-white leading-normal ml-3">
       <div className="flex flex-col  space-y-4">
@@ -11,7 +12,7 @@ const ProfileDetails = ({description}) => {
           Description
         </p>
         <p className=" sm:text-xl font-GeneralSans font-normal p-3">
-          {description}
+          {userData.description}
         </p>
       </div>
 
@@ -21,21 +22,20 @@ const ProfileDetails = ({description}) => {
             Skills
           </p>
           <ul className="sm:text-xl font-GeneralSans font-normal list-disc list-inside">
-            <li>Graphic Design</li>
-            <li>UI/UX</li>
-            <li>Motion graphics</li>
-            <li>Research</li>
+          {userData.skills.map((item, index) => (
+    <li key={index}>{item}</li>
+  ))}
           </ul>
         </div>
         <div className=" space-y-4">
-          <p className="sm:text-2xl text-lg font-spaceGrotesk font-bold">
+        <p className="sm:text-2xl text-lg font-spaceGrotesk font-bold">
             Languages
           </p>
-          <div className="sm:text-xl font-GeneralSans font-normal">
-            <p>English</p>
-            <p> Hindi</p>
-            <p>French</p>
-          </div>
+          <ul className="sm:text-xl font-GeneralSans font-normal list-disc list-inside">
+          {userData.languages.map((item, index) => (
+    <li key={index}>{item}</li>
+  ))}
+          </ul>
         </div>
       </div>
 
