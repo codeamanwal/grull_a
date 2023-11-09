@@ -29,7 +29,7 @@ const ProfileDetails = ({userData}) => {
         </div>
         <div className=" space-y-4">
         <p className="sm:text-2xl text-lg font-spaceGrotesk font-bold">
-            Languages
+            Spoken Languages
           </p>
           <ul className="sm:text-xl font-GeneralSans font-normal list-disc list-inside">
           {userData?.languages?.map((item, index) => (

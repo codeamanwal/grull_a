@@ -5,7 +5,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import config from 'react-global-configuration';
 import AuthService from "../../Services/AuthService";
 
-const SkillsRequiredCard = ({ isFreelancer, jobData }) => {
+const SkillsRequiredCard = ({ isFreelancer, jobData ,onClick}) => {
   
   const [applied, setApplied] = useState(false); // State to keep track of whether applied or not
   const { id } = useParams();
@@ -13,14 +13,22 @@ const SkillsRequiredCard = ({ isFreelancer, jobData }) => {
   const[description, setDescription] = useState("");
   const[title, setTitle] = useState("");
   var accessToken = AuthService.getToken();
+  const redirect = ()=>{
+    const browseJobsInDetails = '/browseJobsInDetails';
+
+    // Pass both paths and states in a single navigate call
+    navigate(
+      browseJobsInDetails,{
+      state: {
+        jobData: jobData,
+      }}
+    );
+  }
   const handleApply = async () => {
     // Perform API request here
-    console.log("skills", jobData)
     try {
       
-      const id = localStorage.getItem('job_id');
-    
-      console.log("id:", id);
+      const id = jobData.id;
       const response = await fetch(`${config.get('BACKEND_URL')}/api/v0/jobs/${id}`, {
         method: 'GET', 
         headers: {
@@ -28,7 +36,6 @@ const SkillsRequiredCard = ({ isFreelancer, jobData }) => {
           'Authorization': `Bearer ${accessToken}`,
         },
       });
-
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }
@@ -62,8 +69,8 @@ const SkillsRequiredCard = ({ isFreelancer, jobData }) => {
   // console.log("data", jobData)
   if (jobData) {
   return (
-    <Link  onClick={handleApply}>
-    <div className="flex flex-wrap justify-between rounded-[55px] border border-solid border-purple-500 bg-[#492772] bg-opacity-70 sm:py-8 sm:px-4 py-2 px-2 2xl:w-[1200px] my-5 ">
+    <Link >
+    <div className="flex flex-wrap justify-between rounded-[55px] border border-solid border-purple-500 bg-[#492772] bg-opacity-70 sm:py-8 sm:px-4 py-2 px-2 2xl:w-[1200px] my-5 " onClick={redirect}>
       <div>
         <div className="flex flex-col items-start">
           <p className="text-white sm:text-3xl text-xl ont-medium sm:px-4 py-2" id="title">{jobData.title}</p>
