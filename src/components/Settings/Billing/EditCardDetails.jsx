@@ -7,7 +7,7 @@ import {
   phonepay,
   paytm,
 } from '../../Assets';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 const EditCardDetails = () => {
   const [isCardChecked, setIsCardChecked] = useState(true);
@@ -22,11 +22,11 @@ const EditCardDetails = () => {
     setIsPaypalChecked(true);
     setIsCardChecked(false);
   };
-
+  const navigate = useNavigate();
   return (
     <div className="flex flex-wrap sm:space-x-5 bg-[#1A0142] text-white w-4/5 mx-auto justify-between sm:mt-20">
       <div className="sm:flex hidden flex-col space-y-6  font-semibold justify-start">
-        <button className="bg-purple-900 bg-opacity-70 border border-solid border-purple-500 rounded-lg p-4 w-48">
+        <button className="bg-purple-900 bg-opacity-70 border border-solid border-purple-500 rounded-lg p-4 w-48" onClick={()=>navigate('/AccountDetailsPage')}>
                     My Account
         </button>
         <button className="md:px-8 p-4 w-48 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
@@ -38,7 +38,7 @@ const EditCardDetails = () => {
       </div>
 
       <div className="sm:hidden flex  py-10 space-x-5 font-semibold text-sm text-white">
-        <button className="flex-grow bg-purple-900 bg-opacity-70 border border-solid border-purple-500 rounded-lg p-2">
+        <button className="flex-grow bg-purple-900 bg-opacity-70 border border-solid border-purple-500 rounded-lg p-2" onClick={()=>navigate('/AccountDetailsPage')}>
                     My Account
         </button>
         <button className="flex-grow bg-purple-900 bg-opacity-70 border border-solid bg-gradient-to-l from-purple-400 to-transparentrounded-lg p-2">
@@ -49,7 +49,7 @@ const EditCardDetails = () => {
         </button>
       </div>
 
-      <div className="flex flex-col sm:space-y-0 space-y-2">
+      <div className="flex flex-col sm:space-y-0 space-y-2 w-3/4 pb-5">
         <p className="text-white font-bold text-2xl">NEW BILLING DETAILS</p>
         <div className="grid sm:grid-cols-8  grid-cols-5 sm:gap-10 sm:p-10 p-3 gap-4">
           <label className="sm:col-span-4 col-span-3  text-base font-semibold">

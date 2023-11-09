@@ -8,8 +8,8 @@ const FreelancerFileSharing = () => {
   );
 
   return (
-    <div className="flex text-white flex-wrap  sm:w-full  justify-center sm:space-x-44 overflow-x-hidden">
-      <div className="flex-col flex-wrap space-y-6 pt-20 font-semibold justify-start pl-16 text-white hidden sm:flex">
+    <div className="flex text-white flex-wrap  sm:w-full  justify-center sm:space-x-44  overflow-x-hidden">
+      <div className="flex-col flex-wrap space-y-6 pt-20 font-semibold justify-start text-white hidden sm:flex lg:w-44">
         <Link to="/browseJobsInDetails" className="bg-purple-900 text-center bg-opacity-70 border border-solid border-purple-500 rounded-lg p-4 w-48">
           Job Details
         </Link>
@@ -24,7 +24,7 @@ const FreelancerFileSharing = () => {
         </button>
       </div>
 
-      <div className="sm:hidden flex flex-row space-x-2 sm:pt-20 pt-10 font-semibold justify-start sm:pl-16 text-white">
+      {/* <div className="sm:hidden flex flex-row space-x-2 sm:pt-20 pt-10 font-semibold justify-start sm:pl-16 text-white">
         <button className="flex-grow bg-purple-900 bg-opacity-70 border border-solid border-purple-500 rounded-lg p-4">
           Job Details
         </button>
@@ -37,7 +37,7 @@ const FreelancerFileSharing = () => {
         <button className="flex-grow bg-purple-900 bg-opacity-70 rounded-lg border border-purple-600 p-4">
           Reviews
         </button>
-      </div>
+      </div> */}
 
       <div className="flex flex-col flex-wrap text-white sm:space-y-7 sm:space-x-7 sm:pt-20 sm:w-3/4 w-full p-1 py-10">
         <div>

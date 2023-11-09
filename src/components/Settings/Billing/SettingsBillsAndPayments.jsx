@@ -1,11 +1,13 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 const SettingsBillsAndPayments = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="flex text-white items-center justify-between bg-[#1A0142] sm:w-3/4 mx-auto p-2">
       <div className="flex justify-center flex-col space-y-6 pt-20 font-semibold sm:justify-start text-sm">
-        <button className="bg-purple-900 bg-opacity-70 border border-solid border-purple-500 rounded-lg sm:p-4 p-2 sm:w-48">
+        <button className="bg-purple-900 bg-opacity-70 border border-solid border-purple-500 rounded-lg sm:p-4 p-2 sm:w-48" onClick={()=>navigate('/AccountDetailsPage')}>
                     My Account
         </button>
 

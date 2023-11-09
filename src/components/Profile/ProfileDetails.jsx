@@ -22,7 +22,7 @@ const ProfileDetails = ({userData}) => {
             Skills
           </p>
           <ul className="sm:text-xl font-GeneralSans font-normal list-disc list-inside">
-          {userData.skills.map((item, index) => (
+          {userData?.skills?.map((item, index) => (
     <li key={index}>{item}</li>
   ))}
           </ul>
@@ -32,7 +32,7 @@ const ProfileDetails = ({userData}) => {
             Languages
           </p>
           <ul className="sm:text-xl font-GeneralSans font-normal list-disc list-inside">
-          {userData.languages.map((item, index) => (
+          {userData?.languages?.map((item, index) => (
     <li key={index}>{item}</li>
   ))}
           </ul>
