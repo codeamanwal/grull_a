@@ -137,7 +137,7 @@ const SignUp = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const isFreelancerParam = params.get('isFreelancer');
-  const isFreelancer = isFreelancerParam === 'true';
+  const isFreelancer = isFreelancerParam;
 
   const handleSignUp = async () => {
     

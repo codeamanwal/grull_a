@@ -2,18 +2,19 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 
-const BrowseByCard = ({topic, items}) => {
+const BrowseByCard = ({topic, items,setFilter}) => {
   const [checkedItems, setCheckedItems] = useState([]);
   const [showOptions, setShowOptions] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-
   const handleCheckboxChange = (item) => {
     if (checkedItems.includes(item)) {
       setCheckedItems(
           checkedItems.filter((checkedItem) => checkedItem !== item),
       );
+      setFilter(checkedItems.filter((checkedItem) => checkedItem !== item));
     } else {
       setCheckedItems([...checkedItems, item]);
+      setFilter([...checkedItems, item]);
     }
   };
 
