@@ -20,6 +20,9 @@ import {
   ApplyProposalPage,
   EditProfilePage,
   AccountDetailsPage,
+  FreelancerFileSharingPage,
+  BillsAndPaymentsPage,
+  EditCardDetailsPage,
 } from './Pages';
 
 import AuthLayout from './components/AuthLayout';
@@ -98,6 +101,9 @@ function App() {
         </Route>
 
         <Route path="/browseJobs" element={<BrowseJobsPage />} />
+        <Route path="/freelancerFileSharingPage" element={<FreelancerFileSharingPage/>}/>
+        <Route path = "/BillsAndPaymentsPage" element={<BillsAndPaymentsPage/>}/>
+        <Route path="/EditCardDetailsPage" element={<EditCardDetailsPage/>}/>
       </Routes>
     </div>
   );

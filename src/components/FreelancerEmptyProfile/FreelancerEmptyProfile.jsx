@@ -29,7 +29,7 @@ const FreelancerEmptyProfile = () => {
   const handleSubmit = async () => {
     try {
       const payload = {
-        first_name: firstName,
+        full_name: firstName,
         role: role,
         description: description,
         list_as_freelancer: true,
@@ -145,7 +145,7 @@ const FreelancerEmptyProfile = () => {
 
           <div className="sm:col-span-2">
             <label htmlFor="languages" className="font-semibold block mb-2 text-xl font-spaceGrotesk">
-              Languages
+              Spoken Languages
             </label>
             {languages.map((language, index) => (
               <input

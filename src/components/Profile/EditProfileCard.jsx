@@ -69,7 +69,7 @@ const EditProfileCard = ({
       className="rounded-md text-center w-56 h-8 text-white text-base bg-[#B27EE3] bg-opacity-30"
     />
   ) : (
-    editedName // Display the editedName state when editing is off
+    userName // Display the editedName state when editing is off
   )}
 </div>
 
@@ -85,7 +85,7 @@ const EditProfileCard = ({
       className="rounded-md text-center w-56 h-8 text-white text-base bg-[#B27EE3] bg-opacity-30"
     />
   ) : (
-    editedProfession
+    userProfession
   )}
 </div>
 

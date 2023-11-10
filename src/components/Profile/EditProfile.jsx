@@ -185,7 +185,6 @@ const EditProfile = ({isFreelancer}, {toHire}) => {
       const data = await response.json();
   
       // Now, you can use the 'data' object to access the fetched information
-      console.log("Fetched data:", data);
   
       return data; // Return the fetched data
     } catch (error) {
