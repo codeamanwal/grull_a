@@ -4,6 +4,7 @@ import { Link, useHistory, useLocation, useNavigate } from "react-router-dom";
 import SkillsRequiredCard from "../BrowseJobs/SkillsRequiredCard";
 import BrowseByCard from "./BrowseByCard";
 import { axiosGet } from "../../utils/services/axios";
+import { Button } from "antd";
 
 const BrowseJobs = ({ isFreelancer }) => {
   const [jobData, setJobData] = useState([]); // State variable to hold title
@@ -13,6 +14,8 @@ const BrowseJobs = ({ isFreelancer }) => {
   const [hasMore, setHasMore] = useState(true);
   const scrollableJobs = useRef(null);
   const [daysfilter, setdaysfilter] = useState(30);
+  const [locationfilter,setLocationfilter] = useState([]);
+  const [categoryfilter,setCategoryfilter] = useState([]);
   useEffect(() => {
     handleBrowse();
   }, []);
@@ -33,23 +36,36 @@ const BrowseJobs = ({ isFreelancer }) => {
         scrollableDiv.removeEventListener("scroll", handleScroll);
       }
     };
-  }, [jobData, hasMore, loading]);
-  const handleBrowse = async () => {
+  }, [hasMore, loading]);
+  const handleBrowse = async (type) => {
     try {
       setLoading(true);
       const apiUrl = "/api/v0/jobs";
       const params = {
         page: currentpage,
         per_page: 8,
+        category:categoryfilter,
+        location:locationfilter,
       };
+      if(type=="filter"){
+        params.page = 1;
+      }
       const response = await axiosGet(apiUrl, params);
       if (!response.status) {
         throw new Error(`API error! Message: ${response.message}`);
       }
       const responseData = response;
+      if(type=='filter'){
+        setJobData([...responseData.results]);
+        setCurrentpage(2);
+        setHasMore(responseData.results.length >= 8);
+        
+      }
+      else{
       setJobData(prevJobData => [...prevJobData, ...responseData.results]);
       setCurrentpage(currentpage + 1);
       setHasMore(responseData.results.length >= 8);
+      }
       // Pass jobData as state to the next route using navigate
       // navigate(browseJobsRoute, {
       //   state: {
@@ -96,8 +112,9 @@ const BrowseJobs = ({ isFreelancer }) => {
           </div>
           {window.innerWidth > 640 ? (
             <div className="flex flex-col bg-[#B37EE2] sm:p-12 rounded-tl-3xl rounded-bl-3xl w-1/4">
-              <BrowseByCard topic="CATEGORY" items={items1} />
-              <BrowseByCard topic="LOCATION" items={items2} />
+              <BrowseByCard topic="CATEGORY" items={items1} setFilter={setCategoryfilter}/>
+              <BrowseByCard topic="LOCATION" items={items2} setFilter={setLocationfilter}/>
+              <Button type="primary" style={{background:'black'}} onClick={()=>handleBrowse("filter")}>Apply</Button>
             </div>
           ) : null}
         </div>

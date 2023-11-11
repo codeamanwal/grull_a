@@ -124,7 +124,7 @@ const FreelancerEmptyProfile = () => {
             <label htmlFor="skills" className="font-semibold block mb-2 text-xl font-spaceGrotesk">
               Skills
             </label>
-            {skills.map((skill, index) => (
+            {skills?.map((skill, index) => (
               <input
                 key={index}
                 type="text"
@@ -147,7 +147,7 @@ const FreelancerEmptyProfile = () => {
             <label htmlFor="languages" className="font-semibold block mb-2 text-xl font-spaceGrotesk">
               Spoken Languages
             </label>
-            {languages.map((language, index) => (
+            {languages?.map((language, index) => (
               <input
                 key={index}
                 type="text"
@@ -171,7 +171,7 @@ const FreelancerEmptyProfile = () => {
               Ongoing Work/ Portfolio
             </label>
             <div className="flex items-center">
-              {images.map((image, index) => (
+              {images?.map((image, index) => (
                 <label key={index} htmlFor={`image-${index}`} className="mr-2 cursor-pointer">
                   <img src={image ? image : upArrow} alt={`Portfolio ${index + 1}`} className="sm:w-44 sm:h-44 object-fit rounded-md border border-solid border-purple-500 p-2" />
                 </label>
