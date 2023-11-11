@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import EditProfileCard from './EditProfileCard';
 import ProfileDetails from './ProfileDetails';
 import ReviewCard from './ReviewCard';
-import {userProfile} from '../Assets';
 import config from 'react-global-configuration';
 import AuthService from '../../Services/AuthService';
 
@@ -210,7 +209,7 @@ const EditProfile = ({isFreelancer}, {toHire}) => {
       <EditProfileCard
         // toHire={toHire}
         isEmployerProfile={false}
-        userProfileImg={userProfile}
+        userProfileImg={`https://ui-avatars.com/api/?name=${data["first_name"]}+${data["last_name"]}`}
         userData={data}
         userName={data.first_name}
         userProfession={data.role}
@@ -281,7 +280,7 @@ const EditProfile = ({isFreelancer}, {toHire}) => {
 
                 
 
-        <div className="p-6">
+        {/* <div className="p-6">
           <div className="flex flex-col space-y-2 space-x-2 rounded-lg border border-white w-full md:w-[300px]">
             <p className="text-center rounded-t-lg w-full h-10 bg-purple-600 text-24 font-spaceGrotesk font-semibold pt-2">
               REVIEWS
@@ -301,7 +300,7 @@ const EditProfile = ({isFreelancer}, {toHire}) => {
               <div className="border border-gray-300  w-3/4 flex items-center"></div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
       
     </div>
