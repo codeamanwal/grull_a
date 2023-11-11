@@ -9,6 +9,7 @@ const EditProfileCard = ({
         userData,
         userName,
         userProfession,
+        setProfileEditMode,
         
 }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -18,6 +19,9 @@ const EditProfileCard = ({
   console.log(userData)
   const handleEditClick = () => {
     setIsEditing(!isEditing); // Toggle the isEditing state
+    if(setProfileEditMode){
+      setProfileEditMode(true)
+    }
   };
 
   const handleSaveClick = () => {

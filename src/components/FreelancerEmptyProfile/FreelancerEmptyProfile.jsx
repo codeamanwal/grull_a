@@ -189,13 +189,6 @@ const FreelancerEmptyProfile = () => {
         <Link to="/editProfile" className="text-white text-xl font-medium py-2 px-16 rounded shadow bg-gradient-to-l from-purple-400 to-transparent" onClick={handleSubmit}>
           DONE
         </Link>
-        {/* <a href='/EditProfilePage'
-          className="text-white text-xl font-medium py-2 px-16 rounded shadow bg-gradient-to-l from-purple-400 to-transparent"
-          onClick={() => handleSubmit(firstName, lastName)}
-        >
-          DONE
-        </a> */}
-
         <p className="text-[#B27EE3] text-lg font-medium font-spaceGrotesk pt-8">SWITCH TO AN EMPLOYER</p>
       </div>
     </div>
