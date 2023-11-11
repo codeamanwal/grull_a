@@ -100,7 +100,7 @@ const EditProfileCard = ({
                         <p className="font-semibold text-lg font-GeneralSans">
                 Avg. Budget:
                         </p>
-                        <div className="text-base font-GeneralSans">300USD</div>
+                        <div className="text-base font-GeneralSans">{userData.average_rate_offered}</div>
                       </div>
 
                       {/* no. of projects */}
@@ -108,17 +108,7 @@ const EditProfileCard = ({
                         <p className="font-semibold text-lg font-GeneralSans">
                 No. of Jobs Posted:
                         </p>
-                        {isEditing ? (
-                                <input
-                                  placeholder=""
-                                  type="number"
-                                  className="rounded-md text-center w-20 h-8 px-2 text-white text-base bg-[#B27EE3] bg-opacity-30"
-                                />
-                            ) : (
-                                <div className="rounded-md text-center w-20 h-8 px-2 text-white text-base bg-[#B27EE3] bg-opacity-30 font-GeneralSans">
-                  50
-                                </div>
-                            )}
+                        {userData.jobs_posted_count}
                       </div>
                     </div>
                 ) : (
@@ -129,7 +119,7 @@ const EditProfileCard = ({
                 Avg. Rate:
                         </p>
                         <div className="sm:text-base font-GeneralSans">
-                30USD/Per Hour
+                        {userData.rate_per_hour}
                         </div>
                       </div>
 
@@ -138,17 +128,7 @@ const EditProfileCard = ({
                         <p className="font-semibold sm:text-lg font-GeneralSans">
                 No. of Projects Completed:
                         </p>
-                        {isEditing ? (
-                                <input
-                                  placeholder=""
-                                  type="number"
-                                  className="rounded-md text-center w-20 h-8 px-2 text-white text-base bg-[#B27EE3] bg-opacity-30"
-                                />
-                            ) : (
-                                <div className="rounded-md text-center w-20 h-8 px-2 text-white text-base bg-[#B27EE3] bg-opacity-30 font-GeneralSans">
-                  5
-                                </div>
-                            )}
+                        {userData.jobs_completed_count}
                       </div>
                     </div>
                 )}
