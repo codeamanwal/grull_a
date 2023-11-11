@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import {grullLogo, bell, user} from '../Assets';
+import {grullLogo, bell} from '../Assets';
 import AuthService from '../../Services/AuthService';
 import config from 'react-global-configuration';
 
@@ -9,6 +9,7 @@ const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const [isFirstNameNotEmpty, setIsFirstNameNotEmpty] = useState(false);
+  const [userData, setUserData] = useState({});
   const accessToken = AuthService.getToken();
   console.log(isFreelancer, 'isFreelancer');
 
@@ -51,6 +52,7 @@ const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
       if (data.first_name === '') {
         setIsFirstNameNotEmpty(true);
       }
+      setUserData(data);
       return data; // Return the fetched data
     } catch (error) {
       console.error('Error occurred:', error);
@@ -132,7 +134,7 @@ const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
                 >
                   <img
                     className="h-6 w-6 sm:h-8 sm:w-8 object-fit cursor-pointer"
-                    src={user}
+                    src={`https://ui-avatars.com/api/?name=${userData['first_name']}+${userData['last_name']}`}
                     alt="user"
                   />
                 </button>
