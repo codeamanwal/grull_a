@@ -17,13 +17,13 @@ const JobDetailsCard = ({isFreelancer, jobData}) => {
   
 
   return (
-    <div className="sm:w-2/3 w-full">
-      <div className="flex flex-col sm:flex-row  justify-center bg-[#492772] bg-opacity-70 sm:w-auto sm:space-x-36 rounded-lg border border-purple-600 sm:p-10 -mt-16">
+    <div className="sm:w-full md:w-2/3 ">
+      <div className="flex flex-col sm:flex-row  justify-center bg-[#492772] bg-opacity-70 sm:w-auto sm:space-x-30 rounded-lg border border-purple-600 sm:p-10 -mt-16">
         <div className="flex flex-col flex-wrap justify-start space-y-6  p-2 sm:p-8">
           <div className="text-white text-center sm:text-3xl text-xl font-spaceGrotesk font-bold ">
             <p>{jobData.title}</p>
           </div>
-          <div className="flex flex-wrap sm:space-x-16 space-x-5 text-white text-base font-GeneralSans font-normal">
+          <div className="flex sm:space-x-16  text-white text-base font-GeneralSans font-normal">
             <p className="text-sm sm:text-base">BANGALORE, INDIA</p>
             <p className="text-sm sm:text-base">2 MONTHS</p>
             <p className="text-sm sm:text-base"> 30 APPLICANTS</p>
@@ -31,7 +31,7 @@ const JobDetailsCard = ({isFreelancer, jobData}) => {
           <div className="flex sm:flex-row flex-col space-y-2 w-full sm:space-x-16 text-white text-base font-GeneralSan">
             <div className="flex flex-wrap sm:flex-col space-y-2">
               <p className="font-bold sm:pt-4">JOB DESCRIPTION</p>
-              <p className=" sm:w-72  w-full text-sm font-normal sm:pt-2">
+              <p className=" sm:w-75  w-full text-sm font-normal sm:pt-2">
                                 {jobData.description}
               </p>
             </div>
@@ -72,7 +72,7 @@ const JobDetailsCard = ({isFreelancer, jobData}) => {
           </div>
         </div>
 
-        <div className="flex flex-wrap flex-col  space-y-3 sm:gap-y-64 sm:pt-12 py-3">
+        <div className="flex flex-wrap flex-col  ml-1 sm:gap-y-64 sm:pt-12 py-3 space-x-4">
           <div className="space-y-6 sm:w-40 w-full">
             {isFreelancer ? (
                             <p className="text-purple-600 text-base text-center font-GeneralSans font-medium">
@@ -101,7 +101,7 @@ const JobDetailsCard = ({isFreelancer, jobData}) => {
           </div>
           {isFreelancer && (
   <Link to="/ApplyProposalPage">
-    <button className="text-white sm:text-2xl  px-4 py-3  text-base font-medium sm:py-4 sm:px-32 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
+    <button className="text-white sm:text-2xl  px-8 py-3  text-base font-medium sm:py-4 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
       APPLY
     </button>
   </Link>

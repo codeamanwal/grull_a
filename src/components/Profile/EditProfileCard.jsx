@@ -5,11 +5,12 @@ import {youtube, twitter, facebook2, editIcon} from '../Assets';
 
 const EditProfileCard = ({
   isEmployerProfile,
-  userProfileImg,
-  userData,
-  userName,
-  userProfession,
-
+      userProfileImg,
+        userData,
+        userName,
+        userProfession,
+        setProfileEditMode,
+        
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedName, setEditedName] = useState(userName);
@@ -18,6 +19,11 @@ const EditProfileCard = ({
   console.log(userData);
   const handleEditClick = () => {
     setIsEditing(!isEditing); // Toggle the isEditing state
+  };
+
+  const handleSaveClick = () => {
+    // Handle saving changes, e.g., send editedName and editedProfession to the server
+    setIsEditing(false); // Turn off editing mode
   };
 
   return (

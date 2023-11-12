@@ -6,12 +6,14 @@ import ProfileDetails from './ProfileDetails';
 import ReviewCard from './ReviewCard';
 import config from 'react-global-configuration';
 import AuthService from '../../Services/AuthService';
+import FreelancerEmptyProfile from '../FreelancerEmptyProfile/FreelancerEmptyProfile';
 
 const EditProfile = ({isFreelancer}, {toHire}) => {
   const [isHiring, setIsHiring] = useState(false);
   const [successMessage, setSuccessMessage] = useState(''); // Track success message
   const [isPopupVisible, setIsPopupVisible] = useState(false); // Track popup visibility
   const [data, setData] = useState("");
+  const [profileEditMode,setProfileEditMode] = useState(false);
   var accessToken = AuthService.getToken();
   
   const handleHireClick = () => {
@@ -206,17 +208,22 @@ const EditProfile = ({isFreelancer}, {toHire}) => {
 
   return (
     <div className="flex flex-col md:flex-row justify-center md:space-x-20 bg-[#1A0142] 2xl:h-[913px] pt-10">
+      {!profileEditMode?<>
       <EditProfileCard
-        // toHire={toHire}
         isEmployerProfile={false}
         userProfileImg={`https://ui-avatars.com/api/?name=${data["first_name"]}+${data["last_name"]}`}
         userData={data}
-        userName={data.first_name}
+        userName={data.full_name}
         userProfession={data.role}
+        setProfileEditMode={setProfileEditMode}
       />
       <ProfileDetails 
        userData={data}
       />
+      </>:
+      <>
+      <FreelancerEmptyProfile/>
+      </>}
 
       <div className="flex flex-col items-center  sm:space-y-10 text-white space-x-4 pt-8">
         {data.list_as_freelancer
