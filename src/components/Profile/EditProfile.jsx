@@ -213,7 +213,7 @@ const EditProfile = ({isFreelancer}, {toHire}) => {
         isEmployerProfile={false}
         userProfileImg={`https://ui-avatars.com/api/?name=${data["first_name"]}+${data["last_name"]}`}
         userData={data}
-        userName={data.first_name}
+        userName={data.full_name}
         userProfession={data.role}
         setProfileEditMode={setProfileEditMode}
       />
