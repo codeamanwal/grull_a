@@ -71,13 +71,6 @@ const ProfileDetails = ({meData, userMode}) => {
   ): (
     <div className="flex flex-col sm:space-y-20  space-y-5 sm:w-[600px] text-white leading-normal ml-3">
       <div className="flex flex-col  space-y-4">
-        <p className="sm:text-2xl text-lg font-spaceGrotesk font-bold pl-2">
-          Description
-        </p>
-        <p className=" sm:text-xl font-GeneralSans font-normal p-3">
-          {meData.description}
-        </p>
-
         {meData["company"] ? (
            <div className="flex flex-col space-y-2">
            <p className="sm:text-2xl text-xl font-spaceGrotesk font-bold">
