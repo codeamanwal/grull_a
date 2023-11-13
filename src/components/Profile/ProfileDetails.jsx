@@ -2,17 +2,17 @@
 import React from 'react';
 import {projectImg} from '../Assets';
 import {Link} from 'react-router-dom';
+import AuthService from '../../Services/AuthService';
 
-const ProfileDetails = ({userData}) => {
-  console.log(userData)// to correct
-  return (
+const ProfileDetails = ({meData, userMode}) => {
+  return userMode === AuthService.FREELANCER_MODE ? (
     <div className="flex flex-col sm:space-y-20  space-y-5 sm:w-[600px] text-white leading-normal ml-3">
       <div className="flex flex-col  space-y-4">
         <p className="sm:text-2xl text-lg font-spaceGrotesk font-bold pl-2">
           Description
         </p>
         <p className=" sm:text-xl font-GeneralSans font-normal p-3">
-          {userData.description}
+          {meData.description}
         </p>
       </div>
 
@@ -22,19 +22,19 @@ const ProfileDetails = ({userData}) => {
             Skills
           </p>
           <ul className="sm:text-xl font-GeneralSans font-normal list-disc list-inside">
-          {userData?.skills?.map((item, index) => (
-    <li key={index}>{item}</li>
-  ))}
+            {meData?.skills?.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
           </ul>
         </div>
         <div className=" space-y-4">
-        <p className="sm:text-2xl text-lg font-spaceGrotesk font-bold">
+          <p className="sm:text-2xl text-lg font-spaceGrotesk font-bold">
             Spoken Languages
           </p>
           <ul className="sm:text-xl font-GeneralSans font-normal list-disc list-inside">
-          {userData?.languages?.map((item, index) => (
-    <li key={index}>{item}</li>
-  ))}
+            {meData?.languages?.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
           </ul>
         </div>
       </div>
@@ -66,6 +66,28 @@ const ProfileDetails = ({userData}) => {
             />
           </Link>
         </div>
+      </div>
+    </div>
+  ): (
+    <div className="flex flex-col sm:space-y-20  space-y-5 sm:w-[600px] text-white leading-normal ml-3">
+      <div className="flex flex-col  space-y-4">
+        <p className="sm:text-2xl text-lg font-spaceGrotesk font-bold pl-2">
+          Description
+        </p>
+        <p className=" sm:text-xl font-GeneralSans font-normal p-3">
+          {meData.description}
+        </p>
+
+        {meData["company"] ? (
+           <div className="flex flex-col space-y-2">
+           <p className="sm:text-2xl text-xl font-spaceGrotesk font-bold">
+             {meData['company']}
+           </p>
+           <p className="sm:text-xl text-sm font-GeneralSans font-normal">
+             {meData['company_description']}
+           </p>
+         </div>
+        ) : (<></>)}
       </div>
     </div>
   );

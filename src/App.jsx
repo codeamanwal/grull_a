@@ -94,7 +94,6 @@ function App() {
           <Route path="/postJob" element={<PostJobPage />} />
           <Route path="/browseFreelancers" element={<BrowseFreelancersPage />} />
           <Route path="/freelancerProfileViewByEmployer" element={<FreelancerProfileViewByEmployerPage />} />
-          <Route path="/employerProfile" element={<EmployerProfilePage />} />
           <Route path="/employerBrowsingPostedJobs" element={<EmployerBrowsingPostedJobsPage />} />
           <Route path="/freelancerApplicationView" element={<FreelancerApplicationViewPage />} />
           <Route path='/AccountDetailsPage' element={<AccountDetailsPage/>}/>

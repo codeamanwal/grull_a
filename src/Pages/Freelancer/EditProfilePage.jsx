@@ -1,10 +1,11 @@
 /* eslint-disable */
-import React from 'react';
+import React, {useState} from 'react';
+import AuthService from '../../Services/AuthService';
 import {EditProfile, Footer, LoggedInHeader} from '../../components';
 import {Link, useLocation} from 'react-router-dom';
 
 const EditProfilePage = () => {
-  
+  const [userMode, setUserMode] = useState(AuthService.getUserMode());
   return (
     <div className="flex flex-col min-h-screen">
       <LoggedInHeader
@@ -13,7 +14,7 @@ const EditProfilePage = () => {
         isFreelancer={true}
       />
       <div className="flex-grow">
-        <EditProfile />
+        <EditProfile userMode={userMode} setUserMode={setUserMode}/>
       </div>
       <Footer />
     </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import {EditProfileCard, Footer, LoggedInHeader} from '../../components';
-import {userProfile, projectImg} from '../../components/Assets';
+import {projectImg} from '../../components/Assets';
 
 const ProjectGalleryPage = () => {
   return (
@@ -13,11 +13,7 @@ const ProjectGalleryPage = () => {
       <div className="flex flex-wrap sm:space-x-20 sm:p-10 sm:w-3/4 m-auto">
         <div className="mx-auto">
           <EditProfileCard
-            toHire={false}
             isEmployerProfile={false}
-            userProfileImg={userProfile}
-            userName="Chandrakanth Sharma"
-            profession="Product Designer"
           />
         </div>
 

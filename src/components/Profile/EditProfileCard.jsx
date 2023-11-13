@@ -1,30 +1,20 @@
-/* eslint-disable */
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {youtube, twitter, facebook2, editIcon} from '../Assets';
 
 const EditProfileCard = ({
-  isEmployerProfile,
-      userProfileImg,
-        userData,
-        userName,
-        userProfession,
-        setProfileEditMode,
-        
+  isEmployerProfile, meData,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [editedName, setEditedName] = useState(userName);
-  const [editedProfession, setEditedProfession] = useState(userProfession);
+  const [editedName, setEditedName] = useState('');
+  const [editedProfession, setEditedProfession] = useState('');
   const toHire = false;
-  console.log(userData);
   const handleEditClick = () => {
     setIsEditing(!isEditing); // Toggle the isEditing state
   };
 
-  const handleSaveClick = () => {
-    // Handle saving changes, e.g., send editedName and editedProfession to the server
-    setIsEditing(false); // Turn off editing mode
-  };
+  const userLocation = meData['location'] ? `${meData['location']['city']}, ${meData['location']['state']}`: '';
+  const userProfileImg = `https://ui-avatars.com/api/?name=${meData['first_name']}+${meData['last_name'] || ''}`;
 
   return (
     <div className="flex px-2 py-2 text-white">
@@ -70,7 +60,7 @@ const EditProfileCard = ({
       className="rounded-md text-center w-56 h-8 text-white text-base bg-[#B27EE3] bg-opacity-30"
     />
   ) : (
-    userName // Display the editedName state when editing is off
+    meData['full_name'] // Display the editedName state when editing is off
   )}
         </div>
 
@@ -85,7 +75,7 @@ const EditProfileCard = ({
       className="rounded-md text-center w-56 h-8 text-white text-base bg-[#B27EE3] bg-opacity-30"
     />
   ) : (
-    userProfession
+    meData['role']
   )}
         </div>
 
@@ -93,7 +83,7 @@ const EditProfileCard = ({
         <div className="border-b-2 border-gray-300 w-64 m-2"></div>
 
         <div className="text-sm sm:text-base font-GeneralSans font-normal">
-          Bengaluru, India
+          {userLocation}
         </div>
 
         {/* border */}
@@ -106,7 +96,7 @@ const EditProfileCard = ({
                         <p className="font-semibold text-lg font-GeneralSans">
                 Avg. Budget:
                         </p>
-                        <div className="text-base font-GeneralSans">{userData.average_rate_offered}</div>
+                        <div className="text-base font-GeneralSans">{meData.average_rate_offered}</div>
                       </div>
 
                       {/* no. of projects */}
@@ -114,7 +104,7 @@ const EditProfileCard = ({
                         <p className="font-semibold text-lg font-GeneralSans">
                 No. of Jobs Posted:
                         </p>
-                        {userData.jobs_posted_count}
+                        {meData.jobs_posted_count}
                       </div>
                     </div>
                 ) : (
@@ -125,7 +115,7 @@ const EditProfileCard = ({
                 Avg. Rate:
                         </p>
                         <div className="sm:text-base font-GeneralSans">
-                        {userData.rate_per_hour}
+                          {meData.rate_per_hour}
                         </div>
                       </div>
 
@@ -134,7 +124,7 @@ const EditProfileCard = ({
                         <p className="font-semibold sm:text-lg font-GeneralSans">
                 No. of Projects Completed:
                         </p>
-                        {userData.jobs_completed_count}
+                        {meData.jobs_completed_count}
                       </div>
                     </div>
                 )}
@@ -192,13 +182,8 @@ const EditProfileCard = ({
 };
 
 EditProfileCard.propTypes = {
-  userProfileImg: PropTypes.string,
-  toHire: PropTypes.bool,
   isEmployerProfile: PropTypes.bool,
-  userData: PropTypes.array,
-  userName: PropTypes.string,
-  userProfession: PropTypes.string,
-
+  meData: PropTypes.object,
 };
 
 export default EditProfileCard;

@@ -3,14 +3,12 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {grullLogo, bell} from '../Assets';
 import AuthService from '../../Services/AuthService';
-import config from 'react-global-configuration';
+import fetchMeData from '../../Services/User';
 
 const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const [isFirstNameNotEmpty, setIsFirstNameNotEmpty] = useState(false);
   const [userData, setUserData] = useState({});
-  const accessToken = AuthService.getToken();
   console.log(isFreelancer, 'isFreelancer');
 
   const toggleDropdown = () => {
@@ -30,42 +28,10 @@ const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
     };
   }, []);
 
-  const fetchData = async () => {
-    try {
-      // Perform the GET request to fetch data
-      const response = await fetch(`${config.get('BACKEND_URL')}/api/v0/users/me`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      // Parse the response as JSON
-      const data = await response.json();
-
-      // Now, you can use the 'data' object to access the fetched information
-      console.log('Fetched data:', data);
-      if (data.first_name === '') {
-        setIsFirstNameNotEmpty(true);
-      }
-      setUserData(data);
-      return data; // Return the fetched data
-    } catch (error) {
-      console.error('Error occurred:', error);
-      throw error; // Rethrow the error so it can be caught in the calling function
-    }
-  };
-
   useEffect(() => {
-    fetchData()
+    fetchMeData()
         .then((fetchedData) => {
-          if (fetchedData.first_name === '') {
-            setIsFirstNameNotEmpty(true);
-          }
+          setUserData(fetchedData);
         })
         .catch((error) => {
           console.error('Error fetching data:', error);
@@ -139,126 +105,31 @@ const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
                   />
                 </button>
                 {isDropdownOpen &&
-                                    (isFreelancer ? (
-                                        <ul className="dropdown-menu absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg py-2 z-50">
-                                          <li>
-                                            <p className="block px-4 py-2 text-sm leading-5 text-gray-800 hover:bg-gray-100 font-bold">
-                                                    Account
-                                            </p>
-                                          </li>
-                                          <li>
-                                            <Link
-                                              to={isFirstNameNotEmpty ? '/freelancerEmptyProfile' : '/editProfile'}
-                                              className="block px-4 py-1 text-sm leading-5 text-gray-800 hover:bg-gray-100"
-                                            >
+                                    (
+                                      <ul className="dropdown-menu absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg py-2 z-50">
+                                        <li>
+                                          <Link
+                                            to={
+                                              {
+                                                pathname: '/editProfile',
+                                              }
+                                            }
+                                            className="block px-4 py-1 text-sm leading-5 text-gray-800 hover:bg-gray-100"
+                                          >
                                                     Manage Profile
-                                            </Link>
-                                          </li>
-                                          <li>
-                                            <Link
-                                              to="/AccountDetailsPage"
-                                              className="block px-4 py-1 text-sm leading-5 text-gray-800 hover:bg-gray-100"
-                                            >
-                                                    Account Details
-                                            </Link>
-                                          </li>
-                                          <li>
-                                            <Link
-                                              to="/freelancerFileSharingPage?isFreelancer=true"
-                                              className="block px-4 py-1 text-sm leading-5 text-gray-800 hover:bg-gray-100"
-                                            >
-                                                    Settings
-                                            </Link>
-                                          </li>
-                                          {/* <li className="mt-2">
-                                            <p className="block px-4 py-2 text-sm leading-5 text-gray-800 hover:bg-gray-100 font-bold">
-                                                    Finances
-                                            </p>
-                                          </li> */}
-                                          {/* <li>
-                                            <Link
-                                              to="/"
-                                              className="block px-4 py-1 text-sm leading-5 text-gray-800 hover:bg-gray-100"
-                                            >
-                                                    Balance
-                                            </Link>
-                                          </li> */}
-                                          {/* <li>
-                                            <Link
-                                              to="/"
-                                              className="block px-4 py-1 text-sm leading-5 text-gray-800 hover:bg-gray-100"
-                                            >
-                                                    Withdraw Funds
-                                            </Link>
-                                          </li> */}
-                                          {/* <li>
-                                            <Link
-                                              to="/"
-                                              className="block px-4 py-1 text-sm leading-5 text-gray-800 hover:bg-gray-100"
-                                            >
-                                                    Add Funds
-                                            </Link>
-                                          </li> */}
-                                          {/* <li>
-                                            <Link
-                                              to="/"
-                                              className="block px-4 py-1 text-sm leading-5 text-gray-800 hover:bg-gray-100"
-                                            >
-                                                    Transaction History
-                                            </Link>
-                                          </li> */}
-                                          <hr className="flex justify-center items-center w-3/4 ml-4 my-2 border-1 border-black" />
-                                          <li>
-                                            <Link
-                                              to="/logout"
-                                              className="block px-4 py-2 text-sm leading-5 text-gray-800 hover:bg-gray-100 font-bold"
-                                            >
+                                          </Link>
+                                        </li>
+                                        <hr className="flex justify-center items-center w-3/4 ml-4 my-2 border-1 border-black" />
+                                        <li>
+                                          <Link
+                                            to="/logout"
+                                            className="block px-4 py-2 text-sm leading-5 text-gray-800 hover:bg-gray-100 font-bold"
+                                          >
                                                     LOGOUT
-                                            </Link>
-                                          </li>
-                                        </ul>
-                                    ) : (
-                                        <ul className="dropdown-menu absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg py-2 z-50">
-                                          <li>
-                                            <p className="block px-4 py-2 text-sm leading-5 text-gray-800 hover:bg-gray-100 font-bold">
-                                                    Account
-                                            </p>
-                                          </li>
-                                          <li>
-                                            <Link
-                                              to="/employerEmptyProfile"
-                                              className="block px-4 py-1 text-sm leading-5 text-gray-800 hover:bg-gray-100"
-                                            >
-                                                    Manage Profile
-                                            </Link>
-                                          </li>
-                                          <li>
-                                            <Link
-                                              to="/employerAccountDetails"
-                                              className="block px-4 py-1 text-sm leading-5 text-gray-800 hover:bg-gray-100"
-                                            >
-                                                    Account Details
-                                            </Link>
-                                          </li>
-                                          <li>
-                                            <Link
-                                              to="/freelancerFileSharingPage?isFreelancer=false"
-                                              className="block px-4 py-1 text-sm leading-5 text-gray-800 hover:bg-gray-100"
-                                            >
-                                                    Settings
-                                            </Link>
-                                          </li>
-                                          <hr className="flex justify-center items-center w-3/4 ml-4 my-2 border-1 border-black" />
-                                          <li>
-                                            <Link
-                                              to="/logout"
-                                              className="block px-4 py-2 text-sm leading-5 text-gray-800 hover:bg-gray-100 font-bold"
-                                            >
-                                                    LOGOUT
-                                            </Link>
-                                          </li>
-                                        </ul>
-                                    ))}
+                                          </Link>
+                                        </li>
+                                      </ul>
+                                    )}
               </li>
             </ul>
           </nav>

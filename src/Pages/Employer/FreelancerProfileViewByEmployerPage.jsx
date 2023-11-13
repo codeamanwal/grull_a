@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {LoggedInHeader, Footer} from '../../components';
 import ReviewCard from '../../components/Profile/ReviewCard';
-import {userProfile} from '../../components/Assets';
 import EditProfileCard from '../../components/Profile/EditProfileCard';
 import ProfileDetails from '../../components/Profile/ProfileDetails';
 import config from 'react-global-configuration';
@@ -166,9 +165,6 @@ const FreelancerProfileViewByEmployerPage = () => {
           <EditProfileCard
             // toHire={toHire}
             isEmployerProfile={false}
-            userProfileImg={userProfile}
-            userName="Shekhar"
-            profession="Product Designer"
           />
           <ProfileDetails description="Looking for freelancers for more than a year of experience" />
 
