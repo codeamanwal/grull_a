@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {youtube, twitter, facebook2, editIcon} from '../Assets';
 
 const EditProfileCard = ({
-  isEmployerProfile, meData,
+  isEmployerProfile, meData, setProfileEditMode,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedName, setEditedName] = useState('');
@@ -11,6 +11,9 @@ const EditProfileCard = ({
   const toHire = false;
   const handleEditClick = () => {
     setIsEditing(!isEditing); // Toggle the isEditing state
+    if (setProfileEditMode) {
+      setProfileEditMode();
+    }
   };
 
   const userLocation = meData['location'] ? `${meData['location']['city']}, ${meData['location']['state']}`: '';
@@ -184,6 +187,7 @@ const EditProfileCard = ({
 EditProfileCard.propTypes = {
   isEmployerProfile: PropTypes.bool,
   meData: PropTypes.object,
+  setProfileEditMode: PropTypes.func,
 };
 
 export default EditProfileCard;

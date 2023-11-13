@@ -70,7 +70,7 @@ const SkillsRequiredCard = ({ isFreelancer, jobData ,onClick}) => {
   if (jobData) {
   return (
     <Link >
-    <div className="flex flex-wrap justify-between rounded-[55px] border border-solid border-purple-500 bg-[#492772] bg-opacity-70 sm:py-8 sm:px-4 py-2 px-2 2xl:w-[1200px] my-5 " onClick={redirect}>
+    <div className="flex flex-wrap justify-between rounded-[55px] border border-solid border-purple-500 bg-[#492772] bg-opacity-70 sm:py-8 sm:px-4 py-2 px-2 2xl:w-[900px] my-5 " onClick={redirect}>
       <div>
         <div className="flex flex-col items-start">
           <p className="text-white sm:text-3xl text-xl ont-medium sm:px-4 py-2" id="title">{jobData.title}</p>
