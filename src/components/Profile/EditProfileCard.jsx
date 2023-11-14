@@ -97,17 +97,15 @@ const EditProfileCard = ({
                       {/* ave rate usd */}
                       <div className="flex gap-x-20 justify-center items-center">
                         <p className="font-semibold text-lg font-GeneralSans">
-                Avg. Budget:
+                Avg. Budget: <span className="text-base font-GeneralSans">{meData.average_rate_offered}</span>
                         </p>
-                        <div className="text-base font-GeneralSans">{meData.average_rate_offered}</div>
                       </div>
 
                       {/* no. of projects */}
                       <div className="flex justify-center items-center w-64 gap-x-1">
                         <p className="font-semibold text-lg font-GeneralSans">
-                No. of Jobs Posted:
+                No. of Jobs Posted: {meData.jobs_posted_count}
                         </p>
-                        {meData.jobs_posted_count}
                       </div>
                     </div>
                 ) : (
@@ -115,19 +113,18 @@ const EditProfileCard = ({
                       {/* ave rate usd */}
                       <div className="flex gap-x-20 justify-center items-center">
                         <p className="font-semibold sm:text-lg font-GeneralSans">
-                Avg. Rate:
+                Avg. Rate: <span className="sm:text-base font-GeneralSans">
+                            {meData.rate_per_hour}
+                          </span>
                         </p>
-                        <div className="sm:text-base font-GeneralSans">
-                          {meData.rate_per_hour}
-                        </div>
+
                       </div>
 
                       {/* no. of projects */}
                       <div className="flex justify-center items-center w-64 gap-x-1">
                         <p className="font-semibold sm:text-lg font-GeneralSans">
-                No. of Projects Completed:
+                No. of Projects Completed: {meData.jobs_completed_count}
                         </p>
-                        {meData.jobs_completed_count}
                       </div>
                     </div>
                 )}
