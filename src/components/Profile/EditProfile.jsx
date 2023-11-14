@@ -7,7 +7,7 @@ import fetchMeData from '../../Services/User';
 import FreelancerEmptyProfile from '../FreelancerEmptyProfile/FreelancerEmptyProfile';
 
 const EditProfile = ({userMode, setUserMode}) => {
-  const [meData, setMeData] = useState({});
+    const [meData, setMeData] = useState({});
   const [profileEditMode, setProfileEditMode] = useState(false);
 
   useEffect(() => {
@@ -24,22 +24,22 @@ const EditProfile = ({userMode, setUserMode}) => {
     AuthService.toggleUserMode();
     setUserMode(AuthService.getUserMode());
   }
-
   return (
     <div className="flex flex-col md:flex-row justify-center md:space-x-20 bg-[#1A0142] 2xl:h-[913px] pt-10">
       {!profileEditMode?<>
-        <EditProfileCard
-          isEmployerProfile={userMode === AuthService.EMPLOYER_MODE}
-          userMode={userMode}
-          meData={meData}
-        />
-        <ProfileDetails
-          meData={meData}
-          userMode={userMode}
-        />
+      <EditProfileCard
+         isEmployerProfile={userMode === AuthService.EMPLOYER_MODE}
+         userMode={userMode}
+         meData={meData}
+        setProfileEditMode={()=>setProfileEditMode(true)}
+      />
+      <ProfileDetails 
+       meData={meData}
+       userMode={userMode}
+      />
       </>:
       <>
-        <FreelancerEmptyProfile/>
+       <FreelancerEmptyProfile editingDisable={()=>setProfileEditMode(false)} editProfile={true}/>
       </>}
 
       <div className="flex flex-col items-center  sm:space-y-10 text-white space-x-4 pt-8">

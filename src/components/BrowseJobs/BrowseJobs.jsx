@@ -99,14 +99,14 @@ const BrowseJobs = ({ isFreelancer }) => {
               <BrowseByCard topic="LOCATION" items={items2} />
             </div>
           ) : null}
-          <div className="flex flex-col sm:pt-10 p-4 w-3/4 items-center">
+          <div className="flex flex-col sm:pt-10 lg:pt-0 p-4 w-3/4 items-center px-6">
             <div className="flex flex-wrap  sm:flex-row flex-col justify-between sm:justify-between w-3/4">
               <p className="flex sm:text-4xl text-2xl text-white font-bold pl-0">POSTED JOBS</p>
               <div className="flex flex-col items-center">
                 <p className="text-white sm:text-2xl font-semibold">Posted in the last &#x2191; 30 &#x2193; days</p>
               </div>
             </div>
-            <div className="md:max-h-2/4 lg:max-h-3/4 overflow-y-scroll scrollbar-hide" ref={scrollableJobs}>
+            <div className="md:max-h-2/4 lg:max-h-3/4 overflow-y-scroll scrollbar-hide " ref={scrollableJobs}>
               {jobData && jobData.map((job, index) => <SkillsRequiredCard isFreelancer={true} jobData={job} onClick={()=>navigate('/browseJobsInDetails')}/>)}
             </div>
           </div>
