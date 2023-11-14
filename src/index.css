@@ -55,3 +55,25 @@ body {
 .ant-select-arrow{
 	color:rgb(255 255 255 / 0.5) !important;
 }
+.ant-form-item-required,.ant-form-item-label>label{
+	color:white !important;
+	font-size: 20px !important;
+}
+.postjobsselect .ant-select-selector{
+		background-color: transparent !important;
+		border:none !important;
+		opacity:100 !important;
+	}
+.postjobsselect .ant-select-selector .ant-select-selection-item .ant-select-selection-item-content{
+	color: white !important;
+	opacity: 100 !important;
+}
+.ant-select-selection-item-remove{
+	color: white !important;
+}
+.ant-select-selection-placeholder{
+	color: white !important;
+}
+.ant-select-selector input{
+	color: white !important;
+}
