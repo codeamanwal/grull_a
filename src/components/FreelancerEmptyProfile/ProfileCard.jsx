@@ -1,11 +1,11 @@
 /* eslint-disable */
 import React, {useState} from 'react';
-import {userProfile, youtube, twitter, facebook2} from '../Assets';
-import { Select } from 'antd';
+import {youtube, twitter, facebook2} from '../Assets';
+import {Select} from 'antd';
 
 
 // eslint-disable-next-line react/prop-types
-const ProfileCard = ({ profileName, profileRole, onProfileChange }) => {
+const ProfileCard = ({profileName, profileRole, onProfileChange, profileImg}) => {
   const [name, setName] = useState(profileName || '');
   const [role, setRole] = useState(profileRole || 'Programmer');
 
@@ -14,12 +14,36 @@ const ProfileCard = ({ profileName, profileRole, onProfileChange }) => {
     onProfileChange(e.target.value, role);
   };
   const dropdown = [
-    {key:'Graphic Designer',value:"GRAPHIC_DESIGNER"},{key:'Illustrator',value:"ILLUSTRATOR"},{key:'Programmer',value:"PROGRAMMER"},{key:'Video Editor',value:'VIDEO_EDITOR'},{key:'3d artist',value:'THREE_D_ARTIST'},{key:'Product Designer',value:'PRODUCT_DESIGNER'}
-  ]
+    {
+      key: 'Graphic Designer',
+      value: 'GRAPHIC_DESIGNER',
+    },
+    {
+      key: 'Illustrator',
+      value: 'ILLUSTRATOR',
+    }, 
+    {
+      key: 'Programmer', 
+      value: 'PROGRAMMER'
+    }, 
+    {
+      key: 'Video Editor', 
+      value: 'VIDEO_EDITOR'
+    }, 
+    {
+      key: '3D Artist', 
+      value: 'THREE_D_ARTIST'
+    }, 
+    {
+      key: 'Product Designer', 
+      value: 'PRODUCT_DESIGNER'
+    },
+  ];
   // Function to handle input changes and update state
   const handleRoleChange = (e) => {
+    if (!e) return;
     setRole(e);
-    console.log(e)
+    console.log(e);
     onProfileChange(name, e);
   };
 
@@ -28,7 +52,7 @@ const ProfileCard = ({ profileName, profileRole, onProfileChange }) => {
       <div className="flex flex-col items-center space-y-4 xl:space-y-6 bg-[#482773] rounded-lg lg:mt-0 xl:p-8 m-4 px-2 py-6">
         <img
           className="mx-auto rounded-full h-32 w-32 md:h-72 md:w-72"
-          src={userProfile}
+          src={profileImg}
           alt="author avatar"
         />
         <input
@@ -38,18 +62,18 @@ const ProfileCard = ({ profileName, profileRole, onProfileChange }) => {
           onChange={handleNameChange}
           className="rounded-md text-center w-56 h-8 text-white text-base bg-[#B27EE3] bg-opacity-30"
         />
-          <Select
-      placeholder="Select a role"
-      style={{ width: 200 }}
-      value={role}
-      onChange={handleRoleChange}
-    >
-      {dropdown.map((item) => (
-        <Option key={item.value} value={item.value}>
-          {item.key}
-        </Option>
-      ))}
-    </Select>
+        <Select
+          placeholder="Select a role"
+          style={{width: 200}}
+          value={role}
+          onChange={handleRoleChange}
+        >
+          {dropdown.map((item) => (
+            <Option key={item.value} value={item.value}>
+              {item.key}
+            </Option>
+          ))}
+        </Select>
         <div className="border-b-2 border-gray-300 w-64 m-2"></div>
 
         <input

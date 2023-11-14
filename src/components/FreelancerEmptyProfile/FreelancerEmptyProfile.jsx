@@ -1,20 +1,45 @@
 /* eslint-disable */
-import React from "react";
-import ProfileCard from "./ProfileCard";
-import { plus, upArrow } from "../Assets";
-import { useState } from "react";
-import config from "react-global-configuration";
-import { useNavigate, Link } from "react-router-dom";
-import AuthService from "../../Services/AuthService";
+import React from 'react';
+import ProfileCard from './ProfileCard';
+import {plus, upArrow} from '../Assets';
+import {useState, useEffect} from 'react';
+import config from 'react-global-configuration';
+import {Link} from 'react-router-dom';
+import AuthService from '../../Services/AuthService';
+import fetchMeData from '../../Services/User';
 
-const FreelancerEmptyProfile = ({editingDisable,editProfile}) => {
-  const [skills, setSkills] = useState([""]);
-  const [languages, setLanguages] = useState([""]);
-  const [images, setImages] = useState([null]);
-  const [description, setDescription] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [role,setRole] = useState('');
-  const navigate = useNavigate();
+const FreelancerEmptyProfile = ({userData, setUserData, editingDisable, editProfile, profileImg}) => {
+  const [skills, setSkills] = useState(userData['skills'] || []);
+  const [languages, setLanguages] = useState(userData['languages'] || []);
+  const [images, setImages] = useState(userData['images'] || []);
+  const [description, setDescription] = useState(userData['description'] || '');
+  const [fullName, setFullname] = useState(userData['fullname'] || '');
+  const [role, setRole] = useState(userData['role'] || 'Programmer');
+
+  const accessToken = AuthService.getToken();
+
+  useEffect(() => {
+    if (userData) return;
+    fetchMeData()
+        .then((fetchedData) => {
+          setUserData(fetchedData);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        });
+  }, []);
+
+  useEffect(
+      () => {
+        console.log("ME", userData);
+        setFullname(userData['fullname']);
+        setSkills(userData['skills']);
+        setLanguages(userData['languages']);
+        setDescription(userData['setDescription']);
+        setRole(userData['role']);
+      }, [userData],
+  );
+
 
   // const location = useLocation();
   // const queryParams = new URLSearchParams(location.search);
@@ -22,77 +47,72 @@ const FreelancerEmptyProfile = ({editingDisable,editProfile}) => {
   // const [lastName, setLastName] = useState(queryParams.get('last_name') || '');
 
   const handleProfileChange = (newName, newRole) => {
-    setFirstName(newName); // Update firstName state
-    setRole(newRole); // Update lastName state
+    if (newName) {
+      setFullname(newName);
+    } // Update firstName state
+    if (role) {
+      setRole(newRole);
+    } // Update lastName state
   };
 
   const handleSubmit = async () => {
+    const [firstName, ...lastNames] = (fullName || '').split(' ');
+    const lastName = lastNames.join(' ');
     try {
       const payload = {
-        full_name: firstName,
-        role: role,
-        description: description,
+        first_name: firstName || userData['first_name'],
+        last_name: lastName || userData['last_name'],
+        role: role || userData['role'],
+        description: description || userData['description'],
         list_as_freelancer: true,
-        skills,
-        languages,
-       // images//to add
+        skills: skills || userData['skills'],
+        languages: languages || userData['languages'],
       };
 
-      const accessToken = AuthService.getToken();
-
       // Perform the API call
-      const response = await fetch(`${config.get("BACKEND_URL")}/api/v0/users/me`, {
-        method: "PATCH",
+      const response = await fetch(`${config.get('BACKEND_URL')}/api/v0/users/me`, {
+        method: 'PATCH',
         headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
         },
         body: JSON.stringify(payload), // Convert payload to JSON
       });
-      if(response.ok){
-      if(editingDisable){
-        editingDisable();
-      }
-      navigate("/editProfile", {
-        state: {
-          firstName,
-          role,
-          description,
-          list_as_freelancer,
-          skills,
-          languages
-        },
-      });
-    }
-      else if (!response.ok) {
+      if (response.ok) {
+        if (editingDisable) {
+          editingDisable();
+        }
+        const responseData = await response.json();
+        setUserData(responseData);
+      } else if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
     } catch (error) {
-      console.error("Error occurred:", error);
+      console.error('Error occurred:', error);
     }
   };
 
   const handleChange = (index, event, field) => {
-    if (field === "skills") {
+    if (field === 'skills') {
       const updatedSkills = [...skills];
       updatedSkills[index] = event.target.value;
       setSkills(updatedSkills);
-    } else if (field === "languages") {
+    } else if (field === 'languages') {
       const updatedLanguages = [...languages];
       updatedLanguages[index] = event.target.value;
       setLanguages(updatedLanguages);
     }
   };
 
-  const handleAddField = field => {
-    if (field === "skills") {
-      setSkills([...skills, ""]);
-    } else if (field === "languages") {
-      setLanguages([...languages, ""]);
+  const handleAddField = (field) => {
+    if (field === 'skills') {
+      setSkills([...skills, '']);
+    } else if (field === 'languages') {
+      setLanguages([...languages, '']);
     }
   };
 
-  const handleImageUpload = index => event => {
+  const handleImageUpload = (index) => (event) => {
     const file = event.target.files[0];
     const updatedImages = [...images];
     updatedImages[index] = URL.createObjectURL(file);
@@ -102,9 +122,10 @@ const FreelancerEmptyProfile = ({editingDisable,editProfile}) => {
   return (
     <div className="flex flex-wrap bg-[#1A0142] sm:w-3/4 sm:mx-auto  text-white 2xl:h-[913px] p-10">
       <ProfileCard
-        profileName={firstName} // Pass the firstName state as prop
-        profileRole={role} // Pass the lastName state as prop
+        profileName={fullName}
+        profileRole={role}
         onProfileChange={handleProfileChange}
+        profileImg={profileImg}
       />
 
       {/* form */}
@@ -120,7 +141,7 @@ const FreelancerEmptyProfile = ({editingDisable,editProfile}) => {
               className="bg-[#1A0142] border border-solid border-purple-500 rounded-lg  sm:text-sm block w-full p-4"
               placeholder="Write about you..."
               value={description}
-              onChange={event => setDescription(event.target.value)}></textarea>
+              onChange={(event) => setDescription(event.target.value)}></textarea>
           </div>
 
           <div className="sm:col-span-2">
@@ -134,13 +155,13 @@ const FreelancerEmptyProfile = ({editingDisable,editProfile}) => {
                 name="skills"
                 id={`skill-${index}`}
                 value={skill}
-                onChange={event => handleChange(index, event, "skills")}
+                onChange={(event) => handleChange(index, event, 'skills')}
                 className="bg-[#1A0142] border border-solid border-purple-500 rounded-lg text-white sm:text-sm block w-full p-2.5 my-2"
                 required=""
               />
             ))}
             <div className="flex items-center justify-center mt-2">
-              <button type="button" onClick={() => handleAddField("skills")} className="text-white rounded-full p-2">
+              <button type="button" onClick={() => handleAddField('skills')} className="text-white rounded-full p-2">
                 <img src={plus} alt="plus" />
               </button>
             </div>
@@ -157,13 +178,13 @@ const FreelancerEmptyProfile = ({editingDisable,editProfile}) => {
                 name="languages"
                 id={`language-${index}`}
                 value={language}
-                onChange={event => handleChange(index, event, "languages")}
+                onChange={(event) => handleChange(index, event, 'languages')}
                 className="bg-[#1A0142] border border-solid border-purple-500 rounded-lg text-white sm:text-sm block w-full p-2.5 my-2"
                 required=""
               />
             ))}
             <div className="flex items-center justify-center mt-2">
-              <button type="button" onClick={() => handleAddField("languages")} className="text-white rounded-full p-2">
+              <button type="button" onClick={() => handleAddField('languages')} className="text-white rounded-full p-2">
                 <img src={plus} alt="plus" />
               </button>
             </div>
