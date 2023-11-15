@@ -21,13 +21,54 @@ const BrowseFreelancersPage = () => {
   const [freelanceData, setFreelanceData] = useState([]);
   const [transitioning, setTransitioning] = useState(false);
   const [loading,setLoading] = useState(false);
-  const settings = {
-    infinite: false,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-  };
-
+  function displayCards(){
+    if(window.innerWidth >= 1024 ){
+        return(
+          <>
+          {!loading && freelanceData.slice(currentRangeStart, currentRangeStart+3).map((freelancer) => (
+            <BrowseFreelancerProfile
+              key={freelancer.id}
+              toHire={true}
+              isEmployerProfile={false}
+              userProfileImg={userProfile}
+              data={freelancer}
+            />
+          ))}
+          </>
+        )
+    }
+    else if(window.innerWidth>=640){
+      return(
+        <>
+        {!loading && freelanceData.slice(currentRangeStart, currentRangeStart+2).map((freelancer) => (
+          <BrowseFreelancerProfile
+            key={freelancer.id}
+            toHire={true}
+            isEmployerProfile={false}
+            userProfileImg={userProfile}
+            data={freelancer}
+          />
+        ))}
+        </>
+      )
+  }
+  else{
+   
+      return(
+        <>
+        {!loading && freelanceData.slice(currentRangeStart, currentRangeStart).map((freelancer) => (
+          <BrowseFreelancerProfile
+            key={freelancer.id}
+            toHire={true}
+            isEmployerProfile={false}
+            userProfileImg={userProfile}
+            data={freelancer}
+          />
+        ))}
+        </>
+      )
+  }
+  }
   useEffect(() => {
     handleBrowseFreelancers();
   }, []);
@@ -69,6 +110,11 @@ const BrowseFreelancersPage = () => {
       return false;
     }
   };  
+  const applyFilters=()=>{
+    setCurrentPage(1);
+    setCurrentRangeStart(0);
+    handleBrowseFreelancers();
+  }
   const fetchFreelancers = (increment) => {
       const newRangeStart = currentRangeStart + increment;
       if (newRangeStart > 0 && newRangeStart + 3 <= freelanceData.length) {
@@ -95,7 +141,7 @@ const BrowseFreelancersPage = () => {
         isFreelancer={false}
       />
       <div className="flex sm:flex-row justify-between">
-        <div className="flex flex-col justify-evenly w-3/4 mt-4">
+        <div className="flex flex-col mt-4 pl-4 w-3/4">
           <p className="sm:pl-20 text-center text-2xl font-bold text-white">
                         BROWSE FREELANCERS
           </p>
@@ -112,23 +158,13 @@ const BrowseFreelancersPage = () => {
         >
           <GrPrevious />
         </div >
-        {/* <Slider {...settings}> */}
         <div
-          className='flex'
+          className='flex justify-evenly items-center'
         >
-       
-          {!loading && freelanceData.slice(currentRangeStart, currentRangeStart+3).map((freelancer) => (
-  <BrowseFreelancerProfile
-    key={freelancer.id} // Make sure to set a unique key for each profile
-    toHire={true}
-    isEmployerProfile={false}
-    userProfileImg={userProfile}
-    data={freelancer}
-  />
-))}
-
+        {displayCards()}
+      
 </div>
-{/* </Slider> */}
+
 <div
           className='text-white flex justify-center items-center text-lg cursor-pointer'
           onClick={() => fetchFreelancers(1)}
@@ -139,7 +175,7 @@ const BrowseFreelancersPage = () => {
          
         </div>
 
-        {window.innerWidth > 640 ? <div><BrowseFreelancers setLocationFilter={setLocationFilter} setCategoryFilter={setCategoryFilter}/></div>:null}
+        {window.innerWidth > 640 ? <div><BrowseFreelancers setLocationFilter={setLocationFilter} setCategoryFilter={setCategoryFilter} applyFilters={applyFilters}/></div>:null}
       </div>
       <Footer />
     </div>

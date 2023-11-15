@@ -38,7 +38,7 @@ const BrowseByCard = ({topic, items,setFilter}) => {
 
   return (
     <div className="sm:my-6 ">
-      <p className="text-white font-semibold sm:text-3xl sm:pb-6">
+      <p className="text-white font-semibold sm:text-sm lg:text-xl sm:pb-6">
         BROWSE BY {topic}
       </p>
       <div className="flex flex-col sm:b-10">
@@ -108,7 +108,7 @@ const BrowseByCard = ({topic, items,setFilter}) => {
                           onChange={() => handleCheckboxChange(item)}
                           className="appearance-none border border-black w-6 h-6 rounded-sm checked:bg-black checked:border-transparent"
                         />
-                        <span className="text-black font-medium sm:text-2xl">{item}</span>
+                        <span className="text-black font-medium sm:text-sm lg:text-l">{item}</span>
                       </div>
                     ))
                 )}
