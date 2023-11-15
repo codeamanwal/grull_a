@@ -7,30 +7,28 @@ const BrowseFreelancerProfile = ({
   userProfileImg,
   toHire,
   isEmployerProfile,
-  userName,
-  profession,
+  data,
 }) => {
   const isEditing = false;
-
   return (
     <div className="flex px-2 py-2 text-white">
-      <div className="flex flex-col items-center space-y-6 xl:space-y-6 bg-[#482773] rounded-lg lg:mt-0 xl:p-10 m-4 mx-auto py-8 px-2">
+      <div className="flex flex-col items-center space-y-6 xl:space-y-6 bg-[#482773] rounded-lg lg:mt-0 xl:p-5 m-4 mx-auto py-8 px-2">
         <img
           className="mx-auto rounded-full sm:h-64 sm:w-64 w-32 h-32"
           src={userProfileImg}
           alt="author avatar"
         />
         <div className="text-center font-bold text-2xl font-spaceGrotesk">
-          {userName}
+          {data?.full_name}
         </div>
 
-        <div className="text-xl font-GeneralSans font-normal">{profession}</div>
+        <div className="text-xl font-GeneralSans font-normal">{data?.role}</div>
 
         {/* border */}
         <div className="border-b-2 border-gray-300 w-64 m-2"></div>
 
         <div className="text-sm sm:text-base font-GeneralSans font-normal">
-          Bengaluru, India
+          {data?.location?`${data.location.city} , ${data?.location?.country}`:null}
         </div>
 
         {/* border */}
@@ -72,7 +70,7 @@ const BrowseFreelancerProfile = ({
                 Avg. Rate:
                         </p>
                         <div className="sm:text-base font-GeneralSans">
-                30USD/Per Hour
+                {data.average_rate_offered?data.average_rate_offered:0}
                         </div>
                       </div>
 
@@ -89,7 +87,7 @@ const BrowseFreelancerProfile = ({
                                 />
                             ) : (
                                 <div className="rounded-md text-center w-20 h-8 px-2 text-white text-base bg-[#B27EE3] bg-opacity-30 font-GeneralSans">
-                  5
+                  {data?.jobs_completed_count}
                                 </div>
                             )}
                       </div>
