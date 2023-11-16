@@ -70,7 +70,7 @@ const EmployerProfilePage = () => {
                 <button className="md:px-8 sm:py-4 py-2 px-2 text-center rounded shadow bg-gradient-to-l from-purple-400 to-transparent"
                 >
                                     Manage Jobs
-                </button>
+                </button> 
                 <p className="text-purple-600 text-center sm:text-lg font-spaceGrotesk font-medium">
                                     SWITCH TO A FREELANCER
                 </p>

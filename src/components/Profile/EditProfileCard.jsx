@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {youtube, twitter, facebook2, editIcon} from '../Assets';
-
 const EditProfileCard = ({
   isEmployerProfile, meData, setProfileEditMode,
 }) => {
@@ -22,38 +21,17 @@ const EditProfileCard = ({
   return (
     <div className="flex px-2 py-2 text-white">
       <div className="flex flex-col items-center space-y-6 xl:space-y-6 bg-[#482773] rounded-lg lg:mt-0 xl:p-10 m-4 mx-auto py-8 px-2">
-        {isEmployerProfile ? (
-  <>
-    <button
-      className="" style={{marginLeft: '14rem'}}
-      onClick={handleEditClick}
-    >
-      <img src={editIcon} alt="Edit" />
-    </button>
-    <img
-      className="mx-auto rounded-full sm:h-64 sm:w-64 w-32 h-32"
-      src={userProfileImg}
-      alt="author avatar"
-    />
-  </>
-) : (
-  <>
-    <button
-      className="" style={{marginLeft: '11rem'}}
-      onClick={handleEditClick}
-    >
-      <img src={editIcon} alt="Edit" />
-    </button>
-    <img
-      className="mx-auto rounded-full sm:h-64 sm:w-64 w-32 h-32"
-      src={userProfileImg}
-      alt="author avatar"
-    />
-  </>
-)}
-
-
-        <div className="text-center font-bold text-2xl font-spaceGrotesk">
+        <button
+          className="" style={{marginLeft: '11rem'}}
+          onClick={handleEditClick}
+        >
+          <img src={editIcon} alt="Edit" />
+        </button>
+        <img
+          className="mx-auto rounded-full sm:h-64 sm:w-64 w-32 h-32"
+          src={userProfileImg}
+          alt="author avatar"
+        />        <div className="text-center font-bold text-2xl font-spaceGrotesk">
           {isEditing ? (
     <input
       placeholder="Enter Name"

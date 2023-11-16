@@ -3,9 +3,10 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {Link, useParams, useNavigate} from 'react-router-dom';
 import config from 'react-global-configuration';
-import AuthService from '../../Services/AuthService';
+import AuthService from "../../Services/AuthService";
 
-const SkillsRequiredCard = ({isFreelancer, jobData, onClick}) => {
+const SkillsRequiredCard = ({ isFreelancer, jobData ,onClick,isActive}) => {
+  
   const [applied, setApplied] = useState(false); // State to keep track of whether applied or not
   const {id} = useParams();
   const navigate = useNavigate();
@@ -64,7 +65,7 @@ const SkillsRequiredCard = ({isFreelancer, jobData, onClick}) => {
     }
   };
 
-  const firstTwoSkills = jobData['required_skills'].slice(0, 2).map(
+  const firstTwoSkills = jobData['required_skills']?.slice(0, 2).map(
       (item) => {
         return <>
           <p key={jobData['id']} className="bg-[#B37EE2] px-4 py-2 rounded-xl text-white font-medium sm:text-base text-sm m-1">
@@ -73,7 +74,7 @@ const SkillsRequiredCard = ({isFreelancer, jobData, onClick}) => {
         </>;
       },
   );
-  const jobSkillsElem = jobData['required_skills'].length > 2 ? firstTwoSkills.concat(
+  const jobSkillsElem = jobData['required_skills']?.length > 2 ? firstTwoSkills.concat(
     [
       <>
         <p
