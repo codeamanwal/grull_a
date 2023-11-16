@@ -64,21 +64,19 @@ const SkillsRequiredCard = ({isFreelancer, jobData, onClick}) => {
     }
   };
 
-  const firstTwoSkills = jobData['required_skills'].splice(0, 2).map(
+  const firstTwoSkills = jobData['required_skills'].slice(0, 2).map(
       (item) => {
         return <>
-          <p className="bg-[#B37EE2] px-4 py-2 rounded-xl text-white font-medium sm:text-base text-sm m-1">
+          <p key={jobData['id']} className="bg-[#B37EE2] px-4 py-2 rounded-xl text-white font-medium sm:text-base text-sm m-1">
             {item}
           </p>
         </>;
       },
   );
-
-  const jobSkillsElem = jobData['required_skills'] > 2 ? firstTwoSkills.concat(
+  const jobSkillsElem = jobData['required_skills'].length > 2 ? firstTwoSkills.concat(
     [
       <>
         <p
-
           className="text-[#B37EE2] font-normal sm:text-lg text-sm"
         >
           more
