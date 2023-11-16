@@ -74,7 +74,7 @@ const SkillsRequiredCard = ({isFreelancer, jobData, onClick}) => {
       },
   );
 
-  const jobSkillsElem = firstTwoSkills.concat(
+  const jobSkillsElem = jobData['required_skills'] > 2 ? firstTwoSkills.concat(
     [
       <>
         <p
@@ -85,7 +85,7 @@ const SkillsRequiredCard = ({isFreelancer, jobData, onClick}) => {
         </p>
       </>
     ]
-  );
+  ) : firstTwoSkills;
 
   // console.log("data", jobData)
   if (jobData) {
