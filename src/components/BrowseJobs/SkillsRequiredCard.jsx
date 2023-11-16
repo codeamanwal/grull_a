@@ -64,7 +64,7 @@ const SkillsRequiredCard = ({isFreelancer, jobData, onClick}) => {
     }
   };
 
-  const allJobSkills = jobData['required_skills'].map(
+  const firstTwoSkills = jobData['required_skills'].splice(0, 2).map(
       (item) => {
         return <>
           <p className="bg-[#B37EE2] px-4 py-2 rounded-xl text-white font-medium sm:text-base text-sm m-1">
@@ -74,7 +74,7 @@ const SkillsRequiredCard = ({isFreelancer, jobData, onClick}) => {
       },
   );
 
-  const jobSkills = allJobSkills.splice(0, 2).concat(
+  const jobSkillsElem = firstTwoSkills.concat(
     [
       <>
         <p
@@ -103,7 +103,7 @@ const SkillsRequiredCard = ({isFreelancer, jobData, onClick}) => {
                 Skills Required
                   </p>
                   <div className="flex sm:space-x-3 items-center">
-                    {jobSkills}
+                    {jobSkillsElem}
                   </div>
                 </div>
 
