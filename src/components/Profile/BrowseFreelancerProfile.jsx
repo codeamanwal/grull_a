@@ -7,47 +7,46 @@ const BrowseFreelancerProfile = ({
   userProfileImg,
   toHire,
   isEmployerProfile,
-  userName,
-  profession,
+  data,
 }) => {
   const isEditing = false;
-
+  console.log(data)
   return (
     <div className="flex px-2 py-2 text-white">
-      <div className="flex flex-col items-center space-y-6 xl:space-y-6 bg-[#482773] rounded-lg lg:mt-0 xl:p-10 m-4 mx-auto py-8 px-2">
+      <div className="flex flex-col items-center space-y-6 xl:space-y-6 bg-[#482773] rounded-lg lg:mt-0 xl:p-5 m-4 mx-auto py-8 px-2">
         <img
-          className="mx-auto rounded-full sm:h-64 sm:w-64 w-32 h-32"
+          className="mx-auto rounded-full md:h-20 md:w-20 lg:h-64 lg:w-64 w-12 h-12"
           src={userProfileImg}
           alt="author avatar"
         />
-        <div className="text-center font-bold text-2xl font-spaceGrotesk">
-          {userName}
+        <div className="text-center font-bold sm:text-l lg:text-lg font-spaceGrotesk">
+          {data?.full_name}
         </div>
 
-        <div className="text-xl font-GeneralSans font-normal">{profession}</div>
+        <div className="text-xl font-GeneralSans font-normal">{data?.role}</div>
 
         {/* border */}
-        <div className="border-b-2 border-gray-300 w-64 m-2"></div>
+        <div className="border-b-2 border-gray-300 sm:w-40 lg:w-64 m-2"></div>
 
         <div className="text-sm sm:text-base font-GeneralSans font-normal">
-          Bengaluru, India
+          {data?.location?`${data.location.city} , ${data?.location?.country}`:null}
         </div>
 
         {/* border */}
-        <div className="border-b-2 border-gray-300 w-64 m-2"></div>
+        <div className="border-b-2 border-gray-300 sm:w-40 lg:w-64 m-2"></div>
 
         {isEmployerProfile ? (
                     <div className="flex flex-col justify-start items-center space-y-2">
                       {/* ave rate usd */}
                       <div className="flex gap-x-20 justify-center items-center">
-                        <p className="font-semibold text-lg font-GeneralSans">
+                        <p className="font-semibold sm:text-l lg:text-lg font-GeneralSans">
                 Avg. Budget:
                         </p>
                         <div className="text-base font-GeneralSans">300USD</div>
                       </div>
 
                       {/* no. of projects */}
-                      <div className="flex justify-center items-center w-64 gap-x-1">
+                      <div className="flex justify-center items-center sm:w-40 lg:w-64 gap-x-1">
                         <p className="font-semibold text-lg font-GeneralSans">
                 No. of Jobs Posted:
                         </p>
@@ -68,17 +67,17 @@ const BrowseFreelancerProfile = ({
                     <div className="flex flex-col items-center space-y-3">
                       {/* ave rate usd */}
                       <div className="flex gap-x-20 justify-center items-center">
-                        <p className="font-semibold sm:text-lg font-GeneralSans">
+                        <p className="font-semibold sm:text-l lg:text-lg font-GeneralSans">
                 Avg. Rate:
                         </p>
                         <div className="sm:text-base font-GeneralSans">
-                30USD/Per Hour
+                {data.average_rate_offered?data.average_rate_offered:0}
                         </div>
                       </div>
 
                       {/* no. of projects */}
-                      <div className="flex justify-center items-center w-64 gap-x-1">
-                        <p className="font-semibold sm:text-lg font-GeneralSans">
+                      <div className="flex justify-center items-center sm:w-40 lg:w-64 gap-x-1">
+                        <p className="font-semibold sm:text-l lg:text-lg font-GeneralSans">
                 No. of Projects Completed:
                         </p>
                         {isEditing ? (
@@ -89,7 +88,7 @@ const BrowseFreelancerProfile = ({
                                 />
                             ) : (
                                 <div className="rounded-md text-center w-20 h-8 px-2 text-white text-base bg-[#B27EE3] bg-opacity-30 font-GeneralSans">
-                  5
+                  {data?.jobs_completed_count}
                                 </div>
                             )}
                       </div>
@@ -99,7 +98,7 @@ const BrowseFreelancerProfile = ({
         {toHire ? (
                     <>
                       {/* border */}
-                      <div className="border-b-2 border-gray-300 w-64 m-2"></div>
+                      <div className="border-b-2 border-gray-300 sm:w-40 lg:w-64 m-2"></div>
                       <div className="flex flex-col space-y-2">
                         <p>Learn more</p>
                         <a
