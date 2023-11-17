@@ -1,8 +1,8 @@
 /* eslint-disable */
-import React from "react";
+import React,{useState} from "react";
 import PropTypes from "prop-types";
 import JobDetailsCard from "./JobDetailsCard";
-import { ClosedChatBox, OpenedChatBox } from "../../components";
+import { ClosedChatBox, OpenedChatBox, PostJobForm } from "../../components";
 import { downarrow } from "../../components/Assets";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import config from "react-global-configuration";
@@ -15,13 +15,13 @@ const BrowseJobInDetails = ({isOpen, setIsOpen, jobData, jobs }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const isFreelancer = AuthService.isFreelancer()
+  const [editJob,setEditJob] = useState(false);
   console.log("jobData in BrowseJobsInDetails:", jobData);
 
   const handleManagePostedJobsClick = () => {
     console.log("des", description);
     const jobId = localStorage.getItem("job_id");
     const accessToken = localStorage.getItem("access_token");
-
     const apiUrl = `${config.get("BACKEND_URL")}/api/v0/users/me/jobs?page=1&per_page=8`;
 
     fetch(apiUrl, {
@@ -46,6 +46,9 @@ const BrowseJobInDetails = ({isOpen, setIsOpen, jobData, jobs }) => {
         console.error("Network error:", error);
       });
   };
+  const editPostedJob = ()=>{
+    setEditJob(!editJob);
+  }
   const deletePostedJob = async () => {
     const id = jobData.id;
     try {
@@ -105,30 +108,52 @@ const BrowseJobInDetails = ({isOpen, setIsOpen, jobData, jobs }) => {
 
   return (
     <div className="flex  flex-wrap sm:justify-between  justify-center sm:w-11/12 mx-auto py-28 space-y-10">
-      {isFreelancer ? <JobDetailsCard isFreelancer={true} jobData={jobData} /> : <JobDetailsCardForEmployer isFreelancer={false} jobs={jobData} />}
+  {!editJob ? (
+  isFreelancer ? (
+    <JobDetailsCard isFreelancer={true} jobData={jobData} />
+  ) : (
+    <JobDetailsCardForEmployer isFreelancer={false} jobs={jobData} />
+  )
+) : <PostJobForm jobData={jobData} editJob={true}/>}
+    {isFreelancer ? (
+  <div className="flex sm:flex-col flex-wrap sm:justify-start sm:space-y-10">
+    <button className="text-white sm:text-xl font-semibold sm:px-12 sm:py-2 px-4 py-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
+      MANAGE PROFILE
+    </button>
+    <button className="text-white sm:text-xl font-semibold sm:px-8 sm:py-2 px-4 py-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
+      BROWSE MORE JOBS
+    </button>
+  </div>
+) : (
+  !editJob && (
+    <div className="flex flex-col justify-between items-center space-y-4">
+      <div className="flex flex-col items-center space-y-5 sm:justify-start sm:space-y-10 sm:mb-[73px]">
+        <Link
+          to="/freelancerApplicationView"
+          className="text-white sm:text-xl font-semibold md:px-8 py-4 px-2 sm:px-12 rounded shadow bg-gradient-to-l from-purple-400 to-transparent"
+          onClick={handleViewFreelancerApplicationsClick}
+        >
+          VIEW FREELANCER APPLICATIONS
+        </Link>
+        <button
+          className="text-white sm:text-xl font-semibold md:px-8 py-4 sm:px-12 px-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent"
+          onClick={deletePostedJob}
+        >
+          DELETE POSTED JOB
+        </button>
+        <button
+          className="text-white sm:text-xl font-semibold md:px-8 py-4 sm:px-12 px-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent"
+          onClick={editPostedJob}
+        >
+          EDIT POSTED JOB
+        </button>
+      </div>
+      {/* <div className="">{isOpen ? <OpenedChatBox setIsOpen={setIsOpen} /> : <ClosedChatBox arrow={downarrow} onClick={setIsOpen} />}</div> */}
+    </div>
+  )
+)}
 
-      {isFreelancer ? (
-        <div className="flex sm:flex-col flex-wrap sm:justify-start sm:space-y-10">
-          <button className="text-white sm:text-xl font-semibold sm:px-12 sm:py-2 px-4  py-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">MANAGE PROFILE</button>
-          <button className="text-white sm:text-xl font-semibold  sm::px-8 sm:py-2 px-4 py-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">BROWSE MORE JOBS</button>
-        </div>
-      ) : (
-        <div className="flex flex-col  justify-between items-center space-y-4 ">
-          <div className="flex flex-col items-center   space-y-5 sm:justify-start sm:space-y-10 sm:mb-[73px]">
-            <Link to="/freelancerApplicationView" className="text-white sm:text-xl font-semibold md:px-8 py-4 px-2 sm:px-12 rounded shadow bg-gradient-to-l from-purple-400 to-transparent" onClick={handleViewFreelancerApplicationsClick}>
-              VIEW FREELANCER APPLICATIONS
-            </Link>
-            <button className="text-white sm:text-xl font-semibold md:px-8 py-4 sm:px-12  px-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent" onClick={deletePostedJob}>
-              DELETE POSTED JOB
-            </button>
-            <button className="text-white sm:text-xl font-semibold md:px-8 py-4 sm:px-12  px-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent" >
-              EDIT POSTED JOB
-            </button>
-          </div>
-          
-          {/* <div className="">{isOpen ? <OpenedChatBox setIsOpen={setIsOpen} /> : <ClosedChatBox arrow={downarrow} onClick={setIsOpen} />}</div> */}
-        </div>
-      )}
+      
     </div>
   );
 };
