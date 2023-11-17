@@ -44,3 +44,25 @@ export const axiosPost = async (url, data = {}, contentType = 'application/json'
   }
   return response;
 };
+
+export const axiosDelete = async (url, data = {}, contentType = 'application/json') => {
+  let response = {};
+  try {
+    const result = await axiosInstance.delete(url, {
+      data,
+      headers: {
+        'Content-Type': contentType,
+        'Authorization': `Bearer ${accessToken}`,
+      },
+    });
+
+    response = result.data || {};
+    response.status = result?.status;
+    response.message = result?.data?.message;
+  } catch (e) {
+    response.status = false;
+    response.message = 'Something went wrong';
+    response.data = e;
+  }
+  return response;
+};

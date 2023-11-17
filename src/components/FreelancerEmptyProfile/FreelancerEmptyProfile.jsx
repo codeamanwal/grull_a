@@ -15,9 +15,9 @@ const FreelancerEmptyProfile = ({userData, setUserData, editingDisable, editProf
   const [description, setDescription] = useState(userData['description'] || '');
   const [fullName, setFullname] = useState(userData['fullname'] || '');
   const [role, setRole] = useState(userData['role'] || 'Programmer');
-
+  const [location,setLocation] = useState(userData['location']||'India')
   const accessToken = AuthService.getToken();
-
+  // console.log(userData['location'])
   useEffect(() => {
     if (userData) return;
     fetchMeData()
@@ -46,13 +46,16 @@ const FreelancerEmptyProfile = ({userData, setUserData, editingDisable, editProf
   // const [firstName, setFirstName] = useState(queryParams.get('first_name') || '');
   // const [lastName, setLastName] = useState(queryParams.get('last_name') || '');
 
-  const handleProfileChange = (newName, newRole) => {
+  const handleProfileChange = (newName, newRole,newLocation) => {
     if (newName) {
       setFullname(newName);
     } // Update firstName state
     if (role) {
       setRole(newRole);
     } // Update lastName state
+    if(newLocation){
+      setLocation(newLocation)// Update location state
+    }
   };
 
   const handleSubmit = async () => {
@@ -67,6 +70,7 @@ const FreelancerEmptyProfile = ({userData, setUserData, editingDisable, editProf
         list_as_freelancer: true,
         skills: skills || userData['skills'],
         languages: languages || userData['languages'],
+        // location:location||userData['location'],
       };
 
       // Perform the API call
@@ -126,6 +130,8 @@ const FreelancerEmptyProfile = ({userData, setUserData, editingDisable, editProf
         profileRole={role}
         onProfileChange={handleProfileChange}
         profileImg={profileImg}
+      profileLocation={location}
+      handleSubmit={handleSubmit}
       />
 
       {/* form */}

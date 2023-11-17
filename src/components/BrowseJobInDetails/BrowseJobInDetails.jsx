@@ -4,13 +4,17 @@ import PropTypes from "prop-types";
 import JobDetailsCard from "./JobDetailsCard";
 import { ClosedChatBox, OpenedChatBox } from "../../components";
 import { downarrow } from "../../components/Assets";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import config from "react-global-configuration";
 import JobDetailsCardForEmployer from "./JobDetailsCardForEmployer";
+import AuthService from "../../Services/AuthService";
+import { axiosDelete } from "../../utils/services/axios";
+import { openNotificationWithIcon } from "../../utils/openNotificationWithIcon";
 
-const BrowseJobInDetails = ({ isFreelancer, isOpen, setIsOpen, jobData, jobs }) => {
+const BrowseJobInDetails = ({isOpen, setIsOpen, jobData, jobs }) => {
   const location = useLocation();
-
+  const navigate = useNavigate();
+  const isFreelancer = AuthService.isFreelancer()
   console.log("jobData in BrowseJobsInDetails:", jobData);
 
   const handleManagePostedJobsClick = () => {
@@ -42,7 +46,36 @@ const BrowseJobInDetails = ({ isFreelancer, isOpen, setIsOpen, jobData, jobs }) 
         console.error("Network error:", error);
       });
   };
-
+  const deletePostedJob = async () => {
+    const id = jobData.id;
+    try {
+      const apiUrl = `/api/v0/jobs/${id}`;
+      const params = {
+        id: id
+      };
+      const response = await axiosDelete(apiUrl, params);
+      
+      if (!response.status) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
+      const responseData = response;
+  
+      if (responseData.success) {
+        openNotificationWithIcon('success', 'Job deleted successfully');
+        navigate('/editProfile');
+      }
+      else{
+        openNotificationWithIcon('error', 'Something went wrong');
+      }
+  
+      return true;
+    } catch (error) {
+      console.error('Error occurred:', error);
+      return false;
+    }
+  };
+  
   const handleViewFreelancerApplicationsClick = () => {
     const jobId = localStorage.getItem("job_id");
     const accessToken = localStorage.getItem("access_token");
@@ -72,7 +105,7 @@ const BrowseJobInDetails = ({ isFreelancer, isOpen, setIsOpen, jobData, jobs }) 
 
   return (
     <div className="flex  flex-wrap sm:justify-between  justify-center sm:w-11/12 mx-auto py-28 space-y-10">
-      {isFreelancer ? <JobDetailsCard isFreelancer={true} jobData={jobData} /> : <JobDetailsCardForEmployer isFreelancer={false} jobs={jobs} />}
+      {isFreelancer ? <JobDetailsCard isFreelancer={true} jobData={jobData} /> : <JobDetailsCardForEmployer isFreelancer={false} jobs={jobData} />}
 
       {isFreelancer ? (
         <div className="flex sm:flex-col flex-wrap sm:justify-start sm:space-y-10">
@@ -85,12 +118,15 @@ const BrowseJobInDetails = ({ isFreelancer, isOpen, setIsOpen, jobData, jobs }) 
             <Link to="/freelancerApplicationView" className="text-white sm:text-xl font-semibold md:px-8 py-4 px-2 sm:px-12 rounded shadow bg-gradient-to-l from-purple-400 to-transparent" onClick={handleViewFreelancerApplicationsClick}>
               VIEW FREELANCER APPLICATIONS
             </Link>
+            <button className="text-white sm:text-xl font-semibold md:px-8 py-4 sm:px-12  px-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent" onClick={deletePostedJob}>
+              DELETE POSTED JOB
+            </button>
             <button className="text-white sm:text-xl font-semibold md:px-8 py-4 sm:px-12  px-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent" >
-              MANAGE POSTED JOB
+              EDIT POSTED JOB
             </button>
           </div>
-
-          <div className="">{isOpen ? <OpenedChatBox setIsOpen={setIsOpen} /> : <ClosedChatBox arrow={downarrow} onClick={setIsOpen} />}</div>
+          
+          {/* <div className="">{isOpen ? <OpenedChatBox setIsOpen={setIsOpen} /> : <ClosedChatBox arrow={downarrow} onClick={setIsOpen} />}</div> */}
         </div>
       )}
     </div>

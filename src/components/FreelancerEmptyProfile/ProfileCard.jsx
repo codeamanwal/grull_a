@@ -2,16 +2,16 @@
 import React, {useState} from 'react';
 import {youtube, twitter, facebook2} from '../Assets';
 import {Select} from 'antd';
-
+import {FaCheck} from "react-icons/fa";
 
 // eslint-disable-next-line react/prop-types
-const ProfileCard = ({profileName, profileRole, onProfileChange, profileImg}) => {
+const ProfileCard = ({profileName, profileRole, onProfileChange, profileImg,profileLocation,handleSubmit}) => {
   const [name, setName] = useState(profileName || '');
   const [role, setRole] = useState(profileRole || 'Programmer');
-
+  const [location,setLocation] = useState(profileLocation||'')
   const handleNameChange = (e) => {
     setName(e.target.value);
-    onProfileChange(e.target.value, role);
+    onProfileChange(e.target.value, role,location);
   };
   const dropdown = [
     {
@@ -43,13 +43,21 @@ const ProfileCard = ({profileName, profileRole, onProfileChange, profileImg}) =>
   const handleRoleChange = (e) => {
     if (!e) return;
     setRole(e);
-    console.log(e);
-    onProfileChange(name, e);
+    onProfileChange(name, e,location);
   };
-
+  const handleLocationChange = (e) => {
+    if(!e) return;
+    setLocation(e);
+    onProfileChange(name,role,e);
+  }
   return (
     <div className="flex items-center justify-center ">
       <div className="flex flex-col items-center space-y-4 xl:space-y-6 bg-[#482773] rounded-lg lg:mt-0 xl:p-8 m-4 px-2 py-6">
+      <div className='flex items-end justify-end w-full'>
+      <button style={{right: '0'}} className="text-lg" onClick={handleSubmit?handleSubmit:null}>
+            <FaCheck />
+          </button>
+          </div>
         <img
           className="mx-auto rounded-full h-32 w-32 md:h-72 md:w-72"
           src={profileImg}
@@ -79,6 +87,8 @@ const ProfileCard = ({profileName, profileRole, onProfileChange, profileImg}) =>
         <input
           placeholder="Location"
           type="text"
+          onChange={handleLocationChange}
+          value={location}
           className="rounded-md text-center w-36 h-8 px-2  text-white text-base bg-[#B27EE3] bg-opacity-30"
         />
 

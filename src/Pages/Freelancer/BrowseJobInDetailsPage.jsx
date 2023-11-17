@@ -6,7 +6,7 @@ import {Link, useLocation} from 'react-router-dom';
 const BrowseJobInDetailsPage = () => {
   const location = useLocation();
   const { jobData } = location.state || {}; 
-
+  console.log(jobData);
   console.log("jobData in BrowseJobsInDetailsPage:", jobData);
   return (
     <div className="flex flex-col min-h-screen bg-[#1A0142]">

@@ -26,6 +26,7 @@ import {
 } from './Pages';
 
 import AuthLayout from './components/AuthLayout';
+import MyJobs from './Pages/Employer/MyJobs';
 
 function getToken() {
   const tokenString = sessionStorage.getItem('token');
@@ -103,6 +104,7 @@ function App() {
         <Route path="/freelancerFileSharingPage" element={<FreelancerFileSharingPage/>}/>
         <Route path = "/BillsAndPaymentsPage" element={<BillsAndPaymentsPage/>}/>
         <Route path="/EditCardDetailsPage" element={<EditCardDetailsPage/>}/>
+        <Route path="/myjobs" element={<MyJobs/>}/>
       </Routes>
     </div>
   );

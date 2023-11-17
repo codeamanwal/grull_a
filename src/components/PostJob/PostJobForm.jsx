@@ -45,7 +45,7 @@ const PostJobForm = () => {
       const response = axiosPost('/api/v0/jobs',requestData)
       if(response){
        
-        navigate('/myjobs')
+        navigate('/editProfile')
       }
 
 
