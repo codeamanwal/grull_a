@@ -140,14 +140,8 @@ const SkillsRequiredCard = ({ isFreelancer, jobData ,onClick,isActive}) => {
       ) : (
         <>
         <div className="sm:p-8 p-3 space-y-4">
-          <Link to={{
-            pathname: '/browseJobsInDetails',
-            state: {
-              jobData: jobData, // Pass jobData as state
-            },
-          }}>
             <p className="text-lg text-[#B37EE2]">12 FREELANCERS APPLIED</p>
-          </Link>
+  
 
           {isActive ? (
             <button className="flex items-center bg-white border border-gray-300 rounded-lg p-2">

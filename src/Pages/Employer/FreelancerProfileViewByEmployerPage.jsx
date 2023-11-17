@@ -10,6 +10,35 @@ const FreelancerProfileViewByEmployerPage = () => {
   const [successMessage, setSuccessMessage] = useState(''); // Track success message
   const [isPopupVisible, setIsPopupVisible] = useState(false); // Track popup visibility
   const accessToken = AuthService.getToken();
+  const dummydata = [
+    {
+      'email': 'test@user.com',
+      'id': 'bc0cd1f0-ad4e-4f19-b72c-d055f6f61045',
+      'first_name': 'Kartikey',
+      'last_name': 'Front end Developer',
+      'full_name': 'Kartikey Front end Developer',
+      'description': 'developer',
+      'location': 'usa',
+      'skills': [
+        'HTML',
+        'c++',
+        'Javascript',
+      ],
+      'languages': [
+        'English',
+        'Hindi',
+      ],
+      'role': 'PRODUCT_DESIGNER',
+      'rate_per_hour': 500.0,
+      'work_sample_urls': null,
+      'portfolio_urls': null,
+      'resume_url': null,
+      'jobs_completed_count': 0,
+      'list_as_freelancer': true,
+      'jobs_posted_count': 1,
+      'average_rate_offered': 1201.0,
+    },
+  ];
   const handleHireClick = () => {
     const id = localStorage.getItem('job_id');
     // Construct the URL for the API endpoint
@@ -163,10 +192,10 @@ const FreelancerProfileViewByEmployerPage = () => {
       <div className="flex-grow">
         <div className="flex flex-col md:flex-row justify-center md:space-x-20 bg-[#1A0142] 2xl:h-[913px] pt-10">
           <EditProfileCard
-            // toHire={toHire}
+            meData={dummydata}
             isEmployerProfile={false}
           />
-          <ProfileDetails description="Looking for freelancers for more than a year of experience" />
+          <ProfileDetails meData={dummydata} description="Looking for freelancers for more than a year of experience" />
 
           <div className="flex flex-col items-center  sm:space-y-10 text-white space-x-4 pt-8">
             <div className="flex flex-col space-y-4 md:pt-8 font-spaceGrotesk font-semibold text-xl">
