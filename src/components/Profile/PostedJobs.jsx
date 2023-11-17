@@ -67,10 +67,18 @@ const PostedJobs = () => {
       handleBrowseJobsPosted();
     }
   };
+  const redirectToJobDetails=(jobData)=>{
+    const browseJobsInDetails = '/browseJobsInDetails';
+    navigate(browseJobsInDetails, {
+      state: {
+        jobData: jobData, // Pass jobData as state
+      },
+    });
+  };
   return (
     <div className='overflow-y-scroll scrollbar-hide lg:h-[650px] w-full flex flex-col items-center' ref={scrollableJobs} >
       {jobs.map((job, index) => (
-        <SkillsRequiredCard key={index} isFreelancer={false} jobData={job} onClick={() => navigate('/browseJobsInDetails')} isActive={true}/>
+        <SkillsRequiredCard key={index} isFreelancer={false} jobData={job} onClick={() => redirectToJobDetails(job)} isActive={true}/>
       ))}
     </div>
   );

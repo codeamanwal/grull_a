@@ -45,9 +45,9 @@ const EditProfile = ({userMode, setUserMode}) => {
 
       <div className="flex flex-col items-center  sm:space-y-10 text-white space-x-4 pt-8">
         <div className="flex flex-col space-y-4   font-spaceGrotesk font-semibold text-xl">
-          <button className="sm:px-8 sm:py-4  text-center p-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent" onClick = {()=> { !AuthService.isFreelancer()?navigate('/myjobs'):null }}>
+          {/* <button className="sm:px-8 sm:py-4  text-center p-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent" onClick = {()=> { !AuthService.isFreelancer()?navigate('/myjobs'):null }}>
             {AuthService.isFreelancer() ? 'Find Jobs': 'Manage Jobs'}
-          </button>
+          </button> */}
           <p onClick={handleUserModeChange} className="text-purple-600 text-base font-spaceGrotesk font-medium cursor-pointer">
             {AuthService.isFreelancer() ? 'SWITCH TO EMPLOYER' : 'SWITCH TO FREELANCER'}
           </p>
