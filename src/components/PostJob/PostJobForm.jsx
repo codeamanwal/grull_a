@@ -46,7 +46,7 @@ const PostJobForm = ({jobData,editJob}) => {
       const response = editJob?axiosPatch(`/api/v0/jobs/${jobData.id}`,requestData):axiosPost('/api/v0/jobs',requestData)
       if(response){
        
-        navigate('/editProfile')
+        navigate('/my-profile')
       }
 
 
@@ -240,7 +240,7 @@ const PostJobForm = ({jobData,editJob}) => {
                 id="currency"
                 className="bg-[#1A0142] border border-solid border-[#B1B1B1] rounded-lg text-white sm:text-sm sm:p-4 p-2 sm:w-full"
               >
-                <option value="USD">USD</option>
+                {/* <option value="USD">USD</option> */}
                 <option value="INR">INR</option>
               </select>
             </Form.Item>

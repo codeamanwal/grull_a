@@ -58,7 +58,7 @@ const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
               {isFreelancer ? (
                                 <li className="">
                                   <Link
-                                    to={isFreelancer ? '/browseJobs' : '/browseFreelancers'}
+                                    to={isFreelancer ? '/jobs' : '/freelancers'}
                                     className="text-white hover:text-gray-400 font-semibold text-base sm:text-xl inline-block"
                                   >
                                         BROWSE JOBS
@@ -67,7 +67,7 @@ const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
                             ) : (
                                 <li className="sm:w-auto w-1/4 mr-3">
                                   <Link
-                                    to={isFreelancer ? '/browseJobs' : '/browseFreelancers'}
+                                    to={isFreelancer ? '/jobs' : '/freelancers'}
                                     className="text-white hover:text-gray-400 font-semibold text-sm sm:text-xl inline-block"
                                   >
                                         BROWSE FREELANCER
@@ -77,7 +77,7 @@ const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
               { !isFreelancer && (
                 <li className="sm:w-auto  w-1/12 mr-3">
                   <Link
-                    to="/postJob"
+                    to="/post-job"
                     className="text-white hover:text-gray-400 font-semibold text-sm sm:text-xl inline-block"
                   >
                                         POST JOBS
@@ -111,7 +111,7 @@ const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
                                           <Link
                                             to={
                                               {
-                                                pathname: '/editProfile',
+                                                pathname: '/my-profile',
                                               }
                                             }
                                             className="block px-4 py-1 text-sm leading-5 text-gray-800 hover:bg-gray-100"

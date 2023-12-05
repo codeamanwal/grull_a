@@ -33,7 +33,7 @@ const LoginSignUpHeader = () => {
               </li>
               <li>
                 <a
-                  href="/signUpOption"
+                  href="/signup-option"
                   className="text-white hover:text-gray-400 font-semibold sm:text-xl text-sm leading-4 sm:leading-6"
                 >
                   SIGN UP

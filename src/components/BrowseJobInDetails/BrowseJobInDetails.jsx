@@ -19,7 +19,7 @@ const BrowseJobInDetails = ({ isOpen, setIsOpen, jobData, jobs }) => {
     setEditJob(!editJob);
   };
   const redirecttoFreelanceApplications = () => {
-    navigate("/freelancerApplicationView", {
+    navigate("/freelancers-applications", {
       state: {
         jobId: jobData.id,
       },
@@ -42,7 +42,7 @@ const BrowseJobInDetails = ({ isOpen, setIsOpen, jobData, jobs }) => {
 
       if (responseData.success) {
         openNotificationWithIcon("success", "Job deleted successfully");
-        navigate("/editProfile");
+        navigate("/my-profile");
       } else {
         openNotificationWithIcon("error", "Something went wrong");
       }

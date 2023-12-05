@@ -10,7 +10,7 @@ const ProfileViewCard = ({userProfileImg, userName, id, userData}) => {
   const accessToken = AuthService.getToken();
   const navigate = useNavigate();
   const viewProfile=()=>{
-    navigate('/freelancerProfileViewByEmployer', {
+    navigate('/freelancer-profile', {
       state: {
         userProfile: userData,
       },

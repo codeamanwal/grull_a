@@ -18,7 +18,7 @@ const AuthLayout = ({onlyAuthorized}) => {
   }
 
   if (AuthService.isLoggedIn()) {
-    return <Navigate to={'/LoggedInPage'} replace />;
+    return <Navigate to={'/home'} replace />;
   }
   
   return <Outlet />;

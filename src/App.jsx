@@ -43,10 +43,10 @@ function App() {
         <Route element={<AuthLayout onlyAuthorized={false}/>}>
           {/* Only unauthorized Routes go here.*/}
           <Route path="/" element={<LandingPage isLoggedIn={false} />} />
-          <Route path="/signUpOption" element={<SignUpOptionPage />} />
-          <Route path="/signUpEnterOtp" element={<LoginSignUpModalPage otp={false} welcome={false} />} />
-          <Route path="/logInRequestOtp" element={<LoginSignUpModalPage otp={true} welcome={true} />} />
-          <Route path="/logInEnterOtp" element={<LoginSignUpModalPage otp={false} welcome={true} />} />
+          <Route path="/signup-option" element={<SignUpOptionPage />} />
+          <Route path="/signup-enter-otp" element={<LoginSignUpModalPage otp={false} welcome={false} />} />
+          <Route path="/login-request-otp" element={<LoginSignUpModalPage otp={true} welcome={true} />} />
+          <Route path="/login-enter-otp" element={<LoginSignUpModalPage otp={false} welcome={true} />} />
           <Route
             path="/signup"
             element={<LoginSignUpModalPage welcome={false} />}
@@ -61,47 +61,37 @@ function App() {
           <Route path="/" element={<LandingPage isLoggedIn={true} />} />
           <Route path="/logout" element={<LandingPage logout={true} />} />
           <Route
-            path="/LoggedInPage"
+            path="/home"
             element={
               <LandingPage
                 isLoggedIn={true}
-              />
-            }
-          />
-          <Route
-            path="/employerLoggedInPage"
-            element={
-              <LandingPage
-                isLoggedIn={true}
-                category="FREELANCERS"
-                isFreelancer={false}
               />
             }
           />
 
-          <Route path="/editProfile" element={<EditProfilePage />} />
-          <Route path="/ApplyProposalPage" element={<ApplyProposalPage />} />
-          <Route path="/freelancerInDetail" element={<FreelancerInDetail />} />
+          <Route path="/my-profile" element={<EditProfilePage />} />
+          <Route path="/apply-proposal-page" element={<ApplyProposalPage />} />
+          <Route path="/freelancer-in-detail" element={<FreelancerInDetail />} />
           <Route
-            path="/browseJobsInDetails"
+            path="/browse-jobs-in-details"
             element={<BrowseJobInDetailsPage />}
           />
           <Route
-            path="/freelancerEmptyProfile"
+            path="/freelancer-empty-profile"
             element={<FreelancerEmptyProfilePage />}
           />
 
           {/* employer pages */}
-          <Route path="/postJob" element={<PostJobPage />} />
-          <Route path="/browseFreelancers" element={<BrowseFreelancersPage />} />
-          <Route path="/freelancerProfileViewByEmployer" element={<FreelancerProfileViewByEmployerPage />} />
+          <Route path="/post-job" element={<PostJobPage />} />
+          <Route path="/freelancers" element={<BrowseFreelancersPage />} />
+          <Route path="/freelancer-profile" element={<FreelancerProfileViewByEmployerPage />} />
           <Route path="/employerBrowsingPostedJobs" element={<EmployerBrowsingPostedJobsPage />} />
-          <Route path="/freelancerApplicationView" element={<FreelancerApplicationViewPage />} />
+          <Route path="/freelancers-applications" element={<FreelancerApplicationViewPage />} />
           <Route path='/AccountDetailsPage' element={<AccountDetailsPage/>}/>
         </Route>
 
-        <Route path="/browseJobs" element={<BrowseJobsPage />} />
-        <Route path="/freelancerFileSharingPage" element={<FreelancerFileSharingPage/>}/>
+        <Route path="/jobs" element={<BrowseJobsPage />} />
+        <Route path="/jobs-progress-status" element={<FreelancerFileSharingPage/>}/>
         <Route path = "/BillsAndPaymentsPage" element={<BillsAndPaymentsPage/>}/>
         <Route path="/EditCardDetailsPage" element={<EditCardDetailsPage/>}/>
         <Route path="/myjobs" element={<MyJobs/>}/>

@@ -64,14 +64,14 @@ const FreelanceApplication = () => {
                             <textarea
                               id="description"
                               rows="4"
-                              className="bg-[#1A0142] border border-solid border-purple-500 rounded-lg text-gray-900 sm:text-sm p-4 w-full"
+                              className="bg-[#1A0142] border border-solid border-purple-500 rounded-lg text-white sm:text-sm p-4 w-full"
                               placeholder="Enter answer here"
                             ></textarea>
                         ) : (
                             <textarea
                               id="description"
                               rows="6"
-                              className="bg-[#1A0142] border border-solid border-purple-500 rounded-lg text-gray-900 sm:text-sm p-4 w-full"
+                              className="bg-[#1A0142] border border-solid border-purple-500 rounded-lg text-white sm:text-sm p-4 w-full"
                               placeholder="Enter answer here"
                             ></textarea>
                         )}
@@ -110,27 +110,26 @@ const FreelanceApplication = () => {
             <div className="grid grid-cols-8 gap-4">
               <div className="col-span-2">
                 <div className="flex items-center">
-                  <input
+                <select
+                    id="currency"
+                    className="p-2 bg-white border border-solid border-gray-300 rounded w-full text-black"
+                  >
+                    <option value="USD">INR</option>
+                    {/* <option value="EUR">EUR</option> */}
+                    {/* Add more currency options here */}
+                  </select>
+                </div>
+              </div>
+              <div className="col-span-2">
+                <div className="flex items-center">
+                <input
                     type="number"
                     id="rate"
                     value={rate}
                     onChange={handleRateChange}
-                    className="p-2 bg-white border border-solid border-gray-300 rounded w-full"
-                    placeholder="USD"
-                  />
-                </div>
-              </div>
-
-              <div className="col-span-2">
-                <div className="flex items-center">
-                  <select
-                    id="currency"
-                    className="p-2 bg-white border border-solid border-gray-300 rounded w-full"
-                  >
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                    {/* Add more currency options here */}
-                  </select>
+                    className="p-2 bg-white border border-solid border-gray-300 rounded w-full text-black"
+                    placeholder="INR"
+                  />       
                 </div>
               </div>
             </div>

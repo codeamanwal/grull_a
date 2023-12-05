@@ -53,7 +53,7 @@ const EmployerEmptyProfile = () => {
   //     });
 
   //     console.log("firstname for edit profile", firstName),
-  //     navigate("/editProfile", {
+  //     navigate("/my-profile", {
         
   //       state: {
   //         firstName,
