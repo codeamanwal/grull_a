@@ -3,15 +3,16 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import config from 'react-global-configuration';
 import { Button, Checkbox, Form, Input, Select, Tag } from "antd";
-import { axiosPost } from "../../utils/services/axios";
+import { axiosPatch, axiosPost } from "../../utils/services/axios";
 import { useNavigate } from "react-router-dom";
 const { Option } = Select;
 
-const PostJobForm = () => {
+const PostJobForm = ({jobData,editJob}) => {
+  console.log(editJob)
   const [form] = Form.useForm();
   const navigate = useNavigate();
-  const [selectedSkills, setSelectedSkills] = useState([]);
-  const [urls,setSelectedUrls] = useState([]);
+  const [selectedSkills, setSelectedSkills] = useState(jobData?.required_skills?jobData.required_skills:[]);
+  const [urls,setSelectedUrls] = useState(jobData?.reference_files_urls?jobData.reference_files_urls:[]);
   var validUrls = [];
   const urlRegex = /^(?:(?:https?|ftp):)?\/\/(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S)?$/;
   const handleChange = (selectedItems) => {
@@ -20,29 +21,29 @@ const PostJobForm = () => {
   const handleUrlChange=(selectedItems)=>{
     console.log(selectedItems)
     validUrls = selectedItems.filter(validateUrl);
+    setSelectedUrls(validUrls)
   };
   useEffect(()=>{
     setSelectedUrls(validUrls);
-  },[validUrls])
+  },[])
   const validateUrl = (value) => {
     return urlRegex.test(value);
   };
   const onFinish = async (values) => {
-   
     try {
       const requestData = {
         "title": values.title,
         "description": values.jobDescription,
-        "rate_per_hour": 0,
+        "rate_per_hour": values.budgetValue,
         "required_skills": selectedSkills,
         "location": values.location,
         "category": values.category,
         "company_name": values.companyName,
         "company_description": values.aboutCompany,
         "duration": 0,
-        "reference_files_urls": urls,
+        "reference_files_urls": values.files,
       }
-      const response = axiosPost('/api/v0/jobs',requestData)
+      const response = editJob?axiosPatch(`/api/v0/jobs/${jobData.id}`,requestData):axiosPost('/api/v0/jobs',requestData)
       if(response){
        
         navigate('/editProfile')
@@ -62,11 +63,22 @@ const PostJobForm = () => {
       <Form
         layout={'vertical'}
         form={form}
-
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         className="grid sm:grid-cols-8 sm:gap-6 gap-3"
         name="basic"
+        initialValues={{
+          title: jobData?.title || "", // Set the initial value for the "title" field
+          tags:jobData?.required_skills||"",
+          category:jobData?.category||"",
+          location:jobData?.location||"",
+          duration:jobData?.duration||"",
+          companyName:jobData?.company_name||"",
+          aboutCompany:jobData?.company_description||"",
+          jobDescription:jobData?.description||"",
+          budgetValue:jobData?.rate_per_hour||"",
+          budget:jobData?.rate_per_hour||"",
+        }}
       >
         {/* Title */}
         <Form.Item
@@ -75,8 +87,9 @@ const PostJobForm = () => {
           className="sm:col-span-4 flex flex-col space-y-2 justify-center"
           label="Title"
           
+          
         >
-          <Input placeholder="Enter" className="bg-[#1A0142] border border-solid border-[#B1B1B1] rounded-lg text-white sm:text-sm sm:p-4  p-2 sm:w-full"/>
+          <Input value={jobData?.title?jobData.title:''} placeholder="Enter" className="bg-[#1A0142] border border-solid border-[#B1B1B1] rounded-lg text-white sm:text-sm sm:p-4  p-2 sm:w-full"/>
         </Form.Item>
 
         {/* Add Skills Required */}
@@ -85,6 +98,7 @@ const PostJobForm = () => {
       rules={[{ required: true, message: 'Please enter skills' }]}
       className="sm:col-span-4 flex flex-col space-y-2 justify-center"
       label="Add Skills Required"
+      initialValue={jobData?.required_skills||[]}
     >
       <Select
         mode="tags"
@@ -110,6 +124,7 @@ const PostJobForm = () => {
           rules={[{ required: true, message: "Please select the category" }]}
           className="sm:col-span-4 flex flex-col space-y-2 justify-center text-white"
           label={'Job Category'}
+          
         >
             <select
               id="category"
@@ -132,6 +147,7 @@ const PostJobForm = () => {
           rules={[{ required: true, message: "Please upload files" }, { pattern:urlRegex,message:'Please enter a valid url' }]}
           label="Reference Files"
           className="sm:col-span-4 flex flex-col space-y-2 justify-center text-white"
+          initialValue={jobData?.reference_files_urls||[]}
         >
         <Select
         mode="tags"
@@ -288,7 +304,7 @@ const PostJobForm = () => {
             className="text-white sm:text-2xl text-base font-semibold p-3 mt-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent sm:py-2 sm:w-full"
             htmlFor="submit"
           >
-            POST JOB
+            {editJob?"EDIT JOB":"POST JOB"}
           </button>
         </Form.Item>
       </Form>

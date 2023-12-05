@@ -5,11 +5,14 @@ import EditProfileCard from '../../components/Profile/EditProfileCard';
 import ProfileDetails from '../../components/Profile/ProfileDetails';
 import config from 'react-global-configuration';
 import AuthService from '../../Services/AuthService';
+import {useLocation} from 'react-router-dom';
 
 const FreelancerProfileViewByEmployerPage = () => {
   const [successMessage, setSuccessMessage] = useState(''); // Track success message
   const [isPopupVisible, setIsPopupVisible] = useState(false); // Track popup visibility
   const accessToken = AuthService.getToken();
+  const location = useLocation();
+  const dummydata = location?.state?.userProfile?.employee||[];
   const handleHireClick = () => {
     const id = localStorage.getItem('job_id');
     // Construct the URL for the API endpoint
@@ -26,7 +29,7 @@ const FreelancerProfileViewByEmployerPage = () => {
       // body: JSON.stringify({}),
     })
         .then((response) => {
-          if (response.ok) {
+          if (response.success) {
           // Handle success
             console.log('Hired successfully');
             setIsHiring(true); // Set a state variable to indicate the hiring action
@@ -62,7 +65,7 @@ const FreelancerProfileViewByEmployerPage = () => {
       // body: JSON.stringify({}),
     })
         .then((response) => {
-          if (response.ok) {
+          if (response.success) {
           // Handle success
             console.log('Application accepted successfully');
             setIsHiring(true); // Set a state variable to indicate the hiring action
@@ -163,10 +166,10 @@ const FreelancerProfileViewByEmployerPage = () => {
       <div className="flex-grow">
         <div className="flex flex-col md:flex-row justify-center md:space-x-20 bg-[#1A0142] 2xl:h-[913px] pt-10">
           <EditProfileCard
-            // toHire={toHire}
+            meData={dummydata}
             isEmployerProfile={false}
           />
-          <ProfileDetails description="Looking for freelancers for more than a year of experience" />
+          <ProfileDetails meData={dummydata} employerViewProfile={true} description="Looking for freelancers for more than a year of experience" />
 
           <div className="flex flex-col items-center  sm:space-y-10 text-white space-x-4 pt-8">
             <div className="flex flex-col space-y-4 md:pt-8 font-spaceGrotesk font-semibold text-xl">

@@ -2,30 +2,59 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import config from 'react-global-configuration';
 import AuthService from '../../Services/AuthService';
-
-const ProfileViewCard = ({userProfileImg, userName}) => {
+import {useNavigate} from 'react-router-dom';
+const ProfileViewCard = ({userProfileImg, userName, id, userData}) => {
+  console.log(userData);
   const [successMessage, setSuccessMessage] = useState(''); // Track success message
   const [isPopupVisible, setIsPopupVisible] = useState(false); // Track popup visibility
   const accessToken = AuthService.getToken();
-  const confirmSalaryNegotiation = () => {
-    const id = localStorage.getItem('job_id');
-
-
-    // Construct the URL for the API endpoint
-    const apiUrl = `${config.get('BACKEND_URL')}/api/v0/applications/${id}/confirm-negotiation`;
-
-    // Make a POST request to accept the application
+  const navigate = useNavigate();
+  const viewProfile=()=>{
+    navigate('/freelancerProfileViewByEmployer', {
+      state: {
+        userProfile: userData,
+      },
+    });
+  };
+  const confirmApplication = () => {
+    const apiUrl = `${config.get('BACKEND_URL')}/api/v0/applications/${id}/accept`;
     fetch(apiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`,
       },
-      // Add any request body data if required
-      // body: JSON.stringify({}),
     })
         .then((response) => {
-          if (response.ok) {
+          if (response.success) {
+          // Handle success
+            console.log('Application rejected successfully');
+            setIsHiring(true); // Set a state variable to indicate the hiring action
+            setSuccessMessage('Application accepted successfully'); // Set success message
+          } else {
+          // Handle error
+            console.error('Failed to reject application');
+            setSuccessMessage('Failed to accept application'); // Set error message
+          }
+          setIsPopupVisible(true); // Show the popup whether it's success or error
+        })
+        .catch((error) => {
+          console.error('Network error:', error);
+          setSuccessMessage('Network error'); // Set error message
+          setIsPopupVisible(true); // Show the popup for network errors
+        });
+  };
+  const rejectApplication = () => {
+    const apiUrl = `${config.get('BACKEND_URL')}/api/v0/applications/${id}/reject`;
+    fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`,
+      },
+    })
+        .then((response) => {
+          if (response.success) {
           // Handle success
             console.log('Application rejected successfully');
             setIsHiring(true); // Set a state variable to indicate the hiring action
@@ -33,35 +62,38 @@ const ProfileViewCard = ({userProfileImg, userName}) => {
           } else {
           // Handle error
             console.error('Failed to reject application');
-            setSuccessMessage('Failed to cancel application'); // Set error message
+            setSuccessMessage('Failed to reject application'); // Set error message
           }
           setIsPopupVisible(true); // Show the popup whether it's success or error
         })
         .catch((error) => {
-        // Handle network error
           console.error('Network error:', error);
           setSuccessMessage('Network error'); // Set error message
           setIsPopupVisible(true); // Show the popup for network errors
         });
   };
-
   return (
     <div className="flex sm:px-6 sm:py-3 px-2  text-white">
       <div className="flex flex-col items-center space-y-2 xl:space-y-6 bg-[#482773] rounded-lg lg:mt-0 xl:p-10 m-4 py-3">
         <img className="rounded-full sm:h-72 sm:w-72 w-36 h-36 p-2" src={userProfileImg} alt="author avatar" />
-        <div className="text-center font-bold sm:text-2xl text-xl font-spaceGrotesk">{userName}</div>
-        <div className="sm:text-xl text-base font-GeneralSans font-normal">30USD/Per Hour</div>
+        <div className="text-center font-bold sm:text-2xl text-xl font-spaceGrotesk">{userData?.employee?.full_name}</div>
+        <div className="sm:text-xl text-base font-GeneralSans font-normal">{userData?.employee?.rate_per_hour}</div>
         <div className=" text-base text-center font-GeneralSans font-normal">
-          I have had an inclination towards art and design since childhood and have grown to have a high level of liking and skill set to nurture this talent. A sense of aesthetics always came
-          naturally to me
+          {userData?.proposal}
         </div>
-
-        <div className="flex flex-col space-y-6">
+        <button className="text-white text-center text-xl font-medium rounded shadow bg-gradient-to-l from-purple-400 to-transparent py-2 w-full " onClick={viewProfile}>
+            View Profile
+        </button>
+        <div className='flex justify-between w-full'>
+          <button className="text-green-400 text-sm" onClick={confirmApplication}>Accept Application</button>
+          <button className="text-red-500 text-sm" onClick={rejectApplication}>Reject Application</button>
+        </div>
+        {/* <div className="flex flex-col space-y-6">
           <p className="text-[#b27ee3] text-xl font-normal">VIEW SAMPLE WORK</p>
           <button className="text-white text-center text-xl font-medium rounded shadow bg-gradient-to-l from-purple-400 to-transparent py-2 w-full " onClick={confirmSalaryNegotiation}>
             MESSAGE
           </button>
-        </div>
+        </div> */}
         {/* Conditionally render the popup */}
         {isPopupVisible && (
           <div id="Popup" className="popup" style={{zIndex: 7}}>
@@ -106,6 +138,8 @@ const ProfileViewCard = ({userProfileImg, userName}) => {
 ProfileViewCard.propTypes = {
   userProfileImg: PropTypes.string,
   userName: PropTypes.string,
+  id: PropTypes.string,
+  userData: PropTypes.obj,
 };
 
 export default ProfileViewCard;
