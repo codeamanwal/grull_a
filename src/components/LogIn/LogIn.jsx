@@ -80,7 +80,7 @@ const LoginForm = () => {
           .then(json => {
             AuthService.setUserMode(json.list_as_freelancer? AuthService.FREELANCER_MODE: AuthService.EMPLOYER_MODE);
             const isFreelancer = AuthService.isFreelancer();
-            navigate("/LoggedInPage", { state: { isFreelancer, category: isFreelancer ? "FREELANCER" : "JOBS" } });
+            navigate("/home", { state: { isFreelancer, category: isFreelancer ? "FREELANCER" : "JOBS" } });
             return true;
           })
           .catch(error => console.error(error));
@@ -153,7 +153,7 @@ const LogIn = () => {
       <div className="flex flex-col items-center">
         <p className="text-lg">
           Don&apos;t have an account?
-          <a href="/signUpOption">
+          <a href="/signup-option">
             <span className="text-purple-700"> Sign Up</span>
           </a>
         </p>

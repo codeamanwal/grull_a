@@ -80,7 +80,7 @@ const FreelancerInDetail = ({ firstName, lastName, description, toHire }) => {
               <div className="border-b-2 border-gray-300 w-64 m-2"></div>
               <div className="flex flex-col space-y-2">
                 <p>Learn more</p>
-                <a href="/freelancerProfileViewByEmployer" className="text-white text-center text-xl font-medium rounded shadow bg-gradient-to-l from-purple-400 to-transparent py-2 w-full">
+                <a href="/freelancer-profile" className="text-white text-center text-xl font-medium rounded shadow bg-gradient-to-l from-purple-400 to-transparent py-2 w-full">
                   HIRE
                 </a>
               </div>

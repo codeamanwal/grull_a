@@ -15,7 +15,7 @@ const SkillsRequiredCard = ({ isFreelancer, jobData ,onClick,isActive}) => {
   const [title, setTitle] = useState('');
   const accessToken = AuthService.getToken();
   const redirect = ()=>{
-    const browseJobsInDetails = '/browseJobsInDetails';
+    const browseJobsInDetails = '/browse-jobs-in-details';
 
     // Pass both paths and states in a single navigate call
     navigate(
@@ -42,7 +42,7 @@ const SkillsRequiredCard = ({ isFreelancer, jobData ,onClick,isActive}) => {
 
       const data = await response.json();
 
-      // const browseJobs = "/browseJobsInDetails";
+      // const browseJobs = "/browse-jobs-in-details";
 
       // // Pass jobData as state to the next route using navigate
       // navigate(browseJobs, {
@@ -51,7 +51,7 @@ const SkillsRequiredCard = ({ isFreelancer, jobData ,onClick,isActive}) => {
       //     title: data.title
       //   },
       // });
-      const browseJobsInDetails = '/browseJobsInDetails';
+      const browseJobsInDetails = '/browse-jobs-in-details';
 
       // Pass jobData as state to the next route using navigate
       navigate(browseJobsInDetails, {
@@ -124,7 +124,7 @@ const SkillsRequiredCard = ({ isFreelancer, jobData ,onClick,isActive}) => {
           {isFreelancer ? (
         <div className="sm:p-8 mt-6 space-y-4">
           {/* <Link to={{
-  pathname: "/browseJobsInDetails",
+  pathname: "/browse-jobs-in-details",
 }}> */}
           <p className="sm:text-lg text-sm text-[#B37EE2]">NON-NEGOTIABLE</p>
           {/* </Link> */}

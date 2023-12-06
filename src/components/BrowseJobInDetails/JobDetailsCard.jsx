@@ -100,7 +100,7 @@ const JobDetailsCard = ({isFreelancer, jobData}) => {
             </div>
           </div>
           {isFreelancer && (
-  <Link to="/ApplyProposalPage">
+  <Link to="/apply-proposal-page">
     <button className="text-white sm:text-2xl  px-8 py-3  text-base font-medium sm:py-4 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
       APPLY
     </button>
