@@ -13,6 +13,7 @@ const SkillsRequiredCard = ({ isFreelancer, jobData ,onClick,isActive}) => {
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
   const accessToken = AuthService.getToken();
+  console.log(jobData);
   const redirect = ()=>{
     const browseJobsInDetails = `/jobs/${jobData.id}`;
 
@@ -139,7 +140,7 @@ const SkillsRequiredCard = ({ isFreelancer, jobData ,onClick,isActive}) => {
       ) : (
         <>
         <div className="sm:p-8 p-3 space-y-4">
-            <p className="text-lg text-[#B37EE2]">12 FREELANCERS APPLIED</p>
+            <p className="text-lg text-[#B37EE2]">{jobData.job_applicants_count} FREELANCERS APPLIED</p>
   
 
           {isActive ? (

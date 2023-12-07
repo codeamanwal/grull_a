@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import {grullLogo, bell} from '../Assets';
 import AuthService from '../../Services/AuthService';
 import fetchMeData from '../../Services/User';
-
+import {CiWallet} from 'react-icons/ci';
 const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -118,6 +118,9 @@ const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
                                           >
                                                     Manage Profile
                                           </Link>
+                                        </li>
+                                        <li className="px-4 py-1 text-sm leading-5 text-gray-800 hover:bg-gray-100 flex items-center">
+                                          <CiWallet className='mr-2'/> Wallet Balance - {userData.wallet_balance}
                                         </li>
                                         <hr className="flex justify-center items-center w-3/4 ml-4 my-2 border-1 border-black" />
                                         <li>

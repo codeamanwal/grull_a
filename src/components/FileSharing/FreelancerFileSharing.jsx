@@ -40,7 +40,7 @@ const FreelancerFileSharing = () => {
           <div className="sm:w-4/5 w-5/6 h-10 flex-shrink-0 border border-solid border-purple-500 rounded-lg bg-purple-300 relative">
             <div
               className="bg-green-500 rounded-lg absolute top-0 left-0 bottom-0"
-              style={{width: '75%'}}
+              style={{width: '0%'}}
             ></div>
           </div>
           <div className="flex flex-row justify-between text-white sm:text-base text-sm font-GeneralSans sm:leading-24 pt-4 sm:w-4/5 w-1/2 sm:space-x-4 space-x-5 ">
@@ -62,19 +62,19 @@ const FreelancerFileSharing = () => {
             </p>
             <div className="flex justify-between space-x-2 sm:space-x-10 w-full sm:w-3/4">
               <button className="bg-purple-900 bg-opacity-70 border border-solid text-sm border-purple-500 rounded-lg text-purple-500  sm:p-4 w-full sm:w-1/3">
-                Upload Files
+                {isFreelancer?'Upload Files':'Download Files'}
               </button>
               <button className="bg-purple-900 bg-opacity-70 border border-solid border-purple-500 rounded-lg p-2 sm:p-4 w-full sm:w-1/3">
                 {!isFreelancer?'Add Comments':'Review Comments'}
               </button>
               <button className="bg-purple-500 bg-opacity-70 border border-solid border-purple-500 rounded-lg p-2 sm:p-4 w-full sm:w-1/3">
-                Approve
+                {isFreelancer?'Request for approval':'Approve'}
               </button>
             </div>
           </div>
           <div className="flex flex-row-reverse font-GeneralSans w-full sm:w-5/6">
             <button className="bg-purple-900 bg-opacity-70 border border-solid border-purple-500 rounded-lg p-2 sm:p-4 w-full sm:w-1/4">
-              Release Payment
+              {isFreelancer?'Request for milestone':'Release Payment'}
             </button>
           </div>
         </div>

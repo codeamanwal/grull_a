@@ -2,10 +2,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import JobDetailsCard from "./JobDetailsCard";
-import { ClosedChatBox, OpenedChatBox, PostJobForm } from "../../components";
-import { downarrow } from "../../components/Assets";
-import { Link, redirect, useLocation, useNavigate } from "react-router-dom";
-import config from "react-global-configuration";
+import { PostJobForm } from "../../components";
+import { Link,  useNavigate } from "react-router-dom";
 import JobDetailsCardForEmployer from "./JobDetailsCardForEmployer";
 import AuthService from "../../Services/AuthService";
 import { axiosDelete } from "../../utils/services/axios";
@@ -15,8 +13,8 @@ const BrowseJobInDetails = ({ isOpen, setIsOpen, jobData, jobs }) => {
   const navigate = useNavigate();
   const isFreelancer = AuthService.isFreelancer();
   const [editJob, setEditJob] = useState(false);
-  const [trackProgress,setTrackProgress] = useState(true);
-  const [myjob,setMyJob] = useState(true)
+  const [trackProgress,setTrackProgress] = useState(false);
+  const [myjob,setMyJob] = useState(false)
   const editPostedJob = () => {
     setEditJob(!editJob);
   };
@@ -71,7 +69,7 @@ const BrowseJobInDetails = ({ isOpen, setIsOpen, jobData, jobs }) => {
       )}
       {isFreelancer ? (
         <div className="flex sm:flex-col flex-wrap sm:justify-start sm:space-y-10">
-           {myjob&&<Link to='/my-profile'><button className="text-white sm:text-xl font-semibold sm:px-12 sm:py-2 px-4 py-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent" onClick={redirect}>TRACK JOB PROGRESS</button></Link>}
+           {myjob&&<button className="text-white sm:text-xl font-semibold sm:px-12 sm:py-2 px-4 py-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent" onClick={redirect}>TRACK JOB PROGRESS</button>}
           <Link to='/my-profile'><button className="text-white sm:text-xl font-semibold sm:px-12 sm:py-2 px-4 py-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent" >MANAGE PROFILE</button></Link>
           <Link to='/jobs'><button className="text-white sm:text-xl font-semibold sm:px-8 sm:py-2 px-4 py-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">BROWSE MORE JOBS</button></Link>
         </div>
