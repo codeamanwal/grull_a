@@ -5,6 +5,7 @@ import config from 'react-global-configuration';
 import { Button, Checkbox, Form, Input, Select, Tag } from "antd";
 import { axiosPatch, axiosPost } from "../../utils/services/axios";
 import { useNavigate } from "react-router-dom";
+import { openNotificationWithIcon } from "../../utils/openNotificationWithIcon";
 const { Option } = Select;
 
 const PostJobForm = ({jobData,editJob}) => {
@@ -45,7 +46,7 @@ const PostJobForm = ({jobData,editJob}) => {
       }
       const response = editJob?axiosPatch(`/api/v0/jobs/${jobData.id}`,requestData):axiosPost('/api/v0/jobs',requestData)
       if(response){
-       
+        editJob?openNotificationWithIcon('success','Job edited successfully'):openNotificationWithIcon('success','Job posted successfully');
         navigate('/my-profile')
       }
 
@@ -65,7 +66,7 @@ const PostJobForm = ({jobData,editJob}) => {
         form={form}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
-        className="grid sm:grid-cols-8 sm:gap-6 gap-3"
+        className="lg:grid sm:grid-cols-8 sm:gap-6 gap-3"
         name="basic"
         initialValues={{
           title: jobData?.title || "", // Set the initial value for the "title" field
@@ -89,7 +90,7 @@ const PostJobForm = ({jobData,editJob}) => {
           
           
         >
-          <Input value={jobData?.title?jobData.title:''} placeholder="Enter" className="bg-[#1A0142] border border-solid border-[#B1B1B1] rounded-lg text-white sm:text-sm sm:p-4  p-2 sm:w-full"/>
+          <input value={jobData?.title?jobData.title:''} style={{color:'white'}}placeholder="Enter" className="bg-[#1A0142] border border-solid border-[#B1B1B1] rounded-lg text-white sm:text-sm sm:p-4  p-2 sm:w-full"/>
         </Form.Item>
 
         {/* Add Skills Required */}
@@ -155,7 +156,7 @@ const PostJobForm = ({jobData,editJob}) => {
         onChange={handleUrlChange}
         value={urls}
         tokenSeparators={[',']}
-        className="bg-[#1A0142] border border-solid border-[#B1B1B1]  rounded-lg text-gray-900 sm:text-sm sm:p-3 p-2 sm:w-full postjobsselect text-white"
+        className="bg-[#1A0142] border border-solid border-[#B1B1B1]  rounded-lg sm:text-sm sm:p-3 p-2 sm:w-full postjobsselect text-white"
       >
         {urls.map((tag, index) => (
           <Option key={index} value={tag} onClose={() => handleChange(urls.filter(item => item !== tag))} >

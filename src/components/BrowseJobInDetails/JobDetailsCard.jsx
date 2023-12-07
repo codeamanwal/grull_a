@@ -4,17 +4,12 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 
-const JobDetailsCard = ({isFreelancer, jobData}) => {
+const JobDetailsCard = ({isFreelancer, jobData,myjob}) => {
 
   if (!jobData) {
     // Render a loading indicator or message when jobData is undefined
     return <div>Loading...</div>;
   }
-
-  console.log("jobData in detailsCard:", jobData);
-  console.log("jobDatapat in detailsCard:", jobData.title);
-
-  
 
   return (
     <div className="sm:w-full md:w-2/3 ">
@@ -37,10 +32,9 @@ const JobDetailsCard = ({isFreelancer, jobData}) => {
             </div>
             <div className="flex flex-wrap flex-col">
               <div className="flex flex-wrap flex-col space-y-2">
-                <p className="font-bold sm:pt-4">COMPANY NAME</p>
+                <p className="font-bold sm:pt-4">{jobData.company_name}</p>
                 <p className="sm:pt-2">
-                                    We are a kids furniture retail company based in Bangalore,
-                                    India with many stores.
+                                    {jobData.company_description}
                 </p>
               </div>
               <p className="sm:pt-12 font-bold text-sm">
@@ -53,21 +47,13 @@ const JobDetailsCard = ({isFreelancer, jobData}) => {
                             SKILLS REQUIRED
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 sm:gap-4 gap-2 sm:pt-4 text-white p-2 text-base">
-              <button className="sm:p-2 s p-1 rounded-md bg-[#B27FE2] ">
-                                Auto CAD
-              </button>
-              <button className="sm:p-2  p-1 rounded-md bg-[#B27FE2]">
-                                MAYA
-              </button>
-              <button className="sm:p-2  p-1 rounded-md bg-[#B27FE2]">
-                                Adobe Dimension
-              </button>
-              <button className="sm:p-2  p-1 rounded-md bg-[#B27FE2]">
-                                Adobe Creative Cloud
-              </button>
-              <button className="sm:p-2  p-1 rounded-md bg-[#B27FE2]">
-                                Photoshop
-              </button>
+            {jobData.required_skills.map((skill) => {
+  return (
+    <button className="sm:p-2 rounded-md bg-[#B27FE2]" key={skill}>
+      {skill}
+    </button>
+  );
+})}
             </div>
           </div>
         </div>
@@ -90,7 +76,7 @@ const JobDetailsCard = ({isFreelancer, jobData}) => {
             <div className=" space-y-4 sm:pt-8 py-4 ml-2">
               <p className="text-white font-semibold pl-4">BUDGET</p>
               <div className="border border-solid border-purple-500 rounded-lg p-2 sm:w-full w-1/2">
-                <p className="text-white sm:text-lg sm:px-2">100-200 USD</p>
+                <p className="text-white sm:text-lg sm:px-2">{jobData.rate_per_hour}</p>
               </div>
               {!isFreelancer && (
                 <p className="text-purple-600 text-base  text-center font-GeneralSans font-medium">
@@ -99,7 +85,8 @@ const JobDetailsCard = ({isFreelancer, jobData}) => {
               )}
             </div>
           </div>
-          {isFreelancer && (
+          {isFreelancer && !myjob&&(
+  
   <Link to="/apply-proposal-page">
     <button className="text-white sm:text-2xl  px-8 py-3  text-base font-medium sm:py-4 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
       APPLY

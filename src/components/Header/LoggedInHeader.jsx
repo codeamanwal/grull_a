@@ -54,12 +54,12 @@ const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
 
         {includeNavBar && (
           <nav className=" flex justify-end sm:pl-6 w-3/4 sm:w-full">
-            <ul className="flex space-x-4 sm:space-x-8 justify-end items-center gap-4 sm:gap-8">
+            <ul className="flex space-x-4 sm:space-x-8 justify-end items-center gap-4 sm:gap-4">
               {isFreelancer ? (
                                 <li className="">
                                   <Link
                                     to={isFreelancer ? '/jobs' : '/freelancers'}
-                                    className="text-white hover:text-gray-400 font-semibold text-base sm:text-xl inline-block"
+                                    className="text-white hover:text-gray-400 font-semibold text-xs sm:text-sm md:text-xl inline-block"
                                   >
                                         BROWSE JOBS
                                   </Link>
@@ -68,7 +68,7 @@ const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
                                 <li className="sm:w-auto w-1/4 mr-3">
                                   <Link
                                     to={isFreelancer ? '/jobs' : '/freelancers'}
-                                    className="text-white hover:text-gray-400 font-semibold text-sm sm:text-xl inline-block"
+                                    className="text-white hover:text-gray-400 font-semibold text-xs sm:text-sm md:text-xl inline-block"
                                   >
                                         BROWSE FREELANCER
                                   </Link>
@@ -78,7 +78,7 @@ const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
                 <li className="sm:w-auto  w-1/12 mr-3">
                   <Link
                     to="/post-job"
-                    className="text-white hover:text-gray-400 font-semibold text-sm sm:text-xl inline-block"
+                    className="text-white hover:text-gray-400 font-semibold text-xs sm:text-sm md:text-xl inline-block"
                   >
                                         POST JOBS
                   </Link>
@@ -87,7 +87,7 @@ const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
 
               <li>
                 <img
-                  className="h-6 w-6 sm:h-8 sm:w-8 object-fit"
+                  className="h-4 w-4 sm:h-8 sm:w-8 object-fit"
                   src={bell}
                   alt="bell"
                 />

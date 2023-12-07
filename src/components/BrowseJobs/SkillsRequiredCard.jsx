@@ -7,7 +7,6 @@ import AuthService from "../../Services/AuthService";
 import { Button } from 'antd';
 
 const SkillsRequiredCard = ({ isFreelancer, jobData ,onClick,isActive}) => {
-  console.log(jobData)
   const [applied, setApplied] = useState(false); // State to keep track of whether applied or not
   const {id} = useParams();
   const navigate = useNavigate();
@@ -15,7 +14,7 @@ const SkillsRequiredCard = ({ isFreelancer, jobData ,onClick,isActive}) => {
   const [title, setTitle] = useState('');
   const accessToken = AuthService.getToken();
   const redirect = ()=>{
-    const browseJobsInDetails = '/browse-jobs-in-details';
+    const browseJobsInDetails = `/jobs/${jobData.id}`;
 
     // Pass both paths and states in a single navigate call
     navigate(
@@ -51,7 +50,7 @@ const SkillsRequiredCard = ({ isFreelancer, jobData ,onClick,isActive}) => {
       //     title: data.title
       //   },
       // });
-      const browseJobsInDetails = '/browse-jobs-in-details';
+      const browseJobsInDetails = `/jobs/${jobData.id}`;
 
       // Pass jobData as state to the next route using navigate
       navigate(browseJobsInDetails, {

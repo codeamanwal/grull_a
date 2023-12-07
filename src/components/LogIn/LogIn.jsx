@@ -5,6 +5,7 @@ import config from "react-global-configuration";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../Services/AuthService";
+import { openNotificationWithIcon } from "../../utils/openNotificationWithIcon";
 const LoginForm = () => {
   const fieldClassNames = "py-2 px-4 border text-xs w-72 h-10 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 m-2";
   const errorClassNames = "text-red-500 text-sm text-center";
@@ -53,12 +54,12 @@ const LoginForm = () => {
           setSubmitting(false);
           if (!result.ok && result.status == 400) {
             setIsIncorrectCredential(true);
+            openNotificationWithIcon('error',"Incorrect credentials")
             return false;
           }
 
           if (!result.ok) {
             const text = await result.text();
-            console.error(`Error(${result.status}): ${text}.`);
             return false;
           }
           const responseData = await result.json();

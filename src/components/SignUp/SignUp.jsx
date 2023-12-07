@@ -5,6 +5,7 @@ import {Formik, Form, Field, ErrorMessage} from 'formik';
 import {Link, useLocation} from 'react-router-dom';
 import config from 'react-global-configuration';
 import getQueryParams from '../utils';
+import { openNotificationWithIcon } from '../../utils/openNotificationWithIcon';
 
 const RegistrationState = ({isEmailAlreadyInUse, isSignUpSuccessful, errorClassNames}) => {
   if (isEmailAlreadyInUse) return <span className={errorClassNames}>This email is already in use.</span>;
@@ -70,6 +71,7 @@ const SignUpForm = () => {
         setSubmitting(false);
         if (!result.ok && result.status == 400) {
           setIsEmailAlreadyInUse(true);
+          openNotificationWithIcon('error','Email is already in use')
           setIsSignUpSuccessful(false);
           return false;
         }
@@ -77,10 +79,12 @@ const SignUpForm = () => {
         if (!result.ok) {
           const text = await result.text();
           console.error(`Error(${result.status}): ${text}.`);
+          openNotificationWithIcon('error',text)
           setIsSignUpSuccessful(false);
           return false;
         }
         setIsEmailAlreadyInUse(false);
+        openNotificationWithIcon('success','User Signed up successfully!');
         setIsSignUpSuccessful(true);
         return true;
       }}
@@ -171,16 +175,11 @@ const SignUp = () => {
       setIsSignUpSuccessful(true);
 
       const responseData = await response.json();
-      console.log('User signed up successfully!');
-      console.log('User details:', responseData);
-
-      // if (responseData.list_as_freelancer) {
-      //   localStorage.setItem("list_as_freelancer", responseData.list_as_freelancer);
-      // }
-
+      openNotificationWithIcon('success','User signed up successfully!')
       return true;
     } catch (error) {
       console.error('Error occurred:', error);
+      openNotificationWithIcon('error','Something went wrong')
       setIsSignUpSuccessful(false);
       return false;
     }

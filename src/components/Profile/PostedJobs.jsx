@@ -68,7 +68,7 @@ const PostedJobs = () => {
     }
   };
   const redirectToJobDetails=(jobData)=>{
-    const browseJobsInDetails = '/browse-jobs-in-details';
+    const browseJobsInDetails = `/jobs/${jobData.id}`;
     navigate(browseJobsInDetails, {
       state: {
         jobData: jobData, // Pass jobData as state
