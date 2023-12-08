@@ -56,14 +56,26 @@ const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
           <nav className=" flex justify-end sm:pl-6 w-3/4 sm:w-full">
             <ul className="flex space-x-4 sm:space-x-8 justify-end items-center gap-4 sm:gap-4">
               {isFreelancer ? (
-                                <li className="">
-                                  <Link
-                                    to={isFreelancer ? '/jobs' : '/freelancers'}
-                                    className="text-white hover:text-gray-400 font-semibold text-xs sm:text-sm md:text-xl inline-block"
-                                  >
+                                <>
+                                  <li className="">
+                                    <Link
+                                      to={isFreelancer ? '/jobs' : '/freelancers'}
+                                      className="text-white hover:text-gray-400 font-semibold text-xs sm:text-sm md:text-xl inline-block"
+                                    >
                                         BROWSE JOBS
-                                  </Link>
-                                </li>
+                                    </Link>
+
+                                  </li>
+                                  <li className="">
+                                    <Link
+                                      to={'/myjobs'}
+                                      className="text-white hover:text-gray-400 font-semibold text-xs sm:text-sm md:text-xl inline-block"
+                                    >
+                                      My Jobs
+                                    </Link>
+
+                                  </li>
+                                </>
                             ) : (
                                 <li className="sm:w-auto w-1/4 mr-3">
                                   <Link

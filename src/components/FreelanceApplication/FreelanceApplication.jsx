@@ -120,7 +120,7 @@ const FreelanceApplication = ({job}) => {
         className="bg-[#1A0142] border border-solid border-[#B1B1B1]  rounded-lg text-gray-900 sm:text-sm sm:p-3 p-2 sm:w-full postjobsselect text-white"
       >
         {urls?.map((tag, index) => (
-          <Option key={index} value={tag} onClose={() => handleChange(urls.filter(item => item !== tag))} >
+          <Option key={index} value={tag} onClose={() => handleUrlChange(urls.filter(item => item !== tag))} >
           
               {tag}
           

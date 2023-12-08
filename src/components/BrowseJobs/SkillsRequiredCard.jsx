@@ -6,7 +6,7 @@ import config from 'react-global-configuration';
 import AuthService from "../../Services/AuthService";
 import { Button } from 'antd';
 
-const SkillsRequiredCard = ({ isFreelancer, jobData ,onClick,isActive}) => {
+const SkillsRequiredCard = ({ isFreelancer, jobData ,onClick,isActive,freelancerManageJobs}) => {
   const [applied, setApplied] = useState(false); // State to keep track of whether applied or not
   const {id} = useParams();
   const navigate = useNavigate();
@@ -41,19 +41,7 @@ const SkillsRequiredCard = ({ isFreelancer, jobData ,onClick,isActive}) => {
       }
 
       const data = await response.json();
-
-      // const browseJobs = "/browse-jobs-in-details";
-
-      // // Pass jobData as state to the next route using navigate
-      // navigate(browseJobs, {
-      //   state: {
-      //     description: data.description, // Pass jobData as state
-      //     title: data.title
-      //   },
-      // });
       const browseJobsInDetails = `/jobs/${jobData.id}`;
-
-      // Pass jobData as state to the next route using navigate
       navigate(browseJobsInDetails, {
         state: {
           jobData: jobData, // Pass jobData as state
@@ -65,7 +53,9 @@ const SkillsRequiredCard = ({ isFreelancer, jobData ,onClick,isActive}) => {
       console.error('Error fetching data:', error);
     }
   };
-
+  const trackProgress=()=>{
+    navigate('/job-progress-status')
+  }
   const firstTwoSkills = jobData['required_skills']?.slice(0, 2).map(
       (item) => {
         return <>
@@ -159,7 +149,7 @@ const SkillsRequiredCard = ({ isFreelancer, jobData ,onClick,isActive}) => {
             </button>
           )}
         </div>
-            <Button  style={{ borderColor: '#B37EE2 !important' }} onClick={handleApply} className='bg-[#B37EE2] border-gray-300 rounded-lg text-white hover:text-white hover:border-gray-300 active:border-gray-300 active:text-white'>View Job Details</Button>
+            <Button  style={{ borderColor: '#B37EE2 !important' }} onClick={freelancerManageJobs?trackProgress:handleApply} className='bg-[#B37EE2] border-gray-300 rounded-lg text-white hover:text-white hover:border-gray-300 active:border-gray-300 active:text-white'>{freelancerManageJobs?"Track Progress":"View Job Details"}</Button>
           </>
       )
       
