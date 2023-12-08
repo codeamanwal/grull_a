@@ -198,7 +198,7 @@ const FreelancerFileSharing = () => {
         <div>
           <h2 className="text-2xl font-spaceGrotesk font-semibold pb-4">PROGRESS TRACKER</h2>
           <div className="h-10 flex-shrink-0 border border-solid border-purple-500 rounded-lg bg-purple-300 relative">
-            <div className="bg-green-500 rounded-lg absolute top-0 left-0 bottom-0" style={{width: '0%'}}></div>
+            <div className="bg-green-500 rounded-lg absolute top-0 left-0 bottom-0" style={{width: `${completedmilestones * 25}%`}}></div>
           </div>
           <div className="flex flex-row justify-between text-white sm:text-base text-sm font-GeneralSans sm:leading-24 pt-4 sm:w-4/5 w-1/2 sm:space-x-4 space-x-5 ">
             <p>1st Milestone</p>
