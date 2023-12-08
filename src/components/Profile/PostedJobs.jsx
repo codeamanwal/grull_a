@@ -3,6 +3,7 @@ import {axiosGet} from '../../utils/services/axios';
 import SkillsRequiredCard from '../BrowseJobs/SkillsRequiredCard';
 import {useNavigate} from 'react-router-dom';
 import AuthService from '../../Services/AuthService';
+import {Typography} from 'antd';
 const PostedJobs = () => {
   const [jobs, setJobs] = useState([]);
   const [page, setPage] = useState(1);
@@ -86,10 +87,14 @@ const PostedJobs = () => {
     });
   };
   return (
-    <div className='overflow-y-scroll scrollbar-hide lg:h-[650px] w-full flex flex-col items-center' ref={scrollableJobs} >
-      {jobs.map((job, index) => (
+    <div className='overflow-y-scroll scrollbar-hide lg:h-[650px] w-full flex flex-col items-center' ref={scrollableJobs}
+    >
+      {jobs?
+      (jobs.map((job, index) => (
         <SkillsRequiredCard key={index} isFreelancer={false} freelancerManageJobs={isFreelancer} jobData={job} onClick={() => redirectToJobDetails(job)} isActive={true}/>
-      ))}
+      ))):
+        <Typography className='text-white'> Nothing to show here</Typography>
+      }
     </div>
   );
 };

@@ -71,7 +71,7 @@ const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
                                       to={'/myjobs'}
                                       className="text-white hover:text-gray-400 font-semibold text-xs sm:text-sm md:text-xl inline-block"
                                     >
-                                      My Jobs
+                                      MY JOBS
                                     </Link>
 
                                   </li>

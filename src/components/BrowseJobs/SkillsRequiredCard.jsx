@@ -54,7 +54,11 @@ const SkillsRequiredCard = ({ isFreelancer, jobData ,onClick,isActive,freelancer
     }
   };
   const trackProgress=()=>{
-    navigate('/job-progress-status')
+    navigate('/job-progress-status', {
+      state: {
+        jobData: jobData,
+      },
+    });
   }
   const firstTwoSkills = jobData['required_skills']?.slice(0, 2).map(
       (item) => {
@@ -130,24 +134,33 @@ const SkillsRequiredCard = ({ isFreelancer, jobData ,onClick,isActive,freelancer
       ) : (
         <>
         <div className="sm:p-8 p-3 space-y-4">
-            <p className="text-lg text-[#B37EE2]">{jobData.job_applicants_count} FREELANCERS APPLIED</p>
+        {!freelancerManageJobs&&<p className="text-lg text-[#B37EE2]">{jobData.job_applicants_count} FREELANCERS APPLIED</p>}
   
+        {jobData.status === 'ONGOING' ?   <button className="flex items-center bg-white border border-gray-300 rounded-lg p-2">
+      <div className="h-6 w-6 bg-yellow-500 rounded-full"></div>
+      <span className="ml-2 text-[#4301a3] opacity-1 font-semibold">
+        ONGOING
+      </span>
+    </button>: (
+  isActive ? (
+    <button className="flex items-center bg-white border border-gray-300 rounded-lg p-2">
+      <div className="h-6 w-6 bg-green-500 rounded-full"></div>
+      <span className="ml-2 text-[#4301a3] opacity-1 font-semibold">
+        ACTIVE
+      </span>
+    </button>
+  ) : (
+    <button className="flex items-center bg-white border border-gray-300 rounded-lg p-2">
+      <div className="h-6 w-6 bg-red-500 rounded-full"></div>
+      <span className="ml-2 text-[#4301a3] opacity-1 font-semibold">
+        COMPLETED
+      </span>
+    </button>
+  )
+)}
 
-          {isActive ? (
-            <button className="flex items-center bg-white border border-gray-300 rounded-lg p-2">
-              <div className="h-6 w-6 bg-green-500 rounded-full"></div>
-              <span className="ml-2 text-[#4301a3] opacity-1 font-semibold">
-                ACTIVE
-              </span>
-            </button>
-          ) : (
-            <button className="flex items-center bg-white border border-gray-300 rounded-lg p-2">
-              <div className="h-6 w-6 bg-red-500 rounded-full"></div>
-              <span className="ml-2 text-[#4301a3] opacity-1 font-semibold">
-                COMPLETED
-              </span>
-            </button>
-          )}
+
+
         </div>
             <Button  style={{ borderColor: '#B37EE2 !important' }} onClick={freelancerManageJobs?trackProgress:handleApply} className='bg-[#B37EE2] border-gray-300 rounded-lg text-white hover:text-white hover:border-gray-300 active:border-gray-300 active:text-white'>{freelancerManageJobs?"Track Progress":"View Job Details"}</Button>
           </>

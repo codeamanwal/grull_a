@@ -1,17 +1,48 @@
 import React, {useEffect, useState} from 'react';
-import {star} from '../Assets';
 import {useLocation} from 'react-router-dom';
 import AuthService from '../../Services/AuthService';
 import {Select} from 'antd';
+import {axiosGet, axiosPost} from '../../utils/services/axios';
+import CommentModal from '../../utils/CommentModal';
+import {openNotificationWithIcon} from '../../utils/openNotificationWithIcon';
+import ReviewModal from '../../utils/ReviewModal';
 const {Option} = Select;
 const FreelancerFileSharing = () => {
   const location = useLocation();
   const urlRegex =
     /^(?:(?:https?|ftp):)?\/\/(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?(?:[/?#]\S)?$/;
   const [completedmilestones, setCompletedMilestones] = useState(0);
-  console.log(location.state);
   const [urls, setSelectedUrls] = useState();
+  const [comment, setComment] = useState();
+  const isFreelancer = AuthService.isFreelancer();
+  const [submissionData, setSubmittedData] = useState([]);
+  const [review, setReview] = useState(0);
   let validUrls = [];
+  const [modalVisible, setModalVisible] = useState(false);
+  const [reviewModal, setReviewModal] = useState(false);
+  const [payout, setSendPayout] = useState(false);
+  const handleOpenModal = () => {
+    setModalVisible(true);
+  };
+  const handleCancel = () => {
+    setModalVisible(false);
+  };
+  const handleOk = (comment) => {
+    setComment(comment);
+    setModalVisible(false);
+  };
+  const handleOpenReviewModal=()=>{
+    setReviewModal(true);
+  };
+  const handleCancelReviewModal=()=>{
+    setReviewModal(false);
+  };
+  const handleOkReviewModal=(review)=>{
+    setReview(review);
+    console.log(review);
+    setReviewModal(false);
+    addReview(submissionData[completedmilestones].id);
+  };
   const handleUrlChange = (selectedItems) => {
     validUrls = selectedItems.filter(validateUrl);
     setSelectedUrls(validUrls);
@@ -22,57 +53,122 @@ const FreelancerFileSharing = () => {
   const validateUrl = (value) => {
     return urlRegex.test(value);
   };
-  const isFreelancer = AuthService.isFreelancer();
-  console.log(isFreelancer);
-  const stars = Array(5).fill(<img src={star} className="sm:w-15 sm:h-15 w-10 h-10" alt="star" />);
+  const getSubmissions = async () => {
+    const apiUrl = `/api/v0/jobs/${location?.state?.jobData?.id}/submissions`;
+    const response = await axiosGet(apiUrl);
+    console.log(response);
+    setSubmittedData(response.results);
+    checkProgress(response.results);
+  };
+  const checkProgress = (data) => {
+    let count = 0;
+    for (let i = 0; i < 4; i++) {
+      if (data[i]?.approved_at === null) {
+        break;
+      } else {
+        count++;
+      }
+    }
+    if (count<=3) {
+      setCompletedMilestones(count);
+    }
+  };
+  const makeSubmission = async () => {
+    if (!comment || !urls) {
+      openNotificationWithIcon('error', 'Please fill all the details properly');
+      return;
+    }
+    const data = {
+      title: 'Submission',
+      description: comment,
+      submission_urls: urls,
+    };
+    const apiUrl = `/api/v0/jobs/${location?.state?.jobData?.id}/add-submission`;
+    const response = await axiosPost(apiUrl, data);
+    console.log(response);
+    getSubmissions();
+  };
+  const addReview=async (id)=>{
+    const data = {
+      'review_comments': [`${review.comment}`],
+      'review_stars': review.rating,
+    };
+    const apiUrl = `/api/v0/submissions/${id}/review`;
+    const response = await axiosPost(apiUrl, data);
+    console.log(response);
+  };
+  const approveMilestone=async ()=>{
+    // if (!payout) {
+    //   openNotificationWithIcon('error', 'Complete the Payment First');
+    //   return;
+    // }
+    const apiUrl = `/api/v0/submissions/${submissionData[completedmilestones].id}/approve`;
+    const response = await axiosPost(apiUrl);
+
+    if (response.status) {
+      openNotificationWithIcon('success', 'Milestone Approved Scuccessfully');
+      getSubmissions();
+    }
+  };
+  const approvePayout=async ()=> {
+    const {id} = location.state.jobData.employee;
+    const requestData={
+      amount: location.state.jobData.rate_per_hour/4,
+    };
+    const response = await axiosPost(`/api/v0/users/${id}/send-money`, requestData);
+    if (response.status) {
+      openNotificationWithIcon('success', 'Amount Transferred successfully');
+      setSendPayout(true);
+    } else {
+      openNotificationWithIcon('error', response.message);
+    }
+    console.log(payout);
+  };
   useEffect(() => {
-    setCompletedMilestones(4);
+    getSubmissions();
   }, []);
-  // const approvePayout=()=> {
-  //   const requestData={
-  //      amount:1000,
-  //   }
-  //   const response = axiosPost(`/api/v0/users/${user_id}/send-money`,requestData)
-  //   if(response){
-  //     ('/my-profile')
-  //   }
-
-
-  // } catch (error) {
-  //   console.error("Error occurred:", error);
-  // }
-  // };
   function addMilestones() {
     const milestones = [];
-    for (let i = 1; i <= completedmilestones; i++) {
+    for (let i = 0; i <= completedmilestones; i++) {
       milestones.push(
           <div key={i} className="flex  flex-wrap items-center justify-center space-y-3 font-GeneralSans w-full sm:w-5/6">
-            <p className="sm:w-1/4 sm:text-xl text-sm font-semibold">Milestone {i}</p>
+            <p className="sm:w-1/4 sm:text-xl text-sm font-semibold">Milestone {i + 1}</p>
             <div className="flex justify-between space-x-2 sm:space-x-10 w-full sm:w-3/4">
-              <button className="bg-purple-900 bg-opacity-70 border border-solid text-sm border-purple-500 rounded-lg text-purple-500  sm:p-4 w-full sm:w-1/3">
+              {/* <button className="bg-purple-900 bg-opacity-70 border border-solid text-sm border-purple-500 rounded-lg text-purple-500  sm:p-4 w-full sm:w-1/3">
                 {isFreelancer ? 'Upload Urls' : 'Download Urls'}
-              </button>
+              </button> */}
               <Select
+                id={`milestone ${i}`}
                 mode="tags"
-                placeholder="Enter Urls"
+                placeholder="eg-https://www.google.com"
                 onChange={handleUrlChange}
-                value={urls}
+                disabled={!isFreelancer||i!=completedmilestones}
+                value={!isFreelancer||i!=completedmilestones?submissionData[i]?.submission_urls:urls}
                 tokenSeparators={[',']}
-                className="bg-[#1A0142] border border-solid border-[#B1B1B1]  rounded-lg text-gray-900 sm:text-sm sm:p-3 p-2 sm:w-full postjobsselect text-white">
-                {urls?.map((tag, index) => (
+                className="bg-[#1A0142] border border-solid border-[#B1B1B1]  rounded-lg text-gray-900 sm:text-sm sm:w-full postjobsselect text-white">
+                {isFreelancer ?
+                urls?.map((tag, index) => (
+                  <Option key={index} value={tag} onClose={() => handleUrlChange(urls.filter((item) => item !== tag))}>
+                    {tag}
+                  </Option>
+                )) :
+                submissionData[i]?.submission_urls?.map((tag, index) => (
                   <Option key={index} value={tag} onClose={() => handleUrlChange(urls.filter((item) => item !== tag))}>
                     {tag}
                   </Option>
                 ))}
               </Select>
-
-              <button className="bg-purple-900 bg-opacity-70 border border-solid border-purple-500 rounded-lg p-2 sm:p-4 w-full sm:w-1/3">{!isFreelancer ? 'Add Comments' : 'Review Comments'}</button>
-              <button className="bg-purple-500 bg-opacity-70 border border-solid border-purple-500 rounded-lg p-2 sm:p-4 w-full sm:w-1/3">{isFreelancer ? 'Request for approval' : 'Approve'}</button>
+              <button className="bg-purple-900 bg-opacity-70 border border-solid border-purple-500 rounded-lg p-2 sm:p-4 w-full sm:w-1/3" onClick={completedmilestones == i ? (!isFreelancer ? handleOpenReviewModal : handleOpenModal):null}>
+                {!isFreelancer ? 'Review Comments' : 'Add Comments'}
+              </button>
+              <CommentModal visible={modalVisible} onCancel={handleCancel} onOk={handleOk} />
+              <ReviewModal visible={reviewModal} onCancel={handleCancelReviewModal} onOk={handleOkReviewModal} />
+              <button onClick={completedmilestones == i ? (isFreelancer ? makeSubmission : approveMilestone):null} className="bg-purple-500 bg-opacity-70 border border-solid border-purple-500 rounded-lg p-2 sm:p-4 w-full sm:w-1/3">
+                {isFreelancer ? 'Request for approval' : 'Approve'}
+              </button>
             </div>
             <div className="flex flex-row-reverse font-GeneralSans w-full py-5">
-              <button className="bg-purple-900 bg-opacity-70 border border-solid border-purple-500 rounded-lg p-2 sm:p-4 w-full sm:w-1/4">
-                {isFreelancer ? 'Request for milestone' : 'Release Payment'}
-              </button>
+              {!isFreelancer && <button className="bg-purple-900 bg-opacity-70 border border-solid border-purple-500 rounded-lg p-2 sm:p-4 w-full sm:w-1/4" onClick={completedmilestones == i ? approvePayout:null}>Release Payment</button>}
             </div>
           </div>,
       );
@@ -115,20 +211,6 @@ const FreelancerFileSharing = () => {
           <p className="text-2xl font-spaceGrotesk font-semibold py-3">Job Title - {location?.state?.jobData?.title}</p>
         </div>
         <div className="flex justify-center flex-col items-center">{addMilestones()}</div>
-        <div className="flex flex-col text-white pb-10">
-          <p className="text-2xl font-spaceGrotesk font-semibold pb-4">Rate your work experience</p>
-          <div className="flex space-x-1">{stars}</div>
-        </div>
-
-        <div className="flex  justify-between w-7/8 font-spaceGrotesk font-medium">
-          <div className="flex flex-col sm:w-1/2">
-            <p className=" text-2xl pb-4 font-semibold">Write a review about your work experience</p>
-            <textarea type="text" className="bg-[#1A0142] border border-solid border-purple-500 rounded-lg text-white sm:text-sm  h-32 w-full p-4" />
-          </div>
-          <div className="flex flex-wrap flex-col justify-end w-1/3 p-1">
-            <button className="md:px-8 p-2 sm:w-3/4 h-12  text-xl rounded shadow bg-gradient-to-l from-purple-400 to-transparent">MARK AS DONE</button>
-          </div>
-        </div>
       </div>
     </div>
   );
