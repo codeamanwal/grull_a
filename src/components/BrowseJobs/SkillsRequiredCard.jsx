@@ -6,16 +6,16 @@ import config from 'react-global-configuration';
 import AuthService from "../../Services/AuthService";
 import { Button } from 'antd';
 
-const SkillsRequiredCard = ({ isFreelancer, jobData ,onClick,isActive}) => {
-  console.log(jobData)
+const SkillsRequiredCard = ({ isFreelancer, jobData ,onClick,isActive,freelancerManageJobs}) => {
   const [applied, setApplied] = useState(false); // State to keep track of whether applied or not
   const {id} = useParams();
   const navigate = useNavigate();
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
   const accessToken = AuthService.getToken();
+  console.log(jobData);
   const redirect = ()=>{
-    const browseJobsInDetails = '/browse-jobs-in-details';
+    const browseJobsInDetails = `/jobs/${jobData.id}`;
 
     // Pass both paths and states in a single navigate call
     navigate(
@@ -41,19 +41,7 @@ const SkillsRequiredCard = ({ isFreelancer, jobData ,onClick,isActive}) => {
       }
 
       const data = await response.json();
-
-      // const browseJobs = "/browse-jobs-in-details";
-
-      // // Pass jobData as state to the next route using navigate
-      // navigate(browseJobs, {
-      //   state: {
-      //     description: data.description, // Pass jobData as state
-      //     title: data.title
-      //   },
-      // });
-      const browseJobsInDetails = '/browse-jobs-in-details';
-
-      // Pass jobData as state to the next route using navigate
+      const browseJobsInDetails = `/jobs/${jobData.id}`;
       navigate(browseJobsInDetails, {
         state: {
           jobData: jobData, // Pass jobData as state
@@ -65,7 +53,13 @@ const SkillsRequiredCard = ({ isFreelancer, jobData ,onClick,isActive}) => {
       console.error('Error fetching data:', error);
     }
   };
-
+  const trackProgress=()=>{
+    navigate('/job-progress-status', {
+      state: {
+        jobData: jobData,
+      },
+    });
+  }
   const firstTwoSkills = jobData['required_skills']?.slice(0, 2).map(
       (item) => {
         return <>
@@ -140,26 +134,35 @@ const SkillsRequiredCard = ({ isFreelancer, jobData ,onClick,isActive}) => {
       ) : (
         <>
         <div className="sm:p-8 p-3 space-y-4">
-            <p className="text-lg text-[#B37EE2]">12 FREELANCERS APPLIED</p>
+        {!freelancerManageJobs&&<p className="text-lg text-[#B37EE2]">{jobData.job_applicants_count} FREELANCERS APPLIED</p>}
   
+        {jobData.status === 'ONGOING' ?   <button className="flex items-center bg-white border border-gray-300 rounded-lg p-2">
+      <div className="h-6 w-6 bg-yellow-500 rounded-full"></div>
+      <span className="ml-2 text-[#4301a3] opacity-1 font-semibold">
+        ONGOING
+      </span>
+    </button>: (
+  isActive ? (
+    <button className="flex items-center bg-white border border-gray-300 rounded-lg p-2">
+      <div className="h-6 w-6 bg-green-500 rounded-full"></div>
+      <span className="ml-2 text-[#4301a3] opacity-1 font-semibold">
+        ACTIVE
+      </span>
+    </button>
+  ) : (
+    <button className="flex items-center bg-white border border-gray-300 rounded-lg p-2">
+      <div className="h-6 w-6 bg-red-500 rounded-full"></div>
+      <span className="ml-2 text-[#4301a3] opacity-1 font-semibold">
+        COMPLETED
+      </span>
+    </button>
+  )
+)}
 
-          {isActive ? (
-            <button className="flex items-center bg-white border border-gray-300 rounded-lg p-2">
-              <div className="h-6 w-6 bg-green-500 rounded-full"></div>
-              <span className="ml-2 text-[#4301a3] opacity-1 font-semibold">
-                ACTIVE
-              </span>
-            </button>
-          ) : (
-            <button className="flex items-center bg-white border border-gray-300 rounded-lg p-2">
-              <div className="h-6 w-6 bg-red-500 rounded-full"></div>
-              <span className="ml-2 text-[#4301a3] opacity-1 font-semibold">
-                COMPLETED
-              </span>
-            </button>
-          )}
+
+
         </div>
-            <Button  style={{ borderColor: '#B37EE2 !important' }} onClick={handleApply} className='bg-[#B37EE2] border-gray-300 rounded-lg text-white hover:text-white hover:border-gray-300 active:border-gray-300 active:text-white'>View Job Details</Button>
+            <Button  style={{ borderColor: '#B37EE2 !important' }} onClick={freelancerManageJobs?trackProgress:handleApply} className='bg-[#B37EE2] border-gray-300 rounded-lg text-white hover:text-white hover:border-gray-300 active:border-gray-300 active:text-white'>{freelancerManageJobs?"Track Progress":"View Job Details"}</Button>
           </>
       )
       

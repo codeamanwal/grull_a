@@ -20,17 +20,15 @@ const SignUpBox = () => {
             </button>
           </Link>
         </div>
-
-        <div className="mt-8 md:mt-0 space-y-3 flex flex-col justify-center items-center">
-          <p className="text-white md:text-2xl font-medium font-GeneralSans">
-                        I want to post jobs
+        <div className="space-y-3 flex flex-col justify-center items-center">
+          <p className="flex flex-col text-white md:text-2xl font-medium font-GeneralSans">
+          I want to post jobs
           </p>
-
           <Link to="/signUp?isFreelancer=false">
             <button className="text-white md:text-xl font-spaceGrotesk font-medium px-6 py-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">
-              SIGN UP AS AN EMPLOYER
+            SIGN UP AS AN EMPLOYER
             </button>
-          </Link>⁄
+          </Link>
         </div>
       </div>
     </div>

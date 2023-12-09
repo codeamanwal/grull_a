@@ -3,16 +3,17 @@ import PropTypes from 'prop-types';
 import config from 'react-global-configuration';
 import AuthService from '../../Services/AuthService';
 import {useNavigate} from 'react-router-dom';
-const ProfileViewCard = ({userProfileImg, userName, id, userData}) => {
+const ProfileViewCard = ({userProfileImg, userName, id, userData, jobId}) => {
   console.log(userData);
   const [successMessage, setSuccessMessage] = useState(''); // Track success message
   const [isPopupVisible, setIsPopupVisible] = useState(false); // Track popup visibility
   const accessToken = AuthService.getToken();
   const navigate = useNavigate();
   const viewProfile=()=>{
-    navigate('/freelancer-profile', {
+    navigate(`/freelancers/${id}`, {
       state: {
         userProfile: userData,
+        jobId: jobId,
       },
     });
   };
@@ -42,6 +43,30 @@ const ProfileViewCard = ({userProfileImg, userName, id, userData}) => {
           console.error('Network error:', error);
           setSuccessMessage('Network error'); // Set error message
           setIsPopupVisible(true); // Show the popup for network errors
+        });
+
+    const confirmapplication = `${config.get('BACKEND_URL')}/api/v0/applications/${id}/confirm-negotiation`;
+    fetch(confirmapplication, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`,
+      },
+    }).then((response) => {
+      if (response.success) {
+        navigate(`jobs-progress-status`, {
+          state: {
+            userProfile: userData,
+            jobId: jobId,
+            id: id,
+          },
+        });
+      } else {
+
+      }
+    })
+        .catch((error) => {
+
         });
   };
   const rejectApplication = () => {
@@ -77,7 +102,7 @@ const ProfileViewCard = ({userProfileImg, userName, id, userData}) => {
       <div className="flex flex-col items-center space-y-2 xl:space-y-6 bg-[#482773] rounded-lg lg:mt-0 xl:p-10 m-4 py-3">
         <img className="rounded-full sm:h-72 sm:w-72 w-36 h-36 p-2" src={userProfileImg} alt="author avatar" />
         <div className="text-center font-bold sm:text-2xl text-xl font-spaceGrotesk">{userData?.employee?.full_name}</div>
-        <div className="sm:text-xl text-base font-GeneralSans font-normal">{userData?.employee?.rate_per_hour}</div>
+        <div className="sm:text-xl text-base font-GeneralSans font-normal">{userData?.proposed_rate}</div>
         <div className=" text-base text-center font-GeneralSans font-normal">
           {userData?.proposal}
         </div>
@@ -140,6 +165,7 @@ ProfileViewCard.propTypes = {
   userName: PropTypes.string,
   id: PropTypes.string,
   userData: PropTypes.obj,
+  jobId: PropTypes.string,
 };
 
 export default ProfileViewCard;

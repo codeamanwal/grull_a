@@ -5,6 +5,7 @@ import config from 'react-global-configuration';
 import { Button, Checkbox, Form, Input, Select, Tag } from "antd";
 import { axiosPatch, axiosPost } from "../../utils/services/axios";
 import { useNavigate } from "react-router-dom";
+import { openNotificationWithIcon } from "../../utils/openNotificationWithIcon";
 const { Option } = Select;
 
 const PostJobForm = ({jobData,editJob}) => {
@@ -14,7 +15,7 @@ const PostJobForm = ({jobData,editJob}) => {
   const [selectedSkills, setSelectedSkills] = useState(jobData?.required_skills?jobData.required_skills:[]);
   const [urls,setSelectedUrls] = useState(jobData?.reference_files_urls?jobData.reference_files_urls:[]);
   var validUrls = [];
-  const urlRegex = /^(?:(?:https?|ftp):)?\/\/(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S)?$/;
+  const urlRegex = /^(?:(?:https?|ftp):)?\/\/(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?(?:[/?#]\S)?$/;
   const handleChange = (selectedItems) => {
     setSelectedSkills(selectedItems);
   };
@@ -45,7 +46,7 @@ const PostJobForm = ({jobData,editJob}) => {
       }
       const response = editJob?axiosPatch(`/api/v0/jobs/${jobData.id}`,requestData):axiosPost('/api/v0/jobs',requestData)
       if(response){
-       
+        editJob?openNotificationWithIcon('success','Job edited successfully'):openNotificationWithIcon('success','Job posted successfully');
         navigate('/my-profile')
       }
 
@@ -65,7 +66,7 @@ const PostJobForm = ({jobData,editJob}) => {
         form={form}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
-        className="grid sm:grid-cols-8 sm:gap-6 gap-3"
+        className="xl:grid sm:grid-cols-8 sm:gap-6 gap-3"
         name="basic"
         initialValues={{
           title: jobData?.title || "", // Set the initial value for the "title" field
@@ -89,7 +90,7 @@ const PostJobForm = ({jobData,editJob}) => {
           
           
         >
-          <Input value={jobData?.title?jobData.title:''} placeholder="Enter" className="bg-[#1A0142] border border-solid border-[#B1B1B1] rounded-lg text-white sm:text-sm sm:p-4  p-2 sm:w-full"/>
+          <input value={jobData?.title?jobData.title:''} style={{color:'white'}}placeholder="Enter" className="bg-[#1A0142] border border-solid border-[#B1B1B1] rounded-lg text-white sm:text-sm sm:p-4  p-2 sm:w-full"/>
         </Form.Item>
 
         {/* Add Skills Required */}
@@ -144,7 +145,7 @@ const PostJobForm = ({jobData,editJob}) => {
         {/* Reference Files */}
         <Form.Item
           name="files"
-          rules={[{ required: true, message: "Please upload files" }, { pattern:urlRegex,message:'Please enter a valid url' }]}
+          rules={[{ required: true, message: "Please enter urls" }, { pattern:urlRegex,message:'Please enter a valid url' }]}
           label="Reference Files"
           className="sm:col-span-4 flex flex-col space-y-2 justify-center text-white"
           initialValue={jobData?.reference_files_urls||[]}
@@ -165,7 +166,7 @@ const PostJobForm = ({jobData,editJob}) => {
           </Option>
         ))}
       </Select>
-
+      <Typography className='mb-0 pb-0 text-white'> eg - 'https://www.google.com'</Typography>
         </Form.Item>
 
         {/* Location */}

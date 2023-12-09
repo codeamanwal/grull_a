@@ -1,20 +1,33 @@
 /* eslint-disable */
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import config from 'react-global-configuration';
 import AuthService from '../../Services/AuthService';
-
-function setFiles() {
-
-}
-
-const FreelanceApplication = () => {
+import { Form, Select, Typography } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { openNotificationWithIcon } from '../../utils/openNotificationWithIcon';
+const { Option } = Select;
+const FreelanceApplication = ({job}) => {
   const [rate, setRate] = useState('');
   const [isApplying, setIsApplying] = useState('');
+  const [proposal,setProposal] = useState('');
+  const [urls,setSelectedUrls] = useState();
+  const navigate = useNavigate();
+  var validUrls = [];
+  const urlRegex = /^(?:(?:https?|ftp):)?\/\/(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?(?:[/?#]\S)?$/;
+  const handleUrlChange=(selectedItems)=>{
+    validUrls = selectedItems.filter(validateUrl);
+    setSelectedUrls(validUrls)
+  };
+  useEffect(()=>{
+    setSelectedUrls(validUrls);
+  },[])
+  const validateUrl = (value) => {
+    return urlRegex.test(value);
+  };
   var accessToken = AuthService.getToken();
   const handleApplyClick = async () => {
     setIsApplying(true);
-    const jobId = localStorage.getItem('job_id'); // Replace with how you obtain the job ID
-  
+    const jobId = job.jobData.id
     try {
       const response = await fetch(`${config.get('BACKEND_URL')}/api/v0/jobs/${jobId}/apply`, {
         method: 'POST',
@@ -22,13 +35,19 @@ const FreelanceApplication = () => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${accessToken}`,
         },
+        body: JSON.stringify({
+          proposal: proposal,
+          proposed_rate: parseInt(rate),
+        }),
       });
   
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-  
+      openNotificationWithIcon('success','Proposal sent successfully')
+      navigate('/my-profile')
       setIsApplying(false);
+      nav
     } catch (error) {
       console.error('Error occurred:', error);
       setIsApplying(false); // Reset the applying state to false if there's an error
@@ -66,6 +85,7 @@ const FreelanceApplication = () => {
                               rows="4"
                               className="bg-[#1A0142] border border-solid border-purple-500 rounded-lg text-white sm:text-sm p-4 w-full"
                               placeholder="Enter answer here"
+                              onChange={(e)=>setProposal(e.target.value)}
                             ></textarea>
                         ) : (
                             <textarea
@@ -73,6 +93,7 @@ const FreelanceApplication = () => {
                               rows="6"
                               className="bg-[#1A0142] border border-solid border-purple-500 rounded-lg text-white sm:text-sm p-4 w-full"
                               placeholder="Enter answer here"
+                              onChange={(e)=>setProposal(e.target.value)}
                             ></textarea>
                         )}
           </div>
@@ -84,7 +105,31 @@ const FreelanceApplication = () => {
             >
               Any files to support your proposal
             </label>
-            <div className="flex items-center">
+            <Form.Item
+          name="files"
+          rules={[{ required: true, message: "Please enter urls" }, { pattern:urlRegex,message:'Please enter a valid url' }]}
+          className="sm:col-span-4 flex flex-col space-y-2 justify-center text-white"
+          initialValue={[]}
+        >
+            <Select
+        mode="tags"
+        placeholder="Enter Urls"
+        onChange={handleUrlChange}
+        value={urls}
+        tokenSeparators={[',']}
+        className="bg-[#1A0142] border border-solid border-[#B1B1B1]  rounded-lg text-gray-900 sm:text-sm sm:p-3 p-2 sm:w-full postjobsselect text-white"
+      >
+        {urls?.map((tag, index) => (
+          <Option key={index} value={tag} onClose={() => handleUrlChange(urls.filter(item => item !== tag))} >
+          
+              {tag}
+          
+          </Option>
+        ))}
+      </Select>
+      <Typography className='mb-0 pb-0 text-white'> eg - 'https://www.google.com'</Typography>
+      </Form.Item>
+            {/* <div className="flex items-center">
               <label
                 htmlFor="file-upload"
                 className="flex  p-2 h-10 border border-solid border-purple-500 rounded-md cursor-pointer w-full"
@@ -97,7 +142,7 @@ const FreelanceApplication = () => {
                 onChange={handleFileUpload}
                 className="hidden"
               />
-            </div>
+            </div> */}
           </div>
 
           <div className="col-span-full">

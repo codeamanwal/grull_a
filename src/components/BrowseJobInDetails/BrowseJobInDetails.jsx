@@ -2,10 +2,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import JobDetailsCard from "./JobDetailsCard";
-import { ClosedChatBox, OpenedChatBox, PostJobForm } from "../../components";
-import { downarrow } from "../../components/Assets";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import config from "react-global-configuration";
+import { PostJobForm } from "../../components";
+import { Link,  useNavigate } from "react-router-dom";
 import JobDetailsCardForEmployer from "./JobDetailsCardForEmployer";
 import AuthService from "../../Services/AuthService";
 import { axiosDelete } from "../../utils/services/axios";
@@ -18,12 +16,15 @@ const BrowseJobInDetails = ({ isOpen, setIsOpen, jobData, jobs }) => {
   const editPostedJob = () => {
     setEditJob(!editJob);
   };
-  const redirecttoFreelanceApplications = () => {
-    navigate("/freelancers-applications", {
+  const redirect = () => {
+    const url = jobData.status=='ONGOING'?'/job-progress-status':'/freelancers-applications'
+    navigate(url, {
       state: {
         jobId: jobData.id,
+        jobData:jobData
       },
     });
+
   };
   const deletePostedJob = async () => {
     const id = jobData.id;
@@ -57,7 +58,7 @@ const BrowseJobInDetails = ({ isOpen, setIsOpen, jobData, jobs }) => {
     <div className="flex  flex-wrap sm:justify-between  justify-center sm:w-11/12 mx-auto py-28 space-y-10">
       {!editJob ? (
         isFreelancer ? (
-          <JobDetailsCard isFreelancer={true} jobData={jobData} />
+          <JobDetailsCard isFreelancer={true} jobData={jobData} myjob={myjob}/>
         ) : (
           <JobDetailsCardForEmployer isFreelancer={false} jobs={jobData} />
         )
@@ -66,15 +67,15 @@ const BrowseJobInDetails = ({ isOpen, setIsOpen, jobData, jobs }) => {
       )}
       {isFreelancer ? (
         <div className="flex sm:flex-col flex-wrap sm:justify-start sm:space-y-10">
-          <button className="text-white sm:text-xl font-semibold sm:px-12 sm:py-2 px-4 py-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">MANAGE PROFILE</button>
-          <button className="text-white sm:text-xl font-semibold sm:px-8 sm:py-2 px-4 py-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">BROWSE MORE JOBS</button>
+          <Link to='/my-profile'><button className="text-white sm:text-xl font-semibold sm:px-12 sm:py-2 px-4 py-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent" >MANAGE PROFILE</button></Link>
+          <Link to='/jobs'><button className="text-white sm:text-xl font-semibold sm:px-8 sm:py-2 px-4 py-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent">BROWSE MORE JOBS</button></Link>
         </div>
       ) : (
         !editJob && (
           <div className="flex flex-col justify-between items-center space-y-4">
             <div className="flex flex-col items-center   space-y-5 sm:justify-start sm:space-y-10 sm:mb-[73px]">
-            <button  className="text-white sm:text-xl font-semibold md:px-8 py-4 px-2 sm:px-12 rounded shadow bg-gradient-to-l from-purple-400 to-transparent" onClick={redirecttoFreelanceApplications}>
-                VIEW FREELANCER APPLICATIONS
+            <button  className="text-white sm:text-xl font-semibold md:px-8 py-4 px-2 sm:px-12 rounded shadow bg-gradient-to-l from-purple-400 to-transparent" onClick={redirect}>
+                {jobData.status=='ONGOING'?"TRACK JOB PROGRESS":"VIEW FREELANCER APPLICATIONS"}
               </button>
               <button className="text-white sm:text-xl font-semibold md:px-8 py-4 sm:px-12 px-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent" onClick={deletePostedJob}>
                 DELETE POSTED JOB

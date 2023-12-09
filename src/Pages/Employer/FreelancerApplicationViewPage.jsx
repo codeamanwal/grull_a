@@ -73,7 +73,7 @@ const FreelancerApplicationViewPage = () => {
             ?.slice(currentIndex, currentIndex + itemsPerPage)
             .map((application, index) => (
               <div key={index}>
-                <ProfileViewCard userProfileImg={userProfile} userName={application.applicantName} id={application.id} userData={application}/>
+                <ProfileViewCard userProfileImg={userProfile} userName={application.applicantName} id={application.id} userData={application} jobId={jobId}/>
               </div>
             ))}
         <div className="text-white flex justify-center items-center text-lg cursor-pointer" onClick={handleNext}>
@@ -86,8 +86,8 @@ const FreelancerApplicationViewPage = () => {
     <div className="bg-[#1A0142] flex flex-col min-h-screen">
       <LoggedInHeader includeNavBar={true} category="FREELANCER" isFreelancer={false} />
       <div className="flex-grow mt-10">
-        <div className="flex sm:space-x-20">
-          <div className="flex flex-col space-x-3 space-y-3 font-bold text-2xl text-white justify-start mt-4">
+        <div className="flex justify-center">
+          <div className="flex flex-col space-x-3 font-bold text-2xl text-white justify-start mt-4">
             <div className="flex flex-wrap sm:justify-between sm:px-6 items-center justify-center">
               <p className="sm:pl-20 text-2xl font-bold">FREELANCER APPLICATIONS</p>
               <div className="flex flex-col items-center">

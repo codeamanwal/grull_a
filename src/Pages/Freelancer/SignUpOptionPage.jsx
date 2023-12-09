@@ -26,7 +26,7 @@ const SignUpOptionPage = () => {
           filter: 'hue-rotate(359deg) brightness(1.2)',
         }}
       >
-        <div className="sm:mr-44">
+        <div className="xl:mr-44 mt-2 sm:mt-0 lg:mb-5 xl:mb-0">
           <SignUpBox />
         </div>
         <div className="flex flex-col md:max-w-xs items-center justify-center border border-black rounded-2xl bg-[rgb(61,35,128)] p-10 space-y-3">

@@ -73,7 +73,7 @@ function App() {
           <Route path="/apply-proposal-page" element={<ApplyProposalPage />} />
           <Route path="/freelancer-in-detail" element={<FreelancerInDetail />} />
           <Route
-            path="/browse-jobs-in-details"
+            path="/jobs/:id"
             element={<BrowseJobInDetailsPage />}
           />
           <Route
@@ -84,14 +84,14 @@ function App() {
           {/* employer pages */}
           <Route path="/post-job" element={<PostJobPage />} />
           <Route path="/freelancers" element={<BrowseFreelancersPage />} />
-          <Route path="/freelancer-profile" element={<FreelancerProfileViewByEmployerPage />} />
+          <Route path={`/freelancers/:id`}element={<FreelancerProfileViewByEmployerPage />} />
           <Route path="/employerBrowsingPostedJobs" element={<EmployerBrowsingPostedJobsPage />} />
           <Route path="/freelancers-applications" element={<FreelancerApplicationViewPage />} />
           <Route path='/AccountDetailsPage' element={<AccountDetailsPage/>}/>
         </Route>
 
         <Route path="/jobs" element={<BrowseJobsPage />} />
-        <Route path="/jobs-progress-status" element={<FreelancerFileSharingPage/>}/>
+        <Route path="/job-progress-status" element={<FreelancerFileSharingPage/>}/>
         <Route path = "/BillsAndPaymentsPage" element={<BillsAndPaymentsPage/>}/>
         <Route path="/EditCardDetailsPage" element={<EditCardDetailsPage/>}/>
         <Route path="/myjobs" element={<MyJobs/>}/>

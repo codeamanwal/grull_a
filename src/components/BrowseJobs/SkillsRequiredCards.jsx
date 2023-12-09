@@ -26,7 +26,7 @@ const SkillsRequiredCards = ({isFreelancer, isActive, title, description}) => {
                   MAYA
                 </p>
                 <Link
-                  to="/browse-jobs-in-details"
+                  to={`/jobs/${1}`}
                   className="text-[#B37EE2] font-normal sm:text-lg text-sm"
                 >
                   more
@@ -51,7 +51,7 @@ const SkillsRequiredCards = ({isFreelancer, isActive, title, description}) => {
 
       {isFreelancer ? (
                 <div className="sm:p-8 mt-6 space-y-4">
-                  <Link to="/browse-jobs-in-details">
+                  <Link to={`/jobs/${1}`}>
                     <p className="sm:text-lg text-sm text-[#B37EE2]">NON-NEGOTIABLE</p>
                   </Link>
 
