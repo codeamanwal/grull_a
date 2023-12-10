@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation} from 'react-router-dom';
 import AuthService from '../../Services/AuthService';
-import {Select} from 'antd';
+import {Select, Typography} from 'antd';
 import {axiosGet, axiosPost} from '../../utils/services/axios';
 import CommentModal from '../../utils/CommentModal';
 import {openNotificationWithIcon} from '../../utils/openNotificationWithIcon';
+import {GiPartyPopper} from 'react-icons/gi';
 import ReviewModal from '../../utils/ReviewModal';
 const {Option} = Select;
 const FreelancerFileSharing = () => {
@@ -17,10 +18,12 @@ const FreelancerFileSharing = () => {
   const isFreelancer = AuthService.isFreelancer();
   const [submissionData, setSubmittedData] = useState([]);
   const [review, setReview] = useState(0);
+  const [approved, setApproved] = useState(false);
   let validUrls = [];
   const [modalVisible, setModalVisible] = useState(false);
   const [reviewModal, setReviewModal] = useState(false);
   const [payout, setSendPayout] = useState(false);
+  const [completedJob, setCompletedJob] = useState(false);
   const handleOpenModal = () => {
     setModalVisible(true);
   };
@@ -69,7 +72,12 @@ const FreelancerFileSharing = () => {
         count++;
       }
     }
-    setCompletedMilestones(count);
+    if (count==4) {
+      setCompletedJob(true);
+      setCompletedMilestones(4);
+    } else {
+      setCompletedMilestones(count);
+    }
   };
   const makeSubmission = async () => {
     if (!comment || !urls) {
@@ -100,12 +108,16 @@ const FreelancerFileSharing = () => {
     //   openNotificationWithIcon('error', 'Complete the Payment First');
     //   return;
     // }
+    if (approved) {
+      return;
+    }
     const apiUrl = `/api/v0/submissions/${submissionData[completedmilestones].id}/approve`;
     const response = await axiosPost(apiUrl);
 
     if (response.status) {
       openNotificationWithIcon('success', 'Milestone Approved Scuccessfully');
       getSubmissions();
+      setApproved(true);
     }
   };
   const approvePayout=async ()=> {
@@ -157,7 +169,7 @@ const FreelancerFileSharing = () => {
                 ))}
               </Select>
               <button className="bg-purple-900 bg-opacity-70 border border-solid border-purple-500 rounded-lg p-2 sm:p-4 w-full sm:w-1/3" onClick={completedmilestones == i ? (!isFreelancer ? handleOpenReviewModal : handleOpenModal):null}>
-                {!isFreelancer ? 'Review Comments' : 'Add Comments'}
+                {!isFreelancer ? 'Review ' : 'Add Comments'}
               </button>
               <CommentModal visible={modalVisible} onCancel={handleCancel} onOk={handleOk} />
               <ReviewModal visible={reviewModal} onCancel={handleCancelReviewModal} onOk={handleOkReviewModal} />
@@ -166,7 +178,7 @@ const FreelancerFileSharing = () => {
               </button>
             </div>
             <div className="flex flex-row-reverse font-GeneralSans w-full py-5">
-              {!isFreelancer && <button className="bg-purple-900 bg-opacity-70 border border-solid border-purple-500 rounded-lg p-2 sm:p-4 w-full sm:w-1/4" onClick={completedmilestones == i ? approvePayout:null}>Release Payment</button>}
+              {!isFreelancer && <button className="bg-purple-900 bg-opacity-70 border border-solid border-purple-500 rounded-lg p-2 sm:p-4 w-full sm:w-1/4" onClick={completedmilestones == i &&approved ? approvePayout:null}>Release Payment</button>}
             </div>
           </div>,
       );
@@ -196,19 +208,29 @@ const FreelancerFileSharing = () => {
         <div>
           <h2 className="text-2xl font-spaceGrotesk font-semibold pb-4">PROGRESS TRACKER</h2>
           <div className="h-10 flex-shrink-0 border border-solid border-purple-500 rounded-lg bg-purple-300 relative">
-            <div className="bg-green-500 rounded-lg absolute top-0 left-0 bottom-0" style={{width: `${completedmilestones+1 * 25}%`}}></div>
+            <div className="bg-green-500 rounded-lg absolute top-0 left-0 bottom-0" style={{width: `${completedmilestones * 25}%`}}></div>
           </div>
-          <div className="flex flex-row justify-between text-white sm:text-base text-sm font-GeneralSans sm:leading-24 pt-4 sm:w-4/5 w-1/2 sm:space-x-4 space-x-5 ">
-            <p>1st Milestone</p>
-            <p>2nd Milestone</p>
-            <p>3rd Milestone</p>
-            <p>4th Milestone</p>
+          <div className="flex flex-row text-white sm:text-base text-sm font-GeneralSans sm:leading-24 pt-4 sm:space-x-4 space-x-5 ">
+            <p style={{width: '20%'}}>{}</p>
+            <p style={{width: '20%'}}>1st Milestone</p>
+            <p style={{width: '20%'}}>2nd Milestone</p>
+            <p style={{width: '20%'}}>3rd Milestone</p>
+            <p style={{width: '20%'}}>4th Milestone</p>
           </div>
         </div>
-        <div className="flex flex-col flex-wrap sm:space-y-10 space-y-6 sm:pt-16 py-10 sm:py-3">
-          <p className="text-2xl font-spaceGrotesk font-semibold py-3">Job Title - {location?.state?.jobData?.title}</p>
+        <div className='w-full flex justify-between items-center'>
+          <div className="flex flex-col flex-wrap sm:space-y-10 space-y-6 ">
+            <p className="text-2xl font-spaceGrotesk font-semibold py-3 text-decoration-underline">Job Title - {location?.state?.jobData?.title}</p>
+          </div>
+          <div className="flex flex-col flex-wrap w-1/2 justify-end items-end cursor-none">
+            <button className="bg-purple-500 bg-opacity-70 border border-solid border-purple-500 rounded-lg p-2 sm:p-4 w-full sm:w-1/3">
+           Budget {location?.state?.jobData?.rate_per_hour}
+            </button>
+          </div>
         </div>
-        <div className="flex justify-center flex-col items-center">{addMilestones()}</div>
+        {!completedJob?<div className="flex justify-center flex-col items-center">{addMilestones()}</div>:<div>
+          <Typography className='text-white text-xl flex items-center w-full'>Job Completed Successfully <GiPartyPopper className='pl-2'/></Typography>
+        </div>}
       </div>
     </div>
   );

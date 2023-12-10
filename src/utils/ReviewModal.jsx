@@ -19,7 +19,7 @@ const ReviewModal = ({visible, onCancel, onOk}) => {
   return (
     <Modal
       title="Add Review"
-      visible={visible}
+      open={visible}
       onCancel={onCancel}
       footer={null}
     >

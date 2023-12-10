@@ -16,7 +16,7 @@ const BrowseFreelancerProfile = ({
       <div className="flex flex-col items-center space-y-6 xl:space-y-6 bg-[#482773] rounded-lg lg:mt-0 xl:p-5 m-4 mx-auto py-8 px-2">
         <img
           className="mx-auto rounded-full md:h-20 md:w-20 lg:h-64 lg:w-64 w-12 h-12"
-          src={userProfileImg}
+          src={`https://ui-avatars.com/api/?name=${data.full_name}`}
           alt="author avatar"
         />
         <div className="text-center font-bold sm:text-l lg:text-lg font-spaceGrotesk">
@@ -103,7 +103,7 @@ const BrowseFreelancerProfile = ({
                         <p>Learn more</p>
                         <a
                           href={`/freelancers/${data.id}`}
-                          className="text-white text-center text-xl font-medium rounded shadow bg-gradient-to-l from-purple-400 to-transparent py-2 w-full"
+                          className="text-white text-center text-lg font-medium rounded shadow bg-gradient-to-l from-purple-400 to-transparent py-2 w-full"
                         >
                 VIEW PROFILE
                         </a>

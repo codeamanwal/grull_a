@@ -44,8 +44,8 @@ const BrowseJobs = ({isFreelancer}) => {
       const params = {
         page: currentpage,
         per_page: 8,
-        category: categoryfilter,
-        location: locationfilter,
+        category: categoryfilter.join(","),
+        location: locationfilter.join(","),
       };
       if (type=='filter') {
         params.page = 1;
