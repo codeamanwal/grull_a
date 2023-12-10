@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import config from 'react-global-configuration';
-import { Button, Checkbox, Form, Input, Select, Tag } from "antd";
+import { Button, Checkbox, Form, Input, Select, Tag ,Typography} from "antd";
 import { axiosPatch, axiosPost } from "../../utils/services/axios";
 import { useNavigate } from "react-router-dom";
 import { openNotificationWithIcon } from "../../utils/openNotificationWithIcon";
@@ -13,7 +13,7 @@ const PostJobForm = ({jobData,editJob}) => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const [selectedSkills, setSelectedSkills] = useState(jobData?.required_skills?jobData.required_skills:[]);
-  const [urls,setSelectedUrls] = useState(jobData?.reference_files_urls?jobData.reference_files_urls:[]);
+  const [selectedurls,setSelectedUrls] = useState(jobData?.reference_files_urls?jobData.reference_files_urls:[]);
   var validUrls = [];
   const urlRegex = /^(?:(?:https?|ftp):)?\/\/(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?(?:[/?#]\S)?$/;
   const handleChange = (selectedItems) => {
@@ -42,12 +42,15 @@ const PostJobForm = ({jobData,editJob}) => {
         "company_name": values.companyName,
         "company_description": values.aboutCompany,
         "duration": 0,
-        "reference_files_urls": values.files,
+        "reference_files_urls": selectedurls,
       }
       const response = editJob?axiosPatch(`/api/v0/jobs/${jobData.id}`,requestData):axiosPost('/api/v0/jobs',requestData)
-      if(response){
+      if(response.status){
         editJob?openNotificationWithIcon('success','Job edited successfully'):openNotificationWithIcon('success','Job posted successfully');
         navigate('/my-profile')
+      }
+      else{
+        openNotificationWithIcon('error','Something went wrong')
       }
 
 
@@ -56,7 +59,7 @@ const PostJobForm = ({jobData,editJob}) => {
     }
   };
   const onFinishFailed = (errorInfo) => {
-   
+    console.log(errorInfo)
   };
   return (
     <div className="flex flex-col flex-wrap  text-white sm:space-y-7 sm:w-3/4 w-full mx-auto font-GeneralSans p-3">
@@ -144,35 +147,36 @@ const PostJobForm = ({jobData,editJob}) => {
 
         {/* Reference Files */}
         <Form.Item
-          name="files"
-          rules={[{ required: true, message: "Please enter urls" }, { pattern:urlRegex,message:'Please enter a valid url' }]}
-          label="Reference Files"
-          className="sm:col-span-4 flex flex-col space-y-2 justify-center text-white"
-          initialValue={jobData?.reference_files_urls||[]}
-        >
-        <Select
-        mode="tags"
-        placeholder="Enter Urls"
-        onChange={handleUrlChange}
-        value={urls}
-        tokenSeparators={[',']}
-        className="bg-[#1A0142] border border-solid border-[#B1B1B1]  rounded-lg text-gray-900 sm:text-sm sm:p-3 p-2 sm:w-full postjobsselect text-white"
-      >
-        {urls.map((tag, index) => (
-          <Option key={index} value={tag} onClose={() => handleChange(urls.filter(item => item !== tag))} >
-          
-              {tag}
-          
-          </Option>
-        ))}
-      </Select>
-      <Typography className='mb-0 pb-0 text-white'> eg - 'https://www.google.com'</Typography>
-        </Form.Item>
+  name="files"
+  rules={[
+    // { required: true, message: "Please enter URLs" },
+    // { pattern: urlRegex, message: "Please enter a valid URL" },
+  ]}
+  label="Reference Files"
+  className="sm:col-span-4 flex flex-col space-y-2 justify-center text-white"
+  initialValue={jobData?.reference_files_urls || []}
+>
+  <Select
+    mode="tags"
+    placeholder="eg - 'https://www.google.com'"
+    onChange={handleUrlChange}
+    value={selectedurls}
+    tokenSeparators={[',']}
+    className="bg-[#1A0142] border border-solid border-[#B1B1B1] rounded-lg text-gray-900 sm:text-sm sm:p-3 p-2 sm:w-full postjobsselect text-white"
+  >
+    {selectedurls.map((tag, index) => (
+      <Option key={index} value={tag}>
+        {tag}
+      </Option>
+    ))}
+  </Select>
+</Form.Item>
 
         {/* Location */}
         <Form.Item
           name="location"
           className="sm:col-span-2 flex  flex-col space-y-2  justify-center"
+          rules={[{ required: true, message: "Please select the location" }]}
           label="Location"
         >
           <select

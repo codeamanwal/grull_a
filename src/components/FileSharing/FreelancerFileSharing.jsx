@@ -69,9 +69,7 @@ const FreelancerFileSharing = () => {
         count++;
       }
     }
-    if (count<=3) {
-      setCompletedMilestones(count);
-    }
+    setCompletedMilestones(count);
   };
   const makeSubmission = async () => {
     if (!comment || !urls) {

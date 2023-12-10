@@ -58,7 +58,7 @@ const BrowseJobInDetails = ({ isOpen, setIsOpen, jobData, jobs }) => {
     <div className="flex  flex-wrap sm:justify-between  justify-center sm:w-11/12 mx-auto py-28 space-y-10">
       {!editJob ? (
         isFreelancer ? (
-          <JobDetailsCard isFreelancer={true} jobData={jobData} myjob={myjob}/>
+          <JobDetailsCard isFreelancer={true} jobData={jobData} />
         ) : (
           <JobDetailsCardForEmployer isFreelancer={false} jobs={jobData} />
         )
