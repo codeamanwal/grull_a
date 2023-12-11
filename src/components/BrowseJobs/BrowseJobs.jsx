@@ -38,9 +38,8 @@ const BrowseJobs = ({ isFreelancer }) => {
     };
   }, [hasMore, loading]);
   const handleBrowse = async type => {
-    const category = categoryfilter.join(",").replace(/\s+/g, "_").toUpperCase();
-    const location = locationfilter.join(",").replace(/\s+/g, "_").toUpperCase();
-
+    const category = categoryfilter.map(item => items1[item]).join(",");
+    const location = locationfilter.map(item => items2[item]).join(",");
     try {
       setLoading(true);
       const apiUrl = "/api/v0/jobs";
@@ -86,9 +85,23 @@ const BrowseJobs = ({ isFreelancer }) => {
       handleBrowse();
     }
   };
-  const items1 = ["Graphic Designer", "Illustrator", "Programmer", "Video Editor", "3D Artist", "Product Designer"];
+  const items1 = {
+    "Graphic Designer": "GRAPHIC_DESIGNER",
+    "Illustrator": "ILLUSTRATOR",
+    "Programmer": "PROGRAMMER",
+    "Video Editor": "VIDEO_EDITOR",
+    "3D Artist": "THREE_D_ARTIST",
+    "Product Designer": "PRODUCT_DESIGNER",
+  };
 
-  const items2 = ["India", "USA", "Canada", "England", "China", "Russia"];
+  const items2 = {
+    India: "INDIA",
+    USA: "USA",
+    Canada: "CANADA",
+    England: "ENGLAND",
+    China: "CHINA",
+    Russia: "RUSSIA",
+  };
 
   return (
     <div className="browse-jobs-container mt-10 sm:mt-0">

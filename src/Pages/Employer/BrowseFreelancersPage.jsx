@@ -21,6 +21,23 @@ const BrowseFreelancersPage = () => {
   const [freelanceData, setFreelanceData] = useState([]);
   const [transitioning, setTransitioning] = useState(false);
   const [loading,setLoading] = useState(false);
+  const items1 = {
+    'Graphic Designer': 'GRAPHIC_DESIGNER',
+    'Illustrator': 'ILLUSTRATOR',
+    'Programmer': 'PROGRAMMER',
+    'Video Editor': 'VIDEO_EDITOR',
+    '3D Artist': 'THREE_D_ARTIST',
+    'Product Designer': 'PRODUCT_DESIGNER',
+  };
+
+  const items2 = {
+    India: 'INDIA',
+    USA: 'USA',
+    Canada: 'CANADA',
+    England: 'ENGLAND',
+    China: 'CHINA',
+    Russia: 'RUSSIA',
+  };
   function displayCards(){
     if(window.innerWidth >= 1024 ){
         return(
@@ -74,13 +91,16 @@ const BrowseFreelancersPage = () => {
   }, []);
   const handleBrowseFreelancers = async () => {
     setLoading(true);
+    const category = categoryFilter.map(item => items1[item]).join(",");
+    const location = locationFilter.map(item => items2[item]).join(",");
     try {
       const apiUrl = "/api/v0/freelancers";
       const params = {
         page: page,
         per_page: 8,
-        category:categoryFilter.join(",").replace(/\s+/g, "_").toUpperCase(),
-        location:locationFilter.join(",").replace(/\s+/g, "_").toUpperCase(),
+        category:category,
+        location:location,
+        
       };
       
      const response = await axiosGet(apiUrl,params)
