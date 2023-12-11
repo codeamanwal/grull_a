@@ -3,16 +3,23 @@ import BrowseByCard from '../BrowseJobs/BrowseByCard';
 import {Button} from 'antd';
 import PropTypes from 'prop-types';
 const BrowseFreelancers = ({setLocationFilter, setCategoryFilter, applyFilters}) => {
-  const items1 = [
-    'Graphic Designer',
-    'Illustrator',
-    'Programmer',
-    'Video Editor',
-    '3D artist',
-    'Product Designer',
-  ];
-  console.log(setLocationFilter);
-  const items2 = ['India', 'USA', 'Canada', 'England', 'China', 'Russia'];
+  const items1 = {
+    'Graphic Designer': 'GRAPHIC_DESIGNER',
+    'Illustrator': 'ILLUSTRATOR',
+    'Programmer': 'PROGRAMMER',
+    'Video Editor': 'VIDEO_EDITOR',
+    '3D Artist': 'THREE_D_ARTIST',
+    'Product Designer': 'PRODUCT_DESIGNER',
+  };
+
+  const items2 = {
+    India: 'INDIA',
+    USA: 'USA',
+    Canada: 'CANADA',
+    England: 'ENGLAND',
+    China: 'CHINA',
+    Russia: 'RUSSIA',
+  };
 
   return (
     <div>

@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import config from 'react-global-configuration';
 import AuthService from '../../Services/AuthService';
 import { Form, Select, Typography } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { openNotificationWithIcon } from '../../utils/openNotificationWithIcon';
 const { Option } = Select;
 const FreelanceApplication = ({job}) => {
@@ -24,8 +24,19 @@ const FreelanceApplication = ({job}) => {
   const validateUrl = (value) => {
     return urlRegex.test(value);
   };
+  // const redirectToJobDetails=()=>{
+  //   const browseJobsInDetails = `/jobs/${job.jobData.id}`;
+  //   navigate(browseJobsInDetails, {
+  //     state: {
+  //       jobData: job.jobData, // Pass jobData as state
+  //     },
+  //   });
+  // };
   var accessToken = AuthService.getToken();
   const handleApplyClick = async () => {
+    if(!proposal||!rate){
+      openNotificationWithIcon('error','Please fill all details')
+    }
     setIsApplying(true);
     const jobId = job.jobData.id
     try {
@@ -183,8 +194,8 @@ const FreelanceApplication = ({job}) => {
 
         <div className="flex sm:flex-col flex-wrap justify-between items-center space-x-6 space-y-6 sm:space-y-8 mt-10">
           <div className="text-purple-500 text-xl font-GeneralSans font-medium space-y-2">
-            <p className="text-center">Review Profile</p>
-            <p className="text-center">View Job Requirements</p>
+            <Link to='/my-profile'><p className="text-center">Review Profile</p></Link>
+            {/* <Link onClick={redirectToJobDetails}><p className="text-center">View Job Requirements</p></Link> */}
           </div>
 
           <div>

@@ -72,7 +72,7 @@ const JobDetailsCard = ({ isFreelancer, jobData, myjob }) => {
               <button
                 className="text-white sm:text-2xl px-8 py-3 text-base font-medium sm:py-4 rounded shadow bg-gradient-to-l from-purple-400 to-transparent"
                 onClick={() => navigate("/apply-proposal-page", { state: { jobData: jobData } })}>
-                APPLY
+                APPLY HERE
               </button>
           )}
         </div>

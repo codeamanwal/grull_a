@@ -26,6 +26,14 @@ const BrowseJobInDetails = ({ isOpen, setIsOpen, jobData, jobs }) => {
     });
 
   };
+  const viewFreelancerProfile=()=>{
+    navigate(`/freelancers/${jobData.employee.id}`, {
+      state: {
+        userProfile: jobData,
+        jobId: jobData.id,
+      },
+    });
+  }
   const deletePostedJob = async () => {
     const id = jobData.id;
     try {
@@ -58,7 +66,7 @@ const BrowseJobInDetails = ({ isOpen, setIsOpen, jobData, jobs }) => {
     <div className="flex  flex-wrap sm:justify-between  justify-center sm:w-11/12 mx-auto py-28 space-y-10">
       {!editJob ? (
         isFreelancer ? (
-          <JobDetailsCard isFreelancer={true} jobData={jobData} myjob={myjob}/>
+          <JobDetailsCard isFreelancer={true} jobData={jobData} />
         ) : (
           <JobDetailsCardForEmployer isFreelancer={false} jobs={jobData} />
         )
@@ -77,6 +85,9 @@ const BrowseJobInDetails = ({ isOpen, setIsOpen, jobData, jobs }) => {
             <button  className="text-white sm:text-xl font-semibold md:px-8 py-4 px-2 sm:px-12 rounded shadow bg-gradient-to-l from-purple-400 to-transparent" onClick={redirect}>
                 {jobData.status=='ONGOING'?"TRACK JOB PROGRESS":"VIEW FREELANCER APPLICATIONS"}
               </button>
+              {jobData.status=='ONGOING'&&<button  className="text-white sm:text-xl font-semibold md:px-8 py-4 px-2 sm:px-12 rounded shadow bg-gradient-to-l from-purple-400 to-transparent" onClick={viewFreelancerProfile}>
+                VIEW FREELANCER PROFILE
+              </button>}
               <button className="text-white sm:text-xl font-semibold md:px-8 py-4 sm:px-12 px-2 rounded shadow bg-gradient-to-l from-purple-400 to-transparent" onClick={deletePostedJob}>
                 DELETE POSTED JOB
               </button>

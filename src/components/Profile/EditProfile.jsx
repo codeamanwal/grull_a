@@ -6,11 +6,13 @@ import AuthService from '../../Services/AuthService';
 import fetchMeData from '../../Services/User';
 import FreelancerEmptyProfile from '../FreelancerEmptyProfile/FreelancerEmptyProfile';
 import { useNavigate } from 'react-router-dom';
+import AddTokenModal from '../../utils/AddTokenModal';
 
 const EditProfile = ({userMode, setUserMode}) => {
   const [meData, setMeData] = useState({});
   const [profileEditMode, setProfileEditMode] = useState(false);
   const navigate = useNavigate();
+  const [tokenmodalopen,setTokenModalOpen] = useState(false);
   useEffect(() => {
     fetchMeData()
         .then((fetchedData) => {
@@ -20,7 +22,12 @@ const EditProfile = ({userMode, setUserMode}) => {
           console.error('Error fetching data:', error);
         });
   }, []);
-
+  const handleTokenModalClose=()=>{
+    setTokenModalOpen(false);
+  }
+  const handleOpenTokenModal=()=>{
+    setTokenModalOpen(true);
+  }
   const handleUserModeChange = () => {
     AuthService.toggleUserMode();
     setUserMode(AuthService.getUserMode());
@@ -50,7 +57,12 @@ const EditProfile = ({userMode, setUserMode}) => {
           </button> */}
           <p onClick={handleUserModeChange} className="text-purple-600 text-base font-spaceGrotesk font-medium cursor-pointer">
             {AuthService.isFreelancer() ? 'SWITCH TO EMPLOYER' : 'SWITCH TO FREELANCER'}
+            
           </p>
+          <p  className="text-purple-600 text-base font-spaceGrotesk font-medium cursor-pointer" onClick={handleOpenTokenModal}>
+          {!AuthService.isFreelancer() && 'REQUEST WALLET BALANCE'}
+          </p>
+          <AddTokenModal visible={tokenmodalopen} onCancel={handleTokenModalClose}/>
         </div>
       </div>
 
