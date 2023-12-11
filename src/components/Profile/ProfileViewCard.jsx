@@ -27,11 +27,12 @@ const ProfileViewCard = ({userProfileImg, userName, id, userData, jobId}) => {
       },
     })
         .then((response) => {
-          if (response.success) {
+          if (response) {
           // Handle success
             console.log('Application rejected successfully');
-            setIsHiring(true); // Set a state variable to indicate the hiring action
-            setSuccessMessage('Application accepted successfully'); // Set success message
+            setSuccessMessage('Application accepted successfully');
+            setIsPopupVisible(true); // Set success message
+            confirmNegotation();
           } else {
           // Handle error
             console.error('Failed to reject application');
@@ -44,7 +45,8 @@ const ProfileViewCard = ({userProfileImg, userName, id, userData, jobId}) => {
           setSuccessMessage('Network error'); // Set error message
           setIsPopupVisible(true); // Show the popup for network errors
         });
-
+  };
+  const confirmNegotation=()=>{
     const confirmapplication = `${config.get('BACKEND_URL')}/api/v0/applications/${id}/confirm-negotiation`;
     fetch(confirmapplication, {
       method: 'POST',
