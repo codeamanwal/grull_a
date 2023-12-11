@@ -1,12 +1,12 @@
 /* eslint-disable */
-import React, {useEffect, useRef, useState} from 'react';
-import {useNavigate} from 'react-router-dom';
-import SkillsRequiredCard from '../BrowseJobs/SkillsRequiredCard';
-import BrowseByCard from './BrowseByCard';
-import {axiosGet} from '../../utils/services/axios';
-import {Button} from 'antd';
+import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import SkillsRequiredCard from "../BrowseJobs/SkillsRequiredCard";
+import BrowseByCard from "./BrowseByCard";
+import { axiosGet } from "../../utils/services/axios";
+import { Button } from "antd";
 
-const BrowseJobs = ({isFreelancer}) => {
+const BrowseJobs = ({ isFreelancer }) => {
   const [jobData, setJobData] = useState([]); // State variable to hold title
   const navigate = useNavigate();
   const [currentpage, setCurrentpage] = useState(1);
@@ -29,25 +29,28 @@ const BrowseJobs = ({isFreelancer}) => {
     };
     const scrollableDiv = scrollableJobs.current;
     if (scrollableDiv) {
-      scrollableDiv.addEventListener('scroll', handleScroll);
+      scrollableDiv.addEventListener("scroll", handleScroll);
     }
     return () => {
       if (scrollableDiv) {
-        scrollableDiv.removeEventListener('scroll', handleScroll);
+        scrollableDiv.removeEventListener("scroll", handleScroll);
       }
     };
   }, [hasMore, loading]);
-  const handleBrowse = async (type) => {
+  const handleBrowse = async type => {
+    const category = categoryfilter.join(",").replace(/\s+/g, "_").toUpperCase();
+    const location = locationfilter.join(",").replace(/\s+/g, "_").toUpperCase();
+
     try {
       setLoading(true);
-      const apiUrl = '/api/v0/jobs';
+      const apiUrl = "/api/v0/jobs";
       const params = {
         page: currentpage,
         per_page: 8,
-        category: categoryfilter.join(","),
-        location: locationfilter.join(","),
+        category: category,
+        location: location,
       };
-      if (type=='filter') {
+      if (type == "filter") {
         params.page = 1;
       }
       const response = await axiosGet(apiUrl, params);
@@ -55,12 +58,12 @@ const BrowseJobs = ({isFreelancer}) => {
         throw new Error(`API error! Message: ${response.message}`);
       }
       const responseData = response;
-      if (type=='filter') {
+      if (type == "filter") {
         setJobData([...responseData.results]);
         setCurrentpage(2);
         setHasMore(responseData.results.length >= 8);
       } else {
-        setJobData((prevJobData) => [...prevJobData, ...responseData.results]);
+        setJobData(prevJobData => [...prevJobData, ...responseData.results]);
         setCurrentpage(currentpage + 1);
         setHasMore(responseData.results.length >= 8);
       }
@@ -73,7 +76,7 @@ const BrowseJobs = ({isFreelancer}) => {
       setLoading(false);
       return true;
     } catch (error) {
-      console.error('Error occurred:', error);
+      console.error("Error occurred:", error);
       setLoading(false);
       return false;
     }
@@ -83,9 +86,9 @@ const BrowseJobs = ({isFreelancer}) => {
       handleBrowse();
     }
   };
-  const items1 = ['Graphic Designer', 'Illustrator', 'Programmer', 'Video Editor', '3D Artist', 'Product Designer'];
+  const items1 = ["Graphic Designer", "Illustrator", "Programmer", "Video Editor", "3D Artist", "Product Designer"];
 
-  const items2 = ['India', 'USA', 'Canada', 'England', 'China', 'Russia'];
+  const items2 = ["India", "USA", "Canada", "England", "China", "Russia"];
 
   return (
     <div className="browse-jobs-container mt-10 sm:mt-0">
@@ -105,14 +108,16 @@ const BrowseJobs = ({isFreelancer}) => {
               </div>
             </div>
             <div className="md:max-h-2/4 lg:max-h-3/4 overflow-y-scroll scrollbar-hide " ref={scrollableJobs}>
-              {jobData && jobData.map((job, index) => <SkillsRequiredCard isFreelancer={true} jobData={job} onClick={()=>navigate('/browseJobsInDetails')}/>)}
+              {jobData && jobData.map((job, index) => <SkillsRequiredCard isFreelancer={true} jobData={job} onClick={() => navigate("/browseJobsInDetails")} />)}
             </div>
           </div>
           {window.innerWidth > 640 ? (
             <div className="flex flex-col bg-[#B37EE2] sm:p-12 rounded-tl-3xl rounded-bl-3xl w-1/4">
-              <BrowseByCard topic="CATEGORY" items={items1} setFilter={setCategoryfilter}/>
-              <BrowseByCard topic="LOCATION" items={items2} setFilter={setLocationfilter}/>
-              <Button type="primary" style={{background: 'black'}} onClick={()=>handleBrowse('filter')}>Apply</Button>
+              <BrowseByCard topic="CATEGORY" items={items1} setFilter={setCategoryfilter} />
+              <BrowseByCard topic="LOCATION" items={items2} setFilter={setLocationfilter} />
+              <Button type="primary" style={{ background: "black" }} onClick={() => handleBrowse("filter")}>
+                Apply
+              </Button>
             </div>
           ) : null}
         </div>

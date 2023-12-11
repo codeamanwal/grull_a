@@ -79,8 +79,8 @@ const BrowseFreelancersPage = () => {
       const params = {
         page: page,
         per_page: 8,
-        category:categoryFilter,
-        location:locationFilter,
+        category:categoryFilter.join(",").replace(/\s+/g, "_").toUpperCase(),
+        location:locationFilter.join(",").replace(/\s+/g, "_").toUpperCase(),
       };
       
      const response = await axiosGet(apiUrl,params)
