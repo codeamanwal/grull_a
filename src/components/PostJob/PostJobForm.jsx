@@ -45,7 +45,7 @@ const PostJobForm = ({jobData,editJob}) => {
         "reference_files_urls": selectedurls,
       }
       const response = editJob?axiosPatch(`/api/v0/jobs/${jobData.id}`,requestData):axiosPost('/api/v0/jobs',requestData)
-      if(response.status){
+      if(response){
         editJob?openNotificationWithIcon('success','Job edited successfully'):openNotificationWithIcon('success','Job posted successfully');
         navigate('/my-profile')
       }
