@@ -4,7 +4,7 @@ import {Modal, Button, Row, Select} from 'antd';
 
 const {Option} = Select;
 
-const AddTokenModal = ({visible, onCancel}) => {
+const AddTokenModal = ({visible, onCancel, onOk}) => {
   const [selectedDenomination, setSelectedDenomination] = useState(null);
 
   const handleDenominationChange = (value) => {
@@ -12,17 +12,18 @@ const AddTokenModal = ({visible, onCancel}) => {
   };
 
   const handleOk = () => {
-    console.log('Selected Denomination:', selectedDenomination);
+    onOk(selectedDenomination);
     onCancel();
   };
 
   return (
-    <Modal title="Request Denomination" open={visible} onCancel={onCancel} footer={null} className='top-[20%]'>
+    <Modal title="Request Denomination" open={visible} onCancel={onCancel} footer={null} className='top-[20%]' destroyOnClose={true}>
       <Select
         placeholder="Select Denomination"
         style={{width: '100%'}}
         onChange={handleDenominationChange}
         value={selectedDenomination}
+        className='text-black'
       >
         <Option value={100}>100</Option>
         <Option value={500}>500</Option>
@@ -49,6 +50,7 @@ const AddTokenModal = ({visible, onCancel}) => {
 AddTokenModal.propTypes = {
   visible: PropTypes.bool,
   onCancel: PropTypes.func,
+  onOk: PropTypes.func,
 };
 
 export default AddTokenModal;

@@ -9,7 +9,6 @@ const LoggedInHeader = ({includeNavBar, isFreelancer}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const [userData, setUserData] = useState({});
-  console.log(isFreelancer, 'isFreelancer');
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);

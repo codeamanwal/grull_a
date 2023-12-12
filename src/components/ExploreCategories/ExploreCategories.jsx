@@ -19,10 +19,11 @@ const ExploreCategories = () => {
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-6 gap-2 sm:gap-4  font-spaceGrotesk">
           <Category logo={graphics} title="Graphic & Design" />
           <Category logo={sales} title="Sales & Marketing" />
-          <Category logo={writing} title="Writing & Translation" />
-          <Category logo={business} title="Business Consulting" />
-          <Category logo={music} title="Music & Audio" />
-          <Category logo={music} title="Music & Audio" />
+          <Category logo={writing} title="UI/UX
+" />
+          <Category logo={business} title="Branding" />
+          <Category logo={music} title="Tech & Dev" />
+          <Category logo={music} title="Growth & SEO" />
         </div>
       </div>
     </>

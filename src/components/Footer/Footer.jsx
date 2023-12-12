@@ -1,11 +1,9 @@
 import React from 'react';
 import Info from './Info';
 import {
-  facebook2,
   grullLogo,
   linkedin,
   twitter,
-  pinterest,
   instagram,
   globe,
 } from '../Assets';
@@ -31,35 +29,35 @@ const Footer = () => {
         <div className="flex items-center sm:space-x-9 space-x-2">
           <div className="flex justify-center items-center md:space-x-5 space-x-2">
             <a
-              href="https://twitter.com"
+              href="https://twitter.com/Grull_work"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img src={twitter} alt="twitter" />
+              <img src={twitter} alt="twitter" height="28" width="28"/>
             </a>
-            <a
+            {/* <a
               href="https://facebook.com"
               target="_blank"
               rel="noopener noreferrer"
             >
               <img src={facebook2} alt="facebook" />
-            </a>
+            </a> */}
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/company/grull-work/posts/?feedView=all"
               target="_blank"
               rel="noopener noreferrer"
             >
               <img src={linkedin} alt="linkedin" />
             </a>
-            <a
+            {/* <a
               href="https://pinterest.com"
               target="_blank"
               rel="noopener noreferrer"
             >
               <img src={pinterest} alt="pinterest" />
-            </a>
+            </a> */}
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/grull.work/"
               target="_blank"
               rel="noopener noreferrer"
             >

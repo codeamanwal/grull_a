@@ -134,7 +134,7 @@ const BrowseFreelancerProfile = ({
                           href="/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-block rounded-full p-2 bg-white"
+                          className="inline-block rounded-full p-2 bg-white h-10"
                         >
                           <span className="sr-only">Twitter</span>
                           <img src={twitter} alt="twitter" />

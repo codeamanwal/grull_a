@@ -7,7 +7,9 @@ import fetchMeData from '../../Services/User';
 import FreelancerEmptyProfile from '../FreelancerEmptyProfile/FreelancerEmptyProfile';
 import { useNavigate } from 'react-router-dom';
 import AddTokenModal from '../../utils/AddTokenModal';
-
+import { openNotificationWithIcon } from '../../utils/openNotificationWithIcon';
+import emailjs from "@emailjs/browser";
+import config from 'react-global-configuration';
 const EditProfile = ({userMode, setUserMode}) => {
   const [meData, setMeData] = useState({});
   const [profileEditMode, setProfileEditMode] = useState(false);
@@ -27,6 +29,22 @@ const EditProfile = ({userMode, setUserMode}) => {
   }
   const handleOpenTokenModal=()=>{
     setTokenModalOpen(true);
+  }
+  useEffect(() => emailjs.init(config.get('EMAILJS_USER_ID')), []);
+  const onOk=(selectedvalue)=>{
+    const serviceId = config.get('EMAILJS_SERVICE_ID');
+    const templateId = config.get('EMAILJS_TEMPLATE_ID');
+    const templateParams = {
+      from_name: meData.first_name,
+      message:`Please add ${selectedvalue} to my wallet balance with id ${meData.id}`,
+    };
+    emailjs.send(serviceId, templateId, templateParams)
+      .then((response) => {
+        openNotificationWithIcon('success',"Balance request sent successfully");
+      })
+      .catch((error) => {
+        openNotificationWithIcon('error',"Something went wrong");
+      });
   }
   const handleUserModeChange = () => {
     AuthService.toggleUserMode();
@@ -62,7 +80,7 @@ const EditProfile = ({userMode, setUserMode}) => {
           <p  className="text-purple-600 text-base font-spaceGrotesk font-medium cursor-pointer" onClick={handleOpenTokenModal}>
           {!AuthService.isFreelancer() && 'REQUEST WALLET BALANCE'}
           </p>
-          <AddTokenModal visible={tokenmodalopen} onCancel={handleTokenModalClose}/>
+          <AddTokenModal visible={tokenmodalopen} onCancel={handleTokenModalClose} onOk={onOk}/>
         </div>
       </div>
 
