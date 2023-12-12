@@ -15,6 +15,7 @@ const EditProfile = ({userMode, setUserMode}) => {
   const [profileEditMode, setProfileEditMode] = useState(false);
   const navigate = useNavigate();
   const [tokenmodalopen,setTokenModalOpen] = useState(false);
+  const isEmailJsServiceEnabled = config.get('EMAILJS_SERVICE_ENABLED');
   useEffect(() => {
     fetchMeData()
         .then((fetchedData) => {
@@ -30,8 +31,27 @@ const EditProfile = ({userMode, setUserMode}) => {
   const handleOpenTokenModal=()=>{
     setTokenModalOpen(true);
   }
-  useEffect(() => emailjs.init(config.get('EMAILJS_USER_ID')), []);
+  useEffect(() => {
+    if (!isEmailJsServiceEnabled) {
+      console.warn(
+        "Email JS service is not enabled on this environment. " +
+        "Please set `REACT_APP_EMAILJS_SERVICE_ENABLED` environment variable to allow it to initialize."
+      );
+      return;
+    }
+
+    emailjs.init(config.get('EMAILJS_USER_ID'));
+  }, []);
   const onOk=(selectedvalue)=>{
+    if (!isEmailJsServiceEnabled) {
+      openNotificationWithIcon('error',"Balance request email failed!");
+      console.warn(
+        "Email JS service is not enabled on this environment. Email has not been sent." +
+        "Please set `REACT_APP_EMAILJS_SERVICE_ENABLED` environment variable to allow it to send emails."
+      );
+      return;
+    }
+
     const serviceId = config.get('EMAILJS_SERVICE_ID');
     const templateId = config.get('EMAILJS_TEMPLATE_ID');
     const templateParams = {
