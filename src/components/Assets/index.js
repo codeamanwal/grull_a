@@ -3,7 +3,7 @@ import apple from './Logo/apple.svg';
 import facebook from './Logo/facebook.svg';
 import google from './Logo/google.svg';
 import grullLogo from './Logo/grull.svg';
-import twitter from './Logo/twitter-n.svg';
+import twitter from './Logo/twitter.svg';
 import facebook2 from './Logo/facebook2.svg';
 import linkedin from './Logo/linkedin.svg';
 import pinterest from './Logo/pinterest.svg';

@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import AddTokenModal from '../../utils/AddTokenModal';
 import { openNotificationWithIcon } from '../../utils/openNotificationWithIcon';
 import emailjs from "@emailjs/browser";
+import config from 'react-global-configuration';
 const EditProfile = ({userMode, setUserMode}) => {
   const [meData, setMeData] = useState({});
   const [profileEditMode, setProfileEditMode] = useState(false);
@@ -29,10 +30,10 @@ const EditProfile = ({userMode, setUserMode}) => {
   const handleOpenTokenModal=()=>{
     setTokenModalOpen(true);
   }
-  useEffect(() => emailjs.init("orjxh6oY0HnuTQT2f"), []);
+  useEffect(() => emailjs.init(config.get('PUBLIC_KEY')), []);
   const onOk=(selectedvalue)=>{
-    const serviceId = 'service_ucsblll';
-    const templateId = 'template_79hmnhs';
+    const serviceId = config.get('SERVICE_ID');
+    const templateId = config.get('TEMPLATE_ID');
     const templateParams = {
       from_name: meData.first_name,
       message:`Please add ${selectedvalue} to my wallet balance with id ${meData.id}`,

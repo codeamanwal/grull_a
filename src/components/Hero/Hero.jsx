@@ -48,7 +48,7 @@ const Hero = () => {
           <header className="flex flex-col justify-center m-auto items-center md:container px-4 lg:flex mt-10 h-full lg:mt-0">
             <div className="w-full space-y-12">
               <h1 className="text-3xl lg:text-7xl font-semibold text-purple-500 leading-8 font-spaceGrotesk">
-                CONNECTING TALENTS AND CRAFTING EXCELLENCE
+                CONNECTING TALENTS CRAFTING EXCELLENCE
               </h1>
 
               <p className="md:text-2xl text-lg font-GeneralSans md:mb-10 text-white md:w-4/5 w-full md:leading-8 leading-5">
