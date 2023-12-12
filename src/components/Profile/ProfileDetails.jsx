@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import AuthService from "../../Services/AuthService";
 import PostedJobs from "./PostedJobs";
 const ProfileDetails = ({ meData, userMode,employerViewProfile }) => {
-  console.log(meData);
   return userMode === AuthService.FREELANCER_MODE || employerViewProfile ? (
     <div className="flex flex-col sm:space-y-20  space-y-5 sm:w-[600px] text-white leading-normal ml-3">
       <div className="flex flex-col  space-y-4">

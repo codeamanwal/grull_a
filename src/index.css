@@ -81,3 +81,12 @@ body {
 	color: white !important;
 	border-color: gray !important;
 }
+.ant-select-selection-item{
+	 color:purple !important;
+	 z-index: 10 !important;
+	 font-weight: bold !important;
+	 font-size: 14px !important;
+}
+.ant-select-arrow{
+	color:black !important;
+}

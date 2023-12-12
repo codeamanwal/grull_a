@@ -3,7 +3,7 @@ import apple from './Logo/apple.svg';
 import facebook from './Logo/facebook.svg';
 import google from './Logo/google.svg';
 import grullLogo from './Logo/grull.svg';
-import twitter from './Logo/twitter.svg';
+import twitter from './Logo/twitter-n.svg';
 import facebook2 from './Logo/facebook2.svg';
 import linkedin from './Logo/linkedin.svg';
 import pinterest from './Logo/pinterest.svg';
@@ -45,7 +45,14 @@ import search from './Images/search.svg';
 import messageBoxAttachment from './Images/messageBoxAttachment.png';
 import star from './Images/star.svg';
 import projectImg from './Images/projectImg.png';
-
+import footerimage1 from './Footer/IndiaToday.png';
+import footerimage2 from './Footer/madoclogo.png';
+import footerimage3 from './Footer/luxguildlogo.png';
+import footerimage4 from './Footer/mbcgroup.png';
+import footerimage5 from './Footer/etchcraftlogo.png';
+import footerimage6 from './Footer/versealogo.png';
+import footerimage7 from './Footer/oppabarandcafe.png';
+import footerimage8 from './Footer/Buildersclublogo.png';
 export {
   apple,
   facebook,
@@ -93,4 +100,12 @@ export {
   messageBoxAttachment,
   star,
   projectImg,
+  footerimage1,
+  footerimage2,
+  footerimage3,
+  footerimage4,
+  footerimage5,
+  footerimage6,
+  footerimage7,
+  footerimage8,
 };

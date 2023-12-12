@@ -68,8 +68,6 @@ const PostedJobs = () => {
       return false;
     }
   };
-  console.log('jobs', jobs);
-  console.log(loading);
   useEffect(() => {
     handleBrowseJobsPosted();
   }, []);

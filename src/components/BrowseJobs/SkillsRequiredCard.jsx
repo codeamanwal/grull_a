@@ -13,7 +13,7 @@ const SkillsRequiredCard = ({ isFreelancer, jobData ,onClick,isActive,freelancer
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
   const accessToken = AuthService.getToken();
-  console.log(jobData);
+
   const redirect = ()=>{
     const browseJobsInDetails = `/jobs/${jobData.id}`;
 
