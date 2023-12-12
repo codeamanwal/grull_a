@@ -30,10 +30,10 @@ const EditProfile = ({userMode, setUserMode}) => {
   const handleOpenTokenModal=()=>{
     setTokenModalOpen(true);
   }
-  useEffect(() => emailjs.init(config.get('PUBLIC_KEY')), []);
+  useEffect(() => emailjs.init(config.get('EMAILJS_USER_ID')), []);
   const onOk=(selectedvalue)=>{
-    const serviceId = config.get('SERVICE_ID');
-    const templateId = config.get('TEMPLATE_ID');
+    const serviceId = config.get('EMAILJS_SERVICE_ID');
+    const templateId = config.get('EMAILJS_TEMPLATE_ID');
     const templateParams = {
       from_name: meData.first_name,
       message:`Please add ${selectedvalue} to my wallet balance with id ${meData.id}`,
